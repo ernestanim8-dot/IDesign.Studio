@@ -21,4 +21,4 @@ logs/
 /.opencode-skills/
 .peridot/
 *.zip
-
+server/data/

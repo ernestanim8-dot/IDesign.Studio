@@ -35,6 +35,8 @@ export function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [lastAction, setLastAction] = useState<"whatsapp" | "email" | null>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Form State
   const [fullName, setFullName] = useState("");
@@ -77,14 +79,45 @@ export function Contact() {
     setSubmitted(true);
   };
 
-  const handleStandardSubmit = (e: React.FormEvent) => {
+  const handleStandardSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim() || !message.trim()) {
-      alert("Please fill in your name, email, and project message.");
+      setSubmitError("Please fill in your name, email, and project message.");
       return;
     }
-    setLastAction("email");
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          interest,
+          timeline,
+          message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.errors?.[0] || "Unable to submit your inquiry right now.");
+      }
+
+      setLastAction("email");
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit your inquiry right now.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const copyToClipboard = (text: string, key: string) => {
@@ -790,6 +823,22 @@ export function Contact() {
                       />
                     </div>
 
+                    {submitError && (
+                      <p
+                        style={{
+                          fontFamily: "'Work Sans', sans-serif",
+                          fontSize: "0.85rem",
+                          color: "#b42318",
+                          background: "#fff1f0",
+                          border: "1px solid #ffd2cf",
+                          borderRadius: "3px",
+                          padding: "0.75rem 1rem",
+                        }}
+                      >
+                        {submitError}
+                      </p>
+                    )}
+
                     {/* Action buttons */}
                     <div className="flex flex-wrap gap-3 pt-2">
                       <motion.button
@@ -810,8 +859,9 @@ export function Contact() {
                           background: "#25D366",
                           color: WHITE,
                           border: "none",
-                          cursor: "pointer",
+                          cursor: isSubmitting ? "not-allowed" : "pointer",
                           borderRadius: "3px",
+                          opacity: isSubmitting ? 0.7 : 1,
                         }}
                       >
                         <span>Send via WhatsApp 💬</span>
@@ -820,6 +870,7 @@ export function Contact() {
                       <motion.button
                         type="button"
                         onClick={handleStandardSubmit}
+                        disabled={isSubmitting}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         style={{
@@ -836,7 +887,7 @@ export function Contact() {
                           borderRadius: "3px",
                         }}
                       >
-                        Submit by Email →
+                        {isSubmitting ? "Submitting..." : "Submit Inquiry →"}
                       </motion.button>
                     </div>
                     <span
