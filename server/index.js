@@ -1,18 +1,23 @@
 import { createServer } from "node:http";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
-const dataDir = path.join(__dirname, "data");
+const dataDir = process.env.VERCEL ? path.join(os.tmpdir(), "idesign-data") : path.join(__dirname, "data");
+const seedDataDir = path.join(__dirname, "data");
 
 const inquiriesFile = path.join(dataDir, "inquiries.jsonl");
-const projectsFile = path.join(dataDir, "projects.json");
-const servicesFile = path.join(dataDir, "services.json");
-const testimonialsFile = path.join(dataDir, "testimonials.json");
-const statsFile = path.join(dataDir, "stats.json");
+const projectsFile = path.join(seedDataDir, "projects.json");
+const servicesFile = path.join(seedDataDir, "services.json");
+const testimonialsFile = process.env.VERCEL
+  ? path.join(dataDir, "testimonials.json")
+  : path.join(seedDataDir, "testimonials.json");
+const seedTestimonialsFile = path.join(seedDataDir, "testimonials.json");
+const statsFile = path.join(seedDataDir, "stats.json");
 const portfoliosFile = path.join(dataDir, "portfolios.json");
 
 const port = Number(process.env.API_PORT || process.env.PORT || 8787);
@@ -45,6 +50,12 @@ async function readJsonFile(filePath, fallback = []) {
   } catch {
     return fallback;
   }
+}
+
+async function readSeededJsonFile(filePath, seedFilePath, fallback = []) {
+  const current = await readJsonFile(filePath, null);
+  if (current !== null) return current;
+  return readJsonFile(seedFilePath, fallback);
 }
 
 async function writeJsonFile(filePath, data) {
@@ -289,7 +300,7 @@ async function serveStatic(req, res) {
 }
 
 // Master HTTP Server
-const server = createServer(async (req, res) => {
+export async function handleRequest(req, res) {
   if (req.method === "OPTIONS") {
     sendJson(res, 204, {});
     return;
@@ -330,7 +341,7 @@ const server = createServer(async (req, res) => {
 
   // Testimonials
   if (pathname === "/api/testimonials" && req.method === "GET") {
-    const testimonials = await readJsonFile(testimonialsFile, []);
+    const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
     sendJson(res, 200, { ok: true, testimonials });
     return;
   }
@@ -338,7 +349,7 @@ const server = createServer(async (req, res) => {
   if (pathname === "/api/testimonials" && req.method === "POST") {
     try {
       const body = await readRequestBody(req);
-      const testimonials = await readJsonFile(testimonialsFile, []);
+      const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
       const newReview = {
         id: "test-" + (testimonials.length + 1),
         name: cleanString(body.name),
@@ -419,8 +430,12 @@ const server = createServer(async (req, res) => {
 
   // Fallback to static dist
   await serveStatic(req, res);
-});
+}
 
-server.listen(port, () => {
-  console.log(`Backend running at http://localhost:${port}`);
-});
+const server = createServer(handleRequest);
+
+if (!process.env.VERCEL) {
+  server.listen(port, () => {
+    console.log(`Backend running at http://localhost:${port}`);
+  });
+}
