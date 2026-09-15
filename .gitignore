@@ -26,3 +26,4 @@ server/data/*
 !server/data/services.json
 !server/data/stats.json
 !server/data/testimonials.json
+dev-dist/
