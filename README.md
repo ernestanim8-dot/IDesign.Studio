@@ -53,10 +53,12 @@ The application is configured as a fully compliant **Progressive Web App (PWA)**
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - pnpm (`corepack enable pnpm` or `npm install -g pnpm`)
 
 ### Installation
+
 Clone the repository and install dependencies using `pnpm`:
 
 ```bash
@@ -66,11 +68,13 @@ pnpm install
 ### Running Locally
 
 To start the Vite development frontend server:
+
 ```bash
 pnpm dev
 ```
 
 To start both the Node.js REST backend and the Vite frontend:
+
 ```bash
 # Terminal 1: Backend Server (Port 8787)
 pnpm dev:backend
@@ -96,7 +100,7 @@ pnpm dev:frontend
 
 ## 📂 Project Structure
 
-```
+```text
 ├── .figma/                 # Figma Make site configuration
 ├── public/                 # PWA icons, manifest.webmanifest, favicons
 │   ├── icon-192.png

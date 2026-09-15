@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
         strategies: 'generateSW',
         manifest: {
           name: 'IDesign.Studio',
-          short_name: 'IDesign.Studio',
+          short_name: 'IDesign',
           description: 'IDesign.Studio — Luxury Photography, Graphic Design & Creative Concepts Studio',
           start_url: '/',
           display: 'standalone',
