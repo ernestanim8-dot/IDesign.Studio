@@ -1,0 +1,9 @@
+export const GOLD = "#c8a54a";
+export const GOLD_LIGHT = "#e4c06e";
+export const DARK = "#1a1814";
+export const DARKER = "#0d0c09";
+export const MUTED = "#7a7368";
+export const BG = "#faf8f4";
+export const SURFACE = "#f2ede5";
+export const BORDER = "#e0d8cc";
+export const WHITE = "#ffffff";
