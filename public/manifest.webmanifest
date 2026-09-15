@@ -1,7 +1,7 @@
 {
-  "name": "idesign.studio",
-  "short_name": "idesign.studio",
-  "description": "iDESIGN Photography & Creative Design Studio Portfolio",
+  "name": "IDesign.Studio",
+  "short_name": "IDesign.Studio",
+  "description": "IDesign.Studio — Luxury Photography, Graphic Design & Creative Concepts Studio",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d0c09",

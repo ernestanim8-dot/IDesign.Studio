@@ -25,9 +25,9 @@ export default defineConfig(({ mode }) => {
         injectRegister: 'auto',
         strategies: 'generateSW',
         manifest: {
-          name: 'idesign.studio',
-          short_name: 'idesign.studio',
-          description: 'iDESIGN Photography & Creative Design Studio Portfolio',
+          name: 'IDesign.Studio',
+          short_name: 'IDesign.Studio',
+          description: 'IDesign.Studio — Luxury Photography, Graphic Design & Creative Concepts Studio',
           start_url: '/',
           display: 'standalone',
           background_color: '#0d0c09',
@@ -142,7 +142,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
     return html.replace(`<!-- ${slotName} -->`, content)
   }
 
-  const title = config.title ?? "idesign.studio"
+  const title = config.title ?? "IDesign.Studio"
   const description = config.description ?? ''
   const favicon = config.icons?.icon ?? ''
   const socialImage = config.openGraph?.image ?? ''

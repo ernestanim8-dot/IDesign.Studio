@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import logoMark from "@/imports/i_desigcmx.png";
+import logoMark from "@/imports/i design logo gh.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
 import { InquiriesDrawer } from "./components/InquiriesDrawer";
+import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "Graphic Design", to: "/graphic-design" },
   { label: "Photography", to: "/photography" },
   { label: "Creative Concepts", to: "/creative-concepts" },
-  { label: "Portfolio Builder", to: "/builder", isSpecial: true },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -120,13 +120,13 @@ export function Layout() {
 
         {/* desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, to, isSpecial }) => (
+          {NAV_LINKS.map(({ label, to }) => (
             <NavLink key={to} to={to} end={to === "/"}
               style={({ isActive }) => ({
                 fontFamily: "'Work Sans', sans-serif",
                 fontSize: "0.85rem",
                 fontWeight: isActive ? 600 : 500,
-                color: isActive ? GOLD : isSpecial ? DARK : MUTED,
+                color: isActive ? GOLD : MUTED,
                 textDecoration: "none",
                 letterSpacing: "0.01em",
                 borderBottom: isActive ? `2px solid ${GOLD}` : "2px solid transparent",
@@ -138,11 +138,6 @@ export function Layout() {
               })}
             >
               <span>{label}</span>
-              {isSpecial && (
-                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded uppercase tracking-wider bg-[#c8a54a]/20 text-[#8c6b1a] border border-[#c8a54a]/40">
-                  Tool
-                </span>
-              )}
             </NavLink>
           ))}
         </div>
@@ -239,6 +234,9 @@ export function Layout() {
 
       {/* Real-Time Inquiries Manager Drawer */}
       <InquiriesDrawer isOpen={isInquiriesOpen} onClose={() => setIsInquiriesOpen(false)} />
+
+      {/* PWA Install & Offline Banner */}
+      <PWAInstallPrompt />
     </div>
   );
 }

@@ -1,68 +1,60 @@
-# Full-Stack Digital Portfolio Builder & Luxury Creative Studio
+# Implementation Plan: PWA Setup, Brand Update to IDesign.Studio & Removal of Portfolio Builder
 
-This plan details the full-stack architecture combining a robust Node.js REST API backend with a luxury UI/UX frontend featuring the iDESIGN Creative Studio and an interactive Digital Portfolio Builder tool.
+Transform the site into a Progressive Web App (PWA) with installability and offline support, apply the provided brand logo for all site and PWA icons, update the project title and branding from "Figma Make App" to "IDesign.Studio", and remove the Portfolio Builder tool and showcase section.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> - Backend runs via `server/index.js` on port `8787`, proxied automatically by Vite's dev server (`/api/*`).
-> - Frontend will include a dedicated **Portfolio Builder** route (`/builder`) allowing users to design, preview, and save digital portfolios to the backend with device-responsive previews and shareable links.
-> - The studio site gets dynamic data integration (projects, stats, testimonials, inquiries) with offline/mock fallback resilience.
+> - The source icon `src/imports/i design logo gh.png` will be copied into `public/` as `favicon.png`, `favicon.ico`, `icon-192.png`, `icon-512.png`, and `apple-touch-icon.png`.
+> - The "Portfolio Builder" navigation item (`/builder`), routes, and showcase section in `Home.tsx` will be removed as requested.
+> - All occurrences of "Figma Make App" will be replaced with "IDesign.Studio".
 
-## Proposed Architecture & Changes
+## Proposed Changes
 
-### 1. Backend REST API (`server/`)
-We will expand `server/index.js` into a comprehensive, modular REST API with file-based JSON persistence in `server/data/`:
-- **`server/data/`**:
-  - `projects.json`: Curated studio projects (Graphic Design, Photography, Branding, Concepts) with high-res images, metrics, and tags.
-  - `services.json`: Studio service tiers, deliverables, and base pricing.
-  - `testimonials.json`: Verified client testimonials with ratings and avatars.
-  - `stats.json`: Live studio stats (completed projects, happy clients, creative awards, client satisfaction).
-  - `inquiries.jsonl`: Inbound client inquiries and quote requests.
-  - `portfolios.json`: User-built portfolios saved from the interactive Portfolio Builder.
-- **REST Endpoints (`server/index.js`)**:
-  - `GET /api/health` - Service health check
-  - `GET /api/stats` - Live metrics
-  - `GET /api/projects` & `GET /api/projects/:id` - Filter by category or search
-  - `POST /api/projects` - Add new portfolio project
-  - `GET /api/services` - Studio services & pricing tiers
-  - `GET /api/testimonials` & `POST /api/testimonials` - Reviews list & client review submission
-  - `GET /api/inquiries` - Studio inquiry log for management
-  - `POST /api/contact` - Inquiry & quote booking submission
-  - `GET /api/builder` & `GET /api/builder/:id` - Fetch user-created portfolios
-  - `POST /api/builder` - Save/publish user-created digital portfolio
+### 1. Brand Logo & Site Icons
+Copy `C:\Users\ernes\Desktop\Digital Portfolio Builder\src\imports\i design logo gh.png` to:
+- `public/favicon.ico`
+- `public/favicon.png`
+- `public/icon-192.png`
+- `public/icon-512.png`
+- `public/apple-touch-icon.png`
+- `public/idesign-logo.png`
+- Update `src/app/Layout.tsx` navbar and footer logo to import and display `i design logo gh.png`.
 
-### 2. Frontend UI/UX Redesign (`src/`)
-- **Design System & Tokens (`src/tokens.ts`, `src/index.css`)**:
-  - Luxury editorial color palette: Obsidian `#0d0c09`, Warm Sand `#faf8f4`, Artisanal Gold `#c8a54a`, Radiant Gold `#e4c06e`, Slate `#2a2824`, Cream `#f2ede5`.
-  - Glassmorphic navigation bar, glowing accent badges, typography pairing (`DM Serif Display`, `Work Sans`, `DM Mono`).
-  - Toast notification system for instant feedback.
-- **Interactive Digital Portfolio Builder (`src/app/pages/PortfolioBuilder.tsx`)**:
-  - **Customizer Suite**:
-    - *Profile & Bio*: Name, headline, bio, avatar, specialty, social handles.
-    - *Aesthetic Themes*: Obsidian Gold, Warm Editorial, Nordic Monochrome, Emerald Noir.
-    - *Layout Styles*: Masonry Grid, Editorial Storyboard, Minimal Modern, Split Showcase.
-    - *Project Manager*: Add, edit, remove projects with custom tags, images, and descriptions (with 1-click sample filler).
-    - *Device Previewer*: Desktop, Tablet, and Mobile frames with real-time responsive rendering.
-    - *Save & Share*: POST to `/api/builder`, generate share link, and export configuration JSON.
-- **Studio Inquiries Manager Drawer (`src/app/components/InquiriesDrawer.tsx`)**:
-  - Discreet studio owner button in header/footer to view real-time inbound inquiries from `/api/inquiries`.
-- **Pages & Route Updates (`src/app/routes.ts`, `src/app/Layout.tsx`)**:
-  - Add "Portfolio Builder" to navigation with high-visibility badge.
-  - Connect `Home.tsx`, `GraphicDesign.tsx`, `Photography.tsx`, and `Contact.tsx` to backend API endpoints with graceful offline caching.
+---
+
+### 2. Branding & Title Updates ("Figma Make App" → "IDesign.Studio")
+- **`index.html`**: Set default title to `IDesign.Studio`, update `<meta name="apple-mobile-web-app-title" content="IDesign.Studio" />`.
+- **`.figma/make/site.json`**: Set `"title": "IDesign.Studio"`.
+- **`public/manifest.webmanifest`**: Set `"name": "IDesign.Studio"` and `"short_name": "IDesign.Studio"`.
+- **`vite.config.ts`**: Update PWA manifest with `name: "IDesign.Studio"`, `short_name: "IDesign.Studio"`, fallback title to `"IDesign.Studio"`.
+- **`# Figma Make App.txt`**: Update title and references.
+
+---
+
+### 3. Removal of Portfolio Builder
+- **`src/app/Layout.tsx`**: Remove `{ label: "Portfolio Builder", to: "/builder", isSpecial: true }` from `NAV_LINKS`.
+- **`src/app/routes.ts`**: Remove `/builder` route configuration.
+- **`src/app/pages/Home.tsx`**: Remove the `Interactive Digital Portfolio Builder Studio Highlight` section and CTA buttons linking to `/builder`.
+
+---
+
+### 4. PWA Installation & Service Worker Integration
+- **`src/app/components/PWAInstallPrompt.tsx`**: Add a luxury floating PWA Install button & offline ready notification.
+- **`src/main.tsx`**: Register service worker using `registerSW` from `virtual:pwa-register`.
+- **`src/app/Layout.tsx`**: Mount `PWAInstallPrompt` into layout.
+
+---
 
 ## Verification Plan
 
-### Automated / Server Verification
-- Start backend server on port 8787 and verify all endpoints via curl:
-  - `GET /api/health`
-  - `GET /api/projects`
-  - `GET /api/stats`
-  - `POST /api/builder` & `GET /api/builder/:id`
-  - `POST /api/contact` & `GET /api/inquiries`
-- Run Vite TypeScript build check: `npm run build`
+### Automated / Build Verification
+- Copy logo files and verify sizes.
+- Run `npm run build` to verify clean compilation, service worker generation, and manifest validation.
+- Verify `dist/manifest.webmanifest`, `dist/sw.js`, and icon assets in production output.
 
-### UI / Browser Verification
-- Verify navigation between Home, Graphic Design, Photography, Creative Concepts, Contact, and the new **Portfolio Builder**.
-- Test creating a digital portfolio in the builder, switching themes and layouts, previewing in mobile/tablet frames, and saving to backend.
-- Test submitting an inquiry and inspecting it in the Inquiries Manager.
+### Manual Verification
+- Test site loading in browser.
+- Verify site icon in browser tab and PWA install prompt button.
+- Verify that "Portfolio Builder" is completely removed from navigation, home page, and routes.
+- Confirm branding displays as `IDesign.Studio`.
