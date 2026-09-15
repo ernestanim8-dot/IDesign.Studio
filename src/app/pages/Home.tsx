@@ -116,6 +116,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export function Home() {
   const [heroReady, setHeroReady] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeSection, setActiveSection] = useState("about-preview");
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const parallax = useTransform(scrollY, [0, 600], [0, 110]);
@@ -126,10 +127,34 @@ export function Home() {
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => {
+    const sectionIds = ["about-preview", "photography", "graphic-design", "advertising", "featured-work", "cta"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      { rootMargin: "-35% 0px -45% 0px", threshold: [0.1, 0.35, 0.6] }
+    );
+
+    sectionIds.forEach((id) => {
+      const target = document.getElementById(id);
+      if (target) observer.observe(target);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* ── Hero ── */}
       <section
+        id="hero"
         ref={heroRef}
         style={{
           position: "relative",
@@ -263,8 +288,8 @@ export function Home() {
             className="flex flex-wrap gap-4"
           >
             <motion.div whileHover={{ scale: 1.03, boxShadow: `0 8px 32px rgba(200,165,74,0.4)` }} whileTap={{ scale: 0.97 }}>
-              <Link
-                to="/contact"
+              <a
+                href="#about-preview"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -281,8 +306,8 @@ export function Home() {
                   borderRadius: "3px",
                 }}
               >
-                Inquire With Us ✉
-              </Link>
+                Explore Studio ↓
+              </a>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <a
@@ -363,7 +388,51 @@ export function Home() {
       </div>
 
       {/* ── Services ── */}
-      <section style={{ padding: "6rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
+      <section style={{ background: BG, borderBottom: `1px solid ${BORDER}`, padding: "1rem 2rem" }}>
+        <div className="flex flex-wrap items-center justify-center gap-3" style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          {[
+            ["About", "#about-preview"],
+            ["Photography", "#photography"],
+            ["Graphic Design", "#graphic-design"],
+            ["Advertising", "#advertising"],
+            ["Featured Work", "#featured-work"],
+            ["Book", "#cta"],
+          ].map(([label, href]) => {
+            const sectionId = href.slice(1);
+            const isActive = activeSection === sectionId;
+
+            return (
+              <a
+                key={href}
+                href={href}
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: isActive ? GOLD : MUTED,
+                  textDecoration: "none",
+                  padding: "0.45rem 0.7rem",
+                  borderBottom: `1px solid ${isActive ? GOLD : "transparent"}`,
+                  transition: "color 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = GOLD;
+                  e.currentTarget.style.borderBottomColor = GOLD;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = isActive ? GOLD : MUTED;
+                  e.currentTarget.style.borderBottomColor = isActive ? GOLD : "transparent";
+                }}
+              >
+                {label}
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="featured-work" style={{ padding: "6rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <p
@@ -394,6 +463,13 @@ export function Home() {
           {SERVICES.map((svc, i) => (
             <FadeUp key={svc.title} delay={i * 0.12}>
               <motion.div
+                id={
+                  svc.title === "Photography"
+                    ? "photography"
+                    : svc.title === "Graphic Design"
+                      ? "graphic-design"
+                      : "advertising"
+                }
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.3 }}
                 style={{
@@ -645,6 +721,7 @@ export function Home() {
 
       {/* ── About teaser ── */}
       <section
+        id="about-preview"
         style={{
           background: SURFACE,
           padding: "6rem 2rem",
@@ -894,6 +971,7 @@ export function Home() {
 
       {/* ── Bottom CTA ── */}
       <section
+        id="cta"
         style={{
           background: DARKER,
           padding: "5rem 2rem",

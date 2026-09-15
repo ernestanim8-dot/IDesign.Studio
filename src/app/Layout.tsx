@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i_desigcmx.png";
@@ -16,6 +16,66 @@ const NAV_LINKS = [
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const headerOffset = 86;
+
+    const scrollToTarget = (target: HTMLElement) => {
+      const start = window.scrollY;
+      const end = Math.max(target.getBoundingClientRect().top + window.scrollY - headerOffset, 0);
+      const distance = end - start;
+      const duration = 760;
+      const startedAt = performance.now();
+
+      const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+      const step = (now: number) => {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        window.scrollTo(0, start + distance * easeInOutCubic(progress));
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    };
+
+    const handleAnchorClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href^='#']");
+      if (!link || link.hash.length <= 1) return;
+
+      const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+      if (!target) return;
+
+      event.preventDefault();
+      window.history.pushState(null, "", `${location.pathname}${link.hash}`);
+      scrollToTarget(target);
+      setMenuOpen(false);
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
+    if (!location.hash) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return () => document.removeEventListener("click", handleAnchorClick);
+    }
+
+    const scrollToAnchor = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const target = document.getElementById(id);
+
+      if (!target) return;
+      scrollToTarget(target);
+    };
+
+    const timeoutId = window.setTimeout(scrollToAnchor, 80);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      document.removeEventListener("click", handleAnchorClick);
+    };
+  }, [location.pathname, location.hash]);
 
   return (
     <div style={{ background: BG, color: DARK, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -158,4 +218,3 @@ export function Layout() {
     </div>
   );
 }
-

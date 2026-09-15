@@ -9,6 +9,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 86px;
+}
+
+[id] {
+  scroll-margin-top: 86px;
 }
 
 body {
