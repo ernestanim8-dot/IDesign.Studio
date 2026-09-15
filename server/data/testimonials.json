@@ -1,0 +1,35 @@
+[
+  {
+    "id": "test-1",
+    "name": "Ama Serwaa",
+    "role": "Founder & Creative Director",
+    "company": "Kente Contemporary",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces&auto=format",
+    "quote": "iDESIGN transformed our entire brand universe. The packaging and photography felt like a Parisian editorial while staying true to our African luxury heritage. Remarkable attention to detail.",
+    "rating": 5,
+    "project": "Brand Identity & Product Editorial",
+    "date": "February 2025"
+  },
+  {
+    "id": "test-2",
+    "name": "David Mensah",
+    "role": "Managing Partner",
+    "company": "Haven Ridge Architecture",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&auto=format",
+    "quote": "Their architectural photography captured the play of tropical morning light across our concrete facades better than any agency we've ever hired. Our client inquiries doubled in two months.",
+    "rating": 5,
+    "project": "Architectural Visual Direction",
+    "date": "January 2025"
+  },
+  {
+    "id": "test-3",
+    "name": "Elena Rostova",
+    "role": "Head of Marketing",
+    "company": "Velox Sound & Acoustics",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces&auto=format",
+    "quote": "Fast, visionary, and impeccable taste. The digital portfolio system they structured for our product line launch blew our stakeholders away.",
+    "rating": 5,
+    "project": "Launch Campaign & Digital Showcase",
+    "date": "December 2024"
+  }
+]

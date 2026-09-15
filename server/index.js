@@ -11,7 +11,10 @@ const dataDir = process.env.VERCEL ? path.join(os.tmpdir(), "idesign-data") : pa
 const seedDataDir = path.join(__dirname, "data");
 
 const inquiriesFile = path.join(dataDir, "inquiries.jsonl");
-const projectsFile = path.join(seedDataDir, "projects.json");
+const projectsFile = process.env.VERCEL
+  ? path.join(dataDir, "projects.json")
+  : path.join(seedDataDir, "projects.json");
+const seedProjectsFile = path.join(seedDataDir, "projects.json");
 const servicesFile = path.join(seedDataDir, "services.json");
 const testimonialsFile = process.env.VERCEL
   ? path.join(dataDir, "testimonials.json")
@@ -222,7 +225,7 @@ async function handleBuilderGet(req, res, id) {
 
 // Handler: Projects
 async function handleProjectsGet(req, res, searchParams) {
-  const projects = await readJsonFile(projectsFile, []);
+  const projects = await readSeededJsonFile(projectsFile, seedProjectsFile, []);
   const category = searchParams.get("category");
   const q = searchParams.get("q")?.toLowerCase();
 
@@ -247,7 +250,7 @@ async function handleProjectsGet(req, res, searchParams) {
 async function handleProjectCreate(req, res) {
   try {
     const body = await readRequestBody(req);
-    const projects = await readJsonFile(projectsFile, []);
+    const projects = await readSeededJsonFile(projectsFile, seedProjectsFile, []);
 
     const newProj = {
       id: "proj-" + (projects.length + 1),
@@ -379,7 +382,7 @@ export async function handleRequest(req, res) {
 
   if (pathname.startsWith("/api/projects/") && req.method === "GET") {
     const id = pathname.replace("/api/projects/", "");
-    const projects = await readJsonFile(projectsFile, []);
+    const projects = await readSeededJsonFile(projectsFile, seedProjectsFile, []);
     const found = projects.find((p) => p.id === id);
     if (!found) {
       sendJson(res, 404, { ok: false, error: "Project not found" });

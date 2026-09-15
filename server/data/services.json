@@ -1,0 +1,62 @@
+[
+  {
+    "id": "srv-1",
+    "name": "Brand Identity & Graphic Design",
+    "category": "Graphic Design",
+    "tagline": "Distinctive visual systems that elevate market perception.",
+    "startingPrice": "$1,200",
+    "timeline": "2-3 weeks",
+    "deliverables": [
+      "Vector Logo & Monogram Suite",
+      "Comprehensive Brand Guidelines",
+      "Typography & Color Palette System",
+      "Packaging & Print Stationery Assets",
+      "Social Media Brand Kit"
+    ]
+  },
+  {
+    "id": "srv-2",
+    "name": "Editorial & Commercial Photography",
+    "category": "Photography",
+    "tagline": "Cinematic visual storytelling with artful light and emotion.",
+    "startingPrice": "$950",
+    "timeline": "3-5 days",
+    "deliverables": [
+      "High-Resolution Edited Images",
+      "On-Location & Studio Staging",
+      "Full Commercial Usage Rights",
+      "Color Grading & Retouching",
+      "Web & High-DPI Print Ready Formats"
+    ]
+  },
+  {
+    "id": "srv-3",
+    "name": "Creative Concepts & Art Direction",
+    "category": "Creative Concepts",
+    "tagline": "End-to-end creative direction for campaigns, spaces, and digital releases.",
+    "startingPrice": "$1,800",
+    "timeline": "3-4 weeks",
+    "deliverables": [
+      "Moodboards & Concept Deck",
+      "Storyboarding & Treatment",
+      "Styling & Prop Direction",
+      "Digital Presentation & Pitch Decks",
+      "Production Oversight"
+    ]
+  },
+  {
+    "id": "srv-4",
+    "name": "Custom Digital Portfolio Systems",
+    "category": "Digital Design",
+    "tagline": "Tailor-made web portfolios designed to convert high-ticket clients.",
+    "startingPrice": "$1,500",
+    "timeline": "1-2 weeks",
+    "deliverables": [
+      "Bespoke Responsive Web Portfolio",
+      "CMS & Media Gallery Integration",
+      "Micro-animations & Fast CDN Hosting",
+      "Interactive Quote / Booking System",
+      "SEO & Social Graph Optimization"
+    ]
+  }
+]

@@ -21,4 +21,8 @@ logs/
 /.opencode-skills/
 .peridot/
 *.zip
-server/data/
+server/data/*
+!server/data/projects.json
+!server/data/services.json
+!server/data/stats.json
+!server/data/testimonials.json

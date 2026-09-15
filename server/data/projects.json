@@ -1,0 +1,74 @@
+[
+  {
+    "id": "proj-1",
+    "title": "Aura Luxe Fragrance",
+    "category": "Graphic Design",
+    "subcategory": "Brand Identity & Packaging",
+    "year": "2025",
+    "client": "Aura Parfums Paris",
+    "description": "High-concept minimalist luxury packaging and typographic identity featuring matte obsidian foil stamping and sustainable glass embossing.",
+    "imageUrl": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Branding", "Packaging", "Foil Emboss", "Luxury"],
+    "featured": true
+  },
+  {
+    "id": "proj-2",
+    "title": "Echoes of Sahara",
+    "category": "Photography",
+    "subcategory": "Editorial Fashion",
+    "year": "2025",
+    "client": "Vogue West Africa",
+    "description": "High-fashion desert editorial playing with golden hour light, sculpted silhouettes, and rich earthy textures.",
+    "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Editorial", "Fashion", "Golden Hour", "Natural Light"],
+    "featured": true
+  },
+  {
+    "id": "proj-3",
+    "title": "Solstice Modern Architecture",
+    "category": "Creative Concepts",
+    "subcategory": "Spatial Visual Direction",
+    "year": "2025",
+    "client": "Solstice Living",
+    "description": "Conceptual 3D architectural renders and physical publication design for biophilic luxury residences in Accra.",
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Architecture", "Editorial", "Spatial", "3D Direction"],
+    "featured": true
+  },
+  {
+    "id": "proj-4",
+    "title": "Nomad Artisanal Coffee",
+    "category": "Graphic Design",
+    "subcategory": "Label & Typography",
+    "year": "2024",
+    "client": "Nomad Roasters",
+    "description": "Custom hand-drawn vector monogram, compostable packaging line, and responsive web visual identity.",
+    "imageUrl": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Packaging", "Typography", "Identity", "Print"],
+    "featured": false
+  },
+  {
+    "id": "proj-5",
+    "title": "Kinfolk Studio Portraits",
+    "category": "Photography",
+    "subcategory": "Fine Art Studio",
+    "year": "2025",
+    "client": "Private Commission",
+    "description": "Monochrome and warm-toned medium-format portraiture capturing authentic human resonance.",
+    "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Portraits", "Studio Lighting", "Fine Art", "Black & White"],
+    "featured": true
+  },
+  {
+    "id": "proj-6",
+    "title": "Lumina Future Mobility",
+    "category": "Creative Concepts",
+    "subcategory": "Brand Strategy & Vision",
+    "year": "2025",
+    "client": "Lumina EV",
+    "description": "Futuristic UI design system, digital instrument cluster styling, and cinematic launch campaign storyboard.",
+    "imageUrl": "https://images.unsplash.com/photo-1508974239320-0a029497e820?w=1200&h=800&fit=crop&auto=format",
+    "tags": ["Futurism", "UI/UX", "Campaign", "Storyboard"],
+    "featured": false
+  }
+]
