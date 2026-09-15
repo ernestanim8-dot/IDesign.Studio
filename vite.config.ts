@@ -2,6 +2,7 @@ import { defineConfig, type HtmlTagDescriptor, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
+import { VitePWA } from 'vite-plugin-pwa'
 
 import siteConfiguration from './.figma/make/site.json' with { type: 'json' }
 
@@ -19,6 +20,56 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
+      VitePWA({
+        registerType: 'autoUpdate',
+        injectRegister: 'auto',
+        strategies: 'generateSW',
+        manifest: {
+          name: 'idesign.studio',
+          short_name: 'idesign.studio',
+          description: 'iDESIGN Photography & Creative Design Studio Portfolio',
+          start_url: '/',
+          display: 'standalone',
+          background_color: '#0d0c09',
+          theme_color: '#c8a54a',
+          orientation: 'portrait-primary',
+          icons: [
+            {
+              src: '/icon-192.png',
+              sizes: '192x192',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+            {
+              src: '/icon-512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+            {
+              src: '/favicon.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+          ],
+        },
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'unsplash-images',
+                expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              },
+            },
+          ],
+        },
+        devOptions: {
+          enabled: true,
+        },
+      }),
       figmaSiteConfiguration(siteConfiguration),
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
@@ -91,7 +142,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
     return html.replace(`<!-- ${slotName} -->`, content)
   }
 
-  const title = config.title ?? "Figma Make App"
+  const title = config.title ?? "idesign.studio"
   const description = config.description ?? ''
   const favicon = config.icons?.icon ?? ''
   const socialImage = config.openGraph?.image ?? ''

@@ -1,5 +1,5 @@
 {
-  "name": "figma-make-app",
+  "name": "idesign-studio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -27,6 +27,8 @@
     "oxfmt": "^0.2.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
-    "vite": "^8.0.5"
+    "vite": "^8.0.5",
+    "vite-plugin-pwa": "^1.3.0",
+    "workbox-window": "^7.4.1"
   }
 }
