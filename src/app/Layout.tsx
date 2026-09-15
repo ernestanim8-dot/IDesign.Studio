@@ -4,17 +4,20 @@ import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i_desigcmx.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
+import { InquiriesDrawer } from "./components/InquiriesDrawer";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "Graphic Design", to: "/graphic-design" },
   { label: "Photography", to: "/photography" },
   { label: "Creative Concepts", to: "/creative-concepts" },
+  { label: "Portfolio Builder", to: "/builder", isSpecial: true },
   { label: "Contact", to: "/contact" },
 ];
 
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isInquiriesOpen, setIsInquiriesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -91,6 +94,14 @@ export function Layout() {
           </a>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsInquiriesOpen(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#201d17] hover:bg-[#c8a54a]/20 border border-[#383327] hover:border-[#c8a54a] transition-all"
+            style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.08em", color: GOLD, cursor: "pointer" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c8a54a] animate-pulse" />
+            <span>Studio Inquiries</span>
+          </button>
           {["Facebook", "Instagram"].map((s) => (
             <a key={s} href="#"
               style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa49a", textDecoration: "none", transition: "color 0.2s" }}
@@ -109,20 +120,30 @@ export function Layout() {
 
         {/* desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, to }) => (
+          {NAV_LINKS.map(({ label, to, isSpecial }) => (
             <NavLink key={to} to={to} end={to === "/"}
               style={({ isActive }) => ({
                 fontFamily: "'Work Sans', sans-serif",
                 fontSize: "0.85rem",
                 fontWeight: isActive ? 600 : 500,
-                color: isActive ? GOLD : MUTED,
+                color: isActive ? GOLD : isSpecial ? DARK : MUTED,
                 textDecoration: "none",
                 letterSpacing: "0.01em",
                 borderBottom: isActive ? `2px solid ${GOLD}` : "2px solid transparent",
                 paddingBottom: "2px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
                 transition: "color 0.2s, border-color 0.2s",
               })}
-            >{label}</NavLink>
+            >
+              <span>{label}</span>
+              {isSpecial && (
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded uppercase tracking-wider bg-[#c8a54a]/20 text-[#8c6b1a] border border-[#c8a54a]/40">
+                  Tool
+                </span>
+              )}
+            </NavLink>
           ))}
         </div>
 
@@ -215,6 +236,9 @@ export function Layout() {
 
       {/* Floating WhatsApp Quick Action */}
       <WhatsAppFloatingButton />
+
+      {/* Real-Time Inquiries Manager Drawer */}
+      <InquiriesDrawer isOpen={isInquiriesOpen} onClose={() => setIsInquiriesOpen(false)} />
     </div>
   );
 }

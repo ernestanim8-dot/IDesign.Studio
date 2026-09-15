@@ -41,6 +41,13 @@ export const router = createBrowserRouter([
           return { Component: Contact };
         },
       },
+      {
+        path: "builder",
+        lazy: async () => {
+          const { PortfolioBuilder } = await import("./pages/PortfolioBuilder");
+          return { Component: PortfolioBuilder };
+        },
+      },
     ],
   },
 ]);

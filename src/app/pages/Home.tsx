@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import logoFull from "@/imports/i_design_logo.png";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
+import { getStats } from "../api";
 
 const SERVICES = [
   {
@@ -117,6 +118,7 @@ export function Home() {
   const [heroReady, setHeroReady] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeSection, setActiveSection] = useState("about-preview");
+  const [liveStats, setLiveStats] = useState(STATS);
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const parallax = useTransform(scrollY, [0, 600], [0, 110]);
@@ -125,6 +127,19 @@ export function Home() {
   useEffect(() => {
     const t = setTimeout(() => setHeroReady(true), 80);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    getStats().then((data) => {
+      if (data) {
+        setLiveStats([
+          { value: `${data.yearsExperience}+`, label: "Years in Business" },
+          { value: `${data.projectsCompleted}+`, label: "Projects Completed" },
+          { value: data.clientSatisfaction, label: "Client Satisfaction" },
+          { value: `${data.awardsWon}`, label: "Design Awards" },
+        ]);
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -585,7 +600,7 @@ export function Home() {
             </p>
           </FadeUp>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {STATS.map(({ value, label }, i) => (
+            {liveStats.map(({ value, label }, i) => (
               <FadeUp key={label} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ scale: 1.04 }}
@@ -623,6 +638,150 @@ export function Home() {
                 </motion.div>
               </FadeUp>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Interactive Digital Portfolio Builder Studio Highlight ── */}
+      <section style={{ background: "#0b0a08", borderTop: "1px solid #1f1d17", borderBottom: "1px solid #1f1d17", padding: "6rem 2rem", position: "relative", overflow: "hidden" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "20%",
+            transform: "translate(-50%, -50%)",
+            width: "600px",
+            height: "600px",
+            background: "radial-gradient(circle, rgba(200, 165, 74, 0.12) 0%, transparent 65%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Narrative */}
+            <div className="lg:col-span-7 space-y-6">
+              <FadeUp>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c8a54a]/15 border border-[#c8a54a]/30 text-[#e4c06e] text-xs font-mono tracking-wider uppercase">
+                  <span>⚡</span> Live Web Feature
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.1}>
+                <h2
+                  style={{
+                    fontFamily: "'DM Serif Display',serif",
+                    fontSize: "clamp(2.2rem, 4vw, 3.4rem)",
+                    lineHeight: 1.15,
+                    color: "#ffffff",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  Create & Publish Your Own{" "}
+                  <span style={{ color: GOLD, fontStyle: "italic" }}>Digital Portfolio</span>
+                </h2>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <p
+                  style={{
+                    fontFamily: "'Work Sans',sans-serif",
+                    fontSize: "1.05rem",
+                    fontWeight: 300,
+                    lineHeight: 1.75,
+                    color: "#a0998d",
+                    maxWidth: "540px",
+                  }}
+                >
+                  Whether you are a photographer, graphic designer, or multidisciplinary artist, our built-in interactive Studio Builder lets you customize themes, showcase works, preview live across devices, and publish directly to our cloud database.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.3}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                  <div className="p-4 rounded-xl border border-[#26231c] bg-[#14120e]">
+                    <span className="text-xl">🎨</span>
+                    <h4 className="font-serif text-white text-sm font-semibold mt-2">Luxury Palettes</h4>
+                    <p className="text-xs text-[#827a6e] mt-1 font-light">Obsidian, Warm Sand, Emerald Noir, Nordic Minimal.</p>
+                  </div>
+                  <div className="p-4 rounded-xl border border-[#26231c] bg-[#14120e]">
+                    <span className="text-xl">📱</span>
+                    <h4 className="font-serif text-white text-sm font-semibold mt-2">Device Frames</h4>
+                    <p className="text-xs text-[#827a6e] mt-1 font-light">Real-time desktop, tablet, and mobile viewport inspection.</p>
+                  </div>
+                  <div className="p-4 rounded-xl border border-[#26231c] bg-[#14120e]">
+                    <span className="text-xl">☁️</span>
+                    <h4 className="font-serif text-white text-sm font-semibold mt-2">REST Backend</h4>
+                    <p className="text-xs text-[#827a6e] mt-1 font-light">Instant persistence, shareable links, and JSON export.</p>
+                  </div>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.4}>
+                <div className="pt-4 flex items-center gap-4 flex-wrap">
+                  <Link
+                    to="/builder"
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#c8a54a] hover:bg-[#e4c06e] text-black font-semibold text-sm tracking-wide transition-all shadow-xl hover:scale-105"
+                  >
+                    <span>Launch Portfolio Builder</span>
+                    <span className="text-lg">→</span>
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-[#3d372b] hover:border-[#c8a54a] text-xs font-mono text-[#c5bcad] transition-colors"
+                  >
+                    Request Bespoke Site Build
+                  </Link>
+                </div>
+              </FadeUp>
+            </div>
+
+            {/* Right Interactive Mock Card */}
+            <div className="lg:col-span-5">
+              <FadeUp delay={0.2}>
+                <div className="relative rounded-2xl border border-[#2e2a21] bg-[#14120e] p-5 shadow-2xl overflow-hidden group">
+                  <div className="flex items-center justify-between border-b border-[#25221a] pb-3 mb-4 text-xs font-mono text-[#8a8172]">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Interactive Builder Engine
+                    </span>
+                    <span className="text-[#c8a54a]">v2.0 Full-Stack</span>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="aspect-video rounded-xl overflow-hidden relative border border-[#332e24]">
+                      <img
+                        src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&h=500&fit=crop&auto=format"
+                        alt="Demo Showcase"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+                        <div>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#c8a54a] text-black font-semibold uppercase">
+                            Photography & Art Direction
+                          </span>
+                          <h4 className="text-white font-serif text-lg font-semibold mt-1">
+                            Echoes of Golden Horizon
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 rounded-lg bg-[#0d0c09] border border-[#222019] flex items-center justify-between">
+                      <div>
+                        <p className="text-xs text-white font-medium">Ready to showcase your works?</p>
+                        <p className="text-[11px] text-[#787165]">No code required. Export or share instantly.</p>
+                      </div>
+                      <Link
+                        to="/builder"
+                        className="px-3 py-1.5 rounded text-xs font-mono bg-[#c8a54a]/20 text-[#e4c06e] border border-[#c8a54a]/40 hover:bg-[#c8a54a] hover:text-black transition-colors"
+                      >
+                        Try Studio Tool ⚡
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
           </div>
         </div>
       </section>
