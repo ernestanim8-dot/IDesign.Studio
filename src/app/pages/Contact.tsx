@@ -321,8 +321,8 @@ export function Contact() {
                 {
                   key: "addr",
                   label: "Studio Location",
-                  value: "123 Creative Ave, Studio 4B (By Appointment)",
-                  href: "#",
+                  value: "Accra, Ghana (By Appointment & Worldwide Commissions)",
+                  href: "https://maps.google.com/?q=Accra,+Ghana",
                   copyable: false,
                 },
               ].map(({ key, label, value, href, copyable }) => (

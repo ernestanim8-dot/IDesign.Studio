@@ -236,6 +236,38 @@ async function handleContact(req, res) {
 
     const inquiry = await saveInquiry(newInquiry);
 
+    // Optional automated email notification via Resend API
+    if (process.env.RESEND_API_KEY) {
+      try {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: process.env.RESEND_FROM_EMAIL || "iDESIGN Studio <onboarding@resend.dev>",
+            to: [process.env.NOTIFICATION_EMAIL || "idesign6048@gmail.com"],
+            subject: `✦ New Client Inquiry: ${inquiry.fullName} (${inquiry.interest})`,
+            html: `
+              <h2>New Client Inquiry — iDESIGN Studio</h2>
+              <p><strong>Name:</strong> ${inquiry.fullName}</p>
+              <p><strong>Email:</strong> ${inquiry.email}</p>
+              <p><strong>Phone / WhatsApp:</strong> ${inquiry.phone || "Not provided"}</p>
+              <p><strong>Service:</strong> ${inquiry.interest}</p>
+              <p><strong>Timeline:</strong> ${inquiry.timeline}</p>
+              <p><strong>Budget:</strong> ${inquiry.budget || "Flexible"}</p>
+              <hr style="border:0;border-top:1px solid #ddd;margin:16px 0;" />
+              <p><strong>Project Details:</strong></p>
+              <p style="white-space:pre-wrap;">${inquiry.message}</p>
+            `,
+          }),
+        });
+      } catch (mailErr) {
+        console.warn("Resend email notification failed:", mailErr?.message || mailErr);
+      }
+    }
+
     sendJson(res, 201, {
       ok: true,
       message: "Inquiry received successfully. We will get back to you shortly.",
