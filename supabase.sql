@@ -1,3 +1,6 @@
+-- Supabase Database Schema (PostgreSQL)
+-- Run this script in your Supabase Dashboard: SQL Editor > New query > Run.
+
 create table if not exists public.inquiries (
   id text primary key,
   created_at timestamptz not null default now(),

@@ -15,6 +15,17 @@ registerSW({
   },
 })
 
+// Dynamically set theme-color for supported browsers without triggering static HTML compatibility warnings
+if (typeof document !== 'undefined') {
+  let themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (!themeMeta) {
+    themeMeta = document.createElement('meta');
+    themeMeta.setAttribute('name', 'theme-color');
+    document.head.appendChild(themeMeta);
+  }
+  themeMeta.setAttribute('content', '#c8a54a');
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
