@@ -171,10 +171,19 @@ export async function submitInquiry(payload: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    return await readJsonResponse(res, {
-      ok: false,
-      errors: ["The server returned an empty response."],
-    });
+    const fallback = res.ok
+      ? { ok: true, message: "Inquiry received successfully. We will get back to you shortly." }
+      : { ok: false, errors: ["The server returned an empty response."] };
+    const result = await readJsonResponse(res, fallback);
+
+    if (!res.ok && result.ok !== true) {
+      return {
+        ok: false,
+        errors: result.errors || [`Request failed with status ${res.status}.`],
+      };
+    }
+
+    return result;
   } catch (err) {
     return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
   }
