@@ -10,7 +10,7 @@ create table if not exists public.inquiries (
   interest text not null default 'General Inquiry',
   timeline text not null default 'Flexible',
   budget text,
-  message text not null,
+  message text not null default 'General inquiry',
   status text not null default 'New'
 );
 

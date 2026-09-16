@@ -94,9 +94,13 @@ const FALLBACK_STATS: StudioStats = {
 };
 
 async function readJsonResponse<T>(res: Response, fallback: T): Promise<T> {
-  const text = await res.text();
-  if (!text.trim()) return fallback;
-  return JSON.parse(text) as T;
+  try {
+    const text = await res.text();
+    if (!text.trim()) return fallback;
+    return JSON.parse(text) as T;
+  } catch {
+    return fallback;
+  }
 }
 
 export async function getStats(): Promise<StudioStats> {
@@ -163,7 +167,7 @@ export async function submitInquiry(payload: {
   interest: string;
   timeline: string;
   budget?: string;
-  message: string;
+  message?: string;
 }): Promise<{ ok: boolean; message?: string; errors?: string[] }> {
   try {
     const res = await fetch("/api/contact", {
@@ -171,19 +175,29 @@ export async function submitInquiry(payload: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    const fallback = res.ok
-      ? { ok: true, message: "Inquiry received successfully. We will get back to you shortly." }
-      : { ok: false, errors: ["The server returned an empty response."] };
-    const result = await readJsonResponse(res, fallback);
 
-    if (!res.ok && result.ok !== true) {
-      return {
-        ok: false,
-        errors: result.errors || [`Request failed with status ${res.status}.`],
-      };
+    const text = await res.text();
+    let data: any = null;
+    try {
+      data = text.trim() ? JSON.parse(text) : null;
+    } catch {
+      data = null;
     }
 
-    return result;
+    if (res.ok && data?.ok) {
+      return data;
+    }
+
+    if (data?.errors && Array.isArray(data.errors) && data.errors.length > 0) {
+      return { ok: false, errors: data.errors };
+    }
+
+    if (!res.ok) {
+      const errMsg = data?.errors?.[0] || data?.message || (text.length < 200 ? text : "") || `Server status ${res.status}`;
+      return { ok: false, errors: [errMsg] };
+    }
+
+    return data || { ok: true, message: "Inquiry received successfully. We will get back to you shortly." };
   } catch (err) {
     return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
   }

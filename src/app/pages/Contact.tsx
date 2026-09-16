@@ -67,8 +67,8 @@ export function Contact() {
 
   const handleSendViaWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !message.trim()) {
-      alert("Please enter your name and a brief project description.");
+    if (!fullName.trim()) {
+      alert("Please enter your name.");
       return;
     }
 
@@ -82,8 +82,8 @@ export function Contact() {
 
   const handleStandardSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !email.trim() || !message.trim()) {
-      setSubmitError("Please fill in your name, email, and project message.");
+    if (!fullName.trim() || !email.trim()) {
+      setSubmitError("Please fill in your name and a valid email address.");
       return;
     }
 
@@ -790,12 +790,11 @@ export function Contact() {
                           color: MUTED,
                         }}
                       >
-                        Project Details *
+                        Project Details (Optional)
                       </label>
                       <textarea
                         rows={4}
-                        required
-                        placeholder="Tell us about your brand, what deliverables you require, and any specific ideas…"
+                        placeholder="Tell us about your brand, what deliverables you require, or any specific ideas (optional)…"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         style={{

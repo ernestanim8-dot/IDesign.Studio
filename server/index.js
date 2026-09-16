@@ -81,12 +81,27 @@ async function writeJsonFile(filePath, data) {
 }
 
 async function readRequestBody(req) {
-  const chunks = [];
-  for await (const chunk of req) {
-    chunks.push(chunk);
-    if (Buffer.concat(chunks).length > 1024 * 512) {
-      throw new Error("Request body too large. Maximum size is 512KB.");
+  if (req.body) {
+    if (typeof req.body === "object") return req.body;
+    if (typeof req.body === "string") {
+      try {
+        return JSON.parse(req.body);
+      } catch {
+        return {};
+      }
     }
+  }
+  const chunks = [];
+  try {
+    for await (const chunk of req) {
+      chunks.push(chunk);
+      if (Buffer.concat(chunks).length > 1024 * 512) {
+        throw new Error("Request body too large. Maximum size is 512KB.");
+      }
+    }
+  } catch (err) {
+    if (chunks.length === 0) return {};
+    throw err;
   }
   const raw = Buffer.concat(chunks).toString("utf8");
   return raw ? JSON.parse(raw) : {};
@@ -158,17 +173,25 @@ async function supabaseRequest(pathname, options = {}) {
 
 async function saveInquiry(inquiry) {
   if (hasSupabase) {
-    const createdRows = await supabaseRequest("inquiries", {
-      method: "POST",
-      headers: { Prefer: "return=representation" },
-      body: JSON.stringify(toSupabaseInquiry(inquiry)),
-    });
-    const created = Array.isArray(createdRows) ? createdRows[0] : null;
-    return created ? fromSupabaseInquiry(created) : inquiry;
+    try {
+      const createdRows = await supabaseRequest("inquiries", {
+        method: "POST",
+        headers: { Prefer: "return=representation" },
+        body: JSON.stringify(toSupabaseInquiry(inquiry)),
+      });
+      const created = Array.isArray(createdRows) ? createdRows[0] : null;
+      if (created) return fromSupabaseInquiry(created);
+    } catch (supabaseErr) {
+      console.warn("Supabase save failed, falling back to storage:", supabaseErr?.message || supabaseErr);
+    }
   }
 
-  await mkdir(dataDir, { recursive: true });
-  await writeFile(inquiriesFile, `${JSON.stringify(inquiry)}\n`, { flag: "a" });
+  try {
+    await mkdir(dataDir, { recursive: true });
+    await writeFile(inquiriesFile, `${JSON.stringify(inquiry)}\n`, { flag: "a" });
+  } catch (fsErr) {
+    console.warn("Local storage write failed:", fsErr?.message || fsErr);
+  }
   return inquiry;
 }
 
@@ -209,12 +232,11 @@ async function handleContact(req, res) {
     const interest = cleanString(body.interest, "General Inquiry");
     const timeline = cleanString(body.timeline, "Flexible");
     const budget = cleanString(body.budget, "Flexible");
-    const message = cleanString(body.message);
+    const message = cleanString(body.message, "General inquiry — no specific details provided.");
 
     const errors = [];
     if (!fullName) errors.push("Full name is required.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("A valid email address is required.");
-    if (!message) errors.push("Project details are required.");
 
     if (errors.length > 0) {
       sendJson(res, 400, { ok: false, errors });
@@ -435,11 +457,12 @@ export async function handleRequest(req, res) {
     return;
   }
 
-  const requestUrl = new URL(req.url || "/", `http://${req.headers.host}`);
+  const requestUrl = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   const pathname = requestUrl.pathname;
+  const matchApi = (route) => pathname === route || pathname === route.replace(/^\/api/, "");
 
   // Health
-  if (pathname === "/api/health" && req.method === "GET") {
+  if (matchApi("/api/health") && req.method === "GET") {
     sendJson(res, 200, {
       ok: true,
       service: "idesign-api",
@@ -451,7 +474,7 @@ export async function handleRequest(req, res) {
   }
 
   // Stats
-  if (pathname === "/api/stats" && req.method === "GET") {
+  if (matchApi("/api/stats") && req.method === "GET") {
     const stats = await readJsonFile(statsFile, {
       projectsCompleted: 180,
       clientSatisfaction: "99%",
@@ -462,20 +485,20 @@ export async function handleRequest(req, res) {
   }
 
   // Services
-  if (pathname === "/api/services" && req.method === "GET") {
+  if (matchApi("/api/services") && req.method === "GET") {
     const services = await readJsonFile(servicesFile, []);
     sendJson(res, 200, { ok: true, services });
     return;
   }
 
   // Testimonials
-  if (pathname === "/api/testimonials" && req.method === "GET") {
+  if (matchApi("/api/testimonials") && req.method === "GET") {
     const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
     sendJson(res, 200, { ok: true, testimonials });
     return;
   }
 
-  if (pathname === "/api/testimonials" && req.method === "POST") {
+  if (matchApi("/api/testimonials") && req.method === "POST") {
     try {
       const body = await readRequestBody(req);
       const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
@@ -501,13 +524,13 @@ export async function handleRequest(req, res) {
   }
 
   // Projects
-  if (pathname === "/api/projects" && req.method === "GET") {
+  if (matchApi("/api/projects") && req.method === "GET") {
     await handleProjectsGet(req, res, requestUrl.searchParams);
     return;
   }
 
-  if (pathname.startsWith("/api/projects/") && req.method === "GET") {
-    const id = pathname.replace("/api/projects/", "");
+  if ((pathname.startsWith("/api/projects/") || (pathname.startsWith("/projects/") && !pathname.includes("."))) && req.method === "GET") {
+    const id = pathname.replace(/^\/api\/projects\//, "").replace(/^\/projects\//, "");
     const projects = await readSeededJsonFile(projectsFile, seedProjectsFile, []);
     const found = projects.find((p) => p.id === id);
     if (!found) {
@@ -518,18 +541,18 @@ export async function handleRequest(req, res) {
     return;
   }
 
-  if (pathname === "/api/projects" && req.method === "POST") {
+  if (matchApi("/api/projects") && req.method === "POST") {
     await handleProjectCreate(req, res);
     return;
   }
 
   // Inquiries / Contact
-  if (pathname === "/api/contact" && req.method === "POST") {
+  if (matchApi("/api/contact") && req.method === "POST") {
     await handleContact(req, res);
     return;
   }
 
-  if (pathname === "/api/inquiries" && req.method === "GET") {
+  if (matchApi("/api/inquiries") && req.method === "GET") {
     if (!isAuthorizedAdminRequest(req)) {
       sendJson(res, 401, { ok: false, errors: ["Admin token is required."] });
       return;
@@ -539,18 +562,18 @@ export async function handleRequest(req, res) {
   }
 
   // Digital Portfolio Builder
-  if (pathname === "/api/builder" && req.method === "GET") {
+  if (matchApi("/api/builder") && req.method === "GET") {
     await handleBuilderGet(req, res);
     return;
   }
 
-  if (pathname.startsWith("/api/builder/") && req.method === "GET") {
-    const id = pathname.replace("/api/builder/", "");
+  if ((pathname.startsWith("/api/builder/") || (pathname.startsWith("/builder/") && !pathname.includes("."))) && req.method === "GET") {
+    const id = pathname.replace(/^\/api\/builder\//, "").replace(/^\/builder\//, "");
     await handleBuilderGet(req, res, id);
     return;
   }
 
-  if (pathname === "/api/builder" && req.method === "POST") {
+  if (matchApi("/api/builder") && req.method === "POST") {
     await handleBuilderPost(req, res);
     return;
   }
