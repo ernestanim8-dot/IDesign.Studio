@@ -12,15 +12,21 @@ export function InquiriesDrawer({ isOpen, onClose }: InquiriesDrawerProps) {
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [adminToken, setAdminToken] = useState(() => window.localStorage.getItem("idesign-admin-token") || "");
 
   const loadData = async () => {
     setLoading(true);
     setError("");
     try {
-      const list = await getInquiries();
+      const trimmedToken = adminToken.trim();
+      if (trimmedToken) {
+        window.localStorage.setItem("idesign-admin-token", trimmedToken);
+      }
+
+      const list = await getInquiries(trimmedToken);
       setInquiries(list);
     } catch {
-      setError("Unable to load inquiries from backend.");
+      setError("Unable to load inquiries. Check the admin token and try again.");
     } finally {
       setLoading(false);
     }
@@ -65,6 +71,17 @@ export function InquiriesDrawer({ isOpen, onClose }: InquiriesDrawerProps) {
                 <h2 className="text-xl font-serif text-white mt-1">Inbound Client Inquiries</h2>
               </div>
               <div className="flex items-center gap-3">
+                <input
+                  type="password"
+                  value={adminToken}
+                  onChange={(event) => setAdminToken(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") loadData();
+                  }}
+                  placeholder="Admin token"
+                  className="w-32 sm:w-44 px-3 py-1.5 rounded bg-[#100f0d] border border-[#3e382d] text-xs font-mono text-[#f3efe6] placeholder:text-[#6f675b] focus:outline-none focus:border-[#c8a54a]"
+                  aria-label="Admin token"
+                />
                 <button
                   onClick={loadData}
                   disabled={loading}

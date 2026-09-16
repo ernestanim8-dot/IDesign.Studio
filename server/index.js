@@ -24,6 +24,9 @@ const statsFile = path.join(seedDataDir, "stats.json");
 const portfoliosFile = path.join(dataDir, "portfolios.json");
 
 const port = Number(process.env.API_PORT || process.env.PORT || 8787);
+const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const hasSupabase = Boolean(supabaseUrl && supabaseServiceRoleKey);
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -44,6 +47,17 @@ function sendJson(res, statusCode, payload) {
     "Access-Control-Allow-Headers": "Content-Type,Authorization",
   });
   res.end(JSON.stringify(payload));
+}
+
+function isAuthorizedAdminRequest(req) {
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (!adminToken) return true;
+
+  const authHeader = req.headers.authorization || "";
+  const bearerToken = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
+  const headerToken = req.headers["x-admin-token"] || "";
+
+  return bearerToken === adminToken || headerToken === adminToken;
 }
 
 async function readJsonFile(filePath, fallback = []) {
@@ -82,6 +96,109 @@ function cleanString(val, fallback = "") {
   return typeof val === "string" ? val.trim().slice(0, 5000) : fallback;
 }
 
+function toSupabaseInquiry(inquiry) {
+  return {
+    id: inquiry.id,
+    created_at: inquiry.createdAt,
+    full_name: inquiry.fullName,
+    email: inquiry.email,
+    phone: inquiry.phone,
+    interest: inquiry.interest,
+    timeline: inquiry.timeline,
+    budget: inquiry.budget,
+    message: inquiry.message,
+    status: inquiry.status,
+  };
+}
+
+function fromSupabaseInquiry(row) {
+  return {
+    id: row.id,
+    createdAt: row.created_at,
+    fullName: row.full_name,
+    email: row.email,
+    phone: row.phone || "",
+    interest: row.interest,
+    timeline: row.timeline,
+    budget: row.budget || "",
+    message: row.message,
+    status: row.status,
+  };
+}
+
+async function supabaseRequest(pathname, options = {}) {
+  if (!hasSupabase) {
+    throw new Error("Supabase is not configured.");
+  }
+
+  const res = await fetch(`${supabaseUrl}/rest/v1/${pathname}`, {
+    ...options,
+    headers: {
+      apikey: supabaseServiceRoleKey,
+      Authorization: `Bearer ${supabaseServiceRoleKey}`,
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+    },
+  });
+
+  if (!res.ok) {
+    const message = await res.text();
+    throw new Error(message || `Supabase request failed with ${res.status}`);
+  }
+
+  const text = await res.text();
+  if (!text.trim()) return null;
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error("Supabase returned an invalid JSON response.");
+  }
+}
+
+async function saveInquiry(inquiry) {
+  if (hasSupabase) {
+    const createdRows = await supabaseRequest("inquiries", {
+      method: "POST",
+      headers: { Prefer: "return=representation" },
+      body: JSON.stringify(toSupabaseInquiry(inquiry)),
+    });
+    const created = Array.isArray(createdRows) ? createdRows[0] : null;
+    return created ? fromSupabaseInquiry(created) : inquiry;
+  }
+
+  await mkdir(dataDir, { recursive: true });
+  await writeFile(inquiriesFile, `${JSON.stringify(inquiry)}\n`, { flag: "a" });
+  return inquiry;
+}
+
+async function listInquiries() {
+  if (hasSupabase) {
+    const rows = await supabaseRequest("inquiries?select=*&order=created_at.desc");
+    return rows.map(fromSupabaseInquiry);
+  }
+
+  const exists = await stat(inquiriesFile).catch(() => null);
+  if (!exists) return [];
+
+  const content = await readFile(inquiriesFile, "utf8");
+  const lines = content
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+  return lines
+    .map((line) => {
+      try {
+        return JSON.parse(line);
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .reverse();
+}
+
 // Handler: Inquiries / Contact
 async function handleContact(req, res) {
   try {
@@ -104,8 +221,6 @@ async function handleContact(req, res) {
       return;
     }
 
-    await mkdir(dataDir, { recursive: true });
-
     const newInquiry = {
       id: "inq-" + Math.random().toString(36).slice(2, 10),
       createdAt: new Date().toISOString(),
@@ -119,12 +234,12 @@ async function handleContact(req, res) {
       status: "New",
     };
 
-    await writeFile(inquiriesFile, `${JSON.stringify(newInquiry)}\n`, { flag: "a" });
+    const inquiry = await saveInquiry(newInquiry);
 
     sendJson(res, 201, {
       ok: true,
       message: "Inquiry received successfully. We will get back to you shortly.",
-      inquiry: newInquiry,
+      inquiry,
     });
   } catch (err) {
     sendJson(res, 500, { ok: false, errors: [err.message || "Failed to process inquiry."] });
@@ -134,28 +249,7 @@ async function handleContact(req, res) {
 // Handler: Get Inquiries (for studio manager drawer)
 async function handleGetInquiries(req, res) {
   try {
-    const exists = await stat(inquiriesFile).catch(() => null);
-    if (!exists) {
-      sendJson(res, 200, { ok: true, inquiries: [] });
-      return;
-    }
-
-    const content = await readFile(inquiriesFile, "utf8");
-    const lines = content
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean);
-    const inquiries = lines
-      .map((line) => {
-        try {
-          return JSON.parse(line);
-        } catch {
-          return null;
-        }
-      })
-      .filter(Boolean)
-      .reverse();
-
+    const inquiries = await listInquiries();
     sendJson(res, 200, { ok: true, inquiries });
   } catch (err) {
     sendJson(res, 500, { ok: false, errors: [err.message] });
@@ -404,6 +498,10 @@ export async function handleRequest(req, res) {
   }
 
   if (pathname === "/api/inquiries" && req.method === "GET") {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, errors: ["Admin token is required."] });
+      return;
+    }
     await handleGetInquiries(req, res);
     return;
   }

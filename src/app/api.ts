@@ -93,6 +93,12 @@ const FALLBACK_STATS: StudioStats = {
   activeInquiriesThisWeek: 12,
 };
 
+async function readJsonResponse<T>(res: Response, fallback: T): Promise<T> {
+  const text = await res.text();
+  if (!text.trim()) return fallback;
+  return JSON.parse(text) as T;
+}
+
 export async function getStats(): Promise<StudioStats> {
   try {
     const res = await fetch("/api/stats");
@@ -140,15 +146,14 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   }
 }
 
-export async function getInquiries(): Promise<InquiryItem[]> {
-  try {
-    const res = await fetch("/api/inquiries");
-    if (!res.ok) throw new Error("Failed to fetch inquiries");
-    const json = await res.json();
-    return json.inquiries || [];
-  } catch {
-    return [];
-  }
+export async function getInquiries(adminToken?: string): Promise<InquiryItem[]> {
+  const headers: HeadersInit = {};
+  if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+
+  const res = await fetch("/api/inquiries", { headers });
+  if (!res.ok) throw new Error("Failed to fetch inquiries");
+  const json = await readJsonResponse<{ inquiries?: InquiryItem[] }>(res, {});
+  return json.inquiries || [];
 }
 
 export async function submitInquiry(payload: {
@@ -166,7 +171,10 @@ export async function submitInquiry(payload: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    return await res.json();
+    return await readJsonResponse(res, {
+      ok: false,
+      errors: ["The server returned an empty response."],
+    });
   } catch (err) {
     return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
   }
