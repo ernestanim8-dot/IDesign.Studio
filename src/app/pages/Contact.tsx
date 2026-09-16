@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
+import { submitInquiry } from "../api";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
@@ -90,24 +91,16 @@ export function Contact() {
     setSubmitError("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName,
-          email,
-          phone,
-          interest,
-          timeline,
-          message,
-        }),
+      const result = await submitInquiry({
+        fullName,
+        email,
+        phone,
+        interest,
+        timeline,
+        message,
       });
 
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
+      if (!result.ok) {
         throw new Error(result.errors?.[0] || "Unable to submit your inquiry right now.");
       }
 
