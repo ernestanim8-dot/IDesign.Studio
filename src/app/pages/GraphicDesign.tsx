@@ -3,6 +3,16 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
+import callCardBack from "@/imports/IDesign/call card back.jpg";
+import callCardFront from "@/imports/IDesign/call card front.jpg";
+import clockMockup from "@/imports/IDesign/Clock.jpg";
+import mugMockup from "@/imports/IDesign/Mug.jpg";
+import notebookTwo from "@/imports/IDesign/Notebook 2.jpg";
+import notebook from "@/imports/IDesign/Notebook.jpg";
+import penTwo from "@/imports/IDesign/Pen 2.jpg";
+import pen from "@/imports/IDesign/Pen.jpg";
+import shirtTwo from "@/imports/IDesign/Shirt 2.jpg";
+import shirt from "@/imports/IDesign/Shirt.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -14,18 +24,101 @@ interface DesignProject extends LightboxItem {
 
 const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Editorial"];
 
+const BRANDING_GALLERY: LightboxItem[] = [
+  {
+    img: callCardFront,
+    title: "iDESIGN Call Card Front",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Front-facing business card design for the iDESIGN visual identity.",
+  },
+  {
+    img: callCardBack,
+    title: "iDESIGN Call Card Back",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Back-facing business card layout with brand contact details.",
+  },
+  {
+    img: shirt,
+    title: "iDESIGN Shirt",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Branded shirt mockup showing the identity in context.",
+  },
+  {
+    img: shirtTwo,
+    title: "iDESIGN Shirt II",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Second shirt mockup variation for branded apparel.",
+  },
+  {
+    img: mugMockup,
+    title: "iDESIGN Mug",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Branded mug mockup for studio merchandise and presentation.",
+  },
+  {
+    img: notebook,
+    title: "iDESIGN Notebook",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Notebook brand application for stationery and office materials.",
+  },
+  {
+    img: notebookTwo,
+    title: "iDESIGN Notebook II",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Second notebook mockup variation for brand collateral.",
+  },
+  {
+    img: pen,
+    title: "iDESIGN Pen",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Pen mockup showing the identity on everyday brand materials.",
+  },
+  {
+    img: penTwo,
+    title: "iDESIGN Pen II",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Second pen mockup variation for brand collateral.",
+  },
+  {
+    img: clockMockup,
+    title: "iDESIGN Clock",
+    category: "Branding & Identity",
+    client: "iDESIGN Studio",
+    year: "2024",
+    description: "Clock mockup with the brand identity applied to interior decor.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
   {
     id: 1,
-    title: "Meridian Campaign",
-    client: "Meridian Group",
+    title: "iDESIGN Brand Identity",
+    client: "iDESIGN Studio",
     year: "2024",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=1000&fit=crop&auto=format",
+    img: callCardFront,
     wide: true,
     discipline: "Branding",
     category: "Branding & Identity",
     description:
-      "Integrated annual campaign identity including billboard collateral, corporate print reports, and premium digital presentations.",
+      "A curated identity set featuring the studio's logo variations and brand artwork. Click to view the full branding gallery.",
   },
   {
     id: 2,
@@ -65,15 +158,15 @@ const PROJECTS: DesignProject[] = [
   },
   {
     id: 5,
-    title: "Forma Brand System",
-    client: "Forma Studio",
+    title: "iDESIGN Brand Assets",
+    client: "iDESIGN Studio",
     year: "2022",
-    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&h=1200&fit=crop&auto=format",
+    img: shirt,
     wide: false,
     discipline: "Branding",
     category: "Brand Guidelines",
     description:
-      "Comprehensive visual language including custom stationery suite, color theory documentation, and presentation templates.",
+      "Logo systems, regional marks, and visual assets packaged for a consistent brand presence.",
   },
   {
     id: 6,
@@ -125,6 +218,7 @@ export function GraphicDesign() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeDiscipline, setActiveDiscipline] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxItems, setLightboxItems] = useState<LightboxItem[]>(PROJECTS);
 
   const filteredProjects = useMemo(() => {
     if (activeDiscipline === "All") return PROJECTS;
@@ -306,7 +400,16 @@ export function GraphicDesign() {
                 }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
-                onClick={() => setLightboxIndex(i)}
+                onClick={() => {
+                  if (p.discipline === "Branding") {
+                    setLightboxItems(BRANDING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  setLightboxItems(filteredProjects);
+                  setLightboxIndex(i);
+                }}
               >
                 <div style={{ paddingBottom: p.wide ? "46%" : "68%", position: "relative" }}>
                   <motion.img
@@ -538,7 +641,7 @@ export function GraphicDesign() {
 
       {/* Lightbox Modal */}
       <Lightbox
-        items={filteredProjects}
+        items={lightboxItems}
         currentIndex={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
         onNavigate={(idx) => setLightboxIndex(idx)}
