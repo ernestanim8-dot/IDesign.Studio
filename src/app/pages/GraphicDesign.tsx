@@ -3,21 +3,35 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
-import callCardBack from "@/imports/IDesign/call card back.jpg";
-import callCardFront from "@/imports/IDesign/call card front.jpg";
-import clockMockup from "@/imports/IDesign/Clock.jpg";
-import mugMockup from "@/imports/IDesign/Mug.jpg";
-import notebookTwo from "@/imports/IDesign/Notebook 2.jpg";
-import notebook from "@/imports/IDesign/Notebook.jpg";
-import penTwo from "@/imports/IDesign/Pen 2.jpg";
-import pen from "@/imports/IDesign/Pen.jpg";
-import shirtTwo from "@/imports/IDesign/Shirt 2.jpg";
-import shirt from "@/imports/IDesign/Shirt.jpg";
-import funeralTShirtFour from "@/imports/Funeral Branding/T-Shirt 4.jpg";
-import funeralTShirt from "@/imports/Funeral Branding/T-Shirt.jpg";
-import oneVoice from "@/imports/OneVoice27/onevoice.jpg";
-import speakLordTwo from "@/imports/Speak Lord/Speak Lord 2.jpg";
-import speakLord from "@/imports/Speak Lord/Speak Lord.jpg";
+import callCardBack from "@/imports/Branding/IDesign/call card back.jpg";
+import callCardFront from "@/imports/Branding/IDesign/call card front.jpg";
+import clockMockup from "@/imports/Branding/IDesign/Clock.jpg";
+import mugMockup from "@/imports/Branding/IDesign/Mug.jpg";
+import notebookTwo from "@/imports/Branding/IDesign/Notebook 2.jpg";
+import notebook from "@/imports/Branding/IDesign/Notebook.jpg";
+import penTwo from "@/imports/Branding/IDesign/Pen 2.jpg";
+import pen from "@/imports/Branding/IDesign/Pen.jpg";
+import shirtTwo from "@/imports/Branding/IDesign/Shirt 2.jpg";
+import shirt from "@/imports/Branding/IDesign/Shirt.jpg";
+import funeralTShirtFour from "@/imports/Branding/Funeral Branding/T-Shirt 4.jpg";
+import funeralTShirt from "@/imports/Branding/Funeral Branding/T-Shirt.jpg";
+import oneVoice from "@/imports/Branding/OneVoice27/onevoice.jpg";
+import speakLordTwo from "@/imports/Branding/Speak Lord/Speak Lord 2.jpg";
+import speakLord from "@/imports/Branding/Speak Lord/Speak Lord.jpg";
+import stickerFood from "@/imports/Advertising/Food Sticker/Sticker food.jpg";
+import stickerFoodOne from "@/imports/Advertising/Food Sticker/Sticker food1.jpg";
+import dutchBraids from "@/imports/Advertising/dutch braids/Mary's Braids copy copy.jpg";
+import glamourGateOne from "@/imports/Advertising/3mma’s Glamour Banner/3mma's Glamour gate 1.jpg";
+import glamourGateTwo from "@/imports/Advertising/3mma’s Glamour Banner/3mma's Glamour gate 2.jpg";
+import glamourBanner from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour Banner copy copy copy.jpg";
+import glamourPolished from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour GET IT POLISHED 4.jpg";
+import glamourSlideB from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour glass slide 3b.png";
+import glamourSlideC from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour glass slide 3c.png";
+import glamourSlideD from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour glass slide 3d.png";
+import glamourSlideE from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour glass slide 3e.png";
+import glamourOneMonth from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour one month class 1ac.jpg";
+import adomBeauty from "@/imports/Advertising/Adom Beauty/Adom Beauty copy.jpg";
+import fashion from "@/imports/Fashion/Fashion copy.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -25,10 +39,10 @@ interface DesignProject extends LightboxItem {
   year: string;
   wide: boolean;
   discipline: string;
-  gallery?: "idesign" | "funeral" | "onevoice" | "speaklord";
+  gallery?: "idesign" | "funeral" | "onevoice" | "speaklord" | "foodsticker" | "dutchbraids" | "glamour" | "adombeauty" | "fashion";
 }
 
-const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Editorial"];
+const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Advertising"];
 
 const BRANDING_GALLERY: LightboxItem[] = [
   {
@@ -162,6 +176,133 @@ const SPEAK_LORD_BRANDING_GALLERY: LightboxItem[] = [
   },
 ];
 
+const FOOD_STICKER_ADVERTISING_GALLERY: LightboxItem[] = [
+  {
+    img: stickerFood,
+    title: "Food Sticker Advertising",
+    category: "Advertising Design",
+    client: "Food Sticker",
+    year: "2024",
+    description: "Food-focused promotional sticker artwork designed for eye-catching advertising.",
+  },
+  {
+    img: stickerFoodOne,
+    title: "Food Sticker Advertising II",
+    category: "Advertising Design",
+    client: "Food Sticker",
+    year: "2024",
+    description: "Second food sticker advertising layout for the campaign set.",
+  },
+];
+
+const DUTCH_BRAIDS_ADVERTISING_GALLERY: LightboxItem[] = [
+  {
+    img: dutchBraids,
+    title: "Dutch Braids Advertising",
+    category: "Advertising Design",
+    client: "Dutch Braids",
+    year: "2024",
+    description: "Promotional braid design artwork created for a beauty advertising campaign.",
+  },
+];
+
+const GLAMOUR_ADVERTISING_GALLERY: LightboxItem[] = [
+  {
+    img: glamourBanner,
+    title: "3mma's Glamour Banner",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Promotional banner artwork created for 3mma's Glamour.",
+  },
+  {
+    img: glamourGateOne,
+    title: "3mma's Glamour Gate I",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Outdoor gate advertising artwork for the 3mma's Glamour campaign.",
+  },
+  {
+    img: glamourGateTwo,
+    title: "3mma's Glamour Gate II",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Second outdoor gate advertising layout for the campaign set.",
+  },
+  {
+    img: glamourPolished,
+    title: "Get It Polished",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Promotional class artwork for beauty training and service awareness.",
+  },
+  {
+    img: glamourSlideB,
+    title: "Glamour Glass Slide I",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Social advertising slide for the 3mma's Glamour visual campaign.",
+  },
+  {
+    img: glamourSlideC,
+    title: "Glamour Glass Slide II",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Second social advertising slide for the campaign.",
+  },
+  {
+    img: glamourSlideD,
+    title: "Glamour Glass Slide III",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Third social advertising slide for the campaign.",
+  },
+  {
+    img: glamourSlideE,
+    title: "Glamour Glass Slide IV",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Fourth social advertising slide for the campaign.",
+  },
+  {
+    img: glamourOneMonth,
+    title: "One Month Class",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Beauty class advertising artwork for a one-month training promotion.",
+  },
+];
+
+const ADOM_BEAUTY_ADVERTISING_GALLERY: LightboxItem[] = [
+  {
+    img: adomBeauty,
+    title: "Adom Beauty Advertising",
+    category: "Advertising Design",
+    client: "Adom Beauty",
+    year: "2025",
+    description: "Beauty advertising artwork created for Adom Beauty's promotional campaign.",
+  },
+];
+
+const FASHION_ADVERTISING_GALLERY: LightboxItem[] = [
+  {
+    img: fashion,
+    title: "Fashion Advertising",
+    category: "Advertising Design",
+    client: "Fashion",
+    year: "2025",
+    description: "Fashion advertising artwork created for a stylish promotional campaign.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
   {
     id: 1,
@@ -202,18 +343,71 @@ const PROJECTS: DesignProject[] = [
   },
   {
     id: 4,
-    title: "Nova Editorial & Monograph",
-    client: "Nova Magazine",
-    year: "2022",
-    img: "https://images.unsplash.com/photo-1503455637927-730bce8583c0?w=1600&h=950&fit=crop&auto=format",
+    title: "Food Sticker",
+    client: "Food Sticker",
+    year: "2024",
+    img: stickerFood,
     wide: true,
-    discipline: "Editorial",
-    category: "Editorial Design",
+    discipline: "Advertising",
+    gallery: "foodsticker",
+    category: "Advertising Design",
     description:
-      "Quarterly architecture review layout featuring 12-column Swiss grid architecture and custom editorial headers.",
+      "Food-focused sticker advertising visuals created for bold promotional impact. Click to view the Food Sticker gallery.",
   },
   {
     id: 5,
+    title: "Dutch Braids",
+    client: "Dutch Braids",
+    year: "2024",
+    img: dutchBraids,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "dutchbraids",
+    category: "Advertising Design",
+    description:
+      "A beauty-focused advertising visual for Dutch Braids. Click to view the Dutch Braids gallery.",
+  },
+  {
+    id: 6,
+    title: "3mma's Glamour Banner",
+    client: "3mma's Glamour",
+    year: "2025",
+    img: glamourBanner,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "glamour",
+    category: "Advertising Design",
+    description:
+      "A beauty advertising campaign with banners, social slides, and training promotions. Click to view the 3mma's Glamour gallery.",
+  },
+  {
+    id: 11,
+    title: "Adom Beauty",
+    client: "Adom Beauty",
+    year: "2025",
+    img: adomBeauty,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "adombeauty",
+    category: "Advertising Design",
+    description:
+      "A beauty advertising visual for Adom Beauty. Click to view the Adom Beauty gallery.",
+  },
+  {
+    id: 12,
+    title: "Fashion",
+    client: "Fashion",
+    year: "2025",
+    img: fashion,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "fashion",
+    category: "Advertising Design",
+    description:
+      "A fashion-focused advertising visual for a stylish promotional campaign. Click to view the Fashion gallery.",
+  },
+  {
+    id: 13,
     title: "iDESIGN Brand Assets",
     client: "iDESIGN Studio",
     year: "2022",
@@ -226,7 +420,7 @@ const PROJECTS: DesignProject[] = [
       "Logo systems, regional marks, and visual assets packaged for a consistent brand presence.",
   },
   {
-    id: 6,
+    id: 10,
     title: "Lume Festival Poster Series",
     client: "Lume Festival",
     year: "2021",
@@ -398,7 +592,7 @@ export function GraphicDesign() {
               margin: "0 auto 2rem",
             }}
           >
-            Logos, packaging, editorial layouts, and brand systems that communicate your values with confidence and
+            Logos, packaging, advertising layouts, and brand systems that communicate your values with confidence and
             lasting style. Click any project to open detailed view.
           </motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="flex flex-wrap justify-center gap-4">
@@ -497,6 +691,36 @@ export function GraphicDesign() {
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
                 onClick={() => {
+                  if (p.gallery === "fashion") {
+                    setLightboxItems(FASHION_ADVERTISING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "adombeauty") {
+                    setLightboxItems(ADOM_BEAUTY_ADVERTISING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "glamour") {
+                    setLightboxItems(GLAMOUR_ADVERTISING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "dutchbraids") {
+                    setLightboxItems(DUTCH_BRAIDS_ADVERTISING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "foodsticker") {
+                    setLightboxItems(FOOD_STICKER_ADVERTISING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "speaklord") {
                     setLightboxItems(SPEAK_LORD_BRANDING_GALLERY);
                     setLightboxIndex(0);
