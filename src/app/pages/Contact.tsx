@@ -419,15 +419,15 @@ export function Contact() {
               >
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <span>Monday – Friday</span>
-                  <strong style={{ color: DARK }}>9:00 AM – 6:00 PM</strong>
+                  <strong style={{ color: DARK }}>9:00 AM – 7:00 PM</strong>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <span>Saturday</span>
-                  <strong style={{ color: DARK }}>10:00 AM – 4:00 PM</strong>
+                  <span style={{ color: "#a89f91" }}>Closed</span>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <span>Sunday</span>
-                  <span style={{ color: "#a89f91" }}>Closed / Field Shoots Only</span>
+                  <span style={{ color: "#a89f91" }}>Closed</span>
                 </div>
               </div>
             </div>
