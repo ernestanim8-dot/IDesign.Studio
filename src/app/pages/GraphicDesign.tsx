@@ -31,7 +31,7 @@ import glamourSlideD from "@/imports/Advertising/3mma’s Glamour Banner/3mma’
 import glamourSlideE from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour glass slide 3e.png";
 import glamourOneMonth from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour one month class 1ac.jpg";
 import adomBeauty from "@/imports/Advertising/Adom Beauty/Adom Beauty copy.jpg";
-import fashion from "@/imports/Fashion/Fashion copy.jpg";
+import fashion from "@/imports/Advertising/Fashion/Fashion copy.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
