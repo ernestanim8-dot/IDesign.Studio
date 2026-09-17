@@ -104,6 +104,7 @@ const NAV_LINKS = [
 ];
 
 export function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isInquiriesOpen, setIsInquiriesOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const location = useLocation();
@@ -148,6 +149,7 @@ export function Layout() {
       event.preventDefault();
       window.history.pushState(null, "", `${location.pathname}${link.hash}`);
       scrollToTarget(target);
+      setMenuOpen(false);
     };
 
     document.addEventListener("click", handleAnchorClick);
@@ -212,8 +214,8 @@ export function Layout() {
           <img src={logoMark} alt="iDESIGN" style={{ height: "44px", width: "auto", objectFit: "contain" }} />
         </NavLink>
 
-        {/* navigation links */}
-        <div className="flex items-center gap-4 sm:gap-6 md:gap-8 flex-wrap justify-end">
+        {/* desktop */}
+        <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map(({ label, to }) => (
             <NavLink key={to} to={to} end={to === "/"}
               style={({ isActive }) => ({
@@ -228,7 +230,6 @@ export function Layout() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
-                whiteSpace: "nowrap",
                 transition: "color 0.2s, border-color 0.2s",
               })}
             >
@@ -236,6 +237,77 @@ export function Layout() {
             </NavLink>
           ))}
         </div>
+
+        {/* mobile toggle */}
+        <button
+          className="md:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "5px" }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              animate={menuOpen ? { rotate: i === 0 ? 45 : i === 2 ? -45 : 0, y: i === 0 ? 7 : i === 2 ? -7 : 0, opacity: i === 1 ? 0 : 1 } : { rotate: 0, y: 0, opacity: 1 }}
+              style={{ display: "block", width: 24, height: 2, background: DARK, borderRadius: 1, originX: "center" }}
+            />
+          ))}
+        </button>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                right: 0,
+                background: BG,
+                borderBottom: `1px solid ${BORDER}`,
+                padding: "1.5rem 2rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.25rem",
+                zIndex: 100,
+              }}
+            >
+              {NAV_LINKS.map(({ label, to }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={to === "/"}
+                  onClick={() => setMenuOpen(false)}
+                  style={({ isActive }) => ({
+                    fontFamily: "'Work Sans', sans-serif",
+                    fontSize: "0.95rem",
+                    fontWeight: isActive ? 600 : 400,
+                    color: isActive ? GOLD : DARK,
+                    textDecoration: "none",
+                    padding: "0.6rem 0.75rem",
+                    borderRadius: "4px",
+                    background: isActive ? "rgba(200,165,74,0.08)" : "transparent",
+                    borderLeft: isActive ? `3px solid ${GOLD}` : "3px solid transparent",
+                    transition: "background 0.15s, color 0.15s",
+                    display: "block",
+                  })}
+                >
+                  {label}
+                </NavLink>
+              ))}
+              {/* Social icons in mobile menu */}
+              <div style={{ borderTop: `1px solid ${BORDER}`, marginTop: "0.75rem", paddingTop: "1rem", display: "flex", gap: "16px" }}>
+                {SOCIAL_LINKS.map(({ key, icon, href, label }) => (
+                  <SocialIconLink key={key} icon={icon} href={href} label={label} color={MUTED} hoverColor={GOLD} size={18} />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* page content */}
