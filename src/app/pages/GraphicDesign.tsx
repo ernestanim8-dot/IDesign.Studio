@@ -16,6 +16,8 @@ import shirt from "@/imports/IDesign/Shirt.jpg";
 import funeralTShirtFour from "@/imports/Funeral Branding/T-Shirt 4.jpg";
 import funeralTShirt from "@/imports/Funeral Branding/T-Shirt.jpg";
 import oneVoice from "@/imports/OneVoice27/onevoice.jpg";
+import speakLordTwo from "@/imports/Speak Lord/Speak Lord 2.jpg";
+import speakLord from "@/imports/Speak Lord/Speak Lord.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -23,7 +25,7 @@ interface DesignProject extends LightboxItem {
   year: string;
   wide: boolean;
   discipline: string;
-  gallery?: "idesign" | "funeral" | "onevoice";
+  gallery?: "idesign" | "funeral" | "onevoice" | "speaklord";
 }
 
 const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Editorial"];
@@ -125,7 +127,7 @@ const FUNERAL_BRANDING_GALLERY: LightboxItem[] = [
     title: "Funeral Brand T-Shirt II",
     category: "Funeral Branding",
     client: "Funeral Brand",
-    year: "202",
+    year: "2026",
     description: "Second funeral T-shirt mockup variation for the memorial brand package.",
   },
 ];
@@ -141,12 +143,31 @@ const ONEVOICE_BRANDING_GALLERY: LightboxItem[] = [
   },
 ];
 
+const SPEAK_LORD_BRANDING_GALLERY: LightboxItem[] = [
+  {
+    img: speakLord,
+    title: "Speak Lord Brand Identity",
+    category: "Branding & Identity",
+    client: "Speak Lord",
+    year: "2026",
+    description: "Speak Lord brand artwork created for a clear faith-centered identity.",
+  },
+  {
+    img: speakLordTwo,
+    title: "Speak Lord Brand Identity II",
+    category: "Branding & Identity",
+    client: "Speak Lord",
+    year: "2026",
+    description: "Second Speak Lord brand presentation artwork for the identity set.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
   {
     id: 1,
     title: "iDESIGN Brand Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     img: callCardFront,
     wide: true,
     discipline: "Branding",
@@ -241,6 +262,19 @@ const PROJECTS: DesignProject[] = [
     category: "Branding & Identity",
     description:
       "A focused brand identity piece for OneVoice27. Click to view the OneVoice27 branding gallery.",
+  },
+  {
+    id: 9,
+    title: "Speak Lord",
+    client: "Speak Lord",
+    year: "2024",
+    img: speakLord,
+    wide: false,
+    discipline: "Branding",
+    gallery: "speaklord",
+    category: "Branding & Identity",
+    description:
+      "A faith-centered brand identity set for Speak Lord. Click to view the Speak Lord branding gallery.",
   },
 ];
 
@@ -463,6 +497,12 @@ export function GraphicDesign() {
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
                 onClick={() => {
+                  if (p.gallery === "speaklord") {
+                    setLightboxItems(SPEAK_LORD_BRANDING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "onevoice") {
                     setLightboxItems(ONEVOICE_BRANDING_GALLERY);
                     setLightboxIndex(0);
