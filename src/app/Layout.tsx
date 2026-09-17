@@ -228,7 +228,7 @@ export function Layout() {
         {/* desktop */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map(({ label, to }) => (
-            <NavLink key={to} to={to} end={to === "/"}
+            <NavLink key={to} to={to} end={to === "/"} className="main-nav-link"
               style={({ isActive }) => ({
                 fontFamily: "'Work Sans', sans-serif",
                 fontSize: "0.85rem",
@@ -241,7 +241,8 @@ export function Layout() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
-                transition: "color 0.2s, border-color 0.2s",
+                position: "relative",
+                transition: "color 0.2s, border-color 0.2s, transform 0.2s",
               })}
             >
               <span>{label}</span>
@@ -292,6 +293,7 @@ export function Layout() {
                   key={to}
                   to={to}
                   end={to === "/"}
+                  className="mobile-nav-link"
                   onClick={() => setMenuOpen(false)}
                   style={({ isActive }) => ({
                     fontFamily: "'Work Sans', sans-serif",
@@ -303,7 +305,7 @@ export function Layout() {
                     borderRadius: "4px",
                     background: isActive ? "rgba(200,165,74,0.08)" : "transparent",
                     borderLeft: isActive ? `3px solid ${GOLD}` : "3px solid transparent",
-                    transition: "background 0.15s, color 0.15s",
+                    transition: "background 0.15s, color 0.15s, transform 0.15s, border-color 0.15s",
                     display: "block",
                   })}
                 >
