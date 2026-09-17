@@ -32,6 +32,20 @@ import glamourSlideE from "@/imports/Advertising/3mma’s Glamour Banner/3mma’
 import glamourOneMonth from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour one month class 1ac.jpg";
 import adomBeauty from "@/imports/Advertising/Adom Beauty/Adom Beauty copy.jpg";
 import fashion from "@/imports/Advertising/Fashion/Fashion copy.jpg";
+import glamourThree from "@/imports/3mma’s Glamour/3mma’s Glamour 3.jpg";
+import glamourAltBanner from "@/imports/3mma’s Glamour/3mma’s Glamour Banner.jpg";
+import glamourGetItThree from "@/imports/3mma’s Glamour/3mma’s Glamour GET IT  3.jpg";
+import glamourSticker from "@/imports/3mma’s Glamour/3mma’s Glamour sticker 1.jpg";
+import godHaveMercy from "@/imports/God have mercy food joint/God have mercy food joint 2.jpg";
+import iceCream from "@/imports/Ice Cream/Ice Cream copy.jpg";
+import effesCosmetics from "@/imports/It's Effes cosmetic/IT’S EFFES COSMETICS 3a.jpg";
+import janeNails from "@/imports/Nails by Jane/Jane copy.jpg";
+import janetNails from "@/imports/Nails by Jane/Janet copy copy.jpg";
+import openSoon from "@/imports/Open Soon/open soon 1.jpg";
+import owusuwaaLuxe from "@/imports/Owusuwaa's Luxe/Owusuwaa’s Luxe copy copy.jpg";
+import rbWedding from "@/imports/R&B Wedding/wedding 1 copy.jpg";
+import tinaBundle from "@/imports/Tina Special Bundle/Tina-1.jpg";
+import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -39,7 +53,25 @@ interface DesignProject extends LightboxItem {
   year: string;
   wide: boolean;
   discipline: string;
-  gallery?: "idesign" | "funeral" | "onevoice" | "speaklord" | "foodsticker" | "dutchbraids" | "glamour" | "adombeauty" | "fashion";
+  gallery?:
+    | "idesign"
+    | "funeral"
+    | "onevoice"
+    | "speaklord"
+    | "foodsticker"
+    | "dutchbraids"
+    | "glamour"
+    | "adombeauty"
+    | "fashion"
+    | "nailsbyjane"
+    | "icecream"
+    | "effes"
+    | "owusuwaa"
+    | "godhavemercy"
+    | "wedding"
+    | "tinabundle"
+    | "opensoon"
+    | "swgc";
 }
 
 const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Advertising"];
@@ -279,6 +311,38 @@ const GLAMOUR_ADVERTISING_GALLERY: LightboxItem[] = [
     year: "2025",
     description: "Beauty class advertising artwork for a one-month training promotion.",
   },
+  {
+    img: glamourThree,
+    title: "3mma's Glamour Showcase",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Campaign artwork showcasing beauty services and visual branding.",
+  },
+  {
+    img: glamourAltBanner,
+    title: "3mma's Glamour Full Banner",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Wide-format outdoor promotional banner design.",
+  },
+  {
+    img: glamourGetItThree,
+    title: "3mma's Glamour Get It Polished",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Promotional campaign design for premium nail and beauty polishing services.",
+  },
+  {
+    img: glamourSticker,
+    title: "3mma's Glamour Sticker",
+    category: "Advertising Design",
+    client: "3mma's Glamour",
+    year: "2025",
+    description: "Custom branded promotional sticker layout for packaging and giveaways.",
+  },
 ];
 
 const ADOM_BEAUTY_ADVERTISING_GALLERY: LightboxItem[] = [
@@ -300,6 +364,113 @@ const FASHION_ADVERTISING_GALLERY: LightboxItem[] = [
     client: "Fashion",
     year: "2025",
     description: "Fashion advertising artwork created for a stylish promotional campaign.",
+  },
+];
+
+const NAILS_BY_JANE_GALLERY: LightboxItem[] = [
+  {
+    img: janeNails,
+    title: "Nails by Jane Promo",
+    category: "Advertising Design",
+    client: "Nails by Jane",
+    year: "2025",
+    description: "Promotional advertisement and service showcase artwork for Nails by Jane.",
+  },
+  {
+    img: janetNails,
+    title: "Nails by Jane Feature",
+    category: "Advertising Design",
+    client: "Nails by Jane",
+    year: "2025",
+    description: "Editorial advertising artwork highlighting bespoke nail artistry.",
+  },
+];
+
+const ICE_CREAM_GALLERY: LightboxItem[] = [
+  {
+    img: iceCream,
+    title: "Artisanal Ice Cream Branding & Packaging",
+    category: "Packaging",
+    client: "Sweet Treats Co.",
+    year: "2025",
+    description: "Vibrant and mouth-watering ice cream packaging and promotional advertising design.",
+  },
+];
+
+const EFFES_COSMETICS_GALLERY: LightboxItem[] = [
+  {
+    img: effesCosmetics,
+    title: "It's Effes Cosmetics Campaign",
+    category: "Advertising Design",
+    client: "It's Effes Cosmetic",
+    year: "2025",
+    description: "Beauty and cosmetics advertising poster highlighting product elegance and quality.",
+  },
+];
+
+const OWUSUWAA_LUXE_GALLERY: LightboxItem[] = [
+  {
+    img: owusuwaaLuxe,
+    title: "Owusuwaa's Luxe Brand Campaign",
+    category: "Advertising Design",
+    client: "Owusuwaa's Luxe",
+    year: "2025",
+    description: "High-end luxury beauty and hair promotional artwork with refined typography.",
+  },
+];
+
+const GOD_HAVE_MERCY_GALLERY: LightboxItem[] = [
+  {
+    img: godHaveMercy,
+    title: "God Have Mercy Food Joint Banner",
+    category: "Advertising Design",
+    client: "God Have Mercy Food Joint",
+    year: "2025",
+    description: "Appetizing outdoor commercial banner and signage artwork for a local eatery.",
+  },
+];
+
+const RB_WEDDING_GALLERY: LightboxItem[] = [
+  {
+    img: rbWedding,
+    title: "R&B Wedding Invitation & Stationery",
+    category: "Branding & Identity",
+    client: "R&B Wedding",
+    year: "2025",
+    description: "Custom celebratory wedding stationery, monogram layout, and floral invitation design.",
+  },
+];
+
+const TINA_BUNDLE_GALLERY: LightboxItem[] = [
+  {
+    img: tinaBundle,
+    title: "Tina Special Bundle Campaign",
+    category: "Advertising Design",
+    client: "Tina Special Bundle",
+    year: "2025",
+    description: "Eye-catching promotional flyer artwork advertising an exclusive product bundle offer.",
+  },
+];
+
+const OPEN_SOON_GALLERY: LightboxItem[] = [
+  {
+    img: openSoon,
+    title: "Opening Soon Teaser Banner",
+    category: "Advertising Design",
+    client: "Grand Opening Campaign",
+    year: "2025",
+    description: "Anticipation-building 'Opening Soon' promotional graphic for retail launch.",
+  },
+];
+
+const SWGC_MOCKUP_GALLERY: LightboxItem[] = [
+  {
+    img: swgcMockup,
+    title: "SWGC Brand Apparel & Collateral",
+    category: "Branding & Identity",
+    client: "SWGC",
+    year: "2024",
+    description: "Merchandise and corporate apparel identity mockup for SWGC.",
   },
 ];
 
@@ -469,6 +640,123 @@ const PROJECTS: DesignProject[] = [
     category: "Branding & Identity",
     description:
       "A faith-centered brand identity set for Speak Lord. Click to view the Speak Lord branding gallery.",
+  },
+  {
+    id: 14,
+    title: "Nails by Jane",
+    client: "Nails by Jane",
+    year: "2025",
+    img: janeNails,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "nailsbyjane",
+    category: "Advertising Design",
+    description:
+      "Vibrant nail art and beauty advertising visuals. Click to view the Nails by Jane gallery.",
+  },
+  {
+    id: 15,
+    title: "Ice Cream Packaging",
+    client: "Sweet Treats Co.",
+    year: "2025",
+    img: iceCream,
+    wide: false,
+    discipline: "Packaging",
+    gallery: "icecream",
+    category: "Packaging",
+    description:
+      "Delicious artisanal ice cream packaging and promotional branding. Click to view the gallery.",
+  },
+  {
+    id: 16,
+    title: "It's Effes Cosmetics",
+    client: "It's Effes Cosmetic",
+    year: "2025",
+    img: effesCosmetics,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "effes",
+    category: "Advertising Design",
+    description:
+      "Elegantly crafted beauty cosmetics promotion and branding visual. Click to view the gallery.",
+  },
+  {
+    id: 17,
+    title: "Owusuwaa's Luxe",
+    client: "Owusuwaa's Luxe",
+    year: "2025",
+    img: owusuwaaLuxe,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "owusuwaa",
+    category: "Advertising Design",
+    description:
+      "Sophisticated luxury hair and beauty brand advertising. Click to view the gallery.",
+  },
+  {
+    id: 18,
+    title: "God Have Mercy Food Joint",
+    client: "God Have Mercy Food Joint",
+    year: "2025",
+    img: godHaveMercy,
+    wide: true,
+    discipline: "Advertising",
+    gallery: "godhavemercy",
+    category: "Advertising Design",
+    description:
+      "Appetizing outdoor commercial banner and promotional design. Click to view the gallery.",
+  },
+  {
+    id: 19,
+    title: "R&B Wedding Suite",
+    client: "R&B Wedding",
+    year: "2025",
+    img: rbWedding,
+    wide: false,
+    discipline: "Branding",
+    gallery: "wedding",
+    category: "Branding & Identity",
+    description:
+      "Custom wedding stationery and elegant monogram invitation design. Click to view the gallery.",
+  },
+  {
+    id: 20,
+    title: "Tina Special Bundle",
+    client: "Tina Special Bundle",
+    year: "2025",
+    img: tinaBundle,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "tinabundle",
+    category: "Advertising Design",
+    description:
+      "High-converting promotional marketing flyer for an exclusive bundle offer. Click to view the gallery.",
+  },
+  {
+    id: 21,
+    title: "Opening Soon Teaser",
+    client: "Grand Opening Campaign",
+    year: "2025",
+    img: openSoon,
+    wide: false,
+    discipline: "Advertising",
+    gallery: "opensoon",
+    category: "Advertising Design",
+    description:
+      "Attention-commanding launch banner and teaser artwork. Click to view the gallery.",
+  },
+  {
+    id: 22,
+    title: "SWGC Apparel & Merch",
+    client: "SWGC",
+    year: "2024",
+    img: swgcMockup,
+    wide: false,
+    discipline: "Branding",
+    gallery: "swgc",
+    category: "Branding & Identity",
+    description:
+      "Corporate apparel and merchandise branding mockup. Click to view the gallery.",
   },
 ];
 
@@ -691,6 +979,60 @@ export function GraphicDesign() {
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
                 onClick={() => {
+                  if (p.gallery === "nailsbyjane") {
+                    setLightboxItems(NAILS_BY_JANE_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "icecream") {
+                    setLightboxItems(ICE_CREAM_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "effes") {
+                    setLightboxItems(EFFES_COSMETICS_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "owusuwaa") {
+                    setLightboxItems(OWUSUWAA_LUXE_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "godhavemercy") {
+                    setLightboxItems(GOD_HAVE_MERCY_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "wedding") {
+                    setLightboxItems(RB_WEDDING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "tinabundle") {
+                    setLightboxItems(TINA_BUNDLE_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "opensoon") {
+                    setLightboxItems(OPEN_SOON_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "swgc") {
+                    setLightboxItems(SWGC_MOCKUP_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "fashion") {
                     setLightboxItems(FASHION_ADVERTISING_GALLERY);
                     setLightboxIndex(0);
