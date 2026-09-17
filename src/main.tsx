@@ -4,11 +4,17 @@ import App from './App'
 import './index.css'
 import { registerSW } from 'virtual:pwa-register'
 
+// Auto-reload if dynamic chunk import fails due to new deployment
+window.addEventListener('vite:preloadError', () => {
+  window.location.reload();
+});
+
 // Register PWA Service Worker for offline capability & automatic updates
-registerSW({
+const updateSW = registerSW({
   immediate: true,
   onNeedRefresh() {
-    console.log('[IDesign.Studio PWA] New update ready');
+    console.log('[IDesign.Studio PWA] New version detected, updating...');
+    updateSW(true);
   },
   onOfflineReady() {
     console.log('[IDesign.Studio PWA] Offline caching active');
