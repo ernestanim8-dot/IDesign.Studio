@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import logoMark from "@/imports/i design logo gh.png";
+import logoMark from "@/imports/i desigcmx.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
 import { InquiriesDrawer } from "./components/InquiriesDrawer";
