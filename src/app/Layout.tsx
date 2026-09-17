@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i design logo gh.png";
@@ -40,7 +40,7 @@ const SOCIAL_LINKS = [
 ];
 
 function SocialIconLink({ icon: Icon, href, label, color = "#aaa49a", hoverColor = GOLD, size = 16 }: {
-  icon: ({ size }: { size?: number }) => JSX.Element;
+  icon: ({ size }: { size?: number }) => React.ReactNode;
   href: string; label: string; color?: string; hoverColor?: string; size?: number;
 }) {
   return (
