@@ -13,6 +13,9 @@ import penTwo from "@/imports/IDesign/Pen 2.jpg";
 import pen from "@/imports/IDesign/Pen.jpg";
 import shirtTwo from "@/imports/IDesign/Shirt 2.jpg";
 import shirt from "@/imports/IDesign/Shirt.jpg";
+import funeralTShirtFour from "@/imports/Funeral Branding/T-Shirt 4.jpg";
+import funeralTShirt from "@/imports/Funeral Branding/T-Shirt.jpg";
+import oneVoice from "@/imports/OneVoice27/onevoice.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -20,6 +23,7 @@ interface DesignProject extends LightboxItem {
   year: string;
   wide: boolean;
   discipline: string;
+  gallery?: "idesign" | "funeral" | "onevoice";
 }
 
 const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Editorial"];
@@ -30,7 +34,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Call Card Front",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Front-facing business card design for the iDESIGN visual identity.",
   },
   {
@@ -38,7 +42,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Call Card Back",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Back-facing business card layout with brand contact details.",
   },
   {
@@ -46,7 +50,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Shirt",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Branded shirt mockup showing the identity in context.",
   },
   {
@@ -54,7 +58,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Shirt II",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Second shirt mockup variation for branded apparel.",
   },
   {
@@ -62,7 +66,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Mug",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Branded mug mockup for studio merchandise and presentation.",
   },
   {
@@ -70,7 +74,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Notebook",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Notebook brand application for stationery and office materials.",
   },
   {
@@ -78,7 +82,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Notebook II",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Second notebook mockup variation for brand collateral.",
   },
   {
@@ -86,7 +90,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Pen",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Pen mockup showing the identity on everyday brand materials.",
   },
   {
@@ -94,7 +98,7 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Pen II",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Second pen mockup variation for brand collateral.",
   },
   {
@@ -102,8 +106,38 @@ const BRANDING_GALLERY: LightboxItem[] = [
     title: "iDESIGN Clock",
     category: "Branding & Identity",
     client: "iDESIGN Studio",
-    year: "2024",
+    year: "2026",
     description: "Clock mockup with the brand identity applied to interior decor.",
+  },
+];
+
+const FUNERAL_BRANDING_GALLERY: LightboxItem[] = [
+  {
+    img: funeralTShirt,
+    title: "Funeral Brand T-Shirt",
+    category: "Funeral Branding",
+    client: "Funeral Brand",
+    year: "2026",
+    description: "Memorial T-shirt design created as part of the funeral branding set.",
+  },
+  {
+    img: funeralTShirtFour,
+    title: "Funeral Brand T-Shirt II",
+    category: "Funeral Branding",
+    client: "Funeral Brand",
+    year: "202",
+    description: "Second funeral T-shirt mockup variation for the memorial brand package.",
+  },
+];
+
+const ONEVOICE_BRANDING_GALLERY: LightboxItem[] = [
+  {
+    img: oneVoice,
+    title: "OneVoice27 Brand Identity",
+    category: "Branding & Identity",
+    client: "OneVoice27",
+    year: "2026",
+    description: "OneVoice27 brand artwork prepared for a bold, unified visual presence.",
   },
 ];
 
@@ -116,6 +150,7 @@ const PROJECTS: DesignProject[] = [
     img: callCardFront,
     wide: true,
     discipline: "Branding",
+    gallery: "idesign",
     category: "Branding & Identity",
     description:
       "A curated identity set featuring the studio's logo variations and brand artwork. Click to view the full branding gallery.",
@@ -164,6 +199,7 @@ const PROJECTS: DesignProject[] = [
     img: shirt,
     wide: false,
     discipline: "Branding",
+    gallery: "idesign",
     category: "Brand Guidelines",
     description:
       "Logo systems, regional marks, and visual assets packaged for a consistent brand presence.",
@@ -179,6 +215,32 @@ const PROJECTS: DesignProject[] = [
     category: "Poster & Print",
     description:
       "Silk-screened limited edition promotional poster set for international light and contemporary art biennial.",
+  },
+  {
+    id: 7,
+    title: "Funeral Brand",
+    client: "Memorial Identity",
+    year: "2024",
+    img: funeralTShirt,
+    wide: false,
+    discipline: "Branding",
+    gallery: "funeral",
+    category: "Funeral Branding",
+    description:
+      "A respectful memorial branding set featuring custom apparel designs. Click to view the funeral brand gallery.",
+  },
+  {
+    id: 8,
+    title: "OneVoice27",
+    client: "OneVoice27",
+    year: "2024",
+    img: oneVoice,
+    wide: false,
+    discipline: "Branding",
+    gallery: "onevoice",
+    category: "Branding & Identity",
+    description:
+      "A focused brand identity piece for OneVoice27. Click to view the OneVoice27 branding gallery.",
   },
 ];
 
@@ -401,7 +463,19 @@ export function GraphicDesign() {
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
                 onClick={() => {
-                  if (p.discipline === "Branding") {
+                  if (p.gallery === "onevoice") {
+                    setLightboxItems(ONEVOICE_BRANDING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "funeral") {
+                    setLightboxItems(FUNERAL_BRANDING_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
+                  if (p.gallery === "idesign") {
                     setLightboxItems(BRANDING_GALLERY);
                     setLightboxIndex(0);
                     return;
