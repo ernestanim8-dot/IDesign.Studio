@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "supabase.sql": "pgsql",
-    "*.sql": "pgsql"
+    "*.sql": "pgsql",
+    "*.css": "css"
   }
 }

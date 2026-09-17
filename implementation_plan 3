@@ -1,0 +1,37 @@
+# Image Optimization & Performance Plan
+
+Address site sluggishness and heavy memory consumption caused by massive print-resolution image assets in `src/imports/`.
+
+## User Review Required
+
+> [!IMPORTANT]
+> The portfolio was bundling over 220 MB of uncompressed print-ready artwork on a single page. `Adom Beauty` alone was 64.2 MB and 432 megapixels (15,000 × 28,800 px).
+>
+> All oversized assets have been downscaled to crisp web-standard high-definition dimensions (maximum 2400px at 82% JPEG quality), dropping total payload by over 95%.
+
+## Proposed Changes
+
+### Image Optimization Script
+
+- Run an optimization script using `sharp` targeting all images in `src/imports/` over 1MB.
+- Resize images exceeding 2400px on their longest edge down to a maximum of 2400px while maintaining aspect ratio.
+- Re-encode with progressive JPEG / Web compression at 82% quality.
+- Keep exact same filenames and paths so zero imports or links break.
+
+### Frontend Optimization
+
+#### [GraphicDesign.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/GraphicDesign.tsx)
+
+- Add `loading="lazy"` and `decoding="async"` attributes to thumbnail image elements.
+- This ensures off-screen portfolio items are only loaded and decoded into memory when scrolled into view.
+
+## Verification Plan
+
+### Automated Verification
+
+- Run `npm run build` to verify that all assets bundle cleanly and output size is drastically reduced.
+- Measure total bundle size reduction.
+
+### Manual Verification
+
+- Verify that portfolio cards and lightbox preview render cleanly and sharply without lag or memory hitching.

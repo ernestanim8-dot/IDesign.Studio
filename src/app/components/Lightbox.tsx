@@ -241,6 +241,7 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
                   key={currentItem.img}
                   src={currentItem.img}
                   alt={currentItem.title}
+                  decoding="async"
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}

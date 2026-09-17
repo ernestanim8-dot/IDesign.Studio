@@ -32,19 +32,19 @@ import glamourSlideE from "@/imports/Advertising/3mma’s Glamour Banner/3mma’
 import glamourOneMonth from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour one month class 1ac.jpg";
 import adomBeauty from "@/imports/Advertising/Adom Beauty/Adom Beauty copy.jpg";
 import fashion from "@/imports/Advertising/Fashion/Fashion copy.jpg";
-import glamourThree from "@/imports/3mma’s Glamour/3mma’s Glamour 3.jpg";
-import glamourAltBanner from "@/imports/3mma’s Glamour/3mma’s Glamour Banner.jpg";
-import glamourGetItThree from "@/imports/3mma’s Glamour/3mma’s Glamour GET IT  3.jpg";
-import glamourSticker from "@/imports/3mma’s Glamour/3mma’s Glamour sticker 1.jpg";
-import godHaveMercy from "@/imports/God have mercy food joint/God have mercy food joint 2.jpg";
-import iceCream from "@/imports/Ice Cream/Ice Cream copy.jpg";
-import effesCosmetics from "@/imports/It's Effes cosmetic/IT’S EFFES COSMETICS 3a.jpg";
-import janeNails from "@/imports/Nails by Jane/Jane copy.jpg";
-import janetNails from "@/imports/Nails by Jane/Janet copy copy.jpg";
-import openSoon from "@/imports/Open Soon/open soon 1.jpg";
-import owusuwaaLuxe from "@/imports/Owusuwaa's Luxe/Owusuwaa’s Luxe copy copy.jpg";
-import rbWedding from "@/imports/R&B Wedding/wedding 1 copy.jpg";
-import tinaBundle from "@/imports/Tina Special Bundle/Tina-1.jpg";
+import glamourThree from "@/imports/Advertising/3mma’s Glamour/3mma’s Glamour 3.jpg";
+import glamourAltBanner from "@/imports/Advertising/3mma’s Glamour/3mma’s Glamour Banner.jpg";
+import glamourGetItThree from "@/imports/Advertising/3mma’s Glamour/3mma’s Glamour GET IT  3.jpg";
+import glamourSticker from "@/imports/Advertising/3mma’s Glamour/3mma’s Glamour sticker 1.jpg";
+import godHaveMercy from "@/imports/Advertising/God have mercy food joint/God have mercy food joint 2.jpg";
+import iceCream from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg";
+import effesCosmetics from "@/imports/Advertising/It's Effes cosmetic/IT’S EFFES COSMETICS 3a.jpg";
+import janeNails from "@/imports/Advertising/Nails by Jane/Jane copy.jpg";
+import janetNails from "@/imports/Advertising/Nails by Jane/Janet copy copy.jpg";
+import openSoon from "@/imports/Advertising/Open Soon/open soon 1.jpg";
+import owusuwaaLuxe from "@/imports/Advertising/Owusuwaa's Luxe/Owusuwaa’s Luxe copy copy.jpg";
+import rbWedding from "@/imports/Advertising/R&B Wedding/wedding 1 copy.jpg";
+import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
 import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 
 interface DesignProject extends LightboxItem {
@@ -1095,6 +1095,8 @@ export function GraphicDesign() {
                   <motion.img
                     src={p.img}
                     alt={p.title}
+                    loading="lazy"
+                    decoding="async"
                     animate={{
                       scale: hovered === p.id ? 1.06 : 1,
                       filter: hovered === p.id ? "brightness(0.38)" : "brightness(0.92)",
