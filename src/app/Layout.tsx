@@ -26,10 +26,17 @@ const TikTokIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const YouTubeIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-label="YouTube">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
+
 const SOCIAL_LINKS = [
-  { key: "instagram", icon: InstagramIcon, href: "#", label: "Instagram" },
+  { key: "instagram", icon: InstagramIcon, href: "https://www.instagram.com/i_design_8", label: "Instagram" },
   { key: "facebook",  icon: FacebookIcon,  href: "#", label: "Facebook" },
-  { key: "tiktok",    icon: TikTokIcon,    href: "https://www.tiktok.com/@idesigngh", label: "TikTok" },
+  { key: "tiktok",    icon: TikTokIcon,    href: "https://www.tiktok.com/@idesign678", label: "TikTok" },
+  { key: "youtube",   icon: YouTubeIcon,   href: "https://youtube.com/@idesign-c6s", label: "YouTube" },
 ];
 
 function SocialIconLink({ icon: Icon, href, label, color = "#aaa49a", hoverColor = GOLD, size = 16 }: {
