@@ -161,6 +161,10 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export function CreativeConcepts() {
+  useEffect(() => {
+    document.title = "Creative Concepts & Studio Packages — iDESIGN Studio";
+  }, []);
+
   const [hovered, setHovered] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 

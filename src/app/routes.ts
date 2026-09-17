@@ -41,6 +41,14 @@ export const router = createBrowserRouter([
           return { Component: Contact };
         },
       },
+      {
+        path: "*",
+        lazy: async () => {
+          const { NotFound } = await import("./pages/NotFound");
+          return { Component: NotFound };
+        },
+      },
     ],
   },
 ]);
+

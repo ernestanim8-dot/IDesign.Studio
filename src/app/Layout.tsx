@@ -32,11 +32,18 @@ const YouTubeIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+// ── Scroll-to-top chevron ────────────────────────────────────────────────────
+const ChevronUpIcon = () => (
+  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="18 15 12 9 6 15" />
+  </svg>
+);
+
 const SOCIAL_LINKS = [
-  { key: "instagram", icon: InstagramIcon, href: "https://www.instagram.com/i_design_8", label: "Instagram" },
-  { key: "facebook",  icon: FacebookIcon,  href: "#", label: "Facebook" },
-  { key: "tiktok",    icon: TikTokIcon,    href: "https://www.tiktok.com/@idesign678", label: "TikTok" },
-  { key: "youtube",   icon: YouTubeIcon,   href: "https://youtube.com/@idesign-c6s", label: "YouTube" },
+  { key: "instagram", icon: InstagramIcon, href: "https://www.instagram.com/i_design_8?stkn=bWZjNDhoeGVpM2hr&utm_source=qr", label: "Instagram" },
+  { key: "facebook",  icon: FacebookIcon,  href: "https://www.facebook.com/share/19ba8Zujqc/?mibextid=wwXIfr", label: "Facebook" },
+  { key: "tiktok",    icon: TikTokIcon,    href: "https://www.tiktok.com/@idesign678?_r=1&_t=ZS-99nvS5Nbaki", label: "TikTok" },
+  { key: "youtube",   icon: YouTubeIcon,   href: "https://youtube.com/@idesign-c6s?si=GutDYPw_HxdjF0kN", label: "YouTube" },
 ];
 
 function SocialIconLink({ icon: Icon, href, label, color = "#aaa49a", hoverColor = GOLD, size = 16 }: {
@@ -51,11 +58,40 @@ function SocialIconLink({ icon: Icon, href, label, color = "#aaa49a", hoverColor
       aria-label={label}
       title={label}
       style={{ color, transition: "color 0.2s, transform 0.2s", display: "inline-flex", alignItems: "center" }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = hoverColor; e.currentTarget.style.transform = "scale(1.15)"; }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = hoverColor; e.currentTarget.style.transform = "scale(1.18)"; }}
       onMouseLeave={(e) => { e.currentTarget.style.color = color; e.currentTarget.style.transform = "scale(1)"; }}
     >
       <Icon size={size} />
     </a>
+  );
+}
+
+// ── Image with skeleton loading shimmer ──────────────────────────────────────
+export function LazyImg({ src, alt, style }: { src: string; alt: string; style?: React.CSSProperties }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div style={{ position: "relative", overflow: "hidden", ...style }}>
+      {!loaded && (
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(90deg, #1a1814 25%, #222018 50%, #1a1814 75%)",
+          backgroundSize: "200% 100%",
+          animation: "shimmer 1.5s infinite",
+        }} />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        style={{
+          width: "100%", height: "100%", objectFit: "cover",
+          opacity: loaded ? 1 : 0,
+          transition: "opacity 0.4s ease",
+          display: "block",
+        }}
+      />
+    </div>
   );
 }
 
@@ -70,7 +106,17 @@ const NAV_LINKS = [
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isInquiriesOpen, setIsInquiriesOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const location = useLocation();
+
+  // Scroll-to-top visibility
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 420);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   useEffect(() => {
     const headerOffset = 86;
@@ -87,10 +133,7 @@ export function Layout() {
       const step = (now: number) => {
         const progress = Math.min((now - startedAt) / duration, 1);
         window.scrollTo(0, start + distance * easeInOutCubic(progress));
-
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
+        if (progress < 1) window.requestAnimationFrame(step);
       };
 
       window.requestAnimationFrame(step);
@@ -119,7 +162,6 @@ export function Layout() {
     const scrollToAnchor = () => {
       const id = decodeURIComponent(location.hash.slice(1));
       const target = document.getElementById(id);
-
       if (!target) return;
       scrollToTarget(target);
     };
@@ -135,8 +177,11 @@ export function Layout() {
   return (
     <div style={{ background: BG, color: DARK, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
 
-      {/* top contact bar */}
-      <div style={{ background: DARKER, padding: "0.5rem 2rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+      {/* Shimmer keyframes */}
+      <style>{`@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
+
+      {/* top contact bar — hidden on mobile */}
+      <div className="hidden sm:flex" style={{ background: DARKER, padding: "0.5rem 2rem", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
         <div className="flex items-center gap-6">
           <a href="mailto:idesign6048@gmail.com" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
             idesign6048@gmail.com
@@ -154,9 +199,12 @@ export function Layout() {
             <span className="w-1.5 h-1.5 rounded-full bg-[#c8a54a] animate-pulse" />
             <span>Studio Inquiries</span>
           </button>
-          {SOCIAL_LINKS.map(({ key, icon, href, label }) => (
-            <SocialIconLink key={key} icon={icon} href={href} label={label} color="#aaa49a" hoverColor={GOLD} size={15} />
-          ))}
+          {/* Social icons with proper gap */}
+          <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
+            {SOCIAL_LINKS.map(({ key, icon, href, label }) => (
+              <SocialIconLink key={key} icon={icon} href={href} label={label} color="#aaa49a" hoverColor={GOLD} size={15} />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -203,7 +251,7 @@ export function Layout() {
         <AnimatePresence>
           {menuOpen && (
             <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.18 }}
-              style={{ position: "absolute", top: "100%", left: 0, right: 0, background: BG, borderBottom: `1px solid ${BORDER}`, padding: "1.5rem 2rem", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 100 }}>
+              style={{ position: "absolute", top: "100%", left: 0, right: 0, background: BG, borderBottom: `1px solid ${BORDER}`, padding: "1.5rem 2rem", display: "flex", flexDirection: "column", gap: "0.25rem", zIndex: 100 }}>
               {NAV_LINKS.map(({ label, to }) => (
                 <NavLink key={to} to={to} end={to === "/"} onClick={() => setMenuOpen(false)}
                   style={({ isActive }) => ({
@@ -212,9 +260,21 @@ export function Layout() {
                     fontWeight: isActive ? 600 : 400,
                     color: isActive ? GOLD : DARK,
                     textDecoration: "none",
+                    padding: "0.6rem 0.75rem",
+                    borderRadius: "4px",
+                    background: isActive ? "rgba(200,165,74,0.08)" : "transparent",
+                    borderLeft: isActive ? `3px solid ${GOLD}` : "3px solid transparent",
+                    transition: "background 0.15s, color 0.15s",
+                    display: "block",
                   })}
                 >{label}</NavLink>
               ))}
+              {/* Social icons in mobile menu */}
+              <div style={{ borderTop: `1px solid ${BORDER}`, marginTop: "0.75rem", paddingTop: "1rem", display: "flex", gap: "16px" }}>
+                {SOCIAL_LINKS.map(({ key, icon, href, label }) => (
+                  <SocialIconLink key={key} icon={icon} href={href} label={label} color={MUTED} hoverColor={GOLD} size={18} />
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -264,7 +324,8 @@ export function Layout() {
           </div>
           <div style={{ borderTop: "1px solid #1e1c18", paddingTop: "1.5rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.08em", color: "#3a3830" }}>© 2026 iDESIGN Photography — All rights reserved</p>
-            <div className="flex gap-4">
+            {/* Footer social icons with comfortable spacing */}
+            <div style={{ display: "flex", gap: "18px", alignItems: "center" }}>
               {SOCIAL_LINKS.map(({ key, icon, href, label }) => (
                 <SocialIconLink key={key} icon={icon} href={href} label={label} color="#3a3830" hoverColor={GOLD} size={17} />
               ))}
@@ -281,6 +342,42 @@ export function Layout() {
 
       {/* PWA Install & Offline Banner */}
       <PWAInstallPrompt />
+
+      {/* Scroll-to-top button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.22 }}
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            title="Back to top"
+            style={{
+              position: "fixed",
+              bottom: "5.5rem",
+              right: "1.5rem",
+              zIndex: 40,
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              background: GOLD,
+              color: DARKER,
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 18px rgba(200,165,74,0.35)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            <ChevronUpIcon />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

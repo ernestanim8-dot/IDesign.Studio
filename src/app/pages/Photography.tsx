@@ -129,6 +129,10 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export function Photography() {
+  useEffect(() => {
+    document.title = "Photography Portfolio — iDESIGN Studio";
+  }, []);
+
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hovered, setHovered] = useState<number | null>(null);

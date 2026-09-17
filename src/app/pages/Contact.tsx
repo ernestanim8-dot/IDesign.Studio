@@ -33,6 +33,10 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export function Contact() {
+  useEffect(() => {
+    document.title = "Contact & Bookings — iDESIGN Studio";
+  }, []);
+
   const [submitted, setSubmitted] = useState(false);
   const [lastAction, setLastAction] = useState<"whatsapp" | "email" | null>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -468,6 +472,79 @@ export function Contact() {
                   {label}
                 </Link>
               ))}
+            </div>
+
+            {/* Social Channels */}
+            <div style={{ marginTop: "2rem" }}>
+              <p
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: MUTED,
+                  marginBottom: "0.8rem",
+                }}
+              >
+                — Connect With Us
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  {
+                    name: "Instagram",
+                    href: "https://www.instagram.com/i_design_8?stkn=bWZjNDhoeGVpM2hr&utm_source=qr",
+                    icon: "📸",
+                  },
+                  {
+                    name: "TikTok",
+                    href: "https://www.tiktok.com/@idesign678?_r=1&_t=ZS-99nvS5Nbaki",
+                    icon: "🎵",
+                  },
+                  {
+                    name: "YouTube",
+                    href: "https://youtube.com/@idesign-c6s?si=GutDYPw_HxdjF0kN",
+                    icon: "▶️",
+                  },
+                  {
+                    name: "Facebook",
+                    href: "https://www.facebook.com/share/19ba8Zujqc/?mibextid=wwXIfr",
+                    icon: "📘",
+                  },
+                ].map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      fontFamily: "'Work Sans',sans-serif",
+                      fontSize: "0.8rem",
+                      fontWeight: 500,
+                      padding: "0.4rem 0.85rem",
+                      background: SURFACE,
+                      border: `1px solid ${BORDER}`,
+                      borderRadius: "3px",
+                      color: DARK,
+                      textDecoration: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = GOLD;
+                      e.currentTarget.style.color = GOLD;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = BORDER;
+                      e.currentTarget.style.color = DARK;
+                    }}
+                  >
+                    <span>{s.icon}</span>
+                    <span>{s.name}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </FadeUp>
 

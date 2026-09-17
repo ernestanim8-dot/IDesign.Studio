@@ -116,6 +116,10 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export function Home() {
+  useEffect(() => {
+    document.title = "iDESIGN Studio — Accra, Ghana | Photography & Creative Direction";
+  }, []);
+
   const [heroReady, setHeroReady] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeSection, setActiveSection] = useState("about-preview");

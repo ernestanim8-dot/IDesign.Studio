@@ -118,6 +118,10 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export function GraphicDesign() {
+  useEffect(() => {
+    document.title = "Graphic Design & Brand Systems — iDESIGN Studio";
+  }, []);
+
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeDiscipline, setActiveDiscipline] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
