@@ -84,3 +84,11 @@ body {
 .pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
 }
+
+@media (min-width: 768px) {
+  .mobile-menu-toggle,
+  .mobile-menu-drawer {
+    display: none !important;
+  }
+}
+

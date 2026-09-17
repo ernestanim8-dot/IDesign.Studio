@@ -116,6 +116,17 @@ export function Layout() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Auto-close mobile menu on desktop viewports
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   useEffect(() => {
@@ -238,13 +249,12 @@ export function Layout() {
           ))}
         </div>
 
-        {/* mobile toggle */}
+        {/* mobile toggle - strictly hidden on desktop */}
         <button
-          className="md:hidden"
+          className="mobile-menu-toggle flex md:!hidden flex-col gap-[5px] p-2 bg-transparent border-none cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "5px" }}
         >
           {[0, 1, 2].map((i) => (
             <motion.span
@@ -258,6 +268,7 @@ export function Layout() {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
+              className="mobile-menu-drawer md:!hidden"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
