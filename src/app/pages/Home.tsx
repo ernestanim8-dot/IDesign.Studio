@@ -3,6 +3,9 @@ import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 import logoFull from "@/imports/i design logo.png";
+import photographyImg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
+import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
+import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 
@@ -10,25 +13,26 @@ const SERVICES = [
   {
     title: "Photography",
     desc: "Commercial, portrait, and documentary photography that tells your brand's story with clarity and emotion.",
-    img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=700&h=480&fit=crop&auto=format",
+    img: photographyImg,
     icon: "📷",
     to: "/photography",
   },
   {
     title: "Creative Concepts",
     desc: "End-to-end creative identity packages — strategy, visual language, print collateral, and digital assets under one roof.",
-    img: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=700&h=480&fit=crop&auto=format",
+    img: creativeConceptsImg,
     icon: "✦",
     to: "/creative-concepts",
   },
   {
     title: "Graphic Design",
     desc: "Logos, packaging, editorial layouts, and brand systems that communicate your values with confidence and style.",
-    img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&h=480&fit=crop&auto=format",
+    img: graphicDesignImg,
     icon: "◈",
     to: "/graphic-design",
   },
 ];
+
 
 const STATS = [
   { value: "5+", label: "Years in Business" },

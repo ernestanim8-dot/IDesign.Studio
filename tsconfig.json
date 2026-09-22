@@ -10,16 +10,15 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "vite/client", "vite-plugin-pwa/client"],
+    "types": ["node"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "vite.config.ts"],
-  "exclude": ["node_modules", "dist", "src/**/*.css"]
+  "exclude": ["node_modules", "dist", "**/*.css"]
 }

@@ -795,13 +795,24 @@ export function GraphicDesign() {
 
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeDiscipline, setActiveDiscipline] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxItems, setLightboxItems] = useState<LightboxItem[]>(PROJECTS);
 
   const filteredProjects = useMemo(() => {
-    if (activeDiscipline === "All") return PROJECTS;
-    return PROJECTS.filter((p) => p.discipline === activeDiscipline);
-  }, [activeDiscipline]);
+    return PROJECTS.filter((p) => {
+      const matchesDiscipline = activeDiscipline === "All" || p.discipline === activeDiscipline;
+      const query = searchQuery.trim().toLowerCase();
+      if (!query) return matchesDiscipline;
+      const matchesQuery =
+        p.title.toLowerCase().includes(query) ||
+        p.client.toLowerCase().includes(query) ||
+        (p.category && p.category.toLowerCase().includes(query)) ||
+        (p.description && p.description.toLowerCase().includes(query)) ||
+        p.discipline.toLowerCase().includes(query);
+      return matchesDiscipline && matchesQuery;
+    });
+  }, [activeDiscipline, searchQuery]);
 
   return (
     <>
@@ -931,37 +942,195 @@ export function GraphicDesign() {
         </div>
       </section>
 
-      {/* Discipline filter */}
-      <section style={{ padding: "3rem 2rem 1rem", maxWidth: "1280px", margin: "0 auto" }}>
-        <div className="flex flex-wrap justify-center gap-2">
-          {DISCIPLINES.map((d) => (
-            <button
-              key={d}
-              onClick={() => setActiveDiscipline(d)}
+      {/* Discipline filter & Search Bar */}
+      <section style={{ padding: "3rem 2rem 1.5rem", maxWidth: "1280px", margin: "0 auto" }}>
+        {/* Search bar */}
+        <div style={{ maxWidth: "480px", margin: "0 auto 1.5rem", position: "relative" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              background: "rgba(255, 255, 255, 0.65)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              border: `1px solid ${searchQuery ? GOLD : BORDER}`,
+              borderRadius: "4px",
+              padding: "0.5rem 0.9rem",
+              transition: "border-color 0.2s, box-shadow 0.2s",
+              boxShadow: searchQuery ? "0 0 16px rgba(200, 165, 74, 0.2)" : "none",
+            }}
+          >
+            <svg
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={searchQuery ? GOLD : MUTED}
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ marginRight: "0.6rem", flexShrink: 0 }}
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by client, title, packaging, banner..."
               style={{
-                fontFamily: "'DM Mono',monospace",
+                width: "100%",
+                background: "transparent",
+                border: "none",
+                outline: "none",
+                fontFamily: "'Work Sans', sans-serif",
+                fontSize: "0.85rem",
+                color: DARK,
+              }}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  color: MUTED,
+                  fontSize: "1rem",
+                  padding: "0 0.2rem",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                title="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Discipline filter chips */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {DISCIPLINES.map((d) => {
+            const count = d === "All" ? PROJECTS.length : PROJECTS.filter((p) => p.discipline === d).length;
+            return (
+              <button
+                key={d}
+                onClick={() => setActiveDiscipline(d)}
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  padding: "0.5rem 1.1rem",
+                  border: `1px solid ${activeDiscipline === d ? GOLD : BORDER}`,
+                  background: activeDiscipline === d ? GOLD : "transparent",
+                  color: activeDiscipline === d ? WHITE : MUTED,
+                  cursor: "pointer",
+                  borderRadius: "3px",
+                  transition: "all 0.2s",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                }}
+              >
+                <span>{d}</span>
+                <span
+                  style={{
+                    opacity: 0.8,
+                    fontSize: "0.6rem",
+                    padding: "0.1rem 0.35rem",
+                    borderRadius: "10px",
+                    background: activeDiscipline === d ? "rgba(0,0,0,0.18)" : "rgba(13,12,9,0.06)",
+                  }}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Results indicator */}
+        <div style={{ textAlign: "center", marginTop: "1rem" }}>
+          <span
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.65rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: MUTED,
+            }}
+          >
+            Showing {filteredProjects.length} of {PROJECTS.length} showcase projects
+          </span>
+          {(searchQuery || activeDiscipline !== "All") && (
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveDiscipline("All");
+              }}
+              style={{
+                marginLeft: "0.8rem",
+                background: "transparent",
+                border: "none",
+                color: GOLD,
+                fontFamily: "'DM Mono', monospace",
                 fontSize: "0.65rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                padding: "0.45rem 1.2rem",
-                border: `1px solid ${activeDiscipline === d ? GOLD : BORDER}`,
-                background: activeDiscipline === d ? GOLD : "transparent",
-                color: activeDiscipline === d ? WHITE : MUTED,
+                textDecoration: "underline",
                 cursor: "pointer",
-                borderRadius: "3px",
-                transition: "all 0.2s",
               }}
             >
-              {d}
+              Reset Filters
             </button>
-          ))}
+          )}
         </div>
       </section>
 
       {/* Portfolio grid */}
       <section style={{ padding: "3rem 2rem 5rem", maxWidth: "1280px", margin: "0 auto" }}>
-        <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
-          {filteredProjects.map((p, i) => (
+        {filteredProjects.length === 0 ? (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "4rem 1.5rem",
+              background: SURFACE,
+              border: `1px dashed ${BORDER}`,
+              borderRadius: "8px",
+            }}
+          >
+            <p style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.35rem", color: DARK, marginBottom: "0.5rem" }}>
+              No showcase projects found
+            </p>
+            <p style={{ fontFamily: "'Work Sans',sans-serif", fontSize: "0.875rem", color: MUTED, marginBottom: "1.5rem" }}>
+              No matches found for &quot;{searchQuery}&quot; under &quot;{activeDiscipline}&quot;. Try adjusting your keywords.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveDiscipline("All");
+              }}
+              style={{
+                fontFamily: "'Work Sans',sans-serif",
+                fontWeight: 600,
+                fontSize: "0.85rem",
+                padding: "0.75rem 1.8rem",
+                background: GOLD,
+                color: WHITE,
+                border: "none",
+                borderRadius: "3px",
+                cursor: "pointer",
+                transition: "opacity 0.2s",
+              }}
+            >
+              Reset All Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
+            {filteredProjects.map((p, i) => (
+
             <FadeUp key={p.id} delay={i * 0.08}>
               <motion.div
                 className={p.wide ? "md:col-span-2" : ""}
@@ -1180,6 +1349,7 @@ export function GraphicDesign() {
             </FadeUp>
           ))}
         </div>
+        )}
       </section>
 
       {/* Process */}
