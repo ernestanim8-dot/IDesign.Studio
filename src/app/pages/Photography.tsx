@@ -12,68 +12,81 @@ import blueMenSmokeBox from "@/imports/Photography/Commercial/blue-for-men-smoke
 
 const CATEGORIES = ["All", "Product", "Commercial", "Portrait", "Documentary", "Still Life"];
 
-interface PhotoItem extends LightboxItem {
-  id: number;
-  tall: boolean;
-  cat: string;
-}
-
-const PHOTOS: PhotoItem[] = [
+/* ─── Gallery of all Blue for Men images ─────────────────────────────── */
+const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
   {
-    id: 1,
-    title: "Blue for Men — Liquid Splash & Light",
-    cat: "Product",
-    category: "Product",
     img: blueMenSplashLight,
-    tall: false,
+    title: "Blue for Men — Liquid Splash & Light",
+    category: "Product",
     client: "Blue for Men Fragrance",
     year: "2024",
-    description: "High-speed water splash capture highlighting precision rim lighting, crisp droplet kinetics, and crystal glass reflections.",
+    description:
+      "High-speed water splash capture highlighting precision rim lighting, crisp droplet kinetics, and crystal glass reflections.",
   },
   {
-    id: 2,
-    title: "Blue for Men — Midnight Botanical",
-    cat: "Product",
-    category: "Product",
     img: blueMenRosesVertical,
-    tall: true,
+    title: "Blue for Men — Midnight Botanical",
+    category: "Product",
     client: "Blue for Men Fragrance",
     year: "2024",
-    description: "Vertical editorial flacon study with midnight backdrop, aqua rose floral accents, and pristine mirrored surface reflections.",
+    description:
+      "Vertical editorial flacon study with midnight backdrop, aqua rose floral accents, and pristine mirrored surface reflections.",
   },
   {
-    id: 3,
-    title: "Blue for Men — Kinetic Aqua Crown",
-    cat: "Product",
-    category: "Product",
     img: blueMenWaterSplash,
-    tall: true,
+    title: "Blue for Men — Kinetic Aqua Crown",
+    category: "Product",
     client: "Blue for Men Fragrance",
     year: "2024",
-    description: "Dynamic fluid crown sculpted around luxury cologne packaging with rising ambient smoke trails.",
+    description:
+      "Dynamic fluid crown sculpted around luxury cologne packaging with rising ambient smoke trails.",
   },
   {
-    id: 4,
-    title: "Blue for Men — Atmospheric Haze",
-    cat: "Product",
-    category: "Product",
     img: blueMenSmokeBox,
-    tall: false,
+    title: "Blue for Men — Atmospheric Haze",
+    category: "Product",
     client: "Blue for Men Fragrance",
     year: "2024",
-    description: "Commercial still blending high-contrast black backdrop, liquid splash dynamics, and swirling atmospheric mist.",
+    description:
+      "Commercial still blending high-contrast black backdrop, liquid splash dynamics, and swirling atmospheric mist.",
   },
   {
-    id: 5,
-    title: "Blue for Men — Studio Pedestal",
-    cat: "Product",
-    category: "Product",
     img: blueMenPedestal,
-    tall: false,
+    title: "Blue for Men — Studio Pedestal",
+    category: "Product",
     client: "Blue for Men Fragrance",
     year: "2024",
     description: "Minimalist pedestal showcase highlighting the architectural flacon silhouette.",
   },
+];
+
+interface PhotoItem extends LightboxItem {
+  id: number;
+  tall: boolean;
+  cat: string;
+  /** If set, clicking opens the named gallery in the lightbox */
+  gallery?: string;
+  /** Total images in gallery (shown as badge) */
+  galleryCount?: number;
+}
+
+const PHOTOS: PhotoItem[] = [
+  /* ── Blue for Men — grouped ───────────────────── */
+  {
+    id: 1,
+    title: "Blue for Men — Fragrance Campaign",
+    cat: "Product",
+    category: "Product",
+    img: blueMenSplashLight,   // cover photo shown on the card
+    tall: true,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description:
+      "A 5-image commercial product campaign featuring liquid-splash dynamics, editorial botanicals, atmospheric haze, and studio pedestal showcases.",
+    gallery: "blueformen",
+    galleryCount: 5,
+  },
+  /* ── Other portfolio work ─────────────────────── */
   {
     id: 6,
     title: "Fog & Light",
@@ -161,6 +174,15 @@ const PHOTOS: PhotoItem[] = [
   },
 ];
 
+/** Total count for category badges — counts the gallery as 5 individual shots */
+function getCategoryCount(cat: string) {
+  if (cat === "All") {
+    // sum: grouped entries contribute galleryCount, singles contribute 1
+    return PHOTOS.reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
+  }
+  return PHOTOS.filter((p) => p.cat === cat).reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
+}
+
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -197,6 +219,9 @@ export function Photography() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hovered, setHovered] = useState<number | null>(null);
+
+  /* lightbox state */
+  const [lightboxItems, setLightboxItems] = useState<LightboxItem[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filteredPhotos = useMemo(() => {
@@ -212,6 +237,26 @@ export function Photography() {
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
+
+  /* Total count for the "Showing X of Y" label */
+  const totalCount = useMemo(() => getCategoryCount("All"), []);
+  const filteredCount = useMemo(
+    () => filteredPhotos.reduce((acc, p) => acc + (p.galleryCount ?? 1), 0),
+    [filteredPhotos]
+  );
+
+  function openCard(p: PhotoItem, indexInFiltered: number) {
+    if (p.gallery === "blueformen") {
+      setLightboxItems(BLUE_FOR_MEN_GALLERY);
+      setLightboxIndex(0);
+    } else {
+      // For non-grouped photos, show the filtered list (excluding gallery entries)
+      const singlePhotos = filteredPhotos.filter((x) => !x.gallery);
+      const singleIndex = singlePhotos.findIndex((x) => x.id === p.id);
+      setLightboxItems(singlePhotos);
+      setLightboxIndex(singleIndex >= 0 ? singleIndex : 0);
+    }
+  }
 
   return (
     <>
@@ -365,7 +410,7 @@ export function Photography() {
         {/* Category filter chips */}
         <div className="flex flex-wrap justify-center gap-2">
           {CATEGORIES.map((c) => {
-            const count = c === "All" ? PHOTOS.length : PHOTOS.filter((p) => p.cat === c).length;
+            const count = getCategoryCount(c);
             const isSelected = activeCategory === c;
             return (
               <button
@@ -416,7 +461,7 @@ export function Photography() {
               color: MUTED,
             }}
           >
-            Showing {filteredPhotos.length} of {PHOTOS.length} showcase photographs
+            Showing {filteredCount} of {totalCount} showcase photographs
           </span>
           {(searchQuery || activeCategory !== "All") && (
             <button
@@ -503,7 +548,7 @@ export function Photography() {
                 }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
-                onClick={() => setLightboxIndex(i)}
+                onClick={() => openCard(p, i)}
               >
                 <div style={{ paddingBottom: p.tall ? "120%" : "75%", position: "relative" }}>
                   <motion.img
@@ -517,7 +562,40 @@ export function Photography() {
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                   />
 
-                  {/* Hover overlay hint */}
+                  {/* Gallery count badge (top-left) */}
+                  {p.galleryCount && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "0.75rem",
+                        left: "0.75rem",
+                        background: "rgba(13,12,9,0.72)",
+                        backdropFilter: "blur(6px)",
+                        border: `1px solid ${GOLD}`,
+                        color: GOLD,
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.58rem",
+                        letterSpacing: "0.1em",
+                        padding: "0.22rem 0.55rem",
+                        borderRadius: "3px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.3rem",
+                        zIndex: 2,
+                      }}
+                    >
+                      {/* grid icon */}
+                      <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth={2}>
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                      </svg>
+                      {p.galleryCount} PHOTOS
+                    </div>
+                  )}
+
+                  {/* Hover overlay */}
                   <div
                     style={{
                       position: "absolute",
@@ -526,6 +604,7 @@ export function Photography() {
                       flexDirection: "column",
                       justifyContent: "space-between",
                       padding: "1.25rem",
+                      zIndex: 1,
                     }}
                   >
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -542,7 +621,7 @@ export function Photography() {
                           letterSpacing: "0.08em",
                         }}
                       >
-                        VIEW FULL ↗
+                        {p.gallery ? "VIEW GALLERY ↗" : "VIEW FULL ↗"}
                       </motion.span>
                     </div>
 
@@ -737,7 +816,7 @@ export function Photography() {
 
       {/* Lightbox Modal */}
       <Lightbox
-        items={filteredPhotos}
+        items={lightboxItems}
         currentIndex={lightboxIndex}
         onClose={() => setLightboxIndex(null)}
         onNavigate={(idx) => setLightboxIndex(idx)}
