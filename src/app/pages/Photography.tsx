@@ -294,167 +294,190 @@ export function Photography() {
         </div>
       </section>
 
-      {/* Filter + Search + Gallery */}
-      <section style={{ padding: "4rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
-        <FadeUp>
+      {/* Category filter & Search Bar */}
+      <section style={{ padding: "3rem 2rem 1.5rem", maxWidth: "1280px", margin: "0 auto" }}>
+        {/* Search bar */}
+        <div style={{ maxWidth: "480px", margin: "0 auto 1.5rem", position: "relative" }}>
           <div
             style={{
               display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
               alignItems: "center",
-              gap: "1.5rem",
-              marginBottom: "2.5rem",
+              background: "rgba(255, 255, 255, 0.65)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              border: `1px solid ${searchQuery ? GOLD : BORDER}`,
+              borderRadius: "4px",
+              padding: "0.5rem 0.9rem",
+              transition: "border-color 0.2s, box-shadow 0.2s",
+              boxShadow: searchQuery ? "0 0 16px rgba(200, 165, 74, 0.2)" : "none",
             }}
           >
-            {/* Category tabs */}
-            <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((c) => {
-                const count = c === "All" ? PHOTOS.length : PHOTOS.filter((p) => p.cat === c).length;
-                const isSelected = activeCategory === c;
-                return (
-                  <motion.button
-                    key={c}
-                    onClick={() => setActiveCategory(c)}
-                    whileTap={{ scale: 0.96 }}
-                    style={{
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.68rem",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      padding: "0.5rem 1.15rem",
-                      border: `1px solid ${isSelected ? GOLD : BORDER}`,
-                      background: isSelected ? GOLD : SURFACE,
-                      color: isSelected ? WHITE : DARK,
-                      cursor: "pointer",
-                      borderRadius: "4px",
-                      transition: "all 0.2s",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.45rem",
-                      fontWeight: isSelected ? 600 : 400,
-                    }}
-                  >
-                    <span>{c}</span>
-                    <span
-                      style={{
-                        fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.58rem",
-                        padding: "1px 6px",
-                        borderRadius: "10px",
-                        background: isSelected ? "rgba(0,0,0,0.22)" : "rgba(200,165,74,0.12)",
-                        color: isSelected ? WHITE : GOLD,
-                        fontWeight: 600,
-                      }}
-                    >
-                      {count}
-                    </span>
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* Keyword Search Input */}
-            <div style={{ position: "relative", minWidth: "240px" }}>
-              <input
-                type="text"
-                placeholder="Search photos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+            <svg
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={searchQuery ? GOLD : MUTED}
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ marginRight: "0.6rem", flexShrink: 0 }}
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by client, title, product, lighting..."
+              style={{
+                width: "100%",
+                background: "transparent",
+                border: "none",
+                outline: "none",
+                fontFamily: "'Work Sans', sans-serif",
+                fontSize: "0.85rem",
+                color: DARK,
+              }}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
                 style={{
-                  background: SURFACE,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: "20px",
-                  padding: "0.5rem 1.25rem 0.5rem 2.25rem",
-                  fontSize: "0.82rem",
-                  fontFamily: "'Work Sans', sans-serif",
-                  color: DARK,
-                  outline: "none",
-                  width: "100%",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
-                onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  left: "0.85rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  fontSize: "0.8rem",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
                   color: MUTED,
-                  pointerEvents: "none",
+                  fontSize: "1rem",
+                  padding: "0 0.2rem",
+                  display: "flex",
+                  alignItems: "center",
                 }}
+                title="Clear search"
               >
-                🔍
-              </span>
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  style={{
-                    position: "absolute",
-                    right: "0.75rem",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    background: "none",
-                    border: "none",
-                    fontSize: "0.8rem",
-                    color: MUTED,
-                    cursor: "pointer",
-                  }}
-                >
-                  ✕
-                </button>
-              )}
-            </div>
+                ✕
+              </button>
+            )}
           </div>
-        </FadeUp>
-
-        {/* Gallery count / notice */}
-        <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.68rem", color: MUTED, letterSpacing: "0.08em" }}>
-            Showing {filteredPhotos.length} {filteredPhotos.length === 1 ? "work" : "works"}
-          </p>
-          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.62rem", color: GOLD }}>
-            ✦ Click any image for full-screen view
-          </span>
         </div>
 
-        {/* Masonry-style grid */}
+        {/* Category filter chips */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {CATEGORIES.map((c) => {
+            const count = c === "All" ? PHOTOS.length : PHOTOS.filter((p) => p.cat === c).length;
+            const isSelected = activeCategory === c;
+            return (
+              <button
+                key={c}
+                onClick={() => setActiveCategory(c)}
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  padding: "0.5rem 1.1rem",
+                  border: `1px solid ${isSelected ? GOLD : BORDER}`,
+                  background: isSelected ? GOLD : "transparent",
+                  color: isSelected ? WHITE : MUTED,
+                  cursor: "pointer",
+                  borderRadius: "3px",
+                  transition: "all 0.2s",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                }}
+              >
+                <span>{c}</span>
+                <span
+                  style={{
+                    opacity: 0.8,
+                    fontSize: "0.6rem",
+                    padding: "0.1rem 0.35rem",
+                    borderRadius: "10px",
+                    background: isSelected ? "rgba(0,0,0,0.18)" : "rgba(13,12,9,0.06)",
+                  }}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Results indicator */}
+        <div style={{ textAlign: "center", marginTop: "1rem" }}>
+          <span
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.65rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: MUTED,
+            }}
+          >
+            Showing {filteredPhotos.length} of {PHOTOS.length} showcase photographs
+          </span>
+          {(searchQuery || activeCategory !== "All") && (
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveCategory("All");
+              }}
+              style={{
+                marginLeft: "0.8rem",
+                background: "transparent",
+                border: "none",
+                color: GOLD,
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.65rem",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              Reset Filters
+            </button>
+          )}
+        </div>
+      </section>
+
+      {/* Gallery grid section */}
+      <section style={{ padding: "1.5rem 2rem 5rem", maxWidth: "1280px", margin: "0 auto" }}>
         {filteredPhotos.length === 0 ? (
           <div
             style={{
-              padding: "5rem 2rem",
               textAlign: "center",
+              padding: "4rem 1.5rem",
               background: SURFACE,
-              borderRadius: "8px",
               border: `1px dashed ${BORDER}`,
+              borderRadius: "8px",
             }}
           >
-            <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.5rem", color: DARK, marginBottom: "0.5rem" }}>
-              No photographs found
+            <p style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.35rem", color: DARK, marginBottom: "0.5rem" }}>
+              No showcase photographs found
             </p>
-            <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.9rem", color: MUTED, marginBottom: "1.5rem" }}>
-              Try searching with another keyword or resetting the category filter.
+            <p style={{ fontFamily: "'Work Sans',sans-serif", fontSize: "0.875rem", color: MUTED, marginBottom: "1.5rem" }}>
+              No matches found for &quot;{searchQuery}&quot; under &quot;{activeCategory}&quot;. Try adjusting your keywords.
             </p>
             <button
               onClick={() => {
-                setActiveCategory("All");
                 setSearchQuery("");
+                setActiveCategory("All");
               }}
               style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.7rem",
-                padding: "0.5rem 1.25rem",
+                fontFamily: "'Work Sans',sans-serif",
+                fontWeight: 600,
+                fontSize: "0.85rem",
+                padding: "0.75rem 1.8rem",
                 background: GOLD,
                 color: WHITE,
                 border: "none",
                 borderRadius: "3px",
                 cursor: "pointer",
+                transition: "opacity 0.2s",
               }}
             >
-              Reset Filters
+              Reset All Filters
             </button>
           </div>
         ) : (
