@@ -1,0 +1,80 @@
+# Implementation Plan: Enhancements for Options A, B, and C
+
+Implement high-impact enhancements across the studio website:
+
+1. **Option A:** Upgrade [Home.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/Home.tsx) service cards with real studio showcase images & add interactive category filters and search to [GraphicDesign.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/GraphicDesign.tsx).
+2. **Option B:** Connect [CreativeConcepts.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/CreativeConcepts.tsx) pricing calculator to WhatsApp with 1-click custom quote generation.
+3. **Option C:** Add LocalBusiness JSON-LD structured data in [index.html](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/index.html) and implement email notification dispatch in the backend inquiry handler.
+
+---
+
+## User Review Required
+
+> [!NOTE]
+>
+> - The studio phone number for WhatsApp bookings is confirmed as `+233502330663`.
+> - The notification recipient email for contact inquiries is `idesign6048@gmail.com`.
+> - When SMTP or an external email API key (e.g. Resend, SendGrid) is not yet set in environment variables, the backend will safely store the inquiry, log the dispatch payload, and provide a clear setup note without breaking submissions.
+
+---
+
+## Proposed Changes
+
+### Component 1: Home Service Cards & Graphic Design Filter (Option A)
+
+#### [MODIFY] [Home.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/Home.tsx)
+
+- Replace stock Unsplash URLs for the 3 service cards (`SERVICES` array) with high-res real imported imagery:
+  - Graphic Design: Real stationery/branding mockup (`@/imports/Branding/IDesign/Notebook.jpg` or `call card front.jpg`)
+  - Creative Concepts: Multi-asset merchandise brand mockup (`@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg`)
+  - Photography: High-quality luxury portrait/editorial visual
+
+#### [MODIFY] [GraphicDesign.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/GraphicDesign.tsx)
+
+- Add category filter tabs at the top of the gallery:
+  - `All`, `Branding & Identity`, `Advertising & Flyers`, `Banners & Signage`, `Packaging & Labels`
+- Add an interactive search bar allowing instant filtering by client name, project title, or category.
+- Display a clear "Showing X of Y projects" count and active filter tags.
+
+---
+
+### Component 2: WhatsApp Custom Quote Generator (Option B)
+
+#### [MODIFY] [CreativeConcepts.tsx](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/src/app/pages/CreativeConcepts.tsx)
+
+- In the interactive pricing calculator, add a prominent, gold luxury button: **"Book This Custom Package on WhatsApp"**.
+- Format the WhatsApp message with:
+  - Package name (e.g., *Studio Complete*)
+  - Base price
+  - Selected add-ons list (with individual item prices)
+  - Calculated estimated total
+  - Expected turnaround time
+  - Direct link to initiate chat with `+233502330663`.
+
+---
+
+### Component 3: Local SEO Schema & Email Dispatch (Option C)
+
+#### [MODIFY] [index.html](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/index.html)
+
+- Insert a Schema.org `ProfessionalService` / `LocalBusiness` JSON-LD block in `<head>`:
+  - Name, URL, phone number, address (Accra, Greater Accra, Ghana), opening hours, pricing range, official logo, and social profile links (`sameAs`).
+
+#### [MODIFY] [server/index.js](file:///c:/Users/ernes/Desktop/Digital%20Portfolio%20Builder/server/index.js)
+
+- Enhance the `/api/contact` handler to support email notifications via Resend API or SMTP when configured via environment variables (`RESEND_API_KEY`, `NOTIFICATION_EMAIL`), while gracefully logging and saving inquiries to disk / database.
+
+---
+
+## Verification Plan
+
+### Automated Checks
+
+- Run `npx tsc --noEmit` to verify type safety.
+- Run `npm run build` to confirm production bundling succeeds without errors.
+
+### Manual Verification
+
+- Verify that filtering and search in Graphic Design work smoothly.
+- Test the WhatsApp booking link generation from the pricing calculator.
+- Validate JSON-LD structured data syntax.

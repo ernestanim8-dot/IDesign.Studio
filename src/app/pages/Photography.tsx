@@ -4,22 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
 
-// Commercial / Product photography imports (Blue for Men shoot)
-import blueMenPedestal from "@/imports/Photography/Commercial/blue-for-men-pedestal.jpg";
-import blueMenSplashLight from "@/imports/Photography/Commercial/blue-for-men-splash-light.jpg";
-import blueMenRosesVertical from "@/imports/Photography/Commercial/blue-for-men-roses-vertical.jpg";
-import blueMenWaterSplash from "@/imports/Photography/Commercial/blue-for-men-water-splash.jpg";
-import blueMenSmokeBox from "@/imports/Photography/Commercial/blue-for-men-smoke-box.jpg";
-
-const CATEGORIES = [
-  "All",
-  "Commercial / Product",
-  "Fashion / Editorial",
-  "Portrait",
-  "Beauty",
-  "Food",
-  "Events / Weddings",
-];
+const CATEGORIES = ["All", "Commercial", "Portrait", "Documentary", "Still Life"];
 
 interface PhotoItem extends LightboxItem {
   id: number;
@@ -30,113 +15,88 @@ interface PhotoItem extends LightboxItem {
 const PHOTOS: PhotoItem[] = [
   {
     id: 1,
-    title: "Blue for Men — Studio Spotlight",
-    cat: "Commercial / Product",
-    category: "Commercial / Product",
-    img: blueMenPedestal,
-    tall: false,
-    client: "Blue for Men Fragrance",
+    title: "Fog & Light",
+    cat: "Documentary",
+    category: "Documentary",
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=1200&fit=crop&auto=format",
+    tall: true,
     year: "2024",
-    description: "Atmospheric commercial shoot featuring dynamic mist spray on an illuminated circular podium with dense cinematic haze.",
+    description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
     id: 2,
-    title: "Blue for Men — Liquid Splash & Light",
-    cat: "Commercial / Product",
-    category: "Commercial / Product",
-    img: blueMenSplashLight,
+    title: "Golden Hour Coast",
+    cat: "Commercial",
+    category: "Commercial",
+    img: "https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=1600&h=1000&fit=crop&auto=format",
     tall: false,
-    client: "Blue for Men Fragrance",
+    client: "Horizon Travel",
     year: "2024",
-    description: "High-speed water splash capture highlighting precision rim lighting, crisp droplet kinetics, and crystal glass reflections.",
+    description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
     id: 3,
-    title: "Blue for Men — Midnight Botanical",
-    cat: "Commercial / Product",
-    category: "Commercial / Product",
-    img: blueMenRosesVertical,
+    title: "Solstice Ritual",
+    cat: "Documentary",
+    category: "Documentary",
+    img: "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=1600&h=1200&fit=crop&auto=format",
     tall: true,
-    client: "Blue for Men Fragrance",
-    year: "2024",
-    description: "Vertical editorial flacon study with midnight backdrop, aqua rose floral accents, and pristine mirrored surface reflections.",
+    year: "2023",
+    description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
     id: 4,
-    title: "Blue for Men — Kinetic Aqua Crown",
-    cat: "Commercial / Product",
-    category: "Commercial / Product",
-    img: blueMenWaterSplash,
-    tall: true,
-    client: "Blue for Men Fragrance",
-    year: "2024",
-    description: "Dynamic fluid crown sculpted around luxury cologne packaging with rising ambient smoke trails.",
+    title: "Botanical Still Life No. 7",
+    cat: "Still Life",
+    category: "Still Life",
+    img: "https://images.unsplash.com/photo-1490750967868-88df5691cc5f?w=1600&h=1100&fit=crop&auto=format",
+    tall: false,
+    client: "Flora Atelier",
+    year: "2023",
+    description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
     id: 5,
-    title: "Blue for Men — Atmospheric Haze",
-    cat: "Commercial / Product",
-    category: "Commercial / Product",
-    img: blueMenSmokeBox,
-    tall: false,
-    client: "Blue for Men Fragrance",
-    year: "2024",
-    description: "Commercial still blending high-contrast black backdrop, liquid splash dynamics, and swirling atmospheric mist.",
-  },
-  {
-    id: 6,
-    title: "High Fashion Editorial",
-    cat: "Fashion / Editorial",
-    category: "Fashion / Editorial",
-    img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&h=1200&fit=crop&auto=format",
-    tall: true,
-    client: "Editorial Studio",
-    year: "2024",
-    description: "Contemporary fashion lookbook and styled studio editorial.",
-  },
-  {
-    id: 7,
-    title: "Executive Studio Portrait",
+    title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1600&h=1200&fit=crop&auto=format",
     tall: true,
-    client: "Studio Sessions",
+    client: "Vogue Creative Spotlight",
     year: "2024",
-    description: "High-contrast studio portrait capturing executive presence and organic skin tones.",
+    description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
+  },
+  {
+    id: 6,
+    title: "Brand Story & Craft",
+    cat: "Commercial",
+    category: "Commercial",
+    img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1600&h=1000&fit=crop&auto=format",
+    tall: false,
+    client: "Heritage Makers Co.",
+    year: "2023",
+    description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
+  },
+  {
+    id: 7,
+    title: "Urban Fragment",
+    cat: "Documentary",
+    category: "Documentary",
+    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&h=1100&fit=crop&auto=format",
+    tall: false,
+    year: "2023",
+    description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
     id: 8,
-    title: "Radiant Skin & Glow",
-    cat: "Beauty",
-    category: "Beauty",
-    img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&h=1200&fit=crop&auto=format",
-    tall: false,
-    client: "Cosmetic Aesthetics",
-    year: "2024",
-    description: "Close-up skincare and beauty aesthetics with natural luminous lighting.",
-  },
-  {
-    id: 9,
-    title: "Artisanal Culinary Capture",
-    cat: "Food",
-    category: "Food",
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&h=1200&fit=crop&auto=format",
-    tall: false,
-    client: "Gourmet Kitchen",
-    year: "2024",
-    description: "Vibrant culinary styling showcasing rich textures and fresh ingredients.",
-  },
-  {
-    id: 10,
-    title: "Ceremony & Celebration",
-    cat: "Events / Weddings",
-    category: "Events / Weddings",
-    img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&h=1200&fit=crop&auto=format",
+    title: "Quiet Interior & Form",
+    cat: "Still Life",
+    category: "Still Life",
+    img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&h=1200&fit=crop&auto=format",
     tall: true,
-    client: "Private Client",
+    client: "Nordic Living Studio",
     year: "2024",
-    description: "Authentic milestone celebration capturing emotion, elegance, and connection.",
+    description: "Interior architectural study focusing on green velvet furnishings and serene ambient light.",
   },
 ];
 
@@ -209,9 +169,10 @@ export function Photography() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url(${blueMenPedestal})`,
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1800&h=900&fit=crop&auto=format')",
             backgroundSize: "cover",
-            backgroundPosition: "center 40%",
+            backgroundPosition: "center 35%",
           }}
         />
         <div
@@ -540,14 +501,12 @@ export function Photography() {
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Commercial / Product", desc: "High-impact product, cosmetic, and brand visuals engineered for campaigns, packaging, and digital advertising." },
-              { title: "Fashion / Editorial", desc: "Styled lookbooks, designer collections, model portfolios, and runway-inspired editorial visuals." },
-              { title: "Portrait", desc: "Executive, creative, and individual studio portraiture that projects authenticity, character, and command." },
-              { title: "Beauty", desc: "Flawless skincare, makeup aesthetics, and cosmetic product details lit with studio precision." },
-              { title: "Food", desc: "Appetizing culinary styling and restaurant dish captures highlighting vibrant texture and flavour." },
-              { title: "Events / Weddings", desc: "Documentary-grade milestone storytelling capturing every emotion, vow, and celebration." },
+              { title: "Commercial", desc: "Product, lifestyle, and brand photography for marketing and advertising." },
+              { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
+              { title: "Documentary", desc: "Event and editorial coverage that captures real moments authentically." },
+              { title: "Still Life", desc: "Precision product and object photography for e-commerce and print." },
             ].map(({ title, desc }, i) => (
               <FadeUp key={title} delay={i * 0.1}>
                 <div style={{ borderTop: `2px solid ${GOLD}`, paddingTop: "1.25rem" }}>
