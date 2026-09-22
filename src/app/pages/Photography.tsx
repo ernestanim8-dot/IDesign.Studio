@@ -4,7 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
 
-const CATEGORIES = ["All", "Commercial", "Portrait", "Documentary", "Still Life"];
+import blueMenPedestal from "@/imports/Photography/Commercial/blue-for-men-pedestal.jpg";
+import blueMenSplashLight from "@/imports/Photography/Commercial/blue-for-men-splash-light.jpg";
+import blueMenRosesVertical from "@/imports/Photography/Commercial/blue-for-men-roses-vertical.jpg";
+import blueMenWaterSplash from "@/imports/Photography/Commercial/blue-for-men-water-splash.jpg";
+import blueMenSmokeBox from "@/imports/Photography/Commercial/blue-for-men-smoke-box.jpg";
+
+const CATEGORIES = ["All", "Product", "Commercial", "Portrait", "Documentary", "Still Life"];
 
 interface PhotoItem extends LightboxItem {
   id: number;
@@ -15,6 +21,61 @@ interface PhotoItem extends LightboxItem {
 const PHOTOS: PhotoItem[] = [
   {
     id: 1,
+    title: "Blue for Men — Liquid Splash & Light",
+    cat: "Product",
+    category: "Product",
+    img: blueMenSplashLight,
+    tall: false,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description: "High-speed water splash capture highlighting precision rim lighting, crisp droplet kinetics, and crystal glass reflections.",
+  },
+  {
+    id: 2,
+    title: "Blue for Men — Midnight Botanical",
+    cat: "Product",
+    category: "Product",
+    img: blueMenRosesVertical,
+    tall: true,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description: "Vertical editorial flacon study with midnight backdrop, aqua rose floral accents, and pristine mirrored surface reflections.",
+  },
+  {
+    id: 3,
+    title: "Blue for Men — Kinetic Aqua Crown",
+    cat: "Product",
+    category: "Product",
+    img: blueMenWaterSplash,
+    tall: true,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description: "Dynamic fluid crown sculpted around luxury cologne packaging with rising ambient smoke trails.",
+  },
+  {
+    id: 4,
+    title: "Blue for Men — Atmospheric Haze",
+    cat: "Product",
+    category: "Product",
+    img: blueMenSmokeBox,
+    tall: false,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description: "Commercial still blending high-contrast black backdrop, liquid splash dynamics, and swirling atmospheric mist.",
+  },
+  {
+    id: 5,
+    title: "Blue for Men — Studio Pedestal",
+    cat: "Product",
+    category: "Product",
+    img: blueMenPedestal,
+    tall: false,
+    client: "Blue for Men Fragrance",
+    year: "2024",
+    description: "Minimalist pedestal showcase highlighting the architectural flacon silhouette.",
+  },
+  {
+    id: 6,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -24,7 +85,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 2,
+    id: 7,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -35,7 +96,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 3,
+    id: 8,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -45,7 +106,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 4,
+    id: 9,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -56,7 +117,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 5,
+    id: 10,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -67,7 +128,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 6,
+    id: 11,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -78,7 +139,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 7,
+    id: 12,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -88,7 +149,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 8,
+    id: 13,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
@@ -248,28 +309,49 @@ export function Photography() {
           >
             {/* Category tabs */}
             <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((c) => (
-                <motion.button
-                  key={c}
-                  onClick={() => setActiveCategory(c)}
-                  whileTap={{ scale: 0.95 }}
-                  style={{
-                    fontFamily: "'DM Mono',monospace",
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    padding: "0.5rem 1.15rem",
-                    border: `1px solid ${activeCategory === c ? GOLD : BORDER}`,
-                    background: activeCategory === c ? GOLD : "transparent",
-                    color: activeCategory === c ? WHITE : MUTED,
-                    cursor: "pointer",
-                    borderRadius: "3px",
-                    transition: "all 0.2s",
-                  }}
-                >
-                  {c}
-                </motion.button>
-              ))}
+              {CATEGORIES.map((c) => {
+                const count = c === "All" ? PHOTOS.length : PHOTOS.filter((p) => p.cat === c).length;
+                const isSelected = activeCategory === c;
+                return (
+                  <motion.button
+                    key={c}
+                    onClick={() => setActiveCategory(c)}
+                    whileTap={{ scale: 0.96 }}
+                    style={{
+                      fontFamily: "'DM Mono',monospace",
+                      fontSize: "0.68rem",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      padding: "0.5rem 1.15rem",
+                      border: `1px solid ${isSelected ? GOLD : BORDER}`,
+                      background: isSelected ? GOLD : SURFACE,
+                      color: isSelected ? WHITE : DARK,
+                      cursor: "pointer",
+                      borderRadius: "4px",
+                      transition: "all 0.2s",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.45rem",
+                      fontWeight: isSelected ? 600 : 400,
+                    }}
+                  >
+                    <span>{c}</span>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.58rem",
+                        padding: "1px 6px",
+                        borderRadius: "10px",
+                        background: isSelected ? "rgba(0,0,0,0.22)" : "rgba(200,165,74,0.12)",
+                        color: isSelected ? WHITE : GOLD,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {count}
+                    </span>
+                  </motion.button>
+                );
+              })}
             </div>
 
             {/* Keyword Search Input */}
@@ -501,12 +583,13 @@ export function Photography() {
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { title: "Commercial", desc: "Product, lifestyle, and brand photography for marketing and advertising." },
+              { title: "Product", desc: "Studio-grade cosmetic, fragrance, and e-commerce visuals with splash dynamics and rim lighting." },
+              { title: "Commercial", desc: "Brand lifestyle and advertising photography engineered to build customer trust and elevate campaigns." },
               { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
               { title: "Documentary", desc: "Event and editorial coverage that captures real moments authentically." },
-              { title: "Still Life", desc: "Precision product and object photography for e-commerce and print." },
+              { title: "Still Life", desc: "Precision product and object photography for luxury catalogues and print." },
             ].map(({ title, desc }, i) => (
               <FadeUp key={title} delay={i * 0.1}>
                 <div style={{ borderTop: `2px solid ${GOLD}`, paddingTop: "1.25rem" }}>
