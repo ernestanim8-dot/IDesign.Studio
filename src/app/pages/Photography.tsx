@@ -4,22 +4,44 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
 
-import blueMenPedestal from "@/imports/Photography/Commercial/blue-for-men-pedestal.jpg";
-import blueMenSplashLight from "@/imports/Photography/Commercial/blue-for-men-splash-light.jpg";
-import blueMenRosesVertical from "@/imports/Photography/Commercial/blue-for-men-roses-vertical.jpg";
-import blueMenWaterSplash from "@/imports/Photography/Commercial/blue-for-men-water-splash.jpg";
-import blueMenSmokeBox from "@/imports/Photography/Commercial/blue-for-men-smoke-box.jpg";
+import blueMenPedestal from "@/imports/Photography/Commercial/Blue for men/blue-for-men-pedestal.jpg";
+import blueMenSplashLight from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
+import blueMenRosesVertical from "@/imports/Photography/Commercial/Blue for men/blue-for-men-roses-vertical.jpg";
+import blueMenWaterSplash from "@/imports/Photography/Commercial/Blue for men/blue-for-men-water-splash.jpg";
+import blueMenSmokeBox from "@/imports/Photography/Commercial/Blue for men/blue-for-men-smoke-box.jpg";
 
-const CATEGORIES = ["All", "Product", "Commercial", "Portrait", "Documentary", "Still Life"];
+import pomadeImg1 from "@/imports/Photography/Commercial/Pomade/IMG_0063.jpg";
+import pomadeImg2 from "@/imports/Photography/Commercial/Pomade/IMG_0068.jpg";
 
-/* ─── Gallery of all Blue for Men images ─────────────────────────────── */
+import rightGuardImg1 from "@/imports/Photography/Commercial/Right Guard/IMG_0075.jpg";
+import rightGuardImg2 from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
+import rightGuardImg3 from "@/imports/Photography/Commercial/Right Guard/IMG_0084.jpg";
+import rightGuardImg4 from "@/imports/Photography/Commercial/Right Guard/IMG_0112.jpg";
+import rightGuardImg5 from "@/imports/Photography/Commercial/Right Guard/IMG_0114.jpg";
+
+import watchImg1 from "@/imports/Photography/Commercial/Watch/IMG_0045.jpg";
+import watchImg2 from "@/imports/Photography/Commercial/Watch/IMG_0047.jpg";
+
+import frostyBiteImg1 from "@/imports/Photography/Food/Frosty Bite/IMG_0006.jpg";
+import frostyBiteImg2 from "@/imports/Photography/Food/Frosty Bite/IMG_9978.jpg";
+import frostyBiteImg3 from "@/imports/Photography/Food/Frosty Bite/IMG_9982.jpg";
+import frostyBiteImg4 from "@/imports/Photography/Food/Frosty Bite/IMG_9985.jpg";
+import frostyBiteImg5 from "@/imports/Photography/Food/Frosty Bite/IMG_9986.jpg";
+import frostyBiteImg6 from "@/imports/Photography/Food/Frosty Bite/IMG_9996.jpg";
+
+import waakyeImg1 from "@/imports/Photography/Food/Waakye/IMG_0036.jpg";
+import waakyeImg2 from "@/imports/Photography/Food/Waakye/IMG_0038.jpg";
+
+const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Documentary", "Still Life"];
+
+/* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
 const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
   {
     img: blueMenSplashLight,
     title: "Blue for Men — Liquid Splash & Light",
     category: "Product",
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description:
       "High-speed water splash capture highlighting precision rim lighting, crisp droplet kinetics, and crystal glass reflections.",
   },
@@ -28,7 +50,7 @@ const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
     title: "Blue for Men — Midnight Botanical",
     category: "Product",
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description:
       "Vertical editorial flacon study with midnight backdrop, aqua rose floral accents, and pristine mirrored surface reflections.",
   },
@@ -37,7 +59,7 @@ const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
     title: "Blue for Men — Kinetic Aqua Crown",
     category: "Product",
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description:
       "Dynamic fluid crown sculpted around luxury cologne packaging with rising ambient smoke trails.",
   },
@@ -46,7 +68,7 @@ const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
     title: "Blue for Men — Atmospheric Haze",
     category: "Product",
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description:
       "Commercial still blending high-contrast black backdrop, liquid splash dynamics, and swirling atmospheric mist.",
   },
@@ -55,8 +77,181 @@ const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
     title: "Blue for Men — Studio Pedestal",
     category: "Product",
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description: "Minimalist pedestal showcase highlighting the architectural flacon silhouette.",
+  },
+];
+
+/* ─── Gallery 2: Right Guard ───────────────────────────────────────── */
+const RIGHT_GUARD_GALLERY: LightboxItem[] = [
+  {
+    img: rightGuardImg2,
+    title: "Right Guard — Kinetic Water Crown",
+    category: "Product",
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "High-speed fluid dynamics sculpted around the aerosol canister with crystal droplet kinetics and precision studio lighting.",
+  },
+  {
+    img: rightGuardImg3,
+    title: "Right Guard — Liquid Splash Impact",
+    category: "Product",
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "Dynamic water splash impact capturing suspended droplets and high-energy brand motion.",
+  },
+  {
+    img: rightGuardImg1,
+    title: "Right Guard — Wide Dynamic Splash",
+    category: "Product",
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "Wide commercial composition featuring lateral splash waves and sleek studio backdrop reflections.",
+  },
+  {
+    img: rightGuardImg4,
+    title: "Right Guard — Studio Still & Droplet Texture",
+    category: "Product",
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "Crisp studio portrait highlighting fine moisture beading across the matte aerosol canister and chrome nozzle.",
+  },
+  {
+    img: rightGuardImg5,
+    title: "Right Guard — Backlit Atmospheric Mist",
+    category: "Product",
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "Dramatic directional lighting accentuating translucent water sheets and an athletic atmospheric aura.",
+  },
+];
+
+/* ─── Gallery 3: Artisanal Pomade ──────────────────────────────────── */
+const POMADE_GALLERY: LightboxItem[] = [
+  {
+    img: pomadeImg1,
+    title: "Artisanal Pomade — Flacon & Texture Study",
+    category: "Product",
+    client: "Classic Pomade Studio",
+    year: "2026",
+    description:
+      "High-key studio composition highlighting rich pomade formulation, tactile substance textures, and amber jar transparency.",
+  },
+  {
+    img: pomadeImg2,
+    title: "Artisanal Pomade — Packaging & Elevation",
+    category: "Product",
+    client: "Classic Pomade Studio",
+    year: "2026",
+    description:
+      "Dramatic rim lighting emphasizing metallic foil typography, polished lid reflections, and minimalist grooming presentation.",
+  },
+];
+
+/* ─── Gallery 4: Luxury Watch ──────────────────────────────────────── */
+const WATCH_GALLERY: LightboxItem[] = [
+  {
+    img: watchImg2,
+    title: "Chronograph Horizon — Dial & Bevel Macro",
+    category: "Product",
+    client: "Horology Atelier",
+    year: "2026",
+    description:
+      "Vertical macro horology study capturing brushed stainless steel bevels, sapphire crystal reflections, and textured dial indices.",
+  },
+  {
+    img: watchImg1,
+    title: "Chronograph Horizon — Horizon Profile & Leather",
+    category: "Product",
+    client: "Horology Atelier",
+    year: "2026",
+    description:
+      "Angled macro perspective showcasing case contour architecture, knurled crown details, and hand-stitched leather strap grain.",
+  },
+];
+
+/* ─── Gallery 5: Frosty Bite (Food) ────────────────────────────────── */
+const FROSTY_BITE_GALLERY: LightboxItem[] = [
+  {
+    img: frostyBiteImg1,
+    title: "Frosty Bite — Waffle & Gelato Tower",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Decadent multi-layered sundae composition featuring velvety vanilla swirls, warm chocolate drizzle, and crisp waffle crisps.",
+  },
+  {
+    img: frostyBiteImg5,
+    title: "Frosty Bite — Confectionery Spread",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Warm, inviting tabletop overhead showcase highlighting the full dessert lineup with delicate sugar dusting and vibrant garnishes.",
+  },
+  {
+    img: frostyBiteImg3,
+    title: "Frosty Bite — Strawberry Drizzle Sundae",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Mouthwatering dessert presentation with fresh berry coulis, whipped cream swirls, and crisp wafer straws.",
+  },
+  {
+    img: frostyBiteImg4,
+    title: "Frosty Bite — Handcrafted Waffle Cone",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Sensory food portrait capturing a freshly baked waffle cone cradling smooth, velvety artisan gelato.",
+  },
+  {
+    img: frostyBiteImg2,
+    title: "Frosty Bite — Artisanal Chocolate Ribbon",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Close-up culinary study highlighting creamy scoop consistency and rich molten dark chocolate drizzle.",
+  },
+  {
+    img: frostyBiteImg6,
+    title: "Frosty Bite — Signature Gelato Cup",
+    category: "Food",
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "Individual serving presentation adorned with roasted nut toppings and decadent caramel swirl.",
+  },
+];
+
+/* ─── Gallery 6: The Waakye Pot (Food) ─────────────────────────────── */
+const WAAKYE_GALLERY: LightboxItem[] = [
+  {
+    img: waakyeImg2,
+    title: "The Waakye Pot — Banana Leaf Heritage",
+    category: "Food",
+    client: "The Waakye Pot Kitchen",
+    year: "2026",
+    description:
+      "Iconic Ghanaian culinary presentation served in traditional plantain leaves with aromatic shito, tender boiled egg, spaghetti, and seasoned proteins.",
+  },
+  {
+    img: waakyeImg1,
+    title: "The Waakye Pot — Feast Table Spread",
+    category: "Food",
+    client: "The Waakye Pot Kitchen",
+    year: "2026",
+    description:
+      "Editorial culinary table setting highlighting golden fried plantains, rich tomato stew accompaniments, and fragrant sorghum-steeped rice and beans.",
   },
 ];
 
@@ -66,29 +261,109 @@ interface PhotoItem extends LightboxItem {
   cat: string;
   /** If set, clicking opens the named gallery in the lightbox */
   gallery?: string;
+  galleryItems?: LightboxItem[];
   /** Total images in gallery (shown as badge) */
   galleryCount?: number;
 }
 
 const PHOTOS: PhotoItem[] = [
-  /* ── Blue for Men — grouped ───────────────────── */
+  /* ── Grouped Campaigns: Product ─────────────────── */
   {
     id: 1,
     title: "Blue for Men — Fragrance Campaign",
     cat: "Product",
     category: "Product",
-    img: blueMenSplashLight,   // cover photo shown on the card
+    img: blueMenSplashLight,
     tall: true,
     client: "Blue for Men Fragrance",
-    year: "2024",
+    year: "2026",
     description:
       "A 5-image commercial product campaign featuring liquid-splash dynamics, editorial botanicals, atmospheric haze, and studio pedestal showcases.",
     gallery: "blueformen",
+    galleryItems: BLUE_FOR_MEN_GALLERY,
     galleryCount: 5,
   },
-  /* ── Other portfolio work ─────────────────────── */
+  {
+    id: 2,
+    title: "Right Guard — High-Performance Commercial",
+    cat: "Product",
+    category: "Product",
+    img: rightGuardImg2,
+    tall: true,
+    client: "Right Guard Sport",
+    year: "2026",
+    description:
+      "A 5-image high-energy commercial campaign featuring dynamic liquid splash crowns, atmospheric mist, and studio aerosol studies.",
+    gallery: "rightguard",
+    galleryItems: RIGHT_GUARD_GALLERY,
+    galleryCount: 5,
+  },
+  {
+    id: 3,
+    title: "Chronograph Horizon — Luxury Timepiece",
+    cat: "Product",
+    category: "Product",
+    img: watchImg2,
+    tall: true,
+    client: "Horology Atelier",
+    year: "2026",
+    description:
+      "Precision macro horology study highlighting brushed steel bevels, sapphire crystal reflections, and textured dial indices.",
+    gallery: "watch",
+    galleryItems: WATCH_GALLERY,
+    galleryCount: 2,
+  },
+  {
+    id: 4,
+    title: "Artisanal Pomade — Grooming Collection",
+    cat: "Product",
+    category: "Product",
+    img: pomadeImg1,
+    tall: false,
+    client: "Classic Pomade Studio",
+    year: "2026",
+    description:
+      "Studio still-life and packaging study for premium styling pomade, focusing on reflective lid finish, amber jar transparency, and tactile substance textures.",
+    gallery: "pomade",
+    galleryItems: POMADE_GALLERY,
+    galleryCount: 2,
+  },
+
+  /* ── Grouped Campaigns: Food ────────────────────── */
+  {
+    id: 5,
+    title: "Frosty Bite — Gourmet Dessert & Gelato",
+    cat: "Food",
+    category: "Food",
+    img: frostyBiteImg1,
+    tall: true,
+    client: "Frosty Bite Creamery",
+    year: "2026",
+    description:
+      "A 6-image vibrant culinary series capturing artisanal ice cream creations, decadent toppings, rich chocolate drizzles, and fresh waffle textures.",
+    gallery: "frostybite",
+    galleryItems: FROSTY_BITE_GALLERY,
+    galleryCount: 6,
+  },
   {
     id: 6,
+    title: "The Waakye Pot — Heritage Culinary Editorial",
+    cat: "Food",
+    category: "Food",
+    img: waakyeImg2,
+    tall: false,
+    client: "The Waakye Pot Kitchen",
+    year: "2026",
+    description:
+      "Rich, authentic culinary editorial capturing the iconic Ghanaian delicacy served in traditional banana leaves with aromatic shito, golden plantains, and rich stews.",
+    gallery: "waakye",
+    galleryItems: WAAKYE_GALLERY,
+    galleryCount: 2,
+  },
+
+  /* ── Other Portfolio Works ──────────────────────── */
+  {
+    id: 7,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -98,7 +373,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 7,
+    id: 8,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -109,7 +384,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 8,
+    id: 9,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -119,7 +394,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 9,
+    id: 10,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -130,7 +405,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 10,
+    id: 11,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -141,7 +416,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 11,
+    id: 12,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -152,7 +427,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 12,
+    id: 13,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -162,7 +437,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 13,
+    id: 14,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
@@ -174,10 +449,9 @@ const PHOTOS: PhotoItem[] = [
   },
 ];
 
-/** Total count for category badges — counts the gallery as 5 individual shots */
+/** Total count for category badges — counts grouped galleries as their individual shot count */
 function getCategoryCount(cat: string) {
   if (cat === "All") {
-    // sum: grouped entries contribute galleryCount, singles contribute 1
     return PHOTOS.reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
   }
   return PHOTOS.filter((p) => p.cat === cat).reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
@@ -228,12 +502,19 @@ export function Photography() {
     return PHOTOS.filter((p) => {
       const matchesCategory = activeCategory === "All" || p.cat === activeCategory;
       const q = searchQuery.trim().toLowerCase();
+      const matchesNestedGallery = p.galleryItems?.some(
+        (item) =>
+          item.title.toLowerCase().includes(q) ||
+          (item.description && item.description.toLowerCase().includes(q)) ||
+          (item.client && item.client.toLowerCase().includes(q))
+      );
       const matchesSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
         p.cat.toLowerCase().includes(q) ||
         (p.client && p.client.toLowerCase().includes(q)) ||
-        (p.description && p.description.toLowerCase().includes(q));
+        (p.description && p.description.toLowerCase().includes(q)) ||
+        Boolean(matchesNestedGallery);
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -246,12 +527,12 @@ export function Photography() {
   );
 
   function openCard(p: PhotoItem, indexInFiltered: number) {
-    if (p.gallery === "blueformen") {
-      setLightboxItems(BLUE_FOR_MEN_GALLERY);
+    if (p.galleryItems && p.galleryItems.length > 0) {
+      setLightboxItems(p.galleryItems);
       setLightboxIndex(0);
     } else {
       // For non-grouped photos, show the filtered list (excluding gallery entries)
-      const singlePhotos = filteredPhotos.filter((x) => !x.gallery);
+      const singlePhotos = filteredPhotos.filter((x) => !x.galleryItems);
       const singleIndex = singlePhotos.findIndex((x) => x.id === p.id);
       setLightboxItems(singlePhotos);
       setLightboxIndex(singleIndex >= 0 ? singleIndex : 0);
@@ -685,9 +966,10 @@ export function Photography() {
               </h2>
             </div>
           </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { title: "Product", desc: "Studio-grade cosmetic, fragrance, and e-commerce visuals with splash dynamics and rim lighting." },
+              { title: "Food & Culinary", desc: "Sensory gastronomy, dessert styling, and restaurant editorial visuals that stimulate appetite and brand distinction." },
               { title: "Commercial", desc: "Brand lifestyle and advertising photography engineered to build customer trust and elevate campaigns." },
               { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
               { title: "Documentary", desc: "Event and editorial coverage that captures real moments authentically." },

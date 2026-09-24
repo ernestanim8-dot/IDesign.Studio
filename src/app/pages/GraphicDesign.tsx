@@ -74,7 +74,15 @@ interface DesignProject extends LightboxItem {
     | "swgc";
 }
 
-const DISCIPLINES = ["All", "Branding", "Typography", "Packaging", "Advertising"];
+const CATEGORIES = [
+  "All",
+  "Branding & Identity",
+  "Advertising & Flyers",
+  "Banners & Signage",
+  "Packaging & Labels",
+  "Typography",
+];
+const DISCIPLINES = CATEGORIES;
 
 const BRANDING_GALLERY: LightboxItem[] = [
   {
@@ -482,7 +490,7 @@ const PROJECTS: DesignProject[] = [
     year: "2026",
     img: callCardFront,
     wide: true,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "idesign",
     category: "Branding & Identity",
     description:
@@ -507,8 +515,8 @@ const PROJECTS: DesignProject[] = [
     year: "2023",
     img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1400&h=1200&fit=crop&auto=format",
     wide: false,
-    discipline: "Packaging",
-    category: "Packaging",
+    discipline: "Packaging & Labels",
+    category: "Packaging & Labels",
     description:
       "Sustainable embossed carton packaging with foil accents designed for an artisanal skincare line.",
   },
@@ -519,9 +527,9 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: stickerFood,
     wide: true,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "foodsticker",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "Food-focused sticker advertising visuals created for bold promotional impact. Click to view the Food Sticker gallery.",
   },
@@ -532,9 +540,9 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: dutchBraids,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "dutchbraids",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "A beauty-focused advertising visual for Dutch Braids. Click to view the Dutch Braids gallery.",
   },
@@ -545,9 +553,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: glamourBanner,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Banners & Signage",
     gallery: "glamour",
-    category: "Advertising Design",
+    category: "Banners & Signage",
     description:
       "A beauty advertising campaign with banners, social slides, and training promotions. Click to view the 3mma's Glamour gallery.",
   },
@@ -558,9 +566,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: adomBeauty,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "adombeauty",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "A beauty advertising visual for Adom Beauty. Click to view the Adom Beauty gallery.",
   },
@@ -571,9 +579,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: fashion,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "fashion",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "A fashion-focused advertising visual for a stylish promotional campaign. Click to view the Fashion gallery.",
   },
@@ -584,9 +592,9 @@ const PROJECTS: DesignProject[] = [
     year: "2022",
     img: shirt,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "idesign",
-    category: "Brand Guidelines",
+    category: "Branding & Identity",
     description:
       "Logo systems, regional marks, and visual assets packaged for a consistent brand presence.",
   },
@@ -598,7 +606,7 @@ const PROJECTS: DesignProject[] = [
     img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&h=1200&fit=crop&auto=format",
     wide: false,
     discipline: "Typography",
-    category: "Poster & Print",
+    category: "Typography",
     description:
       "Silk-screened limited edition promotional poster set for international light and contemporary art biennial.",
   },
@@ -609,9 +617,9 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: funeralTShirt,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "funeral",
-    category: "Funeral Branding",
+    category: "Branding & Identity",
     description:
       "A respectful memorial branding set featuring custom apparel designs. Click to view the funeral brand gallery.",
   },
@@ -622,7 +630,7 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: oneVoice,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "onevoice",
     category: "Branding & Identity",
     description:
@@ -635,7 +643,7 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: speakLord,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "speaklord",
     category: "Branding & Identity",
     description:
@@ -648,9 +656,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: janeNails,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "nailsbyjane",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "Vibrant nail art and beauty advertising visuals. Click to view the Nails by Jane gallery.",
   },
@@ -661,9 +669,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: iceCream,
     wide: false,
-    discipline: "Packaging",
+    discipline: "Packaging & Labels",
     gallery: "icecream",
-    category: "Packaging",
+    category: "Packaging & Labels",
     description:
       "Delicious artisanal ice cream packaging and promotional branding. Click to view the gallery.",
   },
@@ -674,9 +682,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: effesCosmetics,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "effes",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "Elegantly crafted beauty cosmetics promotion and branding visual. Click to view the gallery.",
   },
@@ -687,9 +695,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: owusuwaaLuxe,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "owusuwaa",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "Sophisticated luxury hair and beauty brand advertising. Click to view the gallery.",
   },
@@ -700,9 +708,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: godHaveMercy,
     wide: true,
-    discipline: "Advertising",
+    discipline: "Banners & Signage",
     gallery: "godhavemercy",
-    category: "Advertising Design",
+    category: "Banners & Signage",
     description:
       "Appetizing outdoor commercial banner and promotional design. Click to view the gallery.",
   },
@@ -713,7 +721,7 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: rbWedding,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "wedding",
     category: "Branding & Identity",
     description:
@@ -726,9 +734,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: tinaBundle,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "tinabundle",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "High-converting promotional marketing flyer for an exclusive bundle offer. Click to view the gallery.",
   },
@@ -739,9 +747,9 @@ const PROJECTS: DesignProject[] = [
     year: "2025",
     img: openSoon,
     wide: false,
-    discipline: "Advertising",
+    discipline: "Advertising & Flyers",
     gallery: "opensoon",
-    category: "Advertising Design",
+    category: "Advertising & Flyers",
     description:
       "Attention-commanding launch banner and teaser artwork. Click to view the gallery.",
   },
@@ -752,7 +760,7 @@ const PROJECTS: DesignProject[] = [
     year: "2024",
     img: swgcMockup,
     wide: false,
-    discipline: "Branding",
+    discipline: "Branding & Identity",
     gallery: "swgc",
     category: "Branding & Identity",
     description:
@@ -794,25 +802,25 @@ export function GraphicDesign() {
   }, []);
 
   const [hovered, setHovered] = useState<number | null>(null);
-  const [activeDiscipline, setActiveDiscipline] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxItems, setLightboxItems] = useState<LightboxItem[]>(PROJECTS);
 
   const filteredProjects = useMemo(() => {
     return PROJECTS.filter((p) => {
-      const matchesDiscipline = activeDiscipline === "All" || p.discipline === activeDiscipline;
+      const matchesCategory = activeCategory === "All" || p.category === activeCategory;
       const query = searchQuery.trim().toLowerCase();
-      if (!query) return matchesDiscipline;
+      if (!query) return matchesCategory;
       const matchesQuery =
         p.title.toLowerCase().includes(query) ||
         p.client.toLowerCase().includes(query) ||
         (p.category && p.category.toLowerCase().includes(query)) ||
         (p.description && p.description.toLowerCase().includes(query)) ||
         p.discipline.toLowerCase().includes(query);
-      return matchesDiscipline && matchesQuery;
+      return matchesCategory && matchesQuery;
     });
-  }, [activeDiscipline, searchQuery]);
+  }, [activeCategory, searchQuery]);
 
   return (
     <>
@@ -1010,23 +1018,23 @@ export function GraphicDesign() {
           </div>
         </div>
 
-        {/* Discipline filter chips */}
+        {/* Category filter chips */}
         <div className="flex flex-wrap justify-center gap-2">
-          {DISCIPLINES.map((d) => {
-            const count = d === "All" ? PROJECTS.length : PROJECTS.filter((p) => p.discipline === d).length;
+          {CATEGORIES.map((cat) => {
+            const count = cat === "All" ? PROJECTS.length : PROJECTS.filter((p) => p.category === cat).length;
             return (
               <button
-                key={d}
-                onClick={() => setActiveDiscipline(d)}
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
                 style={{
                   fontFamily: "'DM Mono',monospace",
                   fontSize: "0.65rem",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   padding: "0.5rem 1.1rem",
-                  border: `1px solid ${activeDiscipline === d ? GOLD : BORDER}`,
-                  background: activeDiscipline === d ? GOLD : "transparent",
-                  color: activeDiscipline === d ? WHITE : MUTED,
+                  border: `1px solid ${activeCategory === cat ? GOLD : BORDER}`,
+                  background: activeCategory === cat ? GOLD : "transparent",
+                  color: activeCategory === cat ? WHITE : MUTED,
                   cursor: "pointer",
                   borderRadius: "3px",
                   transition: "all 0.2s",
@@ -1035,14 +1043,14 @@ export function GraphicDesign() {
                   gap: "0.4rem",
                 }}
               >
-                <span>{d}</span>
+                <span>{cat}</span>
                 <span
                   style={{
                     opacity: 0.8,
                     fontSize: "0.6rem",
                     padding: "0.1rem 0.35rem",
                     borderRadius: "10px",
-                    background: activeDiscipline === d ? "rgba(0,0,0,0.18)" : "rgba(13,12,9,0.06)",
+                    background: activeCategory === cat ? "rgba(0,0,0,0.18)" : "rgba(13,12,9,0.06)",
                   }}
                 >
                   {count}
@@ -1065,11 +1073,11 @@ export function GraphicDesign() {
           >
             Showing {filteredProjects.length} of {PROJECTS.length} showcase projects
           </span>
-          {(searchQuery || activeDiscipline !== "All") && (
+          {(searchQuery || activeCategory !== "All") && (
             <button
               onClick={() => {
                 setSearchQuery("");
-                setActiveDiscipline("All");
+                setActiveCategory("All");
               }}
               style={{
                 marginLeft: "0.8rem",
@@ -1104,12 +1112,12 @@ export function GraphicDesign() {
               No showcase projects found
             </p>
             <p style={{ fontFamily: "'Work Sans',sans-serif", fontSize: "0.875rem", color: MUTED, marginBottom: "1.5rem" }}>
-              No matches found for &quot;{searchQuery}&quot; under &quot;{activeDiscipline}&quot;. Try adjusting your keywords.
+              No matches found for &quot;{searchQuery}&quot; under &quot;{activeCategory}&quot;. Try adjusting your keywords.
             </p>
             <button
               onClick={() => {
                 setSearchQuery("");
-                setActiveDiscipline("All");
+                setActiveCategory("All");
               }}
               style={{
                 fontFamily: "'Work Sans',sans-serif",
