@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
-        injectRegister: 'auto',
+        injectRegister: false,
         strategies: 'generateSW',
         manifest: {
           name: 'IDesign.Studio',
@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,svg,woff2}'],
+          globPatterns: ['**/*.{css,html,ico,svg,woff2}', 'assets/index-*.js'],
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,

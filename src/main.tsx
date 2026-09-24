@@ -9,17 +9,19 @@ window.addEventListener('vite:preloadError', () => {
   window.location.reload();
 });
 
-// Register PWA Service Worker for offline capability & automatic updates
-const updateSW = registerSW({
-  immediate: true,
-  onNeedRefresh() {
-    console.log('[IDesign.Studio PWA] New version detected, updating...');
-    updateSW(true);
-  },
-  onOfflineReady() {
-    console.log('[IDesign.Studio PWA] Offline caching active');
-  },
-})
+// Let first paint and route assets win the network before offline caching begins.
+window.addEventListener("load", () => {
+  const updateSW = registerSW({
+    immediate: true,
+    onNeedRefresh() {
+      console.log("[IDesign.Studio PWA] New version detected, updating...");
+      updateSW(true);
+    },
+    onOfflineReady() {
+      console.log("[IDesign.Studio PWA] Offline caching active");
+    },
+  });
+});
 
 // Dynamically set theme-color for supported browsers without triggering static HTML compatibility warnings
 if (typeof document !== 'undefined') {

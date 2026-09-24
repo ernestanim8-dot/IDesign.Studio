@@ -1,10 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { Layout } from "./Layout";
 import { Home } from "./pages/Home";
-import { GraphicDesign } from "./pages/GraphicDesign";
-import { Photography } from "./pages/Photography";
-import { CreativeConcepts } from "./pages/CreativeConcepts";
-import { Contact } from "./pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -17,19 +13,31 @@ export const router = createBrowserRouter([
       },
       {
         path: "graphic-design",
-        Component: GraphicDesign,
+        lazy: async () => {
+          const { GraphicDesign } = await import("./pages/GraphicDesign");
+          return { Component: GraphicDesign };
+        },
       },
       {
         path: "photography",
-        Component: Photography,
+        lazy: async () => {
+          const { Photography } = await import("./pages/Photography");
+          return { Component: Photography };
+        },
       },
       {
         path: "creative-concepts",
-        Component: CreativeConcepts,
+        lazy: async () => {
+          const { CreativeConcepts } = await import("./pages/CreativeConcepts");
+          return { Component: CreativeConcepts };
+        },
       },
       {
         path: "contact",
-        Component: Contact,
+        lazy: async () => {
+          const { Contact } = await import("./pages/Contact");
+          return { Component: Contact };
+        },
       },
       {
         path: "admin",
