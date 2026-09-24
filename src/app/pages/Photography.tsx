@@ -118,6 +118,38 @@ import gradImg08 from "@/imports/Photography/Events/graduation/IMG_5606.jpg";
 import gradImg09 from "@/imports/Photography/Events/graduation/IMG_5630.jpg";
 import gradImg10 from "@/imports/Photography/Events/graduation/IMG_5643.jpg";
 
+// Event Campaign: The Graduate — GCTU Class of 2025
+import gctu01 from "@/imports/Photography/Events/graduation-2025/gctu-2025-01-family-pride.jpg";
+import gctu02 from "@/imports/Photography/Events/graduation-2025/gctu-2025-02-cap-and-scroll.jpg";
+import gctu03 from "@/imports/Photography/Events/graduation-2025/gctu-2025-03-gown-portrait.jpg";
+import gctu04 from "@/imports/Photography/Events/graduation-2025/gctu-2025-04-family-celebration.jpg";
+import gctu05 from "@/imports/Photography/Events/graduation-2025/gctu-2025-05-mother-and-graduate.jpg";
+import gctu06 from "@/imports/Photography/Events/graduation-2025/gctu-2025-06-joyful-moment.jpg";
+import gctu07 from "@/imports/Photography/Events/graduation-2025/gctu-2025-07-certificate-display.jpg";
+import gctu08 from "@/imports/Photography/Events/graduation-2025/gctu-2025-08-kente-stole.jpg";
+import gctu09 from "@/imports/Photography/Events/graduation-2025/gctu-2025-09-proud-graduate.jpg";
+import gctu10 from "@/imports/Photography/Events/graduation-2025/gctu-2025-10-group-honor.jpg";
+import gctu11 from "@/imports/Photography/Events/graduation-2025/gctu-2025-11-milestone-memory.jpg";
+import gctu12 from "@/imports/Photography/Events/graduation-2025/gctu-2025-12-bsc-accounting.jpg";
+import gctu13 from "@/imports/Photography/Events/graduation-2025/gctu-2025-13-triumph-pose.jpg";
+
+// Event Campaign: The Matriculants — Ceremony & Celebration 2025
+import matriculation01 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-01-radiant-welcome.jpg";
+import matriculation02 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-02-academic-grace.jpg";
+import matriculation03 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-03-campus-poise.jpg";
+import matriculation04 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-04-kente-dignity.jpg";
+import matriculation05 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-05-scholar-aspirations.jpg";
+import matriculation06 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-06-ceremonial-stride.jpg";
+import matriculation07 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-07-induction-pride.jpg";
+import matriculation08 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-08-cap-salute.jpg";
+import matriculation09 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-09-regalia-and-sequins.jpg";
+import matriculation10 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-10-sash-display.jpg";
+import matriculation11 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-11-triumphant-smile.jpg";
+import matriculation12 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-12-golden-sunlight.jpg";
+import matriculation13 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-13-freshman-horizon.jpg";
+import matriculation14 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-14-heritage-honor.jpg";
+import matriculation15 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-15-future-leader.jpg";
+
 // Event Campaign 3: Investiture Services
 import investitureImg01 from "@/imports/Photography/Events/Investiture Services/IMG_0419.jpg";
 import investitureImg02 from "@/imports/Photography/Events/Investiture Services/IMG_0423.jpg";
@@ -181,6 +213,14 @@ import urbanChicImg07 from "@/imports/Photography/Portrait/Urban Chic & Sisterho
 import urbanChicImg08 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0906.jpg";
 import urbanChicImg09 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0910.jpg";
 import urbanChicImg10 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0912.jpg";
+
+// Portrait Campaign: Red Velvet Studio — Bold & Fearless
+import redVelvet01 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-01-standing-full.jpg";
+import redVelvet02 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-02-cap-tip.jpg";
+import redVelvet03 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-03-seated-smile.jpg";
+import redVelvet04 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-04-low-angle-pose.jpg";
+import redVelvet05 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-05-boot-sole-drama.jpg";
+import redVelvet06 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-06-reclined-chair.jpg";
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary"];
 
@@ -1129,6 +1169,238 @@ const GRADUATION_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery: GCTU Class of 2025 — Commencement Ceremony ──────────── */
+const GCTU_2025_GALLERY: LightboxItem[] = [
+  {
+    img: gctu01,
+    title: "GCTU 2025 — Family Pride",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Graduate proudly poses with family, cap and gown gleaming, Kente stole draped in cultural honor, certificates raised high.",
+  },
+  {
+    img: gctu02,
+    title: "GCTU 2025 — Cap & Scroll",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "A defining commencement portrait — cap on, scroll in hand, standing at the threshold of a new chapter.",
+  },
+  {
+    img: gctu03,
+    title: "GCTU 2025 — Gown Portrait",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "BSc. Accounting with Computing 2025 — a clean full-length portrait radiating quiet achievement and Kente pride.",
+  },
+  {
+    img: gctu04,
+    title: "GCTU 2025 — Family Celebration",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "An intimate family moment capturing joy, pride, and the shared triumph of a milestone hard-earned together.",
+  },
+  {
+    img: gctu05,
+    title: "GCTU 2025 — Mother & Graduate",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Graduate and mother share a radiant smile, holding the certificate that represents years of sacrifice and love.",
+  },
+  {
+    img: gctu06,
+    title: "GCTU 2025 — Joyful Moment",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Unscripted laughter and pride — the spontaneous joy of a commencement day etched into memory.",
+  },
+  {
+    img: gctu07,
+    title: "GCTU 2025 — Certificate Display",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Certificate and academic sash proudly on display — a symbol of dedication, discipline, and excellence.",
+  },
+  {
+    img: gctu08,
+    title: "GCTU 2025 — Kente Stole",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Close portrait showcasing the vibrant Kente stole — rich cultural identity woven into academic achievement.",
+  },
+  {
+    img: gctu09,
+    title: "GCTU 2025 — Proud Graduate",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Solo editorial portrait — composed, confident, and proud in navy gown and traditional Kente colors.",
+  },
+  {
+    img: gctu10,
+    title: "GCTU 2025 — Group Honor",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "A joyful group celebration — graduates and loved ones sharing the glory of commencement day together.",
+  },
+  {
+    img: gctu11,
+    title: "GCTU 2025 — Milestone Memory",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "A heartfelt milestone portrait preserving the energy and emotion of this once-in-a-lifetime achievement.",
+  },
+  {
+    img: gctu12,
+    title: "GCTU 2025 — BSc. Accounting",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Graduate in full academic regalia with certificate proudly raised — BSc. Accounting with Computing, Class of 2025.",
+  },
+  {
+    img: gctu13,
+    title: "GCTU 2025 — Triumph Pose",
+    category: "Event",
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description: "Final triumphant pose — cap, gown, family, and legacy. The culmination of years of hard work beautifully framed.",
+  },
+];
+
+/* ─── Gallery: The Matriculants — Ceremony & Celebration 2025 ──────────── */
+const MATRICULATION_2025_GALLERY: LightboxItem[] = [
+  {
+    img: matriculation01,
+    title: "Matriculation 2025 — Radiant Welcome",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "An inaugural portrait capturing the proud first steps of an academic journey, draped in navy regalia and traditional Kente matriculation sash.",
+  },
+  {
+    img: matriculation02,
+    title: "Matriculation 2025 — Academic Grace",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Serene and poised on campus grounds, celebrating the official induction into higher learning.",
+  },
+  {
+    img: matriculation03,
+    title: "Matriculation 2025 — Campus Poise",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "A commanding full-length outdoor portrait radiating ambition, cultural pride, and scholarly promise.",
+  },
+  {
+    img: matriculation04,
+    title: "Matriculation 2025 — Kente Dignity",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Holding the mortarboard high, vibrant African wax prints peeking through rich academic robes.",
+  },
+  {
+    img: matriculation05,
+    title: "Matriculation 2025 — Scholar Aspirations",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "A warm and confident expression marking the oath of matriculation and entry into university life.",
+  },
+  {
+    img: matriculation06,
+    title: "Matriculation 2025 — Ceremonial Stride",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Capturing the kinetic spirit and excitement of ceremony day in sunlit natural contrast.",
+  },
+  {
+    img: matriculation07,
+    title: "Matriculation 2025 — Induction Pride",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "A formal editorial portrait commemorating membership in the prestigious Class of 2025.",
+  },
+  {
+    img: matriculation08,
+    title: "Matriculation 2025 — Cap Salute",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "A joyful salute with the mortarboard raised against the open sky, celebrating collegiate beginnings.",
+  },
+  {
+    img: matriculation09,
+    title: "Matriculation 2025 — Regalia & Sequins",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Contemporary fashion meets ceremonial tradition — royal blue sequins paired with custom matriculation stole.",
+  },
+  {
+    img: matriculation10,
+    title: "Matriculation 2025 — Sash Display",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Hands holding the ceremonial matriculation sash wide, showcasing intricate embroidery and Kente weave.",
+  },
+  {
+    img: matriculation11,
+    title: "Matriculation 2025 — Triumphant Smile",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "An exuberant smile radiating warmth and excitement for the semesters and horizons ahead.",
+  },
+  {
+    img: matriculation12,
+    title: "Matriculation 2025 — Golden Sunlight",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Golden hour lighting accentuates the vivid orange patterned dress and deep navy academic gown.",
+  },
+  {
+    img: matriculation13,
+    title: "Matriculation 2025 — Freshman Horizon",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Poised mid-shot highlighting personal flair, traditional hair styling, and the ceremonial stole.",
+  },
+  {
+    img: matriculation14,
+    title: "Matriculation 2025 — Heritage Honor",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "Honoring family, heritage, and the commencement of a transformative university education.",
+  },
+  {
+    img: matriculation15,
+    title: "Matriculation 2025 — Future Leader",
+    category: "Event",
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description: "A definitive closing portrait of confidence and grace — entering the university gates with purpose.",
+  },
+];
+
 /* ─── Gallery 15: The Engineer — Bold & Professional (Commercial) ── */
 const INVESTITURE_SERVICES_GALLERY: LightboxItem[] = [
   investitureImg01, investitureImg02, investitureImg03, investitureImg04, investitureImg05,
@@ -1328,6 +1600,58 @@ const URBAN_CHIC_SISTERHOOD_GALLERY: LightboxItem[] = [
     client: "Urban Chic Editorial",
     year: "2026",
     description: "Candid, affectionate moment celebrating bond, laughter, and authentic warmth between lifelong friends.",
+  },
+];
+
+/* ─── Gallery: Red Velvet Studio — Bold & Fearless ──────────────────── */
+const RED_VELVET_STUDIO_GALLERY: LightboxItem[] = [
+  {
+    img: redVelvet01,
+    title: "Red Velvet Studio — Standing Tall",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Full-length editorial portrait against a vivid crimson backdrop — crisp white dress shirt, slim tie, and dark denim exuding street-meets-formal confidence.",
+  },
+  {
+    img: redVelvet02,
+    title: "Red Velvet Studio — Cap Tip",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Playful cap-tip pose with an upward gaze, capturing effortless attitude and style on a bold red background.",
+  },
+  {
+    img: redVelvet03,
+    title: "Red Velvet Studio — Joyful Grin",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Candid seated portrait with a genuine, warm smile — spontaneous character shining through against the vibrant studio red.",
+  },
+  {
+    img: redVelvet04,
+    title: "Red Velvet Studio — Low Angle Drama",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Dramatic low-angle shot looking up at the subject — bold perspective amplifying presence, energy, and unapologetic confidence.",
+  },
+  {
+    img: redVelvet05,
+    title: "Red Velvet Studio — Boot Sole Statement",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Artistic low-angle composition with boot sole in sharp foreground focus, subject relaxed and smiling in bokeh background — a fashion-forward editorial moment.",
+  },
+  {
+    img: redVelvet06,
+    title: "Red Velvet Studio — Reclined Elegance",
+    category: "Portrait",
+    client: "Studio Portrait Session",
+    year: "2026",
+    description: "Reclined chair pose with commanding gaze toward camera — legs extended, cap tilted, exuding composed and magnetic editorial energy.",
   },
 ];
 
@@ -1591,6 +1915,36 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: INVESTITURE_SERVICES_GALLERY,
     galleryCount: 20,
   },
+  {
+    id: 28,
+    title: "The Graduate — GCTU Class of 2025",
+    cat: "Event",
+    category: "Event",
+    img: gctu01,
+    tall: true,
+    client: "GCTU Graduation 2025",
+    year: "2025",
+    description:
+      "A 13-image commencement celebration editorial capturing proud graduates, family triumphs, academic regalia with vibrant Kente stoles, and milestone achievements for the GCTU Class of 2025.",
+    gallery: "gctu-2025",
+    galleryItems: GCTU_2025_GALLERY,
+    galleryCount: 13,
+  },
+  {
+    id: 29,
+    title: "The Matriculants — Ceremony & Celebration",
+    cat: "Event",
+    category: "Event",
+    img: matriculation01,
+    tall: true,
+    client: "Matriculation Ceremony 2025",
+    year: "2025",
+    description:
+      "A 15-image ceremonial event editorial documenting university induction, celebratory portraits, vibrant traditional Kente sashes, and freshman milestones for the Class of 2025.",
+    gallery: "matriculation-2025",
+    galleryItems: MATRICULATION_2025_GALLERY,
+    galleryCount: 15,
+  },
 
   /* ── Grouped Campaigns: Documentary ─────────────────── */
   {
@@ -1624,6 +1978,22 @@ const PHOTOS: PhotoItem[] = [
     gallery: "engineer",
     galleryItems: ENGINEER_GALLERY,
     galleryCount: 3,
+  },
+
+  {
+    id: 27,
+    title: "Red Velvet Studio — Bold & Fearless",
+    cat: "Portrait",
+    category: "Portrait",
+    img: redVelvet01,
+    tall: true,
+    client: "Studio Portrait Session",
+    year: "2026",
+    description:
+      "A 6-image studio portrait session bursting with bold crimson energy — same subject, six distinct expressions of confidence, fashion, and fearless personality against a vivid red backdrop.",
+    gallery: "red-velvet-studio",
+    galleryItems: RED_VELVET_STUDIO_GALLERY,
+    galleryCount: 6,
   },
 
 ];
