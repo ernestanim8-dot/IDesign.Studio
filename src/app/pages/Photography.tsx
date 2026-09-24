@@ -106,6 +106,18 @@ import exhibitImg24 from "@/imports/Photography/Events/exhibition/IMG-0729.jpg";
 import exhibitImg25 from "@/imports/Photography/Events/exhibition/IMG-0730.jpg";
 import exhibitImg26 from "@/imports/Photography/Events/exhibition/IMG-0781.jpg";
 
+// Event Campaign 2: The Graduate — Milestone Celebration
+import gradImg01 from "@/imports/Photography/Events/graduation/IMG_5524.jpg";
+import gradImg02 from "@/imports/Photography/Events/graduation/IMG_5530.jpg";
+import gradImg03 from "@/imports/Photography/Events/graduation/IMG_5539.jpg";
+import gradImg04 from "@/imports/Photography/Events/graduation/IMG_5552.jpg";
+import gradImg05 from "@/imports/Photography/Events/graduation/IMG_5564.jpg";
+import gradImg06 from "@/imports/Photography/Events/graduation/IMG_5586.jpg";
+import gradImg07 from "@/imports/Photography/Events/graduation/IMG_5590.jpg";
+import gradImg08 from "@/imports/Photography/Events/graduation/IMG_5606.jpg";
+import gradImg09 from "@/imports/Photography/Events/graduation/IMG_5630.jpg";
+import gradImg10 from "@/imports/Photography/Events/graduation/IMG_5643.jpg";
+
 // Documentary Campaign: Ghana Month — Heritage & Cultural Pride
 import ghanaMonthImg01 from "@/imports/Photography/Documentary/Ghana Month/IMG_6339.jpg";
 import ghanaMonthImg02 from "@/imports/Photography/Documentary/Ghana Month/IMG_6374.jpg";
@@ -985,6 +997,90 @@ const GHANA_MONTH_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 14: The Graduate — Milestone Celebration (Event) ──────── */
+const GRADUATION_GALLERY: LightboxItem[] = [
+  {
+    img: gradImg01,
+    title: "The Graduate — Milestone Portraiture",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Celebratory graduation portrait capturing the joy and pride of academic achievement and milestone success.",
+  },
+  {
+    img: gradImg02,
+    title: "The Graduate — Cap & Gown Honor",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Regal academic regalia study highlighted with crisp outdoor studio rim lighting and proud posture.",
+  },
+  {
+    img: gradImg03,
+    title: "The Graduate — Scholarly Poise",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Classic commemorative portrait commemorating years of dedication, discipline, and excellence.",
+  },
+  {
+    img: gradImg04,
+    title: "The Graduate — Joyful Radiance",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Warm, candid smile capturing the unforgettable excitement of commencement day.",
+  },
+  {
+    img: gradImg05,
+    title: "The Graduate — Tassel & Triumph",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Expressive outdoor graduation capture framing the mortarboard tassel and victorious celebration.",
+  },
+  {
+    img: gradImg06,
+    title: "The Graduate — Golden Horizon",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Looking forward to future ambitions with radiant natural backlighting and academic distinction.",
+  },
+  {
+    img: gradImg07,
+    title: "The Graduate — The Degree in Hand",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Proud moment holding the diploma scroll, honoring family heritage and personal accomplishment.",
+  },
+  {
+    img: gradImg08,
+    title: "The Graduate — Confident Ambition",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Empowered, modern editorial portrait reflecting readiness for leadership and professional triumph.",
+  },
+  {
+    img: gradImg09,
+    title: "The Graduate — Festive Jubilation",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "Dynamic outdoor celebration capturing the vibrant energy of friends, family, and graduation day.",
+  },
+  {
+    img: gradImg10,
+    title: "The Graduate — Stepping into the Future",
+    category: "Event",
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description: "An inspiring closing portrait embodying hope, resilience, and the beginning of a remarkable journey.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -1184,10 +1280,25 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: EXHIBITION_GALLERY,
     galleryCount: 26,
   },
+  {
+    id: 13,
+    title: "The Graduate — Milestone Celebration",
+    cat: "Event",
+    category: "Event",
+    img: gradImg01,
+    tall: true,
+    client: "Commencement Honors Commission",
+    year: "2026",
+    description:
+      "A 10-image celebratory event editorial documenting commencement honors, academic regalia, triumphant smiles, and milestone accomplishments.",
+    gallery: "graduation",
+    galleryItems: GRADUATION_GALLERY,
+    galleryCount: 10,
+  },
 
   /* ── Grouped Campaigns: Documentary ─────────────────── */
   {
-    id: 13,
+    id: 14,
     title: "Ghana Month — Heritage & Cultural Pride",
     cat: "Documentary",
     category: "Documentary",
@@ -1204,7 +1315,7 @@ const PHOTOS: PhotoItem[] = [
 
   /* ── Other Portfolio Works ──────────────────────── */
   {
-    id: 14,
+    id: 15,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -1214,7 +1325,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 15,
+    id: 16,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -1225,7 +1336,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 16,
+    id: 17,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -1235,7 +1346,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 17,
+    id: 18,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -1246,7 +1357,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 18,
+    id: 19,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -1257,7 +1368,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 19,
+    id: 20,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -1268,7 +1379,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 20,
+    id: 21,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -1278,7 +1389,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 21,
+    id: 22,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
