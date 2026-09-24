@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, WHITE, DARKER, MUTED, BORDER } from "@/tokens";
 
@@ -19,6 +19,7 @@ interface LightboxProps {
 }
 
 export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxProps) {
+  const touchStartX = useRef<number | null>(null);
   const isOpen = currentIndex !== null && currentIndex >= 0 && currentIndex < items.length;
   const currentItem = isOpen ? items[currentIndex] : null;
 
@@ -31,6 +32,18 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
     if (currentIndex === null) return;
     onNavigate((currentIndex + 1) % items.length);
   }, [currentIndex, items.length, onNavigate]);
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent) => {
+    const start = touchStartX.current;
+    const end = event.changedTouches[0]?.clientX;
+    touchStartX.current = null;
+    if (start === null || end === undefined || Math.abs(end - start) < 48 || items.length < 2) return;
+    if (end < start) handleNext(); else handlePrev();
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -86,6 +99,8 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
             userSelect: "none",
           }}
           onClick={onClose}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Top Header Bar */}
           <div
@@ -256,6 +271,8 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
                   src={currentItem.img}
                   alt={currentItem.title}
                   decoding="async"
+                  fetchPriority="high"
+                  draggable={false}
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}

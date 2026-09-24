@@ -228,6 +228,29 @@ async function listInquiries() {
     .reverse();
 }
 
+async function updateInquiryStatus(id, status) {
+  const allowedStatuses = new Set(["New", "Contacted", "Qualified", "Booked", "Closed"]);
+  if (!allowedStatuses.has(status)) throw new Error("Invalid inquiry status.");
+
+  if (hasSupabase) {
+    const rows = await supabaseRequest(`inquiries?id=eq.${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      headers: { Prefer: "return=representation" },
+      body: JSON.stringify({ status }),
+    });
+    const updated = Array.isArray(rows) ? rows[0] : null;
+    return updated ? fromSupabaseInquiry(updated) : null;
+  }
+
+  const inquiries = await listInquiries();
+  const index = inquiries.findIndex((inquiry) => inquiry.id === id);
+  if (index === -1) return null;
+  inquiries[index] = { ...inquiries[index], status };
+  await mkdir(dataDir, { recursive: true });
+  await writeFile(inquiriesFile, `${inquiries.slice().reverse().map((inquiry) => JSON.stringify(inquiry)).join("\n")}\n`, "utf8");
+  return inquiries[index];
+}
+
 // Handler: Inquiries / Contact
 async function handleContact(req, res) {
   try {
@@ -765,6 +788,26 @@ export async function handleRequest(req, res) {
       return;
     }
     await handleGetInquiries(req, res);
+    return;
+  }
+
+  if ((pathname.startsWith("/api/inquiries/") || pathname.startsWith("/inquiries/")) && req.method === "PATCH") {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, errors: ["Admin token is required."] });
+      return;
+    }
+    try {
+      const id = pathname.replace(/^\/api\/inquiries\//, "").replace(/^\/inquiries\//, "");
+      const body = await readRequestBody(req);
+      const inquiry = await updateInquiryStatus(id, cleanString(body.status));
+      if (!inquiry) {
+        sendJson(res, 404, { ok: false, errors: ["Inquiry not found."] });
+        return;
+      }
+      sendJson(res, 200, { ok: true, inquiry });
+    } catch (err) {
+      sendJson(res, 400, { ok: false, errors: [err.message || "Failed to update inquiry."] });
+    }
     return;
   }
 

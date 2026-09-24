@@ -160,6 +160,25 @@ export async function getInquiries(adminToken?: string): Promise<InquiryItem[]> 
   return json.inquiries || [];
 }
 
+export async function updateInquiryStatus(
+  id: string,
+  status: string,
+  adminToken?: string
+): Promise<{ ok: boolean; inquiry?: InquiryItem; errors?: string[] }> {
+  try {
+    const headers: HeadersInit = { "Content-Type": "application/json" };
+    if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+    const res = await fetch(`/api/inquiries/${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify({ status }),
+    });
+    return await readJsonResponse(res, { ok: false, errors: ["The server returned an empty response."] });
+  } catch (err) {
+    return { ok: false, errors: [err instanceof Error ? err.message : "Failed to update inquiry"] };
+  }
+}
+
 export async function submitInquiry(payload: {
   fullName: string;
   email: string;

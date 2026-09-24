@@ -194,7 +194,7 @@ export function Home() {
               position: "absolute",
               inset: 0,
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1400&h=900&fit=crop&auto=format&q=75')",
+                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1400&h=900&fit=crop&auto=format&q=95')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -836,7 +836,7 @@ export function Home() {
           <FadeUp delay={0.15}>
             <div style={{ position: "relative" }}>
               <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=820&fit=crop&auto=format&q=80"
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=820&fit=crop&auto=format&q=95"
                 alt="Studio team"
                 loading="lazy"
                 decoding="async"

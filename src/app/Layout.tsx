@@ -100,6 +100,7 @@ const NAV_LINKS = [
   { label: "Graphic Design", to: "/graphic-design" },
   { label: "Photography", to: "/photography" },
   { label: "Creative Concepts", to: "/creative-concepts" },
+  { label: "Portfolio Builder", to: "/builder" },
   { label: "Contact", to: "/contact" },
 ];
 

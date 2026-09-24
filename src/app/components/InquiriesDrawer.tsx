@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getInquiries, type InquiryItem } from "../api";
 import { GOLD, DARKER } from "@/tokens";
+import { Link } from "react-router";
 
 interface InquiriesDrawerProps {
   isOpen: boolean;
@@ -181,7 +182,7 @@ export function InquiriesDrawer({ isOpen, onClose }: InquiriesDrawerProps) {
               <span className="font-mono">
                 Total Inquiries: <strong className="text-white">{inquiries.length}</strong>
               </span>
-              <span className="text-[11px] text-neutral-500">Live JSON database</span>
+              <Link to="/admin" onClick={onClose} className="text-[11px] text-[#c8a54a] hover:text-[#e4c06e]">Open dashboard</Link>
             </div>
           </motion.div>
         </div>
