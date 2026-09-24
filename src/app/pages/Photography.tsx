@@ -1647,7 +1647,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
           obs.disconnect();
         }
       },
-      { rootMargin: "-60px" }
+      { rootMargin: "100px" }
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();

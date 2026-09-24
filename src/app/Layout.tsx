@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i design logo gh.png";
@@ -108,7 +108,20 @@ export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isInquiriesOpen, setIsInquiriesOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [navigating, setNavigating] = useState(false);
+  const isFirstRender = useRef(true);
   const location = useLocation();
+
+  // Instant route change indicator
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setNavigating(true);
+    const timer = window.setTimeout(() => setNavigating(false), 260);
+    return () => window.clearTimeout(timer);
+  }, [location.pathname]);
 
   // Scroll-to-top visibility
   useEffect(() => {
@@ -189,6 +202,29 @@ export function Layout() {
   return (
     <div style={{ background: BG, color: DARK, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Preloader />
+
+      {/* Instant route transition indicator */}
+      <AnimatePresence>
+        {navigating && (
+          <motion.div
+            initial={{ scaleX: 0, opacity: 1 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.24, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "2.5px",
+              background: GOLD,
+              transformOrigin: "left",
+              zIndex: 9999,
+              boxShadow: `0 0 12px ${GOLD}`,
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Shimmer keyframes */}
       <style>{`@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
