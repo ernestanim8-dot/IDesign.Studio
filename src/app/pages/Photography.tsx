@@ -78,9 +78,37 @@ import coastalImg9 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_711
 import coastalImg10 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7127.jpg";
 import coastalImg11 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7129.jpg";
 
+// Event Campaign: Contemporary Design & Arts Exhibition
+import exhibitImg01 from "@/imports/Photography/Events/exhibition/IMG-0589.jpg";
+import exhibitImg02 from "@/imports/Photography/Events/exhibition/IMG-0597.jpg";
+import exhibitImg03 from "@/imports/Photography/Events/exhibition/IMG-0599.jpg";
+import exhibitImg04 from "@/imports/Photography/Events/exhibition/IMG-0603.jpg";
+import exhibitImg05 from "@/imports/Photography/Events/exhibition/IMG-0605.jpg";
+import exhibitImg06 from "@/imports/Photography/Events/exhibition/IMG-0607.jpg";
+import exhibitImg07 from "@/imports/Photography/Events/exhibition/IMG-0609.jpg";
+import exhibitImg08 from "@/imports/Photography/Events/exhibition/IMG-0610.jpg";
+import exhibitImg09 from "@/imports/Photography/Events/exhibition/IMG-0611.jpg";
+import exhibitImg10 from "@/imports/Photography/Events/exhibition/IMG-0612.jpg";
+import exhibitImg11 from "@/imports/Photography/Events/exhibition/IMG-0614.jpg";
+import exhibitImg12 from "@/imports/Photography/Events/exhibition/IMG-0615.jpg";
+import exhibitImg13 from "@/imports/Photography/Events/exhibition/IMG-0616.jpg";
+import exhibitImg14 from "@/imports/Photography/Events/exhibition/IMG-0617.jpg";
+import exhibitImg15 from "@/imports/Photography/Events/exhibition/IMG-0714.jpg";
+import exhibitImg16 from "@/imports/Photography/Events/exhibition/IMG-0715.jpg";
+import exhibitImg17 from "@/imports/Photography/Events/exhibition/IMG-0716.jpg";
+import exhibitImg18 from "@/imports/Photography/Events/exhibition/IMG-0717.jpg";
+import exhibitImg19 from "@/imports/Photography/Events/exhibition/IMG-0718.jpg";
+import exhibitImg20 from "@/imports/Photography/Events/exhibition/IMG-0719.jpg";
+import exhibitImg21 from "@/imports/Photography/Events/exhibition/IMG-0722.jpg";
+import exhibitImg22 from "@/imports/Photography/Events/exhibition/IMG-0724.jpg";
+import exhibitImg23 from "@/imports/Photography/Events/exhibition/IMG-0727.jpg";
+import exhibitImg24 from "@/imports/Photography/Events/exhibition/IMG-0729.jpg";
+import exhibitImg25 from "@/imports/Photography/Events/exhibition/IMG-0730.jpg";
+import exhibitImg26 from "@/imports/Photography/Events/exhibition/IMG-0781.jpg";
 
 
-const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Documentary", "Still Life"];
+
+const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary", "Still Life"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
 const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
@@ -631,6 +659,218 @@ const COASTAL_SERENITY_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 12: Contemporary Design & Arts Exhibition (Event) ──────── */
+const EXHIBITION_GALLERY: LightboxItem[] = [
+  {
+    img: exhibitImg01,
+    title: "Exhibition Prelude — Gallery Ambiance",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Opening moments of the contemporary arts exhibition, capturing the spacious gallery layout and natural architectural lighting.",
+  },
+  {
+    img: exhibitImg02,
+    title: "Curated Showcase — Form & Texture",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Detailed exhibition display highlighting handcrafted textures, dimensional sculptures, and bespoke artisan craft.",
+  },
+  {
+    img: exhibitImg03,
+    title: "Gallery Walkthrough — Spatial Harmony",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Wide environmental capture exploring guest interactions with installations and ambient gallery architecture.",
+  },
+  {
+    img: exhibitImg04,
+    title: "Artisan Installation — Textile & Structure",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Close-up perspective on sculptural installations exploring heritage weaving and contemporary structural design.",
+  },
+  {
+    img: exhibitImg05,
+    title: "Creative Dialogue — Artist & Attendees",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Engaging conversations between artists, patrons, and collectors immersed in the creative dialogue of the showcase.",
+  },
+  {
+    img: exhibitImg06,
+    title: "Sculptural Perspectives — Shadow & Angle",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Angular study of sculptural centerpieces with interplay of gallery spotlights and geometric shadows.",
+  },
+  {
+    img: exhibitImg07,
+    title: "Curatorial Grandeur — Main Pavilion",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Grand wide-angle perspective showcasing the bustling exhibition pavilion with visitors engaging across exhibits.",
+  },
+  {
+    img: exhibitImg08,
+    title: "Exquisite Craftsmanship — Fine Art Details",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Intimate macro study of meticulous craftsmanship, pigments, and nuanced surfaces.",
+  },
+  {
+    img: exhibitImg09,
+    title: "Visual Symphony — Wall Gallery Display",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Curated wall arrangement featuring contemporary prints, graphic typography, and balanced framing.",
+  },
+  {
+    img: exhibitImg10,
+    title: "The Observer — Contemplative Moments",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Candid capture of an art enthusiast deeply immersed in the nuances of a featured design piece.",
+  },
+  {
+    img: exhibitImg11,
+    title: "Illuminated Horizons — Accent Lighting",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Warm directional lighting illuminating featured artisan works on exhibition plinths.",
+  },
+  {
+    img: exhibitImg12,
+    title: "Contemporary Heritage — Cultural Artistry",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "A blend of traditional craft elements reinterpreted through modern architectural design principles.",
+  },
+  {
+    img: exhibitImg13,
+    title: "Dynamic Exchange — Collective Energy",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Atmospheric social energy as creators and audiences exchange ideas throughout the exhibition hall.",
+  },
+  {
+    img: exhibitImg14,
+    title: "Architectural Symmetry — Exhibition Space",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Clean lines and harmonious spatial proportions framing featured art installations.",
+  },
+  {
+    img: exhibitImg15,
+    title: "Vibrant Palette — Expressive Canvas",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Bold color stories and rich tactile mediums commanding attention in the gallery wing.",
+  },
+  {
+    img: exhibitImg16,
+    title: "Artisanal Grace — Masterwork Showcase",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Highlighted masterwork exhibition piece demonstrating world-class design refinement.",
+  },
+  {
+    img: exhibitImg17,
+    title: "The Collector's Eye — Curated Appreciation",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Appreciative moments as patrons examine fine artistic textures under museum-grade illumination.",
+  },
+  {
+    img: exhibitImg18,
+    title: "Exhibition Flora & Accents — Atmospheric Design",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Tasteful floral and environmental styling enhancing the modern exhibition environment.",
+  },
+  {
+    img: exhibitImg19,
+    title: "Creative Vanguard — Signature Pieces",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Signature pieces presented with elegance, creating focal points across the exhibition gallery.",
+  },
+  {
+    img: exhibitImg20,
+    title: "Interactive Engagement — The Arts in Motion",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Attendees experiencing dynamic art forms and sensory installation elements firsthand.",
+  },
+  {
+    img: exhibitImg21,
+    title: "Reflections & Glass — Dimensional Exhibit",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Reflective glass cases and ambient gallery lighting creating layered depth and visual intrigue.",
+  },
+  {
+    img: exhibitImg22,
+    title: "Curatorial Narrative — Exhibition Panels",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Informative curatorial statements guiding visitors through the inspiration and cultural significance of the work.",
+  },
+  {
+    img: exhibitImg23,
+    title: "Celebration of Craft — Evening Reception",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "Evening light cascading into the gallery, elevating the celebratory atmosphere of the exhibition opening.",
+  },
+  {
+    img: exhibitImg24,
+    title: "Harmonic Display — Synergy of Arts",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "A cohesive grouping of diverse artistic mediums presenting a unified creative vision.",
+  },
+  {
+    img: exhibitImg25,
+    title: "Enthusiast Gathering — Community & Culture",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "A vibrant gathering celebrating creative community, design innovation, and cultural expression.",
+  },
+  {
+    img: exhibitImg26,
+    title: "Exhibition Finale — Lasting Impressions",
+    category: "Event",
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description: "A memorable closing perspective capturing the essence and lasting impact of the contemporary exhibition.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -814,9 +1054,26 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 11,
   },
 
-  /* ── Other Portfolio Works ──────────────────────── */
+  /* ── Grouped Campaigns: Event ─────────────────────── */
   {
     id: 12,
+    title: "Contemporary Design & Arts Exhibition",
+    cat: "Event",
+    category: "Event",
+    img: exhibitImg07,
+    tall: true,
+    client: "Design & Arts Pavilion",
+    year: "2026",
+    description:
+      "A 26-image comprehensive event editorial documenting opening night ambiance, curated artisan installations, patron dialogues, and sculptural craft.",
+    gallery: "exhibition",
+    galleryItems: EXHIBITION_GALLERY,
+    galleryCount: 26,
+  },
+
+  /* ── Other Portfolio Works ──────────────────────── */
+  {
+    id: 13,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -826,7 +1083,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 13,
+    id: 14,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -837,7 +1094,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 14,
+    id: 15,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -847,7 +1104,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 15,
+    id: 16,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -858,7 +1115,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 16,
+    id: 17,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -869,7 +1126,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 16,
+    id: 18,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -880,7 +1137,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 17,
+    id: 19,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -890,7 +1147,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 18,
+    id: 20,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
