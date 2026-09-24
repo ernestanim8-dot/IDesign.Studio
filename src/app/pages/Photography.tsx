@@ -106,6 +106,20 @@ import exhibitImg24 from "@/imports/Photography/Events/exhibition/IMG-0729.jpg";
 import exhibitImg25 from "@/imports/Photography/Events/exhibition/IMG-0730.jpg";
 import exhibitImg26 from "@/imports/Photography/Events/exhibition/IMG-0781.jpg";
 
+// Documentary Campaign: Ghana Month — Heritage & Cultural Pride
+import ghanaMonthImg01 from "@/imports/Photography/Documentary/Ghana Month/IMG_6339.jpg";
+import ghanaMonthImg02 from "@/imports/Photography/Documentary/Ghana Month/IMG_6374.jpg";
+import ghanaMonthImg03 from "@/imports/Photography/Documentary/Ghana Month/IMG_6386.jpg";
+import ghanaMonthImg04 from "@/imports/Photography/Documentary/Ghana Month/IMG_63871.jpg";
+import ghanaMonthImg05 from "@/imports/Photography/Documentary/Ghana Month/IMG_6403.jpg";
+import ghanaMonthImg06 from "@/imports/Photography/Documentary/Ghana Month/IMG_6414.jpg";
+import ghanaMonthImg07 from "@/imports/Photography/Documentary/Ghana Month/IMG_6429.jpg";
+import ghanaMonthImg08 from "@/imports/Photography/Documentary/Ghana Month/IMG_6437.jpg";
+import ghanaMonthImg09 from "@/imports/Photography/Documentary/Ghana Month/IMG_6442.jpg";
+import ghanaMonthImg10 from "@/imports/Photography/Documentary/Ghana Month/IMG_6475.jpg";
+import ghanaMonthImg11 from "@/imports/Photography/Documentary/Ghana Month/IMG_6482.jpg";
+import ghanaMonthImg12 from "@/imports/Photography/Documentary/Ghana Month/IMG_6503.jpg";
+
 
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary", "Still Life"];
@@ -871,6 +885,106 @@ const EXHIBITION_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 13: Ghana Month — Heritage & Cultural Pride (Documentary) ── */
+const GHANA_MONTH_GALLERY: LightboxItem[] = [
+  {
+    img: ghanaMonthImg01,
+    title: "Ghana Month — Heritage Awakening",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Opening cultural portraiture celebrating Ghana Month with authentic traditional garments and dignified presence.",
+  },
+  {
+    img: ghanaMonthImg02,
+    title: "Ghana Month — Royal Splendor & Textures",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Intricate weaves and authentic adornments honoring timeless Ghanaian cultural traditions.",
+  },
+  {
+    img: ghanaMonthImg03,
+    title: "Ghana Month — Pride of Identity",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Expressive editorial capture celebrating heritage pride, generational craftsmanship, and cultural storytelling.",
+  },
+  {
+    img: ghanaMonthImg04,
+    title: "Ghana Month — Cultural Resilience",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Striking heritage portrait capturing deep dignity, poise, and rich indigenous textile patterns.",
+  },
+  {
+    img: ghanaMonthImg05,
+    title: "Ghana Month — Ancestral Elegance",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Warm natural lighting highlighting delicate traditional jewelry, beads, and artisanal embellishments.",
+  },
+  {
+    img: ghanaMonthImg06,
+    title: "Ghana Month — Independence Spirit",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "A celebration of Ghanaian independence and sovereignty expressed through authentic regional fashion.",
+  },
+  {
+    img: ghanaMonthImg07,
+    title: "Ghana Month — Modern Heritage Fusion",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Bridging ancestral custom with contemporary youth identity during nationwide Ghana Month commemorations.",
+  },
+  {
+    img: ghanaMonthImg08,
+    title: "Ghana Month — Vibrant Threads of Unity",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Rich color harmonies and symbolic motifs showcasing the diverse cultural tapestry across Ghanaian regions.",
+  },
+  {
+    img: ghanaMonthImg09,
+    title: "Ghana Month — Dignity & Grace",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Serene cultural portrait reflecting honor, community values, and maternal heritage.",
+  },
+  {
+    img: ghanaMonthImg10,
+    title: "Ghana Month — The Sovereign Look",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Authoritative and celebratory framing embodying Ghanaian cultural leadership and majesty.",
+  },
+  {
+    img: ghanaMonthImg11,
+    title: "Ghana Month — Golden Heritage Reflection",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "Radiant golden hour illumination accentuating traditional regal regalia and ceremonial jewelry.",
+  },
+  {
+    img: ghanaMonthImg12,
+    title: "Ghana Month — Everlasting Legacy",
+    category: "Documentary",
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description: "A poignant finale portrait capturing the enduring pride and vibrant future of Ghanaian cultural heritage.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -1071,9 +1185,26 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 26,
   },
 
-  /* ── Other Portfolio Works ──────────────────────── */
+  /* ── Grouped Campaigns: Documentary ─────────────────── */
   {
     id: 13,
+    title: "Ghana Month — Heritage & Cultural Pride",
+    cat: "Documentary",
+    category: "Documentary",
+    img: ghanaMonthImg02,
+    tall: true,
+    client: "Ghana Cultural Heritage Initiative",
+    year: "2026",
+    description:
+      "A 12-image cultural documentary editorial celebrating Ghana Month, traditional textiles, ancestral pride, and sovereign national heritage.",
+    gallery: "ghanamonth",
+    galleryItems: GHANA_MONTH_GALLERY,
+    galleryCount: 12,
+  },
+
+  /* ── Other Portfolio Works ──────────────────────── */
+  {
+    id: 14,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -1083,7 +1214,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 14,
+    id: 15,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -1094,7 +1225,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 15,
+    id: 16,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -1104,7 +1235,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 16,
+    id: 17,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -1115,7 +1246,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 17,
+    id: 18,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -1126,7 +1257,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 18,
+    id: 19,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -1137,7 +1268,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 19,
+    id: 20,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -1147,7 +1278,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 20,
+    id: 21,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
