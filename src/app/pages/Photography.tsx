@@ -132,7 +132,21 @@ import ghanaMonthImg10 from "@/imports/Photography/Documentary/Ghana Month/IMG_6
 import ghanaMonthImg11 from "@/imports/Photography/Documentary/Ghana Month/IMG_6482.jpg";
 import ghanaMonthImg12 from "@/imports/Photography/Documentary/Ghana Month/IMG_6503.jpg";
 
+// Commercial Campaign: The Engineer — Bold & Professional
+import engineerImg01 from "@/imports/Photography/Engineer & Studio Glam/IMG_6838.jpg";
+import engineerImg02 from "@/imports/Photography/Engineer & Studio Glam/IMG_6865.jpg";
+import engineerImg03 from "@/imports/Photography/Engineer & Studio Glam/IMG_6882.jpg";
 
+// Portrait Campaign: Studio Glam Editorial — African Haute Couture
+import glamImg01 from "@/imports/Photography/Engineer & Studio Glam/IMG_6892.jpg";
+import glamImg02 from "@/imports/Photography/Engineer & Studio Glam/IMG_6912.jpg";
+import glamImg03 from "@/imports/Photography/Engineer & Studio Glam/IMG_6920.jpg";
+import glamImg04 from "@/imports/Photography/Engineer & Studio Glam/IMG_6922.jpg";
+import glamImg05 from "@/imports/Photography/Engineer & Studio Glam/IMG_6929.jpg";
+import glamImg06 from "@/imports/Photography/Engineer & Studio Glam/IMG_6936.jpg";
+import glamImg07 from "@/imports/Photography/Engineer & Studio Glam/IMG_6949.jpg";
+import glamImg08 from "@/imports/Photography/Engineer & Studio Glam/IMG_6955.jpg";
+import glamImg09 from "@/imports/Photography/Engineer & Studio Glam/IMG_69552.jpg";
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary", "Still Life"];
 
@@ -1081,6 +1095,110 @@ const GRADUATION_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 15: The Engineer — Bold & Professional (Commercial) ── */
+const ENGINEER_GALLERY: LightboxItem[] = [
+  {
+    img: engineerImg01,
+    title: "The Engineer — Vision & Precision",
+    category: "Commercial",
+    client: "Industrial & Engineering Commission",
+    year: "2026",
+    description: "Vibrant high-key commercial portrait celebrating women in STEM and civil engineering, framed against warm industrial amber.",
+  },
+  {
+    img: engineerImg02,
+    title: "The Engineer — Poised for Leadership",
+    category: "Commercial",
+    client: "Industrial & Engineering Commission",
+    year: "2026",
+    description: "Striking studio portrait highlighting precision engineering leadership against a bold cobalt backdrop.",
+  },
+  {
+    img: engineerImg03,
+    title: "The Engineer — Authority & Resolve",
+    category: "Commercial",
+    client: "Industrial & Engineering Commission",
+    year: "2026",
+    description: "Commanding corporate and industrial editorial portrait capturing dedication, technical mastery, and professional pride.",
+  },
+];
+
+/* ─── Gallery 16: Studio Glam Editorial — African Haute Couture (Portrait) ── */
+const STUDIO_GLAM_GALLERY: LightboxItem[] = [
+  {
+    img: glamImg01,
+    title: "Studio Glam — Heritage in Motion",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Vibrant ankara wax print ball gown flowing against a rich cobalt studio sweep, celebrating contemporary African fashion design.",
+  },
+  {
+    img: glamImg02,
+    title: "Studio Glam — Timeless Elegance",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Conceptual haute couture portrait exploring timeless beauty with an ornate gilded clock prop and dramatic lighting.",
+  },
+  {
+    img: glamImg03,
+    title: "Studio Glam — Sisterhood & Synergy",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Dual-model fashion editorial celebrating complementary silhouette styling, poise, and unity in luxury African textiles.",
+  },
+  {
+    img: glamImg04,
+    title: "Studio Glam — The Flared Silhouette",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Full-figure studio study highlighting structural tailoring, tiered flare detailing, and vibrant blue-gold print patterns.",
+  },
+  {
+    img: glamImg05,
+    title: "Studio Glam — Gilded Serenity",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Intimate studio beauty portrait focusing on radiant complexion, sculpted angles, and intricate artisanal fabric texture.",
+  },
+  {
+    img: glamImg06,
+    title: "Studio Glam — Regal Fluidity",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Expressive studio movement capturing the grand volume and dynamic flow of handcrafted African couture.",
+  },
+  {
+    img: glamImg07,
+    title: "Studio Glam — Sovereign Presence",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Stately fashion portrait embodying grace, poise, and modern African high-fashion identity.",
+  },
+  {
+    img: glamImg08,
+    title: "Studio Glam — The Daily Chronicle",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "Conceptual editorial narrative pairing vintage journalism with bold contemporary couture styling.",
+  },
+  {
+    img: glamImg09,
+    title: "Studio Glam — The Grand Finale",
+    category: "Portrait",
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description: "A showstopping editorial finale capturing elegance, heritage pride, and high-fashion exuberance.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -1263,6 +1381,21 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: COASTAL_SERENITY_GALLERY,
     galleryCount: 11,
   },
+  {
+    id: 24,
+    title: "Studio Glam — From Hard Hats to High Fashion",
+    cat: "Portrait",
+    category: "Portrait",
+    img: glamImg01,
+    tall: true,
+    client: "Haute Couture Editorial",
+    year: "2026",
+    description:
+      "A 9-image vibrant studio fashion editorial celebrating African haute couture, dramatic tiered ankara gowns, conceptual narrative props, and regal beauty.",
+    gallery: "studioglam",
+    galleryItems: STUDIO_GLAM_GALLERY,
+    galleryCount: 9,
+  },
 
   /* ── Grouped Campaigns: Event ─────────────────────── */
   {
@@ -1311,6 +1444,23 @@ const PHOTOS: PhotoItem[] = [
     gallery: "ghanamonth",
     galleryItems: GHANA_MONTH_GALLERY,
     galleryCount: 12,
+  },
+
+  /* ── Grouped Campaigns: Commercial ─────────────────── */
+  {
+    id: 23,
+    title: "The Engineer — Bold & Professional",
+    cat: "Commercial",
+    category: "Commercial",
+    img: engineerImg01,
+    tall: true,
+    client: "Industrial & Engineering Commission",
+    year: "2026",
+    description:
+      "A 3-image commercial studio campaign celebrating women in STEM and engineering leadership, featuring high-visibility gear, crisp precision lighting, and bold color backdrops.",
+    gallery: "engineer",
+    galleryItems: ENGINEER_GALLERY,
+    galleryCount: 3,
   },
 
   /* ── Other Portfolio Works ──────────────────────── */
