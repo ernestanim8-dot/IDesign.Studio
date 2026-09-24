@@ -56,14 +56,22 @@ export default defineConfig(({ mode }) => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2,jpg,jpeg}'],
+          globPatterns: ['**/*.{js,css,html,ico,svg,woff2}'],
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
               handler: 'CacheFirst',
               options: {
                 cacheName: 'unsplash-images',
-                expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
+                expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              },
+            },
+            {
+              urlPattern: /\.(?:png|jpg|jpeg|webp)$/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'local-portfolio-images',
+                expiration: { maxEntries: 120, maxAgeSeconds: 60 * 60 * 24 * 30 },
               },
             },
           ],
