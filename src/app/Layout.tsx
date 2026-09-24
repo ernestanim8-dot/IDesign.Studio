@@ -6,6 +6,7 @@ import { GOLD, DARK, DARKER, MUTED, BG, BORDER } from "@/tokens";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
 import { InquiriesDrawer } from "./components/InquiriesDrawer";
 import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
+import { Preloader } from "./components/Preloader";
 
 // ── Social icon SVGs ────────────────────────────────────────────────────────
 const InstagramIcon = ({ size = 16 }: { size?: number }) => (
@@ -187,6 +188,7 @@ export function Layout() {
 
   return (
     <div style={{ background: BG, color: DARK, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Preloader />
 
       {/* Shimmer keyframes */}
       <style>{`@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
