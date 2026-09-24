@@ -21,7 +21,6 @@ const testimonialsFile = process.env.VERCEL
   : path.join(seedDataDir, "testimonials.json");
 const seedTestimonialsFile = path.join(seedDataDir, "testimonials.json");
 const statsFile = path.join(seedDataDir, "stats.json");
-const portfoliosFile = path.join(dataDir, "portfolios.json");
 
 const port = Number(process.env.API_PORT || process.env.PORT || 8787);
 const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
@@ -453,7 +452,7 @@ async function handleContact(req, res) {
             <table cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
               <tr>
                 <td style="background:#22c55e;border-radius:4px;">
-                  <a href="https://wa.me/233502330663?text=${encodeURIComponent(`Hi iDESIGN! I submitted an inquiry (${inquiry.id}) and wanted to follow up.`)}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#ffffff;text-decoration:none;">Chat on WhatsApp &#128172;</a>
+                  <a href="https://wa.me/233502310663?text=${encodeURIComponent(`Hi iDESIGN! I submitted an inquiry (${inquiry.id}) and wanted to follow up.`)}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#ffffff;text-decoration:none;">Chat on WhatsApp &#128172;</a>
                 </td>
               </tr>
             </table>
@@ -538,67 +537,6 @@ async function handleGetInquiries(req, res) {
   } catch (err) {
     sendJson(res, 500, { ok: false, errors: [err.message] });
   }
-}
-
-// Handler: Portfolio Builder (Save, Get List, Get Single)
-async function handleBuilderPost(req, res) {
-  try {
-    const body = await readRequestBody(req);
-    const name = cleanString(body.name, "Untitled Portfolio");
-    const headline = cleanString(body.headline, "Visual Creator");
-    const bio = cleanString(body.bio, "");
-    const avatar = cleanString(body.avatar, "");
-    const theme = cleanString(body.theme, "obsidian-gold");
-    const layout = cleanString(body.layout, "masonry");
-    const accentColor = cleanString(body.accentColor, "#c8a54a");
-    const email = cleanString(body.email, "");
-    const location = cleanString(body.location, "");
-    const socialLinks = typeof body.socialLinks === "object" ? body.socialLinks : {};
-    const projects = Array.isArray(body.projects) ? body.projects : [];
-
-    const portfolios = await readJsonFile(portfoliosFile, []);
-
-    const newPortfolio = {
-      id: "pf-" + Math.random().toString(36).slice(2, 9),
-      createdAt: new Date().toISOString(),
-      name,
-      headline,
-      bio,
-      avatar,
-      theme,
-      layout,
-      accentColor,
-      email,
-      location,
-      socialLinks,
-      projects,
-    };
-
-    portfolios.unshift(newPortfolio);
-    await writeJsonFile(portfoliosFile, portfolios);
-
-    sendJson(res, 201, {
-      ok: true,
-      message: "Digital portfolio created successfully.",
-      portfolio: newPortfolio,
-    });
-  } catch (err) {
-    sendJson(res, 500, { ok: false, errors: [err.message] });
-  }
-}
-
-async function handleBuilderGet(req, res, id) {
-  const portfolios = await readJsonFile(portfoliosFile, []);
-  if (id) {
-    const item = portfolios.find((p) => p.id === id);
-    if (!item) {
-      sendJson(res, 404, { ok: false, error: "Portfolio not found" });
-      return;
-    }
-    sendJson(res, 200, { ok: true, portfolio: item });
-    return;
-  }
-  sendJson(res, 200, { ok: true, portfolios });
 }
 
 // Handler: Projects
@@ -808,23 +746,6 @@ export async function handleRequest(req, res) {
     } catch (err) {
       sendJson(res, 400, { ok: false, errors: [err.message || "Failed to update inquiry."] });
     }
-    return;
-  }
-
-  // Digital Portfolio Builder
-  if (matchApi("/api/builder") && req.method === "GET") {
-    await handleBuilderGet(req, res);
-    return;
-  }
-
-  if ((pathname.startsWith("/api/builder/") || (pathname.startsWith("/builder/") && !pathname.includes("."))) && req.method === "GET") {
-    const id = pathname.replace(/^\/api\/builder\//, "").replace(/^\/builder\//, "");
-    await handleBuilderGet(req, res, id);
-    return;
-  }
-
-  if (matchApi("/api/builder") && req.method === "POST") {
-    await handleBuilderPost(req, res);
     return;
   }
 

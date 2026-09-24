@@ -224,7 +224,7 @@ export function CreativeConcepts() {
       return;
     }
     const encoded = encodeURIComponent(constructWhatsAppQuote());
-    window.open(`https://wa.me/233502330663?text=${encoded}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/233502310663?text=${encoded}`, "_blank", "noopener,noreferrer");
     setShowWaPreview(false);
   };
 
@@ -328,7 +328,7 @@ export function CreativeConcepts() {
               Calculate Your Package ↓
             </a>
             <a
-              href={`https://wa.me/233502330663?text=${encodeURIComponent(
+              href={`https://wa.me/233502310663?text=${encodeURIComponent(
                 "Hello iDESIGN! I would like to discuss a custom creative package."
               )}`}
               target="_blank"

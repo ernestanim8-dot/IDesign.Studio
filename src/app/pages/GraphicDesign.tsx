@@ -922,7 +922,7 @@ export function GraphicDesign() {
               Start a Project →
             </Link>
             <a
-              href={`https://wa.me/233502330663?text=${encodeURIComponent(
+              href={`https://wa.me/233502310663?text=${encodeURIComponent(
                 "Hello iDESIGN! I would like to discuss a graphic design project."
               )}`}
               target="_blank"
@@ -1474,7 +1474,7 @@ export function GraphicDesign() {
             Get In Touch →
           </Link>
           <a
-            href={`https://wa.me/233502330663?text=${encodeURIComponent(
+            href={`https://wa.me/233502310663?text=${encodeURIComponent(
               "Hello iDESIGN! I'm interested in building a new visual identity."
             )}`}
             target="_blank"

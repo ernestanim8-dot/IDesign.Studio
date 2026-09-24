@@ -87,7 +87,7 @@ const FAQS = [
   },
   {
     q: "Can we handle inquiries and project updates on WhatsApp?",
-    a: "Yes! We maintain an active WhatsApp studio line (+233 50 233 0663) for instant responses, consultation calls, and progress updates throughout your project.",
+    a: "Yes! We maintain an active WhatsApp studio line (+233 50 231 0663) for instant responses, consultation calls, and progress updates throughout your project.",
   },
 ];
 
@@ -335,7 +335,7 @@ export function Home() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <a
-                href={`https://wa.me/233502330663?text=${encodeURIComponent(
+                href={`https://wa.me/233502310663?text=${encodeURIComponent(
                   "Hello iDESIGN! I found you through your website and would like to chat."
                 )}`}
                 target="_blank"
@@ -1064,7 +1064,7 @@ export function Home() {
               Get Started →
             </Link>
             <a
-              href={`https://wa.me/233502330663?text=${encodeURIComponent(
+              href={`https://wa.me/233502310663?text=${encodeURIComponent(
                 "Hello iDESIGN! I'm ready to discuss a new project."
               )}`}
               target="_blank"

@@ -141,7 +141,7 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               {/* Direct WhatsApp inquiry for this specific piece */}
               <a
-                href={`https://wa.me/233502330663?text=${encodeURIComponent(
+                href={`https://wa.me/233502310663?text=${encodeURIComponent(
                   `Hello iDESIGN! I am interested in work similar to: "${currentItem.title}" (${currentItem.category || "Portfolio"})`
                 )}`}
                 target="_blank"

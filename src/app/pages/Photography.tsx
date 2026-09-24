@@ -2273,7 +2273,7 @@ export function Photography() {
               Book Now →
             </Link>
             <a
-              href={`https://wa.me/233502330663?text=${encodeURIComponent(
+              href={`https://wa.me/233502310663?text=${encodeURIComponent(
                 "Hello iDESIGN! I would like to book a photography session."
               )}`}
               target="_blank"

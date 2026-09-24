@@ -51,7 +51,7 @@ export function Contact() {
   const [timeline, setTimeline] = useState("Within 2 weeks");
   const [message, setMessage] = useState("");
 
-  const phoneNumber = "233502330663";
+  const phoneNumber = "233502310663";
 
   const constructWhatsAppMessage = () => {
     return [
@@ -318,7 +318,7 @@ export function Contact() {
                 {
                   key: "wa",
                   label: "WhatsApp / Direct Phone",
-                  value: "+233 50 233 0663",
+                  value: "+233 50 231 0663",
                   href: `https://wa.me/${phoneNumber}`,
                   copyable: true,
                 },
@@ -997,7 +997,7 @@ export function Contact() {
             }}
           >
             <span style={{ fontSize: "1.6rem" }}>💬</span>
-            Fastest response? Message us directly on WhatsApp — +233 50 233 0663
+            Fastest response? Message us directly on WhatsApp — +233 50 231 0663
           </a>
         </div>
       </section>

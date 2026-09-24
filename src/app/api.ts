@@ -55,35 +55,6 @@ export interface InquiryItem {
   status: string;
 }
 
-export interface BuilderProject {
-  id: string;
-  title: string;
-  category: string;
-  imageUrl: string;
-  description: string;
-}
-
-export interface UserPortfolio {
-  id: string;
-  createdAt?: string;
-  name: string;
-  headline: string;
-  bio: string;
-  avatar: string;
-  theme: "obsidian-gold" | "warm-editorial" | "nordic-minimal" | "emerald-noir";
-  layout: "masonry" | "editorial" | "minimal" | "split";
-  accentColor: string;
-  email: string;
-  location: string;
-  socialLinks: {
-    instagram?: string;
-    behance?: string;
-    twitter?: string;
-    website?: string;
-  };
-  projects: BuilderProject[];
-}
-
 const FALLBACK_STATS: StudioStats = {
   projectsCompleted: 184,
   clientSatisfaction: "99.4%",
@@ -219,45 +190,5 @@ export async function submitInquiry(payload: {
     return data || { ok: true, message: "Inquiry received successfully. We will get back to you shortly." };
   } catch (err) {
     return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
-  }
-}
-
-export async function getPortfolios(): Promise<UserPortfolio[]> {
-  try {
-    const res = await fetch("/api/builder");
-    if (!res.ok) throw new Error("Failed to fetch portfolios");
-    const json = await readJsonResponse<{ portfolios?: UserPortfolio[] }>(res, {});
-    return json.portfolios || [];
-  } catch {
-    return [];
-  }
-}
-
-export async function getPortfolioById(id: string): Promise<UserPortfolio | null> {
-  try {
-    const res = await fetch(`/api/builder/${encodeURIComponent(id)}`);
-    if (!res.ok) return null;
-    const json = await readJsonResponse<{ portfolio?: UserPortfolio }>(res, {});
-    return json.portfolio || null;
-  } catch {
-    return null;
-  }
-}
-
-export async function saveUserPortfolio(
-  portfolio: Omit<UserPortfolio, "id" | "createdAt">
-): Promise<{ ok: boolean; portfolio?: UserPortfolio; errors?: string[] }> {
-  try {
-    const res = await fetch("/api/builder", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(portfolio),
-    });
-    return await readJsonResponse(res, {
-      ok: false,
-      errors: ["The server returned an empty response."],
-    });
-  } catch (err) {
-    return { ok: false, errors: [err instanceof Error ? err.message : "Failed to save portfolio"] };
   }
 }

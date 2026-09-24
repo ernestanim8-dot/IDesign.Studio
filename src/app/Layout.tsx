@@ -100,7 +100,6 @@ const NAV_LINKS = [
   { label: "Graphic Design", to: "/graphic-design" },
   { label: "Photography", to: "/photography" },
   { label: "Creative Concepts", to: "/creative-concepts" },
-  { label: "Portfolio Builder", to: "/builder" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -198,8 +197,8 @@ export function Layout() {
           <a href="mailto:idesign6048@gmail.com" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
             idesign6048@gmail.com
           </a>
-          <a href="https://wa.me/233502330663" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
-            +233 50 233 0663 (WhatsApp)
+          <a href="https://wa.me/233502310663" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
+            +233 50 231 0663 (WhatsApp)
           </a>
         </div>
         <div className="flex items-center gap-4">
@@ -362,7 +361,7 @@ export function Layout() {
               <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, marginBottom: "1rem" }}>Contact</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 <a href="mailto:idesign6048@gmail.com" style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.875rem", fontWeight: 300, color: "#6a6460", textDecoration: "none" }}>idesign6048@gmail.com</a>
-                <a href="https://wa.me/233502330663" style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.875rem", fontWeight: 300, color: "#6a6460", textDecoration: "none" }}>+233 50 233 0663 (WhatsApp)</a>
+                <a href="https://wa.me/233502310663" style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.875rem", fontWeight: 300, color: "#6a6460", textDecoration: "none" }}>+233 50 231 0663 (WhatsApp)</a>
               </div>
             </div>
           </div>

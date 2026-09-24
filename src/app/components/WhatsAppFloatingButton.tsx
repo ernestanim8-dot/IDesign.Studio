@@ -4,7 +4,7 @@ import { WHITE } from "@/tokens";
 
 export function WhatsAppFloatingButton() {
   const [hovered, setHovered] = useState(false);
-  const phoneNumber = "233502330663";
+  const phoneNumber = "233502310663";
   const defaultText = encodeURIComponent("Hello iDESIGN! I'm viewing your portfolio website and would like to make an inquiry.");
   const waUrl = `https://wa.me/${phoneNumber}?text=${defaultText}`;
 
