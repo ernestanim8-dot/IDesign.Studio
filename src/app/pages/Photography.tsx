@@ -32,6 +32,28 @@ import frostyBiteImg6 from "@/imports/Photography/Food/Frosty Bite/IMG_9996.jpg"
 import waakyeImg1 from "@/imports/Photography/Food/Waakye/IMG_0036.jpg";
 import waakyeImg2 from "@/imports/Photography/Food/Waakye/IMG_0038.jpg";
 
+// Portrait Campaign 1: Amber Glow Studio Birthday
+import bdayAmberCake from "@/imports/Photography/Portrait/Birthday/IMG_1020.jpg";
+import bdayAmberCalling from "@/imports/Photography/Portrait/Birthday/IMG_1054.jpg";
+import bdayAmberBalloon from "@/imports/Photography/Portrait/Birthday/IMG_0999.jpg";
+import bdayAmberSitting from "@/imports/Photography/Portrait/Birthday/IMG_1002.jpg";
+
+// Portrait Campaign 2: Electric Pop Studio
+import bdayPopBallSmile from "@/imports/Photography/Portrait/Birthday/IMG_1106.jpg";
+import bdayPopBallAction from "@/imports/Photography/Portrait/Birthday/IMG_1116.jpg";
+import bdayPopSkirtTwirl from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
+import bdayPopLaptopSmile from "@/imports/Photography/Portrait/Birthday/IMG_1269.jpg";
+import bdayPopLaptopWork from "@/imports/Photography/Portrait/Birthday/IMG_1273.jpg";
+import bdayPopPortrait from "@/imports/Photography/Portrait/Birthday/IMG_1313.jpg";
+
+// Portrait Campaign 3: Golden Radiance & Emerald Couture
+import bdayOutdoorYellowHero from "@/imports/Photography/Portrait/Birthday 2/IMG_6677.jpg";
+import bdayOutdoorEmeraldCouture from "@/imports/Photography/Portrait/Birthday 2/IMG_6777.jpg";
+import bdayOutdoorYellowWalk from "@/imports/Photography/Portrait/Birthday 2/IMG_6703.jpg";
+import bdayOutdoorYellowBokeh from "@/imports/Photography/Portrait/Birthday 2/IMG_6744.jpg";
+import bdayOutdoorYellowJoy from "@/imports/Photography/Portrait/Birthday 2/IMG_6721.jpg";
+
+
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Documentary", "Still Life"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
@@ -255,6 +277,153 @@ const WAAKYE_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 7: Amber Glow Studio Birthday (Portrait) ─────────────── */
+const AMBER_BIRTHDAY_GALLERY: LightboxItem[] = [
+  {
+    img: bdayAmberCake,
+    title: "Amber Glow — Birthday Cake & Candlelight",
+    category: "Portrait",
+    client: "Studio Birthday Commission",
+    year: "2026",
+    description:
+      "Warm-toned studio birthday portrait capturing the intimate moment of blowing out the birthday cake candle with pastel balloons.",
+  },
+  {
+    img: bdayAmberCalling,
+    title: "Amber Glow — 'Birthday Is Calling'",
+    category: "Portrait",
+    client: "Studio Birthday Commission",
+    year: "2026",
+    description:
+      "Playful candid studio portrait showcasing incoming birthday call on phone with floating celebratory balloons and energetic expression.",
+  },
+  {
+    img: bdayAmberBalloon,
+    title: "Amber Glow — Silver Balloon Reverie",
+    category: "Portrait",
+    client: "Studio Birthday Commission",
+    year: "2026",
+    description:
+      "Warm ambient studio overhead capture playing with reflective silver birthday balloon and plush velvet textures.",
+  },
+  {
+    img: bdayAmberSitting,
+    title: "Amber Glow — Celebratory Still",
+    category: "Portrait",
+    client: "Studio Birthday Commission",
+    year: "2026",
+    description:
+      "Joyful studio birthday portrait surrounded by custom printed pastel balloons and warm terracotta studio illumination.",
+  },
+];
+
+/* ─── Gallery 8: Electric Pop & Collegiate (Portrait) ───────────────── */
+const ELECTRIC_POP_GALLERY: LightboxItem[] = [
+  {
+    img: bdayPopBallSmile,
+    title: "Electric Pop — Hoop & Plaid Chic",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "High-energy studio portrait against rich cobalt cyan, featuring an orange basketball prop, pleated tartan skirt, and radiant smile.",
+  },
+  {
+    img: bdayPopSkirtTwirl,
+    title: "Electric Pop — Plaid Skirt Motion",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "Full-length fashion portrait capturing movement and skirt flare against saturated studio backdrop with clean rim highlights.",
+  },
+  {
+    img: bdayPopBallAction,
+    title: "Electric Pop — Athletic Energy",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "Dynamic athletic portrait pose balancing sport aesthetics with modern fashion studio lighting.",
+  },
+  {
+    img: bdayPopLaptopSmile,
+    title: "Electric Pop — Digital Creator Stool",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "Contemporary editorial portrait seated on studio stool with graphic art laptop, patent pumps, and collegiate necktie styling.",
+  },
+  {
+    img: bdayPopLaptopWork,
+    title: "Electric Pop — Digital Focus",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "Editorial work perspective highlighting expressive style and creative tech presence.",
+  },
+  {
+    img: bdayPopPortrait,
+    title: "Electric Pop — Cyan Studio Portrait",
+    category: "Portrait",
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "Crisp studio beauty portrait showcasing delicate hair styling, vibrant backdrop separation, and natural luminous skin tones.",
+  },
+];
+
+/* ─── Gallery 9: Golden Radiance & Emerald Couture (Portrait) ────────── */
+const OUTDOOR_COUTURE_GALLERY: LightboxItem[] = [
+  {
+    img: bdayOutdoorYellowHero,
+    title: "Golden Radiance — Sunlight Batik Avenue",
+    category: "Portrait",
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "Sunlit outdoor runway portrait on tree-lined avenue featuring a bespoke golden-yellow sunburst batik dress and metallic heels.",
+  },
+  {
+    img: bdayOutdoorEmeraldCouture,
+    title: "Emerald Grace — Sequin Lace Couture",
+    category: "Portrait",
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "Exquisite couture fashion portrait in an asymmetrical one-shoulder emerald green sequined lace gown with traditional wax-print skirt accent.",
+  },
+  {
+    img: bdayOutdoorYellowWalk,
+    title: "Golden Radiance — Street Promenade",
+    category: "Portrait",
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "Fluid full-length editorial stride capturing natural afternoon light and vibrant batik fabric motion.",
+  },
+  {
+    img: bdayOutdoorYellowBokeh,
+    title: "Golden Radiance — Soft Ambient Glow",
+    category: "Portrait",
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "Mid-shot natural light portrait showcasing warm facial expressions framed by lush green canopy bokeh.",
+  },
+  {
+    img: bdayOutdoorYellowJoy,
+    title: "Golden Radiance — Joyful Celebration Flare",
+    category: "Portrait",
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "Dynamic candid outdoor portrait capturing genuine birthday happiness and golden-hour warmth.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -361,9 +530,56 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 2,
   },
 
-  /* ── Other Portfolio Works ──────────────────────── */
+  /* ── Grouped Campaigns: Portrait ─────────────────── */
   {
     id: 7,
+    title: "Amber Glow — Studio Birthday Celebration",
+    cat: "Portrait",
+    category: "Portrait",
+    img: bdayAmberCake,
+    tall: true,
+    client: "Studio Birthday Commission",
+    year: "2026",
+    description:
+      "A 4-image intimate warm-toned birthday studio celebration featuring candlelight cake cuts, playful balloon kinetics, and joyful candid moments.",
+    gallery: "amberbirthday",
+    galleryItems: AMBER_BIRTHDAY_GALLERY,
+    galleryCount: 4,
+  },
+  {
+    id: 8,
+    title: "Electric Pop — Collegiate & Sport Chic",
+    cat: "Portrait",
+    category: "Portrait",
+    img: bdayPopBallSmile,
+    tall: true,
+    client: "Creative Studio Portraiture",
+    year: "2026",
+    description:
+      "A 6-image high-energy pop-editorial portrait series blending 90s collegiate aesthetic, sport chic props, and bold saturated cyan backdrops.",
+    gallery: "electricpop",
+    galleryItems: ELECTRIC_POP_GALLERY,
+    galleryCount: 6,
+  },
+  {
+    id: 9,
+    title: "Golden Radiance & Emerald Couture",
+    cat: "Portrait",
+    category: "Portrait",
+    img: bdayOutdoorYellowHero,
+    tall: true,
+    client: "Outdoor Birthday & Fashion Editorial",
+    year: "2026",
+    description:
+      "A 5-image vibrant open-air celebration series showcasing bespoke Ghanaian textiles — transitioning from sunlit golden batik to intricate emerald lace couture.",
+    gallery: "outdoorcouture",
+    galleryItems: OUTDOOR_COUTURE_GALLERY,
+    galleryCount: 5,
+  },
+
+  /* ── Other Portfolio Works ──────────────────────── */
+  {
+    id: 10,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -373,7 +589,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 8,
+    id: 11,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -384,7 +600,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 9,
+    id: 12,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -394,7 +610,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 10,
+    id: 13,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -405,7 +621,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 11,
+    id: 14,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -416,7 +632,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 12,
+    id: 15,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -427,7 +643,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 13,
+    id: 16,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -437,7 +653,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 14,
+    id: 17,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
