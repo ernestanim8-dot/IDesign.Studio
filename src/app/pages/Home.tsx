@@ -6,9 +6,9 @@ import logoFull from "@/imports/i design logo.png";
 import photographyImg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
 import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
-import graduation2025Img from "@/imports/Photography/Events/graduation-2025/gctu-2025-13-triumph-pose.jpg";
-import matriculation2025Img from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-15-future-leader.jpg";
-import redVelvetStudioImg from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-06-reclined-chair.jpg";
+import blueForMenImg from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
+import rightGuardImg from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
+import studioLifestyleImg from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 
@@ -38,22 +38,22 @@ const SERVICES = [
 
 const LATEST_WORK = [
   {
-    title: "The Graduate",
-    subtitle: "GCTU Graduation 2025",
-    category: "Event Photography",
-    img: graduation2025Img,
+    title: "Blue for Men",
+    subtitle: "Fragrance Campaign",
+    category: "Commercial Photography",
+    img: blueForMenImg,
   },
   {
-    title: "First Steps Forward",
-    subtitle: "Matriculation 2025",
-    category: "Event Photography",
-    img: matriculation2025Img,
+    title: "Right Guard",
+    subtitle: "High-Performance Commercial",
+    category: "Commercial Photography",
+    img: rightGuardImg,
   },
   {
-    title: "Red Velvet Studio",
-    subtitle: "Fashion Portrait Session",
+    title: "Radiant Studio Lifestyle",
+    subtitle: "Elegance & Expression",
     category: "Portrait Photography",
-    img: redVelvetStudioImg,
+    img: studioLifestyleImg,
   },
 ];
 
@@ -620,7 +620,7 @@ export function Home() {
                     marginBottom: "0.75rem",
                   }}
                 >
-                  Latest 2025 Work
+                  Latest 2026 Work
                 </p>
                 <h2
                   style={{
