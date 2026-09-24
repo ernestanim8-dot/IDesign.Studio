@@ -52,6 +52,20 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
     };
   }, [isOpen, onClose, handlePrev, handleNext]);
 
+  // Preload adjacent images so next/prev navigation feels instantaneous
+  useEffect(() => {
+    if (!isOpen || currentIndex === null || items.length <= 1) return;
+    const nextIdx = (currentIndex + 1) % items.length;
+    const prevIdx = (currentIndex - 1 + items.length) % items.length;
+    [nextIdx, prevIdx].forEach((idx) => {
+      const src = items[idx]?.img;
+      if (src) {
+        const img = new Image();
+        img.src = src;
+      }
+    });
+  }, [isOpen, currentIndex, items]);
+
   return (
     <AnimatePresence>
       {isOpen && currentItem && (

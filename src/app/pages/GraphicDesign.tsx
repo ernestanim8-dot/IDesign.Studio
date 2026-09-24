@@ -1139,7 +1139,7 @@ export function GraphicDesign() {
           <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
             {filteredProjects.map((p, i) => (
 
-            <FadeUp key={p.id} delay={i * 0.08}>
+            <FadeUp key={p.id} delay={Math.min(i * 0.05, 0.35)}>
               <motion.div
                 className={p.wide ? "md:col-span-2" : ""}
                 whileHover={{ scale: 1.015 }}
@@ -1152,6 +1152,7 @@ export function GraphicDesign() {
                   cursor: "pointer",
                   boxShadow: "0 4px 20px rgba(26,24,20,0.08)",
                   border: `1px solid ${BORDER}`,
+                  willChange: "transform",
                 }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}

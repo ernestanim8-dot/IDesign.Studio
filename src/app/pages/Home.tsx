@@ -194,7 +194,7 @@ export function Home() {
               position: "absolute",
               inset: 0,
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1920&h=1200&fit=crop&auto=format')",
+                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1400&h=900&fit=crop&auto=format&q=75')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -508,6 +508,8 @@ export function Home() {
                   <img
                     src={svc.img}
                     alt={svc.title}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       width: "100%",
                       height: "240px",
@@ -719,6 +721,8 @@ export function Home() {
                   <img
                     src={t.avatar}
                     alt={t.author}
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: "42px", height: "42px", borderRadius: "50%", objectFit: "cover" }}
                   />
                   <div>
@@ -832,8 +836,10 @@ export function Home() {
           <FadeUp delay={0.15}>
             <div style={{ position: "relative" }}>
               <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=820&fit=crop&auto=format"
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=820&fit=crop&auto=format&q=80"
                 alt="Studio team"
+                loading="lazy"
+                decoding="async"
                 style={{ width: "100%", display: "block", borderRadius: "6px" }}
               />
               <div
