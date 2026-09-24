@@ -148,6 +148,18 @@ import glamImg07 from "@/imports/Photography/Engineer & Studio Glam/IMG_6949.jpg
 import glamImg08 from "@/imports/Photography/Engineer & Studio Glam/IMG_6955.jpg";
 import glamImg09 from "@/imports/Photography/Engineer & Studio Glam/IMG_69552.jpg";
 
+// Portrait Campaign: Urban Chic & Sisterhood — Studio Editorial
+import urbanChicImg01 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0817.jpg";
+import urbanChicImg02 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0823.jpg";
+import urbanChicImg03 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0827.jpg";
+import urbanChicImg04 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0832-1.jpg";
+import urbanChicImg05 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0854.jpg";
+import urbanChicImg06 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0855.jpg";
+import urbanChicImg07 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0886.jpg";
+import urbanChicImg08 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0906.jpg";
+import urbanChicImg09 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0910.jpg";
+import urbanChicImg10 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0912.jpg";
+
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary", "Still Life"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
@@ -1199,6 +1211,90 @@ const STUDIO_GLAM_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 17: Urban Chic & Sisterhood — Studio Editorial (Portrait) ── */
+const URBAN_CHIC_SISTERHOOD_GALLERY: LightboxItem[] = [
+  {
+    img: urbanChicImg01,
+    title: "Urban Chic — Mint Ruffle Elegance",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Serene studio portrait in a pastel mint cocktail dress with sculptural floral organza applique against sky-blue backdrop.",
+  },
+  {
+    img: urbanChicImg02,
+    title: "Urban Chic — Streetwear Silhouette & Poise",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "High-contrast urban streetwear fashion featuring graphic pullover, marble-pattern cargo pants, and crisp white stiletto heels on a studio stool.",
+  },
+  {
+    img: urbanChicImg03,
+    title: "Urban Chic — Contemplative Power",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Relaxed seated editorial pose highlighting modern urban styling, intricate braids, and calm inner confidence.",
+  },
+  {
+    img: urbanChicImg04,
+    title: "Urban Chic — The Daily Gazette Narrative",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Conceptual editorial centerpiece featuring custom print 'The Daily Gazette' newspaper detailing artistic vision, creativity, and discipline.",
+  },
+  {
+    img: urbanChicImg05,
+    title: "Urban Chic — Studio Floor Elegance",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Relaxed low-angle floor composition with stiletto heel accents and minimalist gold geometric architectural frame.",
+  },
+  {
+    img: urbanChicImg06,
+    title: "Urban Chic — Playful Perspective",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Spontaneous, joyful expression capturing authentic personality and creative framing through playful gesture.",
+  },
+  {
+    img: urbanChicImg07,
+    title: "Sisterhood & Couture — Botanical Flare & Timepiece",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Regal floor study in vibrant purple and gold floral ankara dress, framed with vintage alarm clock and white stilettos.",
+  },
+  {
+    img: urbanChicImg08,
+    title: "Sisterhood & Couture — Gilded Reflection",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Intimate portrait focusing on radiant smile, thoughtful gaze, and handcrafted floral textile detailing.",
+  },
+  {
+    img: urbanChicImg09,
+    title: "Sisterhood & Couture — Unified Radiance",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Celebratory dual-portrait showcasing sisterhood, shared ambition, and harmonious color-blocked African print styling.",
+  },
+  {
+    img: urbanChicImg10,
+    title: "Sisterhood & Couture — Joyful Affection",
+    category: "Portrait",
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description: "Candid, affectionate moment celebrating bond, laughter, and authentic warmth between lifelong friends.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -1381,6 +1477,7 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: COASTAL_SERENITY_GALLERY,
     galleryCount: 11,
   },
+  
   {
     id: 24,
     title: "Studio Glam — From Hard Hats to High Fashion",
@@ -1395,6 +1492,21 @@ const PHOTOS: PhotoItem[] = [
     gallery: "studioglam",
     galleryItems: STUDIO_GLAM_GALLERY,
     galleryCount: 9,
+  },
+  {
+    id: 25,
+    title: "Urban Chic & Sisterhood — Studio Editorial",
+    cat: "Portrait",
+    category: "Portrait",
+    img: urbanChicImg04,
+    tall: true,
+    client: "Urban Chic Editorial",
+    year: "2026",
+    description:
+      "A 10-image dynamic studio editorial blending urban streetwear chic, custom newsprint narrative art, vibrant African floral couture, and playful sisterhood portraits.",
+    gallery: "urbanchic",
+    galleryItems: URBAN_CHIC_SISTERHOOD_GALLERY,
+    galleryCount: 10,
   },
 
   /* ── Grouped Campaigns: Event ─────────────────────── */
@@ -1463,17 +1575,6 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 3,
   },
 
-  /* ── Other Portfolio Works ──────────────────────── */
-  {
-    id: 15,
-    title: "Fog & Light",
-    cat: "Documentary",
-    category: "Documentary",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=1200&fit=crop&auto=format",
-    tall: true,
-    year: "2024",
-    description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
-  },
   {
     id: 16,
     title: "Golden Hour Coast",
