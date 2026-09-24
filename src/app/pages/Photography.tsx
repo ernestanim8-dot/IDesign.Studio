@@ -182,7 +182,7 @@ import urbanChicImg08 from "@/imports/Photography/Portrait/Urban Chic & Sisterho
 import urbanChicImg09 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0910.jpg";
 import urbanChicImg10 from "@/imports/Photography/Portrait/Urban Chic & Sisterhood/IMG_0912.jpg";
 
-const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary", "Still Life"];
+const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
 const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
@@ -1577,7 +1577,7 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 10,
   },
   {
-    id: 24,
+    id: 26,
     title: "Investiture Services",
     cat: "Event",
     category: "Event",
@@ -2119,72 +2119,74 @@ export function Photography() {
         )}
       </section>
 
-      {/* Services offered */}
-      <section style={{ background: SURFACE, padding: "5rem 2rem", borderTop: `1px solid ${BORDER}` }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <FadeUp>
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-              <p
-                style={{
-                  fontFamily: "'DM Mono',monospace",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: GOLD,
-                  marginBottom: "0.75rem",
-                }}
-              >
-                — What We Shoot
-              </p>
-              <h2
-                style={{
-                  fontFamily: "'DM Serif Display',serif",
-                  fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
-                  color: DARK,
-                }}
-              >
-                Photography Services
-              </h2>
+      {/* Services offered — only on All tab overview */}
+      {activeCategory === "All" && !searchQuery && (
+        <section style={{ background: SURFACE, padding: "5rem 2rem", borderTop: `1px solid ${BORDER}` }}>
+          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            <FadeUp>
+              <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+                <p
+                  style={{
+                    fontFamily: "'DM Mono',monospace",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: GOLD,
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  — What We Shoot
+                </p>
+                <h2
+                  style={{
+                    fontFamily: "'DM Serif Display',serif",
+                    fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
+                    color: DARK,
+                  }}
+                >
+                  Photography Services
+                </h2>
+              </div>
+            </FadeUp>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: "Product", desc: "Studio-grade cosmetic, fragrance, and e-commerce visuals with splash dynamics and rim lighting." },
+                { title: "Food & Culinary", desc: "Sensory gastronomy, dessert styling, and restaurant editorial visuals that stimulate appetite and brand distinction." },
+                { title: "Commercial", desc: "Brand lifestyle and advertising photography engineered to build customer trust and elevate campaigns." },
+                { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
+                { title: "Event", desc: "Ceremonial, milestone, and commencement documentation capturing distinguished guests and defining moments." },
+                { title: "Documentary", desc: "Cultural and editorial coverage that captures real moments and ancestral heritage authentically." },
+              ].map(({ title, desc }, i) => (
+                <FadeUp key={title} delay={i * 0.1}>
+                  <div style={{ borderTop: `2px solid ${GOLD}`, paddingTop: "1.25rem" }}>
+                    <h3
+                      style={{
+                        fontFamily: "'DM Serif Display',serif",
+                        fontSize: "1.2rem",
+                        color: DARK,
+                        marginBottom: "0.6rem",
+                      }}
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "'Work Sans',sans-serif",
+                        fontSize: "0.875rem",
+                        fontWeight: 300,
+                        lineHeight: "1.7",
+                        color: MUTED,
+                      }}
+                    >
+                      {desc}
+                    </p>
+                  </div>
+                </FadeUp>
+              ))}
             </div>
-          </FadeUp>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Product", desc: "Studio-grade cosmetic, fragrance, and e-commerce visuals with splash dynamics and rim lighting." },
-              { title: "Food & Culinary", desc: "Sensory gastronomy, dessert styling, and restaurant editorial visuals that stimulate appetite and brand distinction." },
-              { title: "Commercial", desc: "Brand lifestyle and advertising photography engineered to build customer trust and elevate campaigns." },
-              { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
-              { title: "Documentary", desc: "Event and editorial coverage that captures real moments authentically." },
-              { title: "Still Life", desc: "Precision product and object photography for luxury catalogues and print." },
-            ].map(({ title, desc }, i) => (
-              <FadeUp key={title} delay={i * 0.1}>
-                <div style={{ borderTop: `2px solid ${GOLD}`, paddingTop: "1.25rem" }}>
-                  <h3
-                    style={{
-                      fontFamily: "'DM Serif Display',serif",
-                      fontSize: "1.2rem",
-                      color: DARK,
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Work Sans',sans-serif",
-                      fontSize: "0.875rem",
-                      fontWeight: 300,
-                      lineHeight: "1.7",
-                      color: MUTED,
-                    }}
-                  >
-                    {desc}
-                  </p>
-                </div>
-              </FadeUp>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section
