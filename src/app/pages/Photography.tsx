@@ -59,6 +59,11 @@ import lifestyleOrangeDress from "@/imports/Photography/Portrait/Studio Lifestyl
 import lifestyleYellowBlouse from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-3-yellow-blouse-pose.jpg";
 import lifestyleFramePose from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-4-camera-frame-pose.jpg";
 import lifestyleCushionPortrait from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-5-cushion-portrait-closeup.jpg";
+import lifestyleAdded6 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-6-added.jpg";
+import lifestyleAdded7 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-7-added.jpg";
+import lifestyleAdded8 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-8-added.jpg";
+import lifestyleAdded9 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-9-added.jpg";
+import lifestyleAdded10 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-10-added.jpg";
 
 
 
@@ -478,6 +483,46 @@ const STUDIO_LIFESTYLE_GALLERY: LightboxItem[] = [
     year: "2026",
     description:
       "Intimate beauty close-up resting on soft studio cushions, capturing genuine eye contact and radiant warmth.",
+  },
+  {
+    img: lifestyleAdded6,
+    title: "Radiant Lifestyle — Studio Portrait 6",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description: "Elegant and radiant studio lifestyle editorial capture showcasing personal style.",
+  },
+  {
+    img: lifestyleAdded7,
+    title: "Radiant Lifestyle — Studio Portrait 7",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description: "Elegant and radiant studio lifestyle editorial capture showcasing personal style.",
+  },
+  {
+    img: lifestyleAdded8,
+    title: "Radiant Lifestyle — Studio Portrait 8",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description: "Elegant and radiant studio lifestyle editorial capture showcasing personal style.",
+  },
+  {
+    img: lifestyleAdded9,
+    title: "Radiant Lifestyle — Studio Portrait 9",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description: "Elegant and radiant studio lifestyle editorial capture showcasing personal style.",
+  },
+  {
+    img: lifestyleAdded10,
+    title: "Radiant Lifestyle — Studio Portrait 10",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description: "Elegant and radiant studio lifestyle editorial capture showcasing personal style.",
   },
 ];
 
