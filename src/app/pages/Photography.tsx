@@ -65,6 +65,19 @@ import lifestyleAdded8 from "@/imports/Photography/Portrait/Studio Lifestyle/lif
 import lifestyleAdded9 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-9-added.jpg";
 import lifestyleAdded10 from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-10-added.jpg";
 
+// Portrait Campaign 5: Coastal Serenity
+import coastalImg1 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7004.jpg";
+import coastalImg2 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7009.jpg";
+import coastalImg3 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7015.jpg";
+import coastalImg4 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7016.jpg";
+import coastalImg5 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7038.jpg";
+import coastalImg6 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7047.jpg";
+import coastalImg7 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7049.jpg";
+import coastalImg8 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7091.jpg";
+import coastalImg9 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7117.jpg";
+import coastalImg10 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7127.jpg";
+import coastalImg11 from "@/imports/Photography/Portrait/Coastal Serenity/IMG_7129.jpg";
+
 
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Documentary", "Still Life"];
@@ -526,6 +539,98 @@ const STUDIO_LIFESTYLE_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 11: Coastal Serenity (Portrait) ───────────────────────── */
+const COASTAL_SERENITY_GALLERY: LightboxItem[] = [
+  {
+    img: coastalImg1,
+    title: "Coastal Serenity — Shoreline Stroll",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "A calming outdoor beach portrait capturing a gentle stroll along the sandy shores.",
+  },
+  {
+    img: coastalImg2,
+    title: "Coastal Serenity — Horizon Gaze",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Looking out toward the horizon, blending portraiture with expansive coastal beauty.",
+  },
+  {
+    img: coastalImg3,
+    title: "Coastal Serenity — Sun-Kissed Shore",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Natural golden sunlight illuminating expressive beach portraiture.",
+  },
+  {
+    img: coastalImg4,
+    title: "Coastal Serenity — Seaside Breeze",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Dynamic lifestyle portrait capturing movement and ocean breeze.",
+  },
+  {
+    img: coastalImg5,
+    title: "Coastal Serenity — Ocean Horizon Focus",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Atmospheric portrait framed against gentle seaside swells and open skies.",
+  },
+  {
+    img: coastalImg6,
+    title: "Coastal Serenity — Beach Front Candid",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Authentic, relaxed lifestyle portrait at the water's edge.",
+  },
+  {
+    img: coastalImg7,
+    title: "Coastal Serenity — Intimate Beach Detail",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Close-up portrait emphasizing serenity, warmth, and natural light.",
+  },
+  {
+    img: coastalImg8,
+    title: "Coastal Serenity — Coastal Chic Attire",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Fashion-forward portraiture harmonized with minimalist beach landscapes.",
+  },
+  {
+    img: coastalImg9,
+    title: "Coastal Serenity — Atlantic Tide Motion",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Striking composition with crashing waves creating an organic backdrop.",
+  },
+  {
+    img: coastalImg10,
+    title: "Coastal Serenity — Golden Sand Glow",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Warm, textured sand aesthetic framing intimate editorial portraiture.",
+  },
+  {
+    img: coastalImg11,
+    title: "Coastal Serenity — Ocean Twilight Horizon",
+    category: "Portrait",
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description: "Thoughtful seaside editorial capture immersed in calm oceanic tones.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -688,15 +793,30 @@ const PHOTOS: PhotoItem[] = [
     client: "Studio Lifestyle Editorial",
     year: "2026",
     description:
-      "A 5-image vibrant high-key studio series capturing relaxed elegance, playful expressive gestures, and sunlit color palettes across summer dresses and contemporary casuals.",
+      "A 10-image vibrant high-key studio series capturing relaxed elegance, playful expressive gestures, and sunlit color palettes across summer dresses and contemporary casuals.",
     gallery: "studiolifestyle",
     galleryItems: STUDIO_LIFESTYLE_GALLERY,
-    galleryCount: 5,
+    galleryCount: 10,
+  },
+  {
+    id: 11,
+    title: "Coastal Serenity — Seaside Lifestyle Editorial",
+    cat: "Portrait",
+    category: "Portrait",
+    img: coastalImg1,
+    tall: true,
+    client: "Coastal Serenity Editorial",
+    year: "2026",
+    description:
+      "An 11-image serene lifestyle portrait campaign capturing calm coastal vibes, ocean horizons, and sun-kissed natural tones along the coast.",
+    gallery: "coastalserenity",
+    galleryItems: COASTAL_SERENITY_GALLERY,
+    galleryCount: 11,
   },
 
   /* ── Other Portfolio Works ──────────────────────── */
   {
-    id: 11,
+    id: 12,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -706,7 +826,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 12,
+    id: 13,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -717,7 +837,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 13,
+    id: 14,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -727,7 +847,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 14,
+    id: 15,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -738,7 +858,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 15,
+    id: 16,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
