@@ -132,7 +132,7 @@ export function Contact() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&h=700&fit=crop&auto=format')",
+              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=600&fit=crop&auto=format&q=75')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.14,
