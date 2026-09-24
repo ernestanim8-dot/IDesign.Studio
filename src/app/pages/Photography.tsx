@@ -119,26 +119,26 @@ import gradImg09 from "@/imports/Photography/Events/graduation/IMG_5630.jpg";
 import gradImg10 from "@/imports/Photography/Events/graduation/IMG_5643.jpg";
 
 // Event Campaign 3: Investiture Services
-import investitureImg01 from "@/imports/Photography/Events/Investiture Services/web/IMG_0419.jpg";
-import investitureImg02 from "@/imports/Photography/Events/Investiture Services/web/IMG_0423.jpg";
-import investitureImg03 from "@/imports/Photography/Events/Investiture Services/web/IMG_0432.jpg";
-import investitureImg04 from "@/imports/Photography/Events/Investiture Services/web/IMG_0433.jpg";
-import investitureImg05 from "@/imports/Photography/Events/Investiture Services/web/IMG_0453.jpg";
-import investitureImg06 from "@/imports/Photography/Events/Investiture Services/web/IMG_0461.jpg";
-import investitureImg07 from "@/imports/Photography/Events/Investiture Services/web/IMG_0517.jpg";
-import investitureImg08 from "@/imports/Photography/Events/Investiture Services/web/IMG_0518.jpg";
-import investitureImg09 from "@/imports/Photography/Events/Investiture Services/web/IMG_0536.jpg";
-import investitureImg10 from "@/imports/Photography/Events/Investiture Services/web/IMG_0573.jpg";
-import investitureImg11 from "@/imports/Photography/Events/Investiture Services/web/IMG_1071.jpg";
-import investitureImg12 from "@/imports/Photography/Events/Investiture Services/web/IMG_1110.jpg";
-import investitureImg13 from "@/imports/Photography/Events/Investiture Services/web/IMG_1124.jpg";
-import investitureImg14 from "@/imports/Photography/Events/Investiture Services/web/IMG_1149.jpg";
-import investitureImg15 from "@/imports/Photography/Events/Investiture Services/web/IMG_1152.jpg";
-import investitureImg16 from "@/imports/Photography/Events/Investiture Services/web/IMG_1191.jpg";
-import investitureImg17 from "@/imports/Photography/Events/Investiture Services/web/IMG_1197.jpg";
-import investitureImg18 from "@/imports/Photography/Events/Investiture Services/web/IMG_1201.jpg";
-import investitureImg19 from "@/imports/Photography/Events/Investiture Services/web/IMG_1210.jpg";
-import investitureImg20 from "@/imports/Photography/Events/Investiture Services/web/IMG_1212.jpg";
+import investitureImg01 from "@/imports/Photography/Events/Investiture Services/IMG_0419.jpg";
+import investitureImg02 from "@/imports/Photography/Events/Investiture Services/IMG_0423.jpg";
+import investitureImg03 from "@/imports/Photography/Events/Investiture Services/IMG_0432.jpg";
+import investitureImg04 from "@/imports/Photography/Events/Investiture Services/IMG_0433.jpg";
+import investitureImg05 from "@/imports/Photography/Events/Investiture Services/IMG_0453.jpg";
+import investitureImg06 from "@/imports/Photography/Events/Investiture Services/IMG_0461.jpg";
+import investitureImg07 from "@/imports/Photography/Events/Investiture Services/IMG_0517.jpg";
+import investitureImg08 from "@/imports/Photography/Events/Investiture Services/IMG_0518.jpg";
+import investitureImg09 from "@/imports/Photography/Events/Investiture Services/IMG_0536.jpg";
+import investitureImg10 from "@/imports/Photography/Events/Investiture Services/IMG_0573.jpg";
+import investitureImg11 from "@/imports/Photography/Events/Investiture Services/IMG_1071.jpg";
+import investitureImg12 from "@/imports/Photography/Events/Investiture Services/IMG_1110.jpg";
+import investitureImg13 from "@/imports/Photography/Events/Investiture Services/IMG_1124.jpg";
+import investitureImg14 from "@/imports/Photography/Events/Investiture Services/IMG_1149.jpg";
+import investitureImg15 from "@/imports/Photography/Events/Investiture Services/IMG_1152.jpg";
+import investitureImg16 from "@/imports/Photography/Events/Investiture Services/IMG_1191.jpg";
+import investitureImg17 from "@/imports/Photography/Events/Investiture Services/IMG_1197.jpg";
+import investitureImg18 from "@/imports/Photography/Events/Investiture Services/IMG_1201.jpg";
+import investitureImg19 from "@/imports/Photography/Events/Investiture Services/IMG_1210.jpg";
+import investitureImg20 from "@/imports/Photography/Events/Investiture Services/IMG_1212.jpg";
 
 // Documentary Campaign: Ghana Month — Heritage & Cultural Pride
 import ghanaMonthImg01 from "@/imports/Photography/Documentary/Ghana Month/IMG_6339.jpg";
