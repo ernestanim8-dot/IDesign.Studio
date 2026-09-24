@@ -53,6 +53,17 @@ export function Contact() {
 
   const phoneNumber = "233502310663";
 
+  const serviceOptions = [
+    "Graduation & Matriculation Sessions",
+    "Studio Fashion Sessions",
+    "Corporate & Investiture Events",
+    "Commercial Photography",
+    "Graphic Design",
+    "Creative Concepts",
+    "Print Only",
+    "Complete Brand",
+  ];
+
   const constructWhatsAppMessage = () => {
     return [
       "👋 Hello iDESIGN Studio!",
@@ -792,7 +803,7 @@ export function Contact() {
                         Service Required
                       </label>
                       <div className="flex flex-wrap gap-2">
-                        {["Graphic Design", "Photography", "Creative Concepts", "Print Only", "Complete Brand"].map(
+                        {serviceOptions.map(
                           (opt) => (
                             <button
                               type="button"

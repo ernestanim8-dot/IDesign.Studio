@@ -6,6 +6,9 @@ import logoFull from "@/imports/i design logo.png";
 import photographyImg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
 import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
+import graduation2025Img from "@/imports/Photography/Events/graduation-2025/gctu-2025-13-triumph-pose.jpg";
+import matriculation2025Img from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-15-future-leader.jpg";
+import redVelvetStudioImg from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-06-reclined-chair.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 
@@ -30,6 +33,27 @@ const SERVICES = [
     img: graphicDesignImg,
     icon: "◈",
     to: "/graphic-design",
+  },
+];
+
+const LATEST_WORK = [
+  {
+    title: "The Graduate",
+    subtitle: "GCTU Graduation 2025",
+    category: "Event Photography",
+    img: graduation2025Img,
+  },
+  {
+    title: "First Steps Forward",
+    subtitle: "Matriculation 2025",
+    category: "Event Photography",
+    img: matriculation2025Img,
+  },
+  {
+    title: "Red Velvet Studio",
+    subtitle: "Fashion Portrait Session",
+    category: "Portrait Photography",
+    img: redVelvetStudioImg,
   },
 ];
 
@@ -456,7 +480,7 @@ export function Home() {
         </div>
       </section>
 
-      <section id="featured-work" style={{ padding: "6rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
+      <section id="services" style={{ padding: "6rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <p
@@ -581,6 +605,93 @@ export function Home() {
       </section>
 
       {/* ── Stats ── */}
+      <section id="featured-work" style={{ background: DARKER, padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <FadeUp>
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between" style={{ marginBottom: "2.5rem" }}>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "'DM Mono',monospace",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: GOLD,
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  Latest 2025 Work
+                </p>
+                <h2
+                  style={{
+                    fontFamily: "'DM Serif Display',serif",
+                    fontSize: "clamp(2rem,4vw,3rem)",
+                    color: WHITE,
+                  }}
+                >
+                  New stories, fully framed.
+                </h2>
+              </div>
+              <Link
+                to="/photography"
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                View all photography {"->"}
+              </Link>
+            </div>
+          </FadeUp>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {LATEST_WORK.map((work, index) => (
+              <FadeUp key={work.title} delay={index * 0.1}>
+                <Link
+                  to="/photography"
+                  className="group block"
+                  style={{ color: WHITE, textDecoration: "none" }}
+                  aria-label={`View ${work.title} in the photography portfolio`}
+                >
+                  <article style={{ position: "relative", minHeight: "clamp(300px, 34vw, 440px)", overflow: "hidden" }}>
+                    <img
+                      src={work.img}
+                      alt={`${work.title} - ${work.subtitle}`}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ width: "100%", height: "100%", position: "absolute", inset: 0, objectFit: "cover", transition: "transform 0.6s ease" }}
+                      className="group-hover:scale-105"
+                    />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(13,12,9,0.03) 30%, rgba(13,12,9,0.9) 100%)" }} />
+                    <div style={{ position: "absolute", left: "1.5rem", right: "1.5rem", bottom: "1.4rem" }}>
+                      <p
+                        style={{
+                          fontFamily: "'DM Mono',monospace",
+                          fontSize: "0.61rem",
+                          letterSpacing: "0.13em",
+                          textTransform: "uppercase",
+                          color: GOLD_LIGHT,
+                          marginBottom: "0.45rem",
+                        }}
+                      >
+                        {work.category}
+                      </p>
+                      <h3 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.65rem", lineHeight: 1.1, marginBottom: "0.3rem" }}>{work.title}</h3>
+                      <p style={{ fontFamily: "'Work Sans',sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.75)" }}>{work.subtitle}</p>
+                    </div>
+                  </article>
+                </Link>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section style={{ background: DARKER, padding: "5rem 2rem", position: "relative", overflow: "hidden" }}>
         <div
           style={{

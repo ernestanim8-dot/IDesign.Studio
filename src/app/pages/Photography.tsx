@@ -2238,7 +2238,10 @@ export function Photography() {
         </div>
 
         {/* Category filter chips */}
-        <div className="flex flex-wrap justify-center gap-2">
+        <div
+          className="flex flex-wrap justify-center gap-2 max-sm:justify-start max-sm:overflow-x-auto max-sm:flex-nowrap max-sm:pb-2 max-sm:px-1"
+          style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}
+        >
           {CATEGORIES.map((c) => {
             const count = getCategoryCount(c);
             const isSelected = activeCategory === c;
