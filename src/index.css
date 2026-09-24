@@ -132,3 +132,16 @@ body {
     display: none !important;
   }
 }
+
+/* ── Performance: GPU promotion for animated cards ─────────────────── */
+/* Cards that use motion scale/brightness get their own compositor layer */
+.perf-card {
+  contain: layout style;
+}
+
+/* ── Performance: deferred off-screen rendering ─────────────────────── */
+/* Sections below the fold skip paint until scrolled near */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}

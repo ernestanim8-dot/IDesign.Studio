@@ -166,7 +166,7 @@ export function Layout() {
     document.addEventListener("click", handleAnchorClick);
 
     if (!location.hash) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo(0, 0);
       return () => document.removeEventListener("click", handleAnchorClick);
     }
 

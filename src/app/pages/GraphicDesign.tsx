@@ -1279,7 +1279,7 @@ export function GraphicDesign() {
                       filter: hovered === p.id ? "brightness(0.38)" : "brightness(0.92)",
                     }}
                     transition={{ duration: 0.5 }}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", willChange: "transform" }}
                   />
 
                   {/* Corner indicator badge */}

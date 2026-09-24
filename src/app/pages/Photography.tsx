@@ -2010,8 +2010,7 @@ export function Photography() {
             </button>
           </div>
         ) : (
-          <motion.div
-            layout
+          <div
             className="grid gap-4"
             style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
           >
@@ -2022,13 +2021,14 @@ export function Photography() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.4, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.35, delay: Math.min(i * 0.04, 0.35), ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   position: "relative",
                   overflow: "hidden",
                   borderRadius: "4px",
                   background: SURFACE,
                   cursor: "pointer",
+                  willChange: "transform",
                 }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
@@ -2038,6 +2038,8 @@ export function Photography() {
                   <motion.img
                     src={p.img}
                     alt={p.title}
+                    loading="lazy"
+                    decoding="async"
                     animate={{
                       scale: hovered === p.id ? 1.06 : 1,
                       filter: hovered === p.id ? "brightness(0.35)" : "brightness(0.92)",
@@ -2137,7 +2139,7 @@ export function Photography() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         )}
       </section>
 

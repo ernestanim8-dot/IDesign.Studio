@@ -1006,6 +1006,7 @@ export function CreativeConcepts() {
                   borderRadius: "5px",
                   background: SURFACE,
                   cursor: "pointer",
+                  willChange: "transform",
                 }}
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
@@ -1015,6 +1016,8 @@ export function CreativeConcepts() {
                   <motion.img
                     src={p.img}
                     alt={p.title}
+                    loading="lazy"
+                    decoding="async"
                     animate={{
                       scale: hovered === p.id ? 1.06 : 1,
                       filter: hovered === p.id ? "brightness(0.38)" : "brightness(0.9)",
