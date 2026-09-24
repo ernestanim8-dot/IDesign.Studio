@@ -118,6 +118,28 @@ import gradImg08 from "@/imports/Photography/Events/graduation/IMG_5606.jpg";
 import gradImg09 from "@/imports/Photography/Events/graduation/IMG_5630.jpg";
 import gradImg10 from "@/imports/Photography/Events/graduation/IMG_5643.jpg";
 
+// Event Campaign 3: Investiture Services
+import investitureImg01 from "@/imports/Photography/Events/Investiture Services/web/IMG_0419.jpg";
+import investitureImg02 from "@/imports/Photography/Events/Investiture Services/web/IMG_0423.jpg";
+import investitureImg03 from "@/imports/Photography/Events/Investiture Services/web/IMG_0432.jpg";
+import investitureImg04 from "@/imports/Photography/Events/Investiture Services/web/IMG_0433.jpg";
+import investitureImg05 from "@/imports/Photography/Events/Investiture Services/web/IMG_0453.jpg";
+import investitureImg06 from "@/imports/Photography/Events/Investiture Services/web/IMG_0461.jpg";
+import investitureImg07 from "@/imports/Photography/Events/Investiture Services/web/IMG_0517.jpg";
+import investitureImg08 from "@/imports/Photography/Events/Investiture Services/web/IMG_0518.jpg";
+import investitureImg09 from "@/imports/Photography/Events/Investiture Services/web/IMG_0536.jpg";
+import investitureImg10 from "@/imports/Photography/Events/Investiture Services/web/IMG_0573.jpg";
+import investitureImg11 from "@/imports/Photography/Events/Investiture Services/web/IMG_1071.jpg";
+import investitureImg12 from "@/imports/Photography/Events/Investiture Services/web/IMG_1110.jpg";
+import investitureImg13 from "@/imports/Photography/Events/Investiture Services/web/IMG_1124.jpg";
+import investitureImg14 from "@/imports/Photography/Events/Investiture Services/web/IMG_1149.jpg";
+import investitureImg15 from "@/imports/Photography/Events/Investiture Services/web/IMG_1152.jpg";
+import investitureImg16 from "@/imports/Photography/Events/Investiture Services/web/IMG_1191.jpg";
+import investitureImg17 from "@/imports/Photography/Events/Investiture Services/web/IMG_1197.jpg";
+import investitureImg18 from "@/imports/Photography/Events/Investiture Services/web/IMG_1201.jpg";
+import investitureImg19 from "@/imports/Photography/Events/Investiture Services/web/IMG_1210.jpg";
+import investitureImg20 from "@/imports/Photography/Events/Investiture Services/web/IMG_1212.jpg";
+
 // Documentary Campaign: Ghana Month — Heritage & Cultural Pride
 import ghanaMonthImg01 from "@/imports/Photography/Documentary/Ghana Month/IMG_6339.jpg";
 import ghanaMonthImg02 from "@/imports/Photography/Documentary/Ghana Month/IMG_6374.jpg";
@@ -1108,6 +1130,20 @@ const GRADUATION_GALLERY: LightboxItem[] = [
 ];
 
 /* ─── Gallery 15: The Engineer — Bold & Professional (Commercial) ── */
+const INVESTITURE_SERVICES_GALLERY: LightboxItem[] = [
+  investitureImg01, investitureImg02, investitureImg03, investitureImg04, investitureImg05,
+  investitureImg06, investitureImg07, investitureImg08, investitureImg09, investitureImg10,
+  investitureImg11, investitureImg12, investitureImg13, investitureImg14, investitureImg15,
+  investitureImg16, investitureImg17, investitureImg18, investitureImg19, investitureImg20,
+].map((img, index) => ({
+  img,
+  title: `Investiture Services - Ceremony Moment ${String(index + 1).padStart(2, "0")}`,
+  category: "Event",
+  client: "Investiture Services",
+  year: "2026",
+  description: "A considered event photograph documenting the ceremony, its people, and the significance of the occasion.",
+}));
+
 const ENGINEER_GALLERY: LightboxItem[] = [
   {
     img: engineerImg01,
@@ -1477,7 +1513,7 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: COASTAL_SERENITY_GALLERY,
     galleryCount: 11,
   },
-  
+
   {
     id: 24,
     title: "Studio Glam — From Hard Hats to High Fashion",
@@ -1540,6 +1576,21 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: GRADUATION_GALLERY,
     galleryCount: 10,
   },
+  {
+    id: 24,
+    title: "Investiture Services",
+    cat: "Event",
+    category: "Event",
+    img: investitureImg01,
+    tall: true,
+    client: "Investiture Services",
+    year: "2026",
+    description:
+      "A 20-image event editorial documenting the ceremony, formal proceedings, distinguished guests, and the defining moments of investiture day.",
+    gallery: "investiture-services",
+    galleryItems: INVESTITURE_SERVICES_GALLERY,
+    galleryCount: 20,
+  },
 
   /* ── Grouped Campaigns: Documentary ─────────────────── */
   {
@@ -1575,81 +1626,6 @@ const PHOTOS: PhotoItem[] = [
     galleryCount: 3,
   },
 
-  {
-    id: 16,
-    title: "Golden Hour Coast",
-    cat: "Commercial",
-    category: "Commercial",
-    img: "https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=1000&h=700&fit=crop&auto=format&q=95",
-    tall: false,
-    client: "Horizon Travel",
-    year: "2024",
-    description: "Campaign visual for sustainable luxury coastal travel destination.",
-  },
-  {
-    id: 17,
-    title: "Solstice Ritual",
-    cat: "Documentary",
-    category: "Documentary",
-    img: "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=1000&h=800&fit=crop&auto=format&q=95",
-    tall: true,
-    year: "2023",
-    description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
-  },
-  {
-    id: 18,
-    title: "Botanical Still Life No. 7",
-    cat: "Still Life",
-    category: "Still Life",
-    img: "https://images.unsplash.com/photo-1490750967868-88df5691cc5f?w=1000&h=750&fit=crop&auto=format&q=95",
-    tall: false,
-    client: "Flora Atelier",
-    year: "2023",
-    description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
-  },
-  {
-    id: 19,
-    title: "Editorial Studio Portrait",
-    cat: "Portrait",
-    category: "Portrait",
-    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&h=800&fit=crop&auto=format&q=95",
-    tall: true,
-    client: "Vogue Creative Spotlight",
-    year: "2024",
-    description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
-  },
-  {
-    id: 20,
-    title: "Brand Story & Craft",
-    cat: "Commercial",
-    category: "Commercial",
-    img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1000&h=700&fit=crop&auto=format&q=95",
-    tall: false,
-    client: "Heritage Makers Co.",
-    year: "2023",
-    description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
-  },
-  {
-    id: 21,
-    title: "Urban Fragment",
-    cat: "Documentary",
-    category: "Documentary",
-    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1000&h=750&fit=crop&auto=format&q=95",
-    tall: false,
-    year: "2023",
-    description: "Geometric lines, architectural shadows, and metropolitan movement.",
-  },
-  {
-    id: 22,
-    title: "Quiet Interior & Form",
-    cat: "Still Life",
-    category: "Still Life",
-    img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1000&h=800&fit=crop&auto=format&q=95",
-    tall: true,
-    client: "Nordic Living Studio",
-    year: "2024",
-    description: "Interior architectural study focusing on green velvet furnishings and serene ambient light.",
-  },
 ];
 
 /** Total count for category badges — counts grouped galleries as their individual shot count */
