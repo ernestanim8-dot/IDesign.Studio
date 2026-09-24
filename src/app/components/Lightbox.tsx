@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, WHITE, DARKER, MUTED, BORDER } from "@/tokens";
+import { submitInquiry } from "@/app/api";
 
 export interface LightboxItem {
   img: string;
@@ -40,6 +41,11 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const [direction, setDirection] = useState<number>(0);
+  const [briefOpen, setBriefOpen] = useState(false);
+  const [briefName, setBriefName] = useState("");
+  const [briefEmail, setBriefEmail] = useState("");
+  const [briefMessage, setBriefMessage] = useState("");
+  const [briefStatus, setBriefStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const isOpen = currentIndex !== null && currentIndex >= 0 && currentIndex < items.length;
   const currentItem = isOpen ? items[currentIndex] : null;
 
@@ -87,6 +93,21 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
         handlePrev();
       }
     }
+  };
+
+  const handleBriefSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!currentItem || !briefName.trim() || !briefEmail.trim() || !briefMessage.trim()) return;
+
+    setBriefStatus("sending");
+    const result = await submitInquiry({
+      fullName: briefName,
+      email: briefEmail,
+      interest: `Artwork request: ${currentItem.title}`,
+      timeline: "Flexible / Future",
+      message: `Artwork reference: ${currentItem.title}\nCategory: ${currentItem.category || "Portfolio"}\n\nClient request:\n${briefMessage.trim()}`,
+    });
+    setBriefStatus(result.ok ? "sent" : "error");
   };
 
   useEffect(() => {
@@ -474,6 +495,29 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
               </p>
             )}
 
+            <button
+              type="button"
+              onClick={() => {
+                setBriefStatus("idle");
+                setBriefOpen(true);
+              }}
+              style={{
+                marginTop: "0.8rem",
+                background: "transparent",
+                border: `1px solid ${GOLD}`,
+                color: GOLD,
+                padding: "0.48rem 0.8rem",
+                borderRadius: "3px",
+                cursor: "pointer",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.62rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              Request something similar
+            </button>
+
             {/* Subtle Mobile Gesture Hint */}
             <div className="sm:hidden" style={{ marginTop: "0.5rem" }}>
               <span
@@ -489,6 +533,74 @@ export function Lightbox({ items, currentIndex, onClose, onNavigate }: LightboxP
               </span>
             </div>
           </div>
+
+          <AnimatePresence>
+            {briefOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 30,
+                  display: "grid",
+                  placeItems: "center",
+                  padding: "1rem",
+                  background: "rgba(10, 9, 7, 0.72)",
+                }}
+                onClick={() => setBriefOpen(false)}
+              >
+                <motion.form
+                  initial={{ opacity: 0, y: 14, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 14, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  onSubmit={handleBriefSubmit}
+                  onClick={(event) => event.stopPropagation()}
+                  style={{
+                    width: "min(100%, 460px)",
+                    maxHeight: "calc(100vh - 2rem)",
+                    overflowY: "auto",
+                    background: "#171510",
+                    border: `1px solid ${BORDER}`,
+                    borderRadius: "6px",
+                    padding: "clamp(1.2rem, 4vw, 2rem)",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", gap: "1rem", marginBottom: "1.2rem" }}>
+                    <div>
+                      <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: GOLD, marginBottom: "0.45rem" }}>Artwork request</p>
+                      <h4 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.4rem", color: WHITE, lineHeight: 1.15 }}>Tell us what you need</h4>
+                      <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.78rem", color: MUTED, marginTop: "0.45rem" }}>Based on: {currentItem.title}</p>
+                    </div>
+                    <button type="button" onClick={() => setBriefOpen(false)} aria-label="Close request form" style={{ background: "transparent", border: "none", color: MUTED, cursor: "pointer", fontSize: "1.25rem", padding: "0.2rem" }}>x</button>
+                  </div>
+
+                  {briefStatus === "sent" ? (
+                    <div style={{ fontFamily: "'Work Sans', sans-serif", color: WHITE, lineHeight: 1.6 }}>
+                      <p style={{ color: GOLD, fontSize: "1.05rem", marginBottom: "0.4rem" }}>Request received.</p>
+                      <p style={{ color: MUTED, fontSize: "0.84rem" }}>We have your brief and will be in touch using the email you provided.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        <input required value={briefName} onChange={(event) => setBriefName(event.target.value)} placeholder="Your name" style={{ background: "#0f0e0b", border: `1px solid ${BORDER}`, color: WHITE, padding: "0.7rem 0.8rem", borderRadius: "3px", fontFamily: "'Work Sans', sans-serif", fontSize: "0.82rem", minWidth: 0 }} />
+                        <input required type="email" value={briefEmail} onChange={(event) => setBriefEmail(event.target.value)} placeholder="Email address" style={{ background: "#0f0e0b", border: `1px solid ${BORDER}`, color: WHITE, padding: "0.7rem 0.8rem", borderRadius: "3px", fontFamily: "'Work Sans', sans-serif", fontSize: "0.82rem", minWidth: 0 }} />
+                      </div>
+                      <textarea required rows={5} value={briefMessage} onChange={(event) => setBriefMessage(event.target.value)} placeholder="Describe the kind of work you would like, the changes you have in mind, and any important details." style={{ width: "100%", marginTop: "0.75rem", background: "#0f0e0b", border: `1px solid ${BORDER}`, color: WHITE, padding: "0.7rem 0.8rem", borderRadius: "3px", resize: "vertical", fontFamily: "'Work Sans', sans-serif", fontSize: "0.82rem", lineHeight: 1.5 }} />
+                      {briefStatus === "error" && <p style={{ color: "#f8aaa5", fontFamily: "'Work Sans', sans-serif", fontSize: "0.78rem", marginTop: "0.65rem" }}>We could not send that request. Please try again or use WhatsApp.</p>}
+                      <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.7rem", marginTop: "1rem" }}>
+                        <button type="button" onClick={() => setBriefOpen(false)} style={{ background: "transparent", border: "none", color: MUTED, cursor: "pointer", fontFamily: "'Work Sans', sans-serif", fontSize: "0.82rem" }}>Cancel</button>
+                        <button type="submit" disabled={briefStatus === "sending"} style={{ background: GOLD, border: "none", borderRadius: "3px", color: DARKER, cursor: briefStatus === "sending" ? "wait" : "pointer", padding: "0.7rem 1rem", fontFamily: "'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>{briefStatus === "sending" ? "Sending..." : "Send request"}</button>
+                      </div>
+                    </>
+                  )}
+                </motion.form>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

@@ -131,7 +131,7 @@ pnpm dev:frontend
 ## 📬 Contact & Studio Inquiries
 
 - **Email**: [idesign6048@gmail.com](mailto:idesign6048@gmail.com)
-- **WhatsApp**: [+233 50 233 0663](https://wa.me/233502330663)
+- **WhatsApp**: [+233 50 231 0663](https://wa.me/233502310663)
 - **Location**: Accra, Ghana
 
 ---
