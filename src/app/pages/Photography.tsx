@@ -53,6 +53,14 @@ import bdayOutdoorYellowWalk from "@/imports/Photography/Portrait/Birthday 2/IMG
 import bdayOutdoorYellowBokeh from "@/imports/Photography/Portrait/Birthday 2/IMG_6744.jpg";
 import bdayOutdoorYellowJoy from "@/imports/Photography/Portrait/Birthday 2/IMG_6721.jpg";
 
+// Portrait Campaign 4: Radiant Studio Lifestyle
+import lifestyleBlueDress from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
+import lifestyleOrangeDress from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-2-orange-pleated-dress.jpg";
+import lifestyleYellowBlouse from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-3-yellow-blouse-pose.jpg";
+import lifestyleFramePose from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-4-camera-frame-pose.jpg";
+import lifestyleCushionPortrait from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-5-cushion-portrait-closeup.jpg";
+
+
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Documentary", "Still Life"];
 
@@ -424,6 +432,55 @@ const OUTDOOR_COUTURE_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery 10: Radiant Studio Lifestyle (Portrait) ───────────────── */
+const STUDIO_LIFESTYLE_GALLERY: LightboxItem[] = [
+  {
+    img: lifestyleBlueDress,
+    title: "Radiant Lifestyle — Pastel Blue Elegance",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "Joyful high-key studio portrait seated on a velvet ottoman in a textured powder-blue summer dress, accented with golden floral arrangement.",
+  },
+  {
+    img: lifestyleOrangeDress,
+    title: "Radiant Lifestyle — Sun-Stripe Poise",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "Vibrant full-length studio fashion study in an orange-and-white ribbed pleated dress, featuring natural smile and delicate hand gestures.",
+  },
+  {
+    img: lifestyleFramePose,
+    title: "Radiant Lifestyle — The Viewfinder Frame",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "Playful candid close-up framing eyes through a camera viewfinder gesture in a sunny yellow cold-shoulder ruffle blouse.",
+  },
+  {
+    img: lifestyleYellowBlouse,
+    title: "Radiant Lifestyle — Yellow Ruffle Chic",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "Expressive contemporary studio portrait pairing a bright sunshine ruffle top with classic blue denim and luminous lighting.",
+  },
+  {
+    img: lifestyleCushionPortrait,
+    title: "Radiant Lifestyle — Intimate Studio Warmth",
+    category: "Portrait",
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "Intimate beauty close-up resting on soft studio cushions, capturing genuine eye contact and radiant warmth.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -576,10 +633,25 @@ const PHOTOS: PhotoItem[] = [
     galleryItems: OUTDOOR_COUTURE_GALLERY,
     galleryCount: 5,
   },
+  {
+    id: 10,
+    title: "Radiant Studio Lifestyle — Elegance & Expression",
+    cat: "Portrait",
+    category: "Portrait",
+    img: lifestyleBlueDress,
+    tall: true,
+    client: "Studio Lifestyle Editorial",
+    year: "2026",
+    description:
+      "A 5-image vibrant high-key studio series capturing relaxed elegance, playful expressive gestures, and sunlit color palettes across summer dresses and contemporary casuals.",
+    gallery: "studiolifestyle",
+    galleryItems: STUDIO_LIFESTYLE_GALLERY,
+    galleryCount: 5,
+  },
 
   /* ── Other Portfolio Works ──────────────────────── */
   {
-    id: 10,
+    id: 11,
     title: "Fog & Light",
     cat: "Documentary",
     category: "Documentary",
@@ -589,7 +661,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Atmospheric dawn capture illustrating the interplay of morning mist and golden mountain ridgelines.",
   },
   {
-    id: 11,
+    id: 12,
     title: "Golden Hour Coast",
     cat: "Commercial",
     category: "Commercial",
@@ -600,7 +672,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Campaign visual for sustainable luxury coastal travel destination.",
   },
   {
-    id: 12,
+    id: 13,
     title: "Solstice Ritual",
     cat: "Documentary",
     category: "Documentary",
@@ -610,7 +682,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Natural light documentary study on quiet spaces and tranquil Scandinavian geography.",
   },
   {
-    id: 13,
+    id: 14,
     title: "Botanical Still Life No. 7",
     cat: "Still Life",
     category: "Still Life",
@@ -621,7 +693,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Minimalist floral composition highlighting soft texture gradients and balanced shadow play.",
   },
   {
-    id: 14,
+    id: 15,
     title: "Editorial Studio Portrait",
     cat: "Portrait",
     category: "Portrait",
@@ -632,7 +704,7 @@ const PHOTOS: PhotoItem[] = [
     description: "High-contrast editorial portrait capturing strength, quiet presence, and organic skin tones.",
   },
   {
-    id: 15,
+    id: 16,
     title: "Brand Story & Craft",
     cat: "Commercial",
     category: "Commercial",
@@ -643,7 +715,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Authentic behind-the-scenes craft documentation showcasing artisanal handiwork.",
   },
   {
-    id: 16,
+    id: 17,
     title: "Urban Fragment",
     cat: "Documentary",
     category: "Documentary",
@@ -653,7 +725,7 @@ const PHOTOS: PhotoItem[] = [
     description: "Geometric lines, architectural shadows, and metropolitan movement.",
   },
   {
-    id: 17,
+    id: 18,
     title: "Quiet Interior & Form",
     cat: "Still Life",
     category: "Still Life",
