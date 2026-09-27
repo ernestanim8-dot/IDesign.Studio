@@ -116,6 +116,13 @@ function cleanString(val, fallback = "") {
   return typeof val === "string" ? val.trim().slice(0, 5000) : fallback;
 }
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+    return entities[character];
+  });
+}
+
 function toSupabaseInquiry(inquiry) {
   return {
     id: inquiry.id,
@@ -288,6 +295,17 @@ async function handleContact(req, res) {
 
     // Automated email notifications via Resend API (fires in parallel — does not block response)
     if (process.env.RESEND_API_KEY) {
+      const savedInquiry = inquiry;
+      const inquiry = {
+        ...savedInquiry,
+        fullName: escapeHtml(savedInquiry.fullName),
+        email: escapeHtml(savedInquiry.email),
+        phone: escapeHtml(savedInquiry.phone),
+        interest: escapeHtml(savedInquiry.interest),
+        timeline: escapeHtml(savedInquiry.timeline),
+        budget: escapeHtml(savedInquiry.budget),
+        message: escapeHtml(savedInquiry.message),
+      };
       const fromAddress = process.env.RESEND_FROM_EMAIL || "iDESIGN Studio <onboarding@resend.dev>";
       const notifyAddress = process.env.NOTIFICATION_EMAIL || "idesign6048@gmail.com";
       const receivedDate = new Date(inquiry.createdAt).toLocaleString("en-US", {
@@ -489,7 +507,7 @@ async function handleContact(req, res) {
           body: JSON.stringify({
             from: fromAddress,
             to: [notifyAddress],
-            reply_to: inquiry.email,
+            reply_to: savedInquiry.email,
             subject: `✦ New Inquiry [${inquiry.id}]: ${inquiry.fullName} — ${inquiry.interest}`,
             html: studioNotificationHtml,
           }),
@@ -502,7 +520,7 @@ async function handleContact(req, res) {
           },
           body: JSON.stringify({
             from: fromAddress,
-            to: [inquiry.email],
+            to: [savedInquiry.email],
             reply_to: notifyAddress,
             subject: `We received your inquiry — iDESIGN Studio`,
             html: clientConfirmationHtml,

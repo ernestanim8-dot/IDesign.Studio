@@ -49,6 +49,8 @@ export function Contact() {
   const [phone, setPhone] = useState("");
   const [interest, setInterest] = useState("Graphic Design");
   const [timeline, setTimeline] = useState("Within 2 weeks");
+  const [budget, setBudget] = useState("Budget flexible");
+  const [preferredDate, setPreferredDate] = useState("");
   const [message, setMessage] = useState("");
 
   const phoneNumber = "233502310663";
@@ -74,10 +76,17 @@ export function Contact() {
       `• Phone/WhatsApp: ${phone.trim() || "Not provided"}`,
       `• Service of Interest: ${interest}`,
       `• Target Timeline: ${timeline}`,
+      `• Budget Range: ${budget}`,
+      `• Preferred Project Date: ${preferredDate || "Not specified"}`,
       "",
       "📝 Project Details:",
       message.trim() || "Looking forward to hearing about your availability and rates.",
     ].join("\n");
+  };
+
+  const buildInquiryMessage = () => {
+    const details = message.trim() || "No additional project details provided.";
+    return preferredDate ? `Preferred project date: ${preferredDate}\n\n${details}` : details;
   };
 
   const handleSendViaWhatsApp = (e: React.FormEvent) => {
@@ -112,7 +121,8 @@ export function Contact() {
         phone,
         interest,
         timeline,
-        message,
+        budget,
+        message: buildInquiryMessage(),
       });
 
       if (!result.ok) {
@@ -680,7 +690,7 @@ export function Contact() {
                     Fill in your project specifications. You can submit normally or dispatch straight to our WhatsApp.
                   </p>
 
-                  <form style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  <form onSubmit={handleStandardSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     {/* Name */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                       <label
@@ -867,6 +877,76 @@ export function Contact() {
                       </div>
                     </div>
 
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                        <label
+                          style={{
+                            fontFamily: "'DM Mono',monospace",
+                            fontSize: "0.62rem",
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase",
+                            color: MUTED,
+                          }}
+                        >
+                          Budget Range
+                        </label>
+                        <select
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                          style={{
+                            background: SURFACE,
+                            border: `1px solid ${BORDER}`,
+                            color: DARK,
+                            fontFamily: "'Work Sans',sans-serif",
+                            fontSize: "0.9rem",
+                            fontWeight: 300,
+                            padding: "0.75rem 1rem",
+                            outline: "none",
+                            borderRadius: "3px",
+                          }}
+                          onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
+                          onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                        >
+                          <option>Budget flexible</option>
+                          <option>Under GHS 1,000</option>
+                          <option>GHS 1,000 - 3,000</option>
+                          <option>GHS 3,000 - 7,500</option>
+                          <option>GHS 7,500+</option>
+                        </select>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                        <label
+                          style={{
+                            fontFamily: "'DM Mono',monospace",
+                            fontSize: "0.62rem",
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase",
+                            color: MUTED,
+                          }}
+                        >
+                          Preferred Project Date
+                        </label>
+                        <input
+                          type="date"
+                          value={preferredDate}
+                          onChange={(e) => setPreferredDate(e.target.value)}
+                          style={{
+                            background: SURFACE,
+                            border: `1px solid ${BORDER}`,
+                            color: DARK,
+                            fontFamily: "'Work Sans',sans-serif",
+                            fontSize: "0.9rem",
+                            fontWeight: 300,
+                            padding: "0.75rem 1rem",
+                            outline: "none",
+                            borderRadius: "3px",
+                          }}
+                          onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
+                          onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                        />
+                      </div>
+                    </div>
+
                     {/* Message */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                       <label
@@ -924,6 +1004,7 @@ export function Contact() {
                       <motion.button
                         type="button"
                         onClick={handleSendViaWhatsApp}
+                        disabled={isSubmitting}
                         whileHover={{ scale: 1.02, boxShadow: "0 8px 24px rgba(37, 211, 102, 0.35)" }}
                         whileTap={{ scale: 0.98 }}
                         style={{
@@ -948,8 +1029,7 @@ export function Contact() {
                       </motion.button>
 
                       <motion.button
-                        type="button"
-                        onClick={handleStandardSubmit}
+                        type="submit"
                         disabled={isSubmitting}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -963,7 +1043,7 @@ export function Contact() {
                           background: GOLD,
                           color: WHITE,
                           border: "none",
-                          cursor: "pointer",
+                          cursor: isSubmitting ? "not-allowed" : "pointer",
                           borderRadius: "3px",
                         }}
                       >
