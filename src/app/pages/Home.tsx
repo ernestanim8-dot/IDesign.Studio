@@ -57,6 +57,36 @@ const LATEST_WORK = [
   },
 ];
 
+const CASE_STUDIES = [
+  {
+    title: "Blue for Men",
+    label: "Product Campaign",
+    image: blueForMenImg,
+    alt: "Blue for Men fragrance campaign photography",
+    summary:
+      "A crisp product story built around texture, light, and a clean premium finish for a fragrance launch.",
+    focus: "Art direction, product photography, campaign-ready imagery",
+  },
+  {
+    title: "Radiant Studio Lifestyle",
+    label: "Portrait Series",
+    image: studioLifestyleImg,
+    alt: "Radiant Studio Lifestyle portrait photography",
+    summary:
+      "An editorial portrait series balancing natural expression with an intentional studio-led visual identity.",
+    focus: "Creative direction, portrait photography, editorial styling",
+  },
+  {
+    title: "Right Guard",
+    label: "Commercial Photography",
+    image: rightGuardImg,
+    alt: "Right Guard commercial product photography",
+    summary:
+      "A high-energy commercial set created to give an everyday product a confident, performance-driven presence.",
+    focus: "Campaign concept, product styling, digital content",
+  },
+];
+
 
 const STATS = [
   { value: "5+", label: "Years in Business" },
@@ -688,6 +718,106 @@ export function Home() {
                     </div>
                   </article>
                 </Link>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ background: BG, padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+          <FadeUp>
+            <div style={{ maxWidth: "620px", marginBottom: "3.5rem" }}>
+              <p
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.68rem",
+                  letterSpacing: 0,
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  marginBottom: "0.8rem",
+                }}
+              >
+                Selected Case Studies
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'DM Serif Display', serif",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  lineHeight: 1.08,
+                  color: DARK,
+                  marginBottom: "1rem",
+                }}
+              >
+                More than a final image.
+              </h2>
+              <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "1rem", lineHeight: 1.7, color: MUTED }}>
+                A closer look at how iDESIGN turns a brief into visual work that feels clear, useful, and ready to share.
+              </p>
+            </div>
+          </FadeUp>
+
+          <div>
+            {CASE_STUDIES.map((study, index) => (
+              <FadeUp key={study.title} delay={index * 0.1}>
+                <article
+                  className="grid gap-8 py-10 md:grid-cols-2 md:items-center md:gap-14"
+                  style={{ borderTop: `1px solid ${BORDER}` }}
+                >
+                  <img
+                    src={study.image}
+                    alt={study.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={index % 2 === 1 ? "md:order-2" : undefined}
+                    style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", display: "block" }}
+                  />
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "0.68rem",
+                        letterSpacing: 0,
+                        textTransform: "uppercase",
+                        color: GOLD,
+                        marginBottom: "0.8rem",
+                      }}
+                    >
+                      {study.label}
+                    </p>
+                    <h3
+                      style={{
+                        fontFamily: "'DM Serif Display', serif",
+                        fontSize: "clamp(1.8rem, 3vw, 2.5rem)",
+                        lineHeight: 1.1,
+                        color: DARK,
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {study.title}
+                    </h3>
+                    <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "1rem", lineHeight: 1.7, color: MUTED, marginBottom: "1rem" }}>
+                      {study.summary}
+                    </p>
+                    <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.9rem", lineHeight: 1.6, color: DARK, marginBottom: "1.6rem" }}>
+                      <strong>Focus:</strong> {study.focus}
+                    </p>
+                    <Link
+                      to="/photography"
+                      style={{
+                        fontFamily: "'Work Sans', sans-serif",
+                        fontWeight: 600,
+                        fontSize: "0.85rem",
+                        color: DARK,
+                        textDecoration: "none",
+                        borderBottom: `1px solid ${GOLD}`,
+                        paddingBottom: "0.2rem",
+                      }}
+                    >
+                      View the portfolio
+                    </Link>
+                  </div>
+                </article>
               </FadeUp>
             ))}
           </div>
