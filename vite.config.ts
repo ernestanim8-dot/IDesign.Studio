@@ -18,6 +18,18 @@ export default defineConfig(({ mode }) => {
       minify: !emitSourcemaps,
       assetsInlineLimit: 0,
       chunkSizeWarningLimit: 600,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Split framer-motion into its own chunk — it's ~140KB gzipped
+            if (id.includes('node_modules/framer-motion')) return 'framer-motion';
+            // Split react-router into its own chunk
+            if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run')) return 'react-router';
+            // All remaining node_modules go into a shared vendor chunk
+            if (id.includes('node_modules')) return 'vendor';
+          },
+        },
+      },
     },
     plugins: [
       react(),

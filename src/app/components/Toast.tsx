@@ -39,6 +39,13 @@ function ToastItem({ toast, onDismiss }: { toast: ToastMessage; onDismiss: (id: 
       ? "bg-[#1f1010] border-red-500 text-red-100"
       : "bg-[#141310] border-neutral-700 text-neutral-200";
 
+  const statusSymbol =
+    toast.type === "success"
+      ? "OK"
+      : toast.type === "error"
+      ? "!"
+      : "i";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -46,17 +53,19 @@ function ToastItem({ toast, onDismiss }: { toast: ToastMessage; onDismiss: (id: 
       exit={{ opacity: 0, y: 10, scale: 0.95 }}
       className={`pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-lg border shadow-xl text-sm font-medium ${bgBorder}`}
       style={{ backdropFilter: "blur(12px)" }}
+      role={toast.type === "error" ? "alert" : "status"}
     >
-      <span className="text-base">
-        {toast.type === "success" ? "✨" : toast.type === "error" ? "⚠️" : "ℹ️"}
+      <span className="flex size-5 shrink-0 items-center justify-center text-xs font-bold" aria-hidden="true">
+        {statusSymbol}
       </span>
       <span>{toast.message}</span>
       <button
+        type="button"
         onClick={() => onDismiss(toast.id)}
-        className="ml-2 text-neutral-400 hover:text-white text-xs px-1"
-        aria-label="Close"
+        className="ml-2 shrink-0 text-neutral-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        aria-label="Dismiss notification"
       >
-        ✕
+        <span aria-hidden="true">x</span>
       </button>
     </motion.div>
   );

@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router";
 import { Layout } from "./Layout";
-import { Home } from "./pages/Home";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +8,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        lazy: async () => {
+          const { Home } = await import("./pages/Home");
+          return { Component: Home };
+        },
       },
       {
         path: "graphic-design",

@@ -2041,7 +2041,6 @@ export function Photography() {
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [hovered, setHovered] = useState<number | null>(null);
 
   /* lightbox state */
   const [lightboxItems, setLightboxItems] = useState<LightboxItem[]>([]);
@@ -2106,7 +2105,7 @@ export function Photography() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1800&h=900&fit=crop&auto=format')",
+              "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=600&fit=crop&auto=format&q=75')",
             backgroundSize: "cover",
             backgroundPosition: "center 35%",
           }}
@@ -2364,37 +2363,25 @@ export function Photography() {
             style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
           >
             {filteredPhotos.map((p, i) => (
-              <motion.div
+              <div
                 key={p.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.35, delay: Math.min(i * 0.04, 0.35), ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden rounded-[4px] cursor-pointer"
                 style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: "4px",
                   background: SURFACE,
-                  cursor: "pointer",
-                  willChange: "transform",
                 }}
-                onMouseEnter={() => setHovered(p.id)}
-                onMouseLeave={() => setHovered(null)}
                 onClick={() => openCard(p, i)}
               >
-                <div style={{ paddingBottom: p.tall ? "120%" : "75%", position: "relative" }}>
-                  <motion.img
+                <div style={{ paddingBottom: p.tall ? "120%" : "75%", position: "relative", overflow: "hidden" }}>
+                  <img
                     src={p.img}
                     alt={p.title}
                     loading="lazy"
                     decoding="async"
-                    animate={{
-                      scale: hovered === p.id ? 1.06 : 1,
-                      filter: hovered === p.id ? "brightness(0.35)" : "brightness(0.92)",
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-[0.4]"
+                    style={{
+                      filter: "brightness(0.92)",
+                      transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease",
                     }}
-                    transition={{ duration: 0.5 }}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                   />
 
                   {/* Gallery count badge (top-left) */}
@@ -2404,8 +2391,7 @@ export function Photography() {
                         position: "absolute",
                         top: "0.75rem",
                         left: "0.75rem",
-                        background: "rgba(13,12,9,0.72)",
-                        backdropFilter: "blur(6px)",
+                        background: "rgba(13,12,9,0.78)",
                         border: `1px solid ${GOLD}`,
                         color: GOLD,
                         fontFamily: "'DM Mono',monospace",
@@ -2430,8 +2416,9 @@ export function Photography() {
                     </div>
                   )}
 
-                  {/* Hover overlay */}
+                  {/* Hover overlay — Pure GPU transition */}
                   <div
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                       position: "absolute",
                       inset: 0,
@@ -2443,9 +2430,8 @@ export function Photography() {
                     }}
                   >
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                      <motion.span
-                        animate={{ opacity: hovered === p.id ? 1 : 0, scale: hovered === p.id ? 1 : 0.8 }}
-                        transition={{ duration: 0.2 }}
+                      <span
+                        className="transform scale-90 group-hover:scale-100 transition-transform duration-300"
                         style={{
                           background: "rgba(200, 165, 74, 0.9)",
                           color: WHITE,
@@ -2457,13 +2443,11 @@ export function Photography() {
                         }}
                       >
                         {p.gallery ? "VIEW GALLERY ↗" : "VIEW FULL ↗"}
-                      </motion.span>
+                      </span>
                     </div>
 
-                    <div>
-                      <motion.span
-                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 6 }}
-                        transition={{ duration: 0.25 }}
+                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <span
                         style={{
                           fontFamily: "'DM Mono',monospace",
                           fontSize: "0.58rem",
@@ -2475,18 +2459,16 @@ export function Photography() {
                         }}
                       >
                         {p.cat} {p.year ? `• ${p.year}` : ""}
-                      </motion.span>
-                      <motion.h3
-                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 8 }}
-                        transition={{ duration: 0.28, delay: 0.04 }}
+                      </span>
+                      <h3
                         style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.2rem", color: WHITE }}
                       >
                         {p.title}
-                      </motion.h3>
+                      </h3>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}
@@ -2576,7 +2558,7 @@ export function Photography() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1400&h=400&fit=crop&auto=format')",
+              "url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&h=400&fit=crop&auto=format&q=75')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.12,

@@ -501,7 +501,7 @@ const PROJECTS: DesignProject[] = [
     title: "Oblivion Typeface",
     client: "Foundry Release",
     year: "2023",
-    img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1400&h=1200&fit=crop&auto=format",
+    img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&h=800&fit=crop&auto=format&q=75",
     wide: false,
     discipline: "Typography",
     category: "Typography",
@@ -513,7 +513,7 @@ const PROJECTS: DesignProject[] = [
     title: "Prism Botanicals Packaging",
     client: "Prism Goods",
     year: "2023",
-    img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1400&h=1200&fit=crop&auto=format",
+    img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=900&h=800&fit=crop&auto=format&q=75",
     wide: false,
     discipline: "Packaging & Labels",
     category: "Packaging & Labels",
@@ -603,7 +603,7 @@ const PROJECTS: DesignProject[] = [
     title: "Lume Festival Poster Series",
     client: "Lume Festival",
     year: "2021",
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&h=1200&fit=crop&auto=format",
+    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&h=800&fit=crop&auto=format&q=75",
     wide: false,
     discipline: "Typography",
     category: "Typography",
@@ -801,7 +801,6 @@ export function GraphicDesign() {
     document.title = "Graphic Design & Brand Systems — iDESIGN Studio";
   }, []);
 
-  const [hovered, setHovered] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -838,7 +837,7 @@ export function GraphicDesign() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=1800&h=700&fit=crop&auto=format')",
+              "url('https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=1200&h=500&fit=crop&auto=format&q=75')",
             backgroundSize: "cover",
             backgroundPosition: "center 40%",
             opacity: 0.18,
@@ -1139,23 +1138,13 @@ export function GraphicDesign() {
           <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
             {filteredProjects.map((p, i) => (
 
-            <FadeUp key={p.id} delay={Math.min(i * 0.05, 0.35)}>
-              <motion.div
-                className={p.wide ? "md:col-span-2" : ""}
-                whileHover={{ scale: 1.015 }}
-                transition={{ duration: 0.3 }}
+            <FadeUp key={p.id} delay={Math.min(i * 0.04, 0.25)}>
+              <div
+                className={`group relative overflow-hidden rounded-[6px] cursor-pointer shadow-[0_4px_20px_rgba(26,24,20,0.08)] ${p.wide ? "md:col-span-2" : ""}`}
                 style={{
-                  position: "relative",
-                  overflow: "hidden",
                   background: SURFACE,
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  boxShadow: "0 4px 20px rgba(26,24,20,0.08)",
                   border: `1px solid ${BORDER}`,
-                  willChange: "transform",
                 }}
-                onMouseEnter={() => setHovered(p.id)}
-                onMouseLeave={() => setHovered(null)}
                 onClick={() => {
                   if (p.gallery === "nailsbyjane") {
                     setLightboxItems(NAILS_BY_JANE_GALLERY);
@@ -1269,41 +1258,39 @@ export function GraphicDesign() {
                   setLightboxIndex(i);
                 }}
               >
-                <div style={{ paddingBottom: p.wide ? "46%" : "68%", position: "relative" }}>
-                  <motion.img
+                <div style={{ paddingBottom: p.wide ? "46%" : "68%", position: "relative", overflow: "hidden" }}>
+                  <img
                     src={p.img}
                     alt={p.title}
                     loading="lazy"
                     decoding="async"
-                    animate={{
-                      scale: hovered === p.id ? 1.06 : 1,
-                      filter: hovered === p.id ? "brightness(0.38)" : "brightness(0.92)",
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-[0.38]"
+                    style={{
+                      filter: "brightness(0.92)",
+                      transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease",
                     }}
-                    transition={{ duration: 0.5 }}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", willChange: "transform" }}
                   />
 
                   {/* Corner indicator badge */}
                   <div style={{ position: "absolute", top: "1rem", right: "1rem", zIndex: 2 }}>
-                    <motion.span
-                      animate={{ opacity: hovered === p.id ? 1 : 0.8 }}
+                    <span
                       style={{
                         fontFamily: "'DM Mono', monospace",
                         fontSize: "0.6rem",
                         letterSpacing: "0.1em",
-                        background: "rgba(13, 12, 9, 0.75)",
+                        background: "rgba(13, 12, 9, 0.78)",
                         color: GOLD,
                         border: "1px solid rgba(200, 165, 74, 0.4)",
-                        backdropFilter: "blur(6px)",
                         padding: "0.25rem 0.6rem",
                         borderRadius: "3px",
                       }}
                     >
                       {p.discipline}
-                    </motion.span>
+                    </span>
                   </div>
 
                   <div
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                       position: "absolute",
                       inset: 0,
@@ -1313,48 +1300,44 @@ export function GraphicDesign() {
                       padding: "1.75rem",
                     }}
                   >
-                    <motion.p
-                      animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 8 }}
-                      transition={{ duration: 0.25 }}
-                      style={{
-                        fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.6rem",
-                        letterSpacing: "0.15em",
-                        textTransform: "uppercase",
-                        color: GOLD,
-                        marginBottom: "0.3rem",
-                      }}
-                    >
-                      {p.client} — {p.year}
-                    </motion.p>
-                    <motion.h3
-                      animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 10 }}
-                      transition={{ duration: 0.28, delay: 0.04 }}
-                      style={{
-                        fontFamily: "'DM Serif Display',serif",
-                        fontSize: "1.45rem",
-                        color: WHITE,
-                        marginBottom: "0.25rem",
-                      }}
-                    >
-                      {p.title}
-                    </motion.h3>
-                    <motion.p
-                      animate={{ opacity: hovered === p.id ? 0.9 : 0, y: hovered === p.id ? 0 : 6 }}
-                      transition={{ duration: 0.3, delay: 0.08 }}
-                      style={{
-                        fontFamily: "'Work Sans', sans-serif",
-                        fontSize: "0.82rem",
-                        color: "#d8d3cb",
-                        lineHeight: "1.5",
-                        maxWidth: "600px",
-                      }}
-                    >
-                      {p.description}
-                    </motion.p>
+                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <p
+                        style={{
+                          fontFamily: "'DM Mono',monospace",
+                          fontSize: "0.6rem",
+                          letterSpacing: "0.15em",
+                          textTransform: "uppercase",
+                          color: GOLD,
+                          marginBottom: "0.3rem",
+                        }}
+                      >
+                        {p.client} — {p.year}
+                      </p>
+                      <h3
+                        style={{
+                          fontFamily: "'DM Serif Display',serif",
+                          fontSize: "1.45rem",
+                          color: WHITE,
+                          marginBottom: "0.25rem",
+                        }}
+                      >
+                        {p.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontFamily: "'Work Sans', sans-serif",
+                          fontSize: "0.82rem",
+                          color: "#d8d3cb",
+                          lineHeight: "1.5",
+                          maxWidth: "600px",
+                        }}
+                      >
+                        {p.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </FadeUp>
           ))}
         </div>

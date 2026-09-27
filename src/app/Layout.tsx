@@ -1,12 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i design logo gh.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER } from "@/tokens";
-import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
-import { InquiriesDrawer } from "./components/InquiriesDrawer";
-import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 import { Preloader } from "./components/Preloader";
+
+// Lazy-load non-critical components — they're only visible after user action
+const WhatsAppFloatingButton = lazy(() =>
+  import("./components/WhatsAppFloatingButton").then((m) => ({ default: m.WhatsAppFloatingButton }))
+);
+const InquiriesDrawer = lazy(() =>
+  import("./components/InquiriesDrawer").then((m) => ({ default: m.InquiriesDrawer }))
+);
+const PWAInstallPrompt = lazy(() =>
+  import("./components/PWAInstallPrompt").then((m) => ({ default: m.PWAInstallPrompt }))
+);
 
 // ── Social icon SVGs ────────────────────────────────────────────────────────
 const InstagramIcon = ({ size = 16 }: { size?: number }) => (
@@ -258,7 +266,7 @@ export function Layout() {
       </div>
 
       {/* main nav */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(250,248,244,0.95)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}`, padding: "0 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
+      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(250,248,244,0.96)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", borderBottom: `1px solid ${BORDER}`, padding: "0 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
         <NavLink to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <img src={logoMark} alt="iDESIGN" style={{ height: "44px", width: "auto", objectFit: "contain" }} />
         </NavLink>
@@ -416,13 +424,19 @@ export function Layout() {
       </footer>
 
       {/* Floating WhatsApp Quick Action */}
-      <WhatsAppFloatingButton />
+      <Suspense fallback={null}>
+        <WhatsAppFloatingButton />
+      </Suspense>
 
       {/* Real-Time Inquiries Manager Drawer */}
-      <InquiriesDrawer isOpen={isInquiriesOpen} onClose={() => setIsInquiriesOpen(false)} />
+      <Suspense fallback={null}>
+        <InquiriesDrawer isOpen={isInquiriesOpen} onClose={() => setIsInquiriesOpen(false)} />
+      </Suspense>
 
       {/* PWA Install & Offline Banner */}
-      <PWAInstallPrompt />
+      <Suspense fallback={null}>
+        <PWAInstallPrompt />
+      </Suspense>
 
       {/* Scroll-to-top button */}
       <AnimatePresence>

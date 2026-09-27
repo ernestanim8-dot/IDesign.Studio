@@ -7,9 +7,13 @@ const easing = [0.16, 1, 0.3, 1] as const;
 export function Preloader() {
   const reduceMotion = useReducedMotion();
   const [progress, setProgress] = useState(0);
-  const [visible, setVisible] = useState(true);
+  // Check if user already saw preloader in this session
+  const alreadyPreloaded = typeof window !== "undefined" && Boolean(sessionStorage.getItem("idesign_preloaded"));
+  const [visible, setVisible] = useState(!alreadyPreloaded);
 
   useEffect(() => {
+    if (alreadyPreloaded) return;
+
     let finished = false;
     let timer = 0;
 
@@ -18,27 +22,30 @@ export function Preloader() {
       finished = true;
       if (timer) window.clearInterval(timer);
       setProgress(100);
-      window.setTimeout(() => setVisible(false), reduceMotion ? 50 : 260);
+      try {
+        sessionStorage.setItem("idesign_preloaded", "1");
+      } catch {}
+      window.setTimeout(() => setVisible(false), reduceMotion ? 40 : 180);
     };
 
-    // Responsive, silky smooth entrance progress: reaches 100 in ~400ms
+    // Swift, silky entrance progress: reaches 100 in ~160ms
     timer = window.setInterval(() => {
       setProgress((current) => {
-        if (current >= 92) {
+        if (current >= 85) {
           complete();
           return 100;
         }
-        return current + 12;
+        return current + 25;
       });
-    }, 40);
+    }, 30);
 
-    const fallback = window.setTimeout(complete, 450);
+    const fallback = window.setTimeout(complete, 220);
 
     return () => {
       if (timer) window.clearInterval(timer);
       window.clearTimeout(fallback);
     };
-  }, [reduceMotion]);
+  }, [alreadyPreloaded, reduceMotion]);
 
   if (!visible) return null;
 
@@ -48,15 +55,20 @@ export function Preloader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-          transition={{ duration: reduceMotion ? 0.1 : 0.42, ease: easing }}
+          transition={{ duration: reduceMotion ? 0.1 : 0.32, ease: easing }}
           aria-label="Loading iDESIGN Studio"
           aria-live="polite"
           role="status"
+          onClick={() => {
+            try { sessionStorage.setItem("idesign_preloaded", "1"); } catch {}
+            setVisible(false);
+          }}
           style={{
             position: "fixed",
             inset: 0,
             zIndex: 10000,
             overflow: "hidden",
+            cursor: "pointer",
             background:
               "radial-gradient(ellipse at 50% 45%, rgba(28, 24, 18, 0.98) 0%, #0d0c09 70%, #070604 100%)",
             color: "#ffffff",
