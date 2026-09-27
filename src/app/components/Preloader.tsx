@@ -7,13 +7,9 @@ const easing = [0.16, 1, 0.3, 1] as const;
 export function Preloader() {
   const reduceMotion = useReducedMotion();
   const [progress, setProgress] = useState(0);
-  // Check if user already saw preloader in this session
-  const alreadyPreloaded = typeof window !== "undefined" && Boolean(sessionStorage.getItem("idesign_preloaded"));
-  const [visible, setVisible] = useState(!alreadyPreloaded);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (alreadyPreloaded) return;
-
     let finished = false;
     let timer = 0;
 
@@ -22,30 +18,27 @@ export function Preloader() {
       finished = true;
       if (timer) window.clearInterval(timer);
       setProgress(100);
-      try {
-        sessionStorage.setItem("idesign_preloaded", "1");
-      } catch {}
-      window.setTimeout(() => setVisible(false), reduceMotion ? 40 : 180);
+      window.setTimeout(() => setVisible(false), reduceMotion ? 40 : 320);
     };
 
-    // Swift, silky entrance progress: reaches 100 in ~160ms
+    // Give the brand mark enough time to register on each full page load.
     timer = window.setInterval(() => {
       setProgress((current) => {
-        if (current >= 85) {
+        if (current >= 90) {
           complete();
           return 100;
         }
-        return current + 25;
+        return current + 10;
       });
-    }, 30);
+    }, 55);
 
-    const fallback = window.setTimeout(complete, 220);
+    const fallback = window.setTimeout(complete, 700);
 
     return () => {
       if (timer) window.clearInterval(timer);
       window.clearTimeout(fallback);
     };
-  }, [alreadyPreloaded, reduceMotion]);
+  }, [reduceMotion]);
 
   if (!visible) return null;
 
@@ -59,10 +52,7 @@ export function Preloader() {
           aria-label="Loading iDESIGN Studio"
           aria-live="polite"
           role="status"
-          onClick={() => {
-            try { sessionStorage.setItem("idesign_preloaded", "1"); } catch {}
-            setVisible(false);
-          }}
+          onClick={() => setVisible(false)}
           style={{
             position: "fixed",
             inset: 0,

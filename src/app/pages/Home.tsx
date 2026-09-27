@@ -38,6 +38,12 @@ const SERVICES = [
 
 const LATEST_WORK = [
   {
+    title: "Radiant Studio Lifestyle",
+    subtitle: "Elegance & Expression",
+    category: "Portrait Photography",
+    img: studioLifestyleImg,
+  },
+  {
     title: "Blue for Men",
     subtitle: "Fragrance Campaign",
     category: "Commercial Photography",
@@ -48,12 +54,6 @@ const LATEST_WORK = [
     subtitle: "High-Performance Commercial",
     category: "Commercial Photography",
     img: rightGuardImg,
-  },
-  {
-    title: "Radiant Studio Lifestyle",
-    subtitle: "Elegance & Expression",
-    category: "Portrait Photography",
-    img: studioLifestyleImg,
   },
 ];
 
