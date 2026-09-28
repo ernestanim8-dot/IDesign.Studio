@@ -51,6 +51,8 @@ import ewurabasCoutureWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo M
 import trailblazersEmblem from "@/imports/Branding/Trailblazers/TRAILBLAZERS .png";
 import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1.png";
 import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
+import newLifeOrionEmblem from "@/imports/Branding/New Life SDA Church/ORION.png";
+import newLifeOrionFlag from "@/imports/Branding/New Life SDA Church/flag.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -78,7 +80,8 @@ interface DesignProject extends LightboxItem {
     | "opensoon"
     | "swgc"
     | "trailblazers"
-    | "ewurabas-couture";
+    | "ewurabas-couture"
+    | "new-life-sda";
 }
 
 const CATEGORIES = [
@@ -535,7 +538,39 @@ const EWURABAS_COUTURE_GALLERY: LightboxItem[] = [
   },
 ];
 
+const NEW_LIFE_SDA_GALLERY: LightboxItem[] = [
+  {
+    img: newLifeOrionEmblem,
+    title: "Orion Pathfinder Club Emblem",
+    category: "Branding & Identity",
+    client: "New Life SDA Church",
+    year: "2024",
+    description: "A bold Pathfinder Club emblem featuring the Orion star and club colours for New Life SDA Church.",
+  },
+  {
+    img: newLifeOrionFlag,
+    title: "Orion Pathfinder Club Flag",
+    category: "Branding & Identity",
+    client: "New Life SDA Church",
+    year: "2024",
+    description: "Flag application of the Orion Pathfinder Club identity for New Life SDA Church.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 25,
+    title: "Orion Pathfinder Club",
+    client: "New Life SDA Church",
+    year: "2024",
+    img: newLifeOrionEmblem,
+    wide: false,
+    discipline: "Branding & Identity",
+    gallery: "new-life-sda",
+    category: "Branding & Identity",
+    description:
+      "A complete Pathfinder Club identity for New Life SDA Church, including an emblem and flag application. Click to view the full branding gallery.",
+  },
   {
     id: 24,
     title: "Trailblazers Pathfinder Club",
@@ -574,30 +609,6 @@ const PROJECTS: DesignProject[] = [
     category: "Branding & Identity",
     description:
       "A curated identity set featuring the studio's logo variations and brand artwork. Click to view the full branding gallery.",
-  },
-  {
-    id: 2,
-    title: "Oblivion Typeface",
-    client: "Foundry Release",
-    year: "2023",
-    img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&h=800&fit=crop&auto=format&q=75",
-    wide: false,
-    discipline: "Typography",
-    category: "Typography",
-    description:
-      "Bespoke geometric display typeface engineered with razor-sharp terminal angles and dual optical weights.",
-  },
-  {
-    id: 3,
-    title: "Prism Botanicals Packaging",
-    client: "Prism Goods",
-    year: "2023",
-    img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=900&h=800&fit=crop&auto=format&q=75",
-    wide: false,
-    discipline: "Packaging & Labels",
-    category: "Packaging & Labels",
-    description:
-      "Sustainable embossed carton packaging with foil accents designed for an artisanal skincare line.",
   },
   {
     id: 4,
@@ -1225,6 +1236,12 @@ export function GraphicDesign() {
                   border: `1px solid ${BORDER}`,
                 }}
                 onClick={() => {
+                  if (p.gallery === "new-life-sda") {
+                    setLightboxItems(NEW_LIFE_SDA_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "ewurabas-couture") {
                     setLightboxItems(EWURABAS_COUTURE_GALLERY);
                     setLightboxIndex(0);
