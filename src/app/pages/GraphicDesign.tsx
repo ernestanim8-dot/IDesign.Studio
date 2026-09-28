@@ -53,11 +53,24 @@ import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1
 import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
 import newLifeOrionEmblem from "@/imports/Branding/New Life SDA Church/ORION.png";
 import newLifeOrionFlag from "@/imports/Branding/New Life SDA Church/flag.jpg";
-import oasisCampoutPoster from "@/imports/Branding/UEW Campout 10.jpg";
-import oasisCampoutRules from "@/imports/Branding/camp rule 3.jpg";
-import oasisCampoutDressCode from "@/imports/Branding/dress code 7.jpg";
-import oasisCampoutPackingList from "@/imports/Branding/packing list 5.jpg";
-import oasisCampoutThankYou from "@/imports/Branding/thank you 2.jpg";
+import oasisCampoutPoster from "@/imports/Advertising/Oasis Pathfinder Club UEW/UEW Campout 10.jpg";
+import oasisCampoutRules from "@/imports/Advertising/Oasis Pathfinder Club UEW/camp rule 3.jpg";
+import oasisCampoutDressCode from "@/imports/Advertising/Oasis Pathfinder Club UEW/dress code 7.jpg";
+import oasisCampoutPackingList from "@/imports/Advertising/Oasis Pathfinder Club UEW/packing list 5.jpg";
+import oasisCampoutThankYou from "@/imports/Advertising/Oasis Pathfinder Club UEW/thank you 2.jpg";
+import citationAbora from "@/imports/Advertising/Citation/Commander Abora Emmanuel A4.jpg";
+import citationAwuni from "@/imports/Advertising/Citation/Commander Awuni Gershon A4.jpg";
+import citationAseidu from "@/imports/Advertising/Citation/Director Aseidu Justice A4.jpg";
+import citationJoseph from "@/imports/Advertising/Citation/Director Joseph Asare 4.jpg";
+import citationAndrews from "@/imports/Advertising/Citation/Doc Andrews Acquah A3 2.jpg";
+import citationElizabeth from "@/imports/Advertising/Citation/Elizabeth Annor Treasurer A4.jpg";
+import citationKelvin from "@/imports/Advertising/Citation/Kelvin Peter  Deputy Organizer.jpg";
+import citationKen from "@/imports/Advertising/Citation/Ken Ndoli Organizer.jpg";
+import citationMary from "@/imports/Advertising/Citation/MG MARY ASIMENG_.jpg";
+import citationMaxwell from "@/imports/Advertising/Citation/Mr Maxwell Smith1.jpg";
+import citationRansford from "@/imports/Advertising/Citation/Pastor Ransford Osarfo Gyasi_.jpg";
+import citationDaniel from "@/imports/Advertising/Citation/Ps Daniel Amissah A3.jpg";
+import citationThomas from "@/imports/Advertising/Citation/Thomas Owusu SYL Rep.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -87,7 +100,8 @@ interface DesignProject extends LightboxItem {
     | "trailblazers"
     | "ewurabas-couture"
     | "new-life-sda"
-    | "oasis-campout";
+    | "oasis-campout"
+    | "citation-series";
 }
 
 const CATEGORIES = [
@@ -606,7 +620,43 @@ const OASIS_CAMPOUT_GALLERY: LightboxItem[] = [
   },
 ];
 
+const CITATION_SERIES_GALLERY: LightboxItem[] = [
+  [citationAbora, "Commander Abora Emmanuel"],
+  [citationAwuni, "Commander Awuni Gershon"],
+  [citationAseidu, "Director Aseidu Justice"],
+  [citationJoseph, "Director Joseph Asare"],
+  [citationAndrews, "Doc Andrews Acquah"],
+  [citationElizabeth, "Elizabeth Annor"],
+  [citationKelvin, "Kelvin Peter"],
+  [citationKen, "Ken Ndoli"],
+  [citationMary, "MG Mary Asimeng"],
+  [citationMaxwell, "Mr Maxwell Smith"],
+  [citationRansford, "Pastor Ransford Osarfo Gyasi"],
+  [citationDaniel, "Ps Daniel Amissah"],
+  [citationThomas, "Thomas Owusu"],
+].map(([img, recipient]) => ({
+  img,
+  title: `Citation in Honour of ${recipient}`,
+  category: "Advertising & Flyers",
+  client: "GNAAS-UEW Adventist Youth Ministry",
+  year: "2024",
+  description: `Recognition citation design created in honour of ${recipient}.`,
+}));
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 27,
+    title: "Adventist Youth Ministry Citation Series",
+    client: "GNAAS-UEW Adventist Youth Ministry",
+    year: "2024",
+    img: citationAbora,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    gallery: "citation-series",
+    category: "Advertising & Flyers",
+    description:
+      "A 13-piece recognition citation series designed to honour leaders and contributors in the Adventist Youth Ministry. Click to view the complete series.",
+  },
   {
     id: 26,
     title: "Oasis Pathfinder Club Campout",
@@ -741,7 +791,7 @@ const PROJECTS: DesignProject[] = [
     id: 13,
     title: "iDESIGN Brand Assets",
     client: "iDESIGN Studio",
-    year: "2022",
+    year: "2026",
     img: shirt,
     wide: false,
     discipline: "Branding & Identity",
@@ -750,23 +800,12 @@ const PROJECTS: DesignProject[] = [
     description:
       "Logo systems, regional marks, and visual assets packaged for a consistent brand presence.",
   },
-  {
-    id: 10,
-    title: "Lume Festival Poster Series",
-    client: "Lume Festival",
-    year: "2021",
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&h=800&fit=crop&auto=format&q=75",
-    wide: false,
-    discipline: "Typography",
-    category: "Typography",
-    description:
-      "Silk-screened limited edition promotional poster set for international light and contemporary art biennial.",
-  },
+
   {
     id: 7,
     title: "Funeral Brand",
     client: "Memorial Identity",
-    year: "2024",
+    year: "2026",
     img: funeralTShirt,
     wide: false,
     discipline: "Branding & Identity",
@@ -779,7 +818,7 @@ const PROJECTS: DesignProject[] = [
     id: 8,
     title: "OneVoice27",
     client: "OneVoice27",
-    year: "2024",
+    year: "2026",
     img: oneVoice,
     wide: false,
     discipline: "Branding & Identity",
@@ -792,7 +831,7 @@ const PROJECTS: DesignProject[] = [
     id: 9,
     title: "Speak Lord",
     client: "Speak Lord",
-    year: "2024",
+    year: "2026",
     img: speakLord,
     wide: false,
     discipline: "Branding & Identity",
@@ -805,7 +844,7 @@ const PROJECTS: DesignProject[] = [
     id: 14,
     title: "Nails by Jane",
     client: "Nails by Jane",
-    year: "2025",
+    year: "2026",
     img: janeNails,
     wide: false,
     discipline: "Advertising & Flyers",
@@ -1298,6 +1337,12 @@ export function GraphicDesign() {
                   border: `1px solid ${BORDER}`,
                 }}
                 onClick={() => {
+                  if (p.gallery === "citation-series") {
+                    setLightboxItems(CITATION_SERIES_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "oasis-campout") {
                     setLightboxItems(OASIS_CAMPOUT_GALLERY);
                     setLightboxIndex(0);
