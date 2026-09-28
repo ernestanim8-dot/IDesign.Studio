@@ -9,6 +9,8 @@ import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 import blueForMenImg from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
 import rightGuardImg from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
 import studioLifestyleImg from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
+import studioExhibitionImg from "@/imports/Photography/Events/exhibition/IMG-0610.jpg";
+import homeHeroBg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 
@@ -72,7 +74,7 @@ const TESTIMONIALS = [
     author: "Kofi Owusu",
     role: "Founder & CEO, Meridian Goods",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
+    initials: "KO",
   },
   {
     quote:
@@ -80,7 +82,7 @@ const TESTIMONIALS = [
     author: "Sarah Lindqvist",
     role: "Creative Director, Nordic Living Studio",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face",
+    initials: "SL",
   },
   {
     quote:
@@ -88,7 +90,7 @@ const TESTIMONIALS = [
     author: "Nana Yaa Boateng",
     role: "Brand Strategist, Flora Botanicals",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face",
+    initials: "NB",
   },
 ];
 
@@ -219,10 +221,9 @@ export function Home() {
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=750&fit=crop&auto=format&q=75')",
+              backgroundImage: `url('${homeHeroBg}')`,
               backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundPosition: "center 25%",
             }}
           />
         </motion.div>
@@ -831,13 +832,27 @@ export function Home() {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "0.9rem", borderTop: `1px solid ${BORDER}`, paddingTop: "1rem" }}>
-                  <img
-                    src={t.avatar}
-                    alt={t.author}
-                    loading="lazy"
-                    decoding="async"
-                    style={{ width: "42px", height: "42px", borderRadius: "50%", objectFit: "cover" }}
-                  />
+                  <div
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "50%",
+                      background: "#161410",
+                      border: `1.5px solid ${GOLD}`,
+                      color: GOLD,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "0.78rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.06em",
+                      flexShrink: 0,
+                    }}
+                    aria-hidden="true"
+                  >
+                    {t.initials}
+                  </div>
                   <div>
                     <h4
                       style={{
@@ -949,11 +964,11 @@ export function Home() {
           <FadeUp delay={0.15}>
             <div style={{ position: "relative" }}>
               <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=700&fit=crop&auto=format&q=75"
-                alt="Studio team"
+                src={studioExhibitionImg}
+                alt="iDESIGN Studio exhibition in Accra"
                 loading="lazy"
                 decoding="async"
-                style={{ width: "100%", display: "block", borderRadius: "6px" }}
+                style={{ width: "100%", maxHeight: "540px", objectFit: "cover", display: "block", borderRadius: "6px" }}
               />
               <div
                 style={{

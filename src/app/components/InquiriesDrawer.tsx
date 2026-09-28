@@ -141,7 +141,7 @@ export function InquiriesDrawer({ isOpen, onClose }: InquiriesDrawerProps) {
                             <>
                               <span>•</span>
                               <a
-                                href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}`}
+                                href={`https://wa.me/${inq.phone.replace(/\D/g, "").startsWith("0") ? "233" + inq.phone.replace(/\D/g, "").slice(1) : inq.phone.replace(/\D/g, "")}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-emerald-400 hover:text-emerald-300 transition-colors"

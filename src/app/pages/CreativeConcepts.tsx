@@ -4,6 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
 
+import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
+import idesignSuite from "@/imports/Branding/IDesign/Notebook 2.jpg";
+import glamourCampaign from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour GET IT POLISHED 4.jpg";
+import speakLordSuite from "@/imports/Branding/Speak Lord/Speak Lord 2.jpg";
+import conceptHeroBg from "@/imports/Branding/IDesign/Notebook.jpg";
+
 const PACKAGES = [
   {
     id: "starter",
@@ -102,33 +108,43 @@ interface ConceptProject extends LightboxItem {
 const PROJECTS: ConceptProject[] = [
   {
     id: 1,
-    title: "Vessel Brand Identity",
-    client: "Vessel Co.",
-    img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1200&h=750&fit=crop&auto=format&q=75",
+    title: "SWGC Brand Architecture & Signage Suite",
+    client: "SWGC Global",
+    img: swgcMockup,
     wide: true,
-    category: "Brand & Packaging",
-    year: "2024",
-    description: "Complete identity system, packaging range, and botanical art direction.",
+    category: "Brand & Spatial Identity",
+    year: "2025",
+    description: "Complete visual identity system, architectural signage mockup, and high-impact corporate branding.",
   },
   {
     id: 2,
-    title: "Arbor Full Concept & Print",
-    client: "Arbor Foods",
-    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&h=900&fit=crop&auto=format&q=75",
+    title: "iDESIGN Corporate Stationery & Collateral",
+    client: "iDESIGN Studio",
+    img: idesignSuite,
     wide: false,
-    category: "Identity & Strategy",
-    year: "2023",
-    description: "Eco-conscious visual language, bespoke iconography, and printed brand collateral.",
+    category: "Corporate Identity & Print",
+    year: "2026",
+    description: "Executive notebooks, branded merchandise, business stationery, and luxury embossed print suite.",
   },
   {
     id: 3,
-    title: "Soleil Identity & Campaign",
-    client: "Soleil Spa",
-    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=900&fit=crop&auto=format&q=75",
+    title: "3mma's Glamour Brand Campaign",
+    client: "3mma's Glamour",
+    img: glamourCampaign,
     wide: false,
-    category: "Art Direction",
-    year: "2023",
-    description: "Serene warm minimalism, editorial photography direction, and print suite.",
+    category: "Advertising & Campaign Direction",
+    year: "2025",
+    description: "High-fashion beauty banner campaigns, outdoor signage, social media templates, and launch collateral.",
+  },
+  {
+    id: 4,
+    title: "Speak Lord Media & Conference Suite",
+    client: "Speak Lord Ministries",
+    img: speakLordSuite,
+    wide: true,
+    category: "Visual Architecture & Media",
+    year: "2024",
+    description: "End-to-end event branding, stage media, promotional editorial banners, and conference print collateral.",
   },
 ];
 
@@ -243,11 +259,10 @@ export function CreativeConcepts() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1200&h=500&fit=crop&auto=format&q=75')",
+            backgroundImage: `url('${conceptHeroBg}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.2,
+            opacity: 0.16,
           }}
         />
         <div
