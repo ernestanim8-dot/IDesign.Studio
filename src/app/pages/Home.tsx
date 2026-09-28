@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 import logoFull from "@/imports/i design logo.png";
-import photographyImg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
+import photographyImg from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
 import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 import blueForMenImg from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
