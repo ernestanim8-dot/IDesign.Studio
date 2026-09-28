@@ -1485,11 +1485,17 @@ export function GraphicDesign() {
                       alt={p.title}
                       loading="lazy"
                       decoding="async"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-[0.38]"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                       style={{
                         filter: "brightness(0.92)",
                         transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease",
                       }}
+                    />
+
+                    <div
+                      className="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"
+                      aria-hidden="true"
+                      style={{ zIndex: 1 }}
                     />
 
                     {/* Corner indicator badge */}
@@ -1519,6 +1525,7 @@ export function GraphicDesign() {
                         flexDirection: "column",
                         justifyContent: "flex-end",
                         padding: "1.75rem",
+                        zIndex: 2,
                       }}
                     >
                       <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
