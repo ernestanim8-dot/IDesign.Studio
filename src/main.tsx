@@ -4,9 +4,21 @@ import App from './App'
 import './index.css'
 import { registerSW } from 'virtual:pwa-register'
 
-// Auto-reload if dynamic chunk import fails due to new deployment
-window.addEventListener('vite:preloadError', () => {
+// A visitor may keep an open tab while a deployment replaces its hashed
+// bundles. Reload once to fetch the current application shell instead of
+// leaving them on React Router's import-error screen.
+window.addEventListener("vite:preloadError", (event) => {
+  event.preventDefault();
+
+  const reloadKey = "idesign:chunk-reload";
+  if (sessionStorage.getItem(reloadKey)) return;
+
+  sessionStorage.setItem(reloadKey, "1");
   window.location.reload();
+});
+
+window.addEventListener("pageshow", () => {
+  sessionStorage.removeItem("idesign:chunk-reload");
 });
 
 // Let first paint and route assets win the network before offline caching begins.

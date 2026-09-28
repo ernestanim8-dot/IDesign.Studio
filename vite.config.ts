@@ -68,7 +68,14 @@ export default defineConfig(({ mode }) => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{css,html,ico,svg,woff2}', 'assets/index-*.js'],
+          // Never precache index.html. Its hashed imports change on every
+          // deployment; caching an older copy can make it request a bundle
+          // that Vercel has already removed. Vercel handles SPA navigation,
+          // while every JavaScript chunk from the current build is cached.
+          globPatterns: ['**/*.{css,ico,svg,woff2}', 'assets/**/*.js'],
+          navigateFallback: null,
+          clientsClaim: true,
+          skipWaiting: true,
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
