@@ -79,29 +79,29 @@ interface DesignProject extends LightboxItem {
   wide: boolean;
   discipline: string;
   gallery?:
-    | "idesign"
-    | "funeral"
-    | "onevoice"
-    | "speaklord"
-    | "foodsticker"
-    | "dutchbraids"
-    | "glamour"
-    | "adombeauty"
-    | "fashion"
-    | "nailsbyjane"
-    | "icecream"
-    | "effes"
-    | "owusuwaa"
-    | "godhavemercy"
-    | "wedding"
-    | "tinabundle"
-    | "opensoon"
-    | "swgc"
-    | "trailblazers"
-    | "ewurabas-couture"
-    | "new-life-sda"
-    | "oasis-campout"
-    | "citation-series";
+  | "idesign"
+  | "funeral"
+  | "onevoice"
+  | "speaklord"
+  | "foodsticker"
+  | "dutchbraids"
+  | "glamour"
+  | "adombeauty"
+  | "fashion"
+  | "nailsbyjane"
+  | "icecream"
+  | "effes"
+  | "owusuwaa"
+  | "godhavemercy"
+  | "wedding"
+  | "tinabundle"
+  | "opensoon"
+  | "swgc"
+  | "trailblazers"
+  | "ewurabas-couture"
+  | "new-life-sda"
+  | "oasis-campout"
+  | "citation-series";
 }
 
 const CATEGORIES = [
@@ -896,7 +896,7 @@ const PROJECTS: DesignProject[] = [
     id: 18,
     title: "God Have Mercy Food Joint",
     client: "God Have Mercy Food Joint",
-    year: "2025",
+    year: "2026",
     img: godHaveMercy,
     wide: true,
     discipline: "Banners & Signage",
@@ -1009,7 +1009,7 @@ export function GraphicDesign() {
         (p.description && p.description.toLowerCase().includes(query)) ||
         p.discipline.toLowerCase().includes(query);
       return matchesCategory && matchesQuery;
-    });
+    }).sort((a, b) => Number(b.year) - Number(a.year));
   }, [activeCategory, searchQuery]);
 
   return (
@@ -1329,239 +1329,239 @@ export function GraphicDesign() {
           <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
             {filteredProjects.map((p, i) => (
 
-            <FadeUp key={p.id} delay={Math.min(i * 0.04, 0.25)}>
-              <div
-                className={`group relative overflow-hidden rounded-[6px] cursor-pointer shadow-[0_4px_20px_rgba(26,24,20,0.08)] ${p.wide ? "md:col-span-2" : ""}`}
-                style={{
-                  background: SURFACE,
-                  border: `1px solid ${BORDER}`,
-                }}
-                onClick={() => {
-                  if (p.gallery === "citation-series") {
-                    setLightboxItems(CITATION_SERIES_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+              <FadeUp key={p.id} delay={Math.min(i * 0.04, 0.25)}>
+                <div
+                  className={`group relative overflow-hidden rounded-[6px] cursor-pointer shadow-[0_4px_20px_rgba(26,24,20,0.08)] ${p.wide ? "md:col-span-2" : ""}`}
+                  style={{
+                    background: SURFACE,
+                    border: `1px solid ${BORDER}`,
+                  }}
+                  onClick={() => {
+                    if (p.gallery === "citation-series") {
+                      setLightboxItems(CITATION_SERIES_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "oasis-campout") {
-                    setLightboxItems(OASIS_CAMPOUT_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "oasis-campout") {
+                      setLightboxItems(OASIS_CAMPOUT_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "new-life-sda") {
-                    setLightboxItems(NEW_LIFE_SDA_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "new-life-sda") {
+                      setLightboxItems(NEW_LIFE_SDA_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "ewurabas-couture") {
-                    setLightboxItems(EWURABAS_COUTURE_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "ewurabas-couture") {
+                      setLightboxItems(EWURABAS_COUTURE_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "trailblazers") {
-                    setLightboxItems(TRAILBLAZERS_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "trailblazers") {
+                      setLightboxItems(TRAILBLAZERS_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "nailsbyjane") {
-                    setLightboxItems(NAILS_BY_JANE_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "nailsbyjane") {
+                      setLightboxItems(NAILS_BY_JANE_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "icecream") {
-                    setLightboxItems(ICE_CREAM_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "icecream") {
+                      setLightboxItems(ICE_CREAM_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "effes") {
-                    setLightboxItems(EFFES_COSMETICS_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "effes") {
+                      setLightboxItems(EFFES_COSMETICS_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "owusuwaa") {
-                    setLightboxItems(OWUSUWAA_LUXE_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "owusuwaa") {
+                      setLightboxItems(OWUSUWAA_LUXE_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "godhavemercy") {
-                    setLightboxItems(GOD_HAVE_MERCY_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "godhavemercy") {
+                      setLightboxItems(GOD_HAVE_MERCY_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "wedding") {
-                    setLightboxItems(RB_WEDDING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "wedding") {
+                      setLightboxItems(RB_WEDDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "tinabundle") {
-                    setLightboxItems(TINA_BUNDLE_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "tinabundle") {
+                      setLightboxItems(TINA_BUNDLE_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "opensoon") {
-                    setLightboxItems(OPEN_SOON_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "opensoon") {
+                      setLightboxItems(OPEN_SOON_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "swgc") {
-                    setLightboxItems(SWGC_MOCKUP_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "swgc") {
+                      setLightboxItems(SWGC_MOCKUP_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "fashion") {
-                    setLightboxItems(FASHION_ADVERTISING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "fashion") {
+                      setLightboxItems(FASHION_ADVERTISING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "adombeauty") {
-                    setLightboxItems(ADOM_BEAUTY_ADVERTISING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "adombeauty") {
+                      setLightboxItems(ADOM_BEAUTY_ADVERTISING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "glamour") {
-                    setLightboxItems(GLAMOUR_ADVERTISING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "glamour") {
+                      setLightboxItems(GLAMOUR_ADVERTISING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "dutchbraids") {
-                    setLightboxItems(DUTCH_BRAIDS_ADVERTISING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "dutchbraids") {
+                      setLightboxItems(DUTCH_BRAIDS_ADVERTISING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "foodsticker") {
-                    setLightboxItems(FOOD_STICKER_ADVERTISING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "foodsticker") {
+                      setLightboxItems(FOOD_STICKER_ADVERTISING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "speaklord") {
-                    setLightboxItems(SPEAK_LORD_BRANDING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "speaklord") {
+                      setLightboxItems(SPEAK_LORD_BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "onevoice") {
-                    setLightboxItems(ONEVOICE_BRANDING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "onevoice") {
+                      setLightboxItems(ONEVOICE_BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "funeral") {
-                    setLightboxItems(FUNERAL_BRANDING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "funeral") {
+                      setLightboxItems(FUNERAL_BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  if (p.gallery === "idesign") {
-                    setLightboxItems(BRANDING_GALLERY);
-                    setLightboxIndex(0);
-                    return;
-                  }
+                    if (p.gallery === "idesign") {
+                      setLightboxItems(BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
 
-                  setLightboxItems(filteredProjects);
-                  setLightboxIndex(i);
-                }}
-              >
-                <div style={{ paddingBottom: p.wide ? "46%" : "68%", position: "relative", overflow: "hidden" }}>
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-[0.38]"
-                    style={{
-                      filter: "brightness(0.92)",
-                      transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease",
-                    }}
-                  />
-
-                  {/* Corner indicator badge */}
-                  <div style={{ position: "absolute", top: "1rem", right: "1rem", zIndex: 2 }}>
-                    <span
+                    setLightboxItems(filteredProjects);
+                    setLightboxIndex(i);
+                  }}
+                >
+                  <div style={{ paddingBottom: p.wide ? "46%" : "68%", position: "relative", overflow: "hidden" }}>
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-[0.38]"
                       style={{
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "0.6rem",
-                        letterSpacing: "0.1em",
-                        background: "rgba(13, 12, 9, 0.78)",
-                        color: GOLD,
-                        border: "1px solid rgba(200, 165, 74, 0.4)",
-                        padding: "0.25rem 0.6rem",
-                        borderRadius: "3px",
+                        filter: "brightness(0.92)",
+                        transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease",
+                      }}
+                    />
+
+                    {/* Corner indicator badge */}
+                    <div style={{ position: "absolute", top: "1rem", right: "1rem", zIndex: 2 }}>
+                      <span
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "0.6rem",
+                          letterSpacing: "0.1em",
+                          background: "rgba(13, 12, 9, 0.78)",
+                          color: GOLD,
+                          border: "1px solid rgba(200, 165, 74, 0.4)",
+                          padding: "0.25rem 0.6rem",
+                          borderRadius: "3px",
+                        }}
+                      >
+                        {p.discipline}
+                      </span>
+                    </div>
+
+                    <div
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-end",
+                        padding: "1.75rem",
                       }}
                     >
-                      {p.discipline}
-                    </span>
-                  </div>
-
-                  <div
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      padding: "1.75rem",
-                    }}
-                  >
-                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <p
-                        style={{
-                          fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.6rem",
-                          letterSpacing: "0.15em",
-                          textTransform: "uppercase",
-                          color: GOLD,
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        {p.client} — {p.year}
-                      </p>
-                      <h3
-                        style={{
-                          fontFamily: "'DM Serif Display',serif",
-                          fontSize: "1.45rem",
-                          color: WHITE,
-                          marginBottom: "0.25rem",
-                        }}
-                      >
-                        {p.title}
-                      </h3>
-                      <p
-                        style={{
-                          fontFamily: "'Work Sans', sans-serif",
-                          fontSize: "0.82rem",
-                          color: "#d8d3cb",
-                          lineHeight: "1.5",
-                          maxWidth: "600px",
-                        }}
-                      >
-                        {p.description}
-                      </p>
+                      <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        <p
+                          style={{
+                            fontFamily: "'DM Mono',monospace",
+                            fontSize: "0.6rem",
+                            letterSpacing: "0.15em",
+                            textTransform: "uppercase",
+                            color: GOLD,
+                            marginBottom: "0.3rem",
+                          }}
+                        >
+                          {p.client} — {p.year}
+                        </p>
+                        <h3
+                          style={{
+                            fontFamily: "'DM Serif Display',serif",
+                            fontSize: "1.45rem",
+                            color: WHITE,
+                            marginBottom: "0.25rem",
+                          }}
+                        >
+                          {p.title}
+                        </h3>
+                        <p
+                          style={{
+                            fontFamily: "'Work Sans', sans-serif",
+                            fontSize: "0.82rem",
+                            color: "#d8d3cb",
+                            lineHeight: "1.5",
+                            maxWidth: "600px",
+                          }}
+                        >
+                          {p.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </FadeUp>
-          ))}
-        </div>
+              </FadeUp>
+            ))}
+          </div>
         )}
       </section>
 
