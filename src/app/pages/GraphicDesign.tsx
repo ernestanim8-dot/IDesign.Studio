@@ -46,6 +46,7 @@ import owusuwaaLuxe from "@/imports/Advertising/Owusuwaa's Luxe/Owusuwaa’s Lux
 import rbWedding from "@/imports/Advertising/R&B Wedding/wedding 1 copy.jpg";
 import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
 import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
+import ewurabasCoutureLogo from "@/imports/EC LOGO png.png";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -483,6 +484,18 @@ const SWGC_MOCKUP_GALLERY: LightboxItem[] = [
 ];
 
 const PROJECTS: DesignProject[] = [
+  {
+    id: 23,
+    title: "Ewuraba's Couture Logo",
+    client: "Ewuraba's Couture",
+    year: "2024",
+    img: ewurabasCoutureLogo,
+    wide: false,
+    discipline: "Branding & Identity",
+    category: "Branding & Identity",
+    description:
+      "A fashion-focused logo identity for Ewuraba's Couture, combining a needle, thread, and silhouette to express bespoke dressmaking.",
+  },
   {
     id: 1,
     title: "iDESIGN Brand Identity",
