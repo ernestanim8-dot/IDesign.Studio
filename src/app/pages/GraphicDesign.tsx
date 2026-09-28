@@ -1493,7 +1493,7 @@ export function GraphicDesign() {
                     />
 
                     <div
-                      className="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"
+                      className="absolute inset-0 bg-black opacity-0 group-hover:opacity-70 transition-opacity duration-300 pointer-events-none"
                       aria-hidden="true"
                       style={{ zIndex: 1 }}
                     />
