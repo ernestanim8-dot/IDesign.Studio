@@ -46,7 +46,10 @@ import owusuwaaLuxe from "@/imports/Advertising/Owusuwaa's Luxe/Owusuwaa’s Lux
 import rbWedding from "@/imports/Advertising/R&B Wedding/wedding 1 copy.jpg";
 import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
 import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
-import ewurabasCoutureLogo from "@/imports/EC LOGO png.png";
+import ewurabasCoutureLogo from "@/imports/Branding/EC LOGO/EC LOGO png.png";
+import trailblazersEmblem from "@/imports/Branding/Trailblazers/TRAILBLAZERS .png";
+import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1.png";
+import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -72,7 +75,8 @@ interface DesignProject extends LightboxItem {
     | "wedding"
     | "tinabundle"
     | "opensoon"
-    | "swgc";
+    | "swgc"
+    | "trailblazers";
 }
 
 const CATEGORIES = [
@@ -483,7 +487,47 @@ const SWGC_MOCKUP_GALLERY: LightboxItem[] = [
   },
 ];
 
+const TRAILBLAZERS_GALLERY: LightboxItem[] = [
+  {
+    img: trailblazersEmblem,
+    title: "Trailblazers Pathfinder Club Emblem",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Club emblem that combines a mountain trail, compass, and explorer silhouette to represent adventure and service.",
+  },
+  {
+    img: trailblazersWordmark,
+    title: "Trailblazers Pathfinder Club Wordmark",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Primary club wordmark and tagline: Adventurous and willing to serve.",
+  },
+  {
+    img: trailblazersFlag,
+    title: "Trailblazers Pathfinder Club Flag",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Flag mockup showing the Pathfinder Club identity applied in a physical setting.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 24,
+    title: "Trailblazers Pathfinder Club",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    img: trailblazersEmblem,
+    wide: false,
+    discipline: "Branding & Identity",
+    gallery: "trailblazers",
+    category: "Branding & Identity",
+    description:
+      "A complete Pathfinder Club identity featuring an emblem, wordmark, and flag application. Click to view the full branding gallery.",
+  },
   {
     id: 23,
     title: "Ewuraba's Couture Logo",
@@ -1159,6 +1203,12 @@ export function GraphicDesign() {
                   border: `1px solid ${BORDER}`,
                 }}
                 onClick={() => {
+                  if (p.gallery === "trailblazers") {
+                    setLightboxItems(TRAILBLAZERS_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "nailsbyjane") {
                     setLightboxItems(NAILS_BY_JANE_GALLERY);
                     setLightboxIndex(0);
