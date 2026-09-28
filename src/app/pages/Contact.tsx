@@ -3,9 +3,6 @@ import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { submitInquiry } from "../api";
-import { showToast } from "../components/Toast";
-import { InstagramIcon, FacebookIcon, TikTokIcon, YouTubeIcon } from "../Layout";
-import contactHeroBg from "@/imports/Branding/IDesign/Notebook.jpg";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
@@ -95,8 +92,7 @@ export function Contact() {
   const handleSendViaWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
-      showToast("Please enter your name to proceed.", "error");
-      setSubmitError("Please enter your name.");
+      alert("Please enter your name.");
       return;
     }
 
@@ -104,7 +100,6 @@ export function Contact() {
     const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
 
-    showToast("Launching WhatsApp inquiry chat...", "success");
     setLastAction("whatsapp");
     setSubmitted(true);
   };
@@ -112,9 +107,7 @@ export function Contact() {
   const handleStandardSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim()) {
-      const msg = "Please fill in your name and a valid email address.";
-      setSubmitError(msg);
-      showToast(msg, "error");
+      setSubmitError("Please fill in your name and a valid email address.");
       return;
     }
 
@@ -136,13 +129,10 @@ export function Contact() {
         throw new Error(result.errors?.[0] || "Unable to submit your inquiry right now.");
       }
 
-      showToast("Inquiry received! We'll review your project and reply shortly.", "success");
       setLastAction("email");
       setSubmitted(true);
     } catch (error) {
-      const errMsg = error instanceof Error ? error.message : "Unable to submit your inquiry right now.";
-      setSubmitError(errMsg);
-      showToast(errMsg, "error");
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit your inquiry right now.");
     } finally {
       setIsSubmitting(false);
     }
@@ -151,7 +141,6 @@ export function Contact() {
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
     setCopiedKey(key);
-    showToast(`Copied ${key} to clipboard!`, "success");
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
@@ -163,10 +152,11 @@ export function Contact() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url('${contactHeroBg}')`,
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=500&fit=crop&auto=format&q=75')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.18,
+            opacity: 0.14,
           }}
         />
         <div
@@ -524,22 +514,22 @@ export function Contact() {
                   {
                     name: "Instagram",
                     href: "https://www.instagram.com/i_design_8?stkn=bWZjNDhoeGVpM2hr&utm_source=qr",
-                    icon: <InstagramIcon size={14} />,
+                    icon: "📸",
                   },
                   {
                     name: "TikTok",
                     href: "https://www.tiktok.com/@idesign678?_r=1&_t=ZS-99nvS5Nbaki",
-                    icon: <TikTokIcon size={14} />,
+                    icon: "🎵",
                   },
                   {
                     name: "YouTube",
                     href: "https://youtube.com/@idesign-c6s?si=GutDYPw_HxdjF0kN",
-                    icon: <YouTubeIcon size={14} />,
+                    icon: "▶️",
                   },
                   {
                     name: "Facebook",
                     href: "https://www.facebook.com/share/19ba8Zujqc/?mibextid=wwXIfr",
-                    icon: <FacebookIcon size={14} />,
+                    icon: "📘",
                   },
                 ].map((s) => (
                   <a
@@ -559,7 +549,7 @@ export function Contact() {
                       textDecoration: "none",
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: "0.5rem",
+                      gap: "0.4rem",
                       transition: "all 0.2s",
                     }}
                     onMouseEnter={(e) => {
@@ -571,7 +561,7 @@ export function Contact() {
                       e.currentTarget.style.color = DARK;
                     }}
                   >
-                    <span style={{ display: "inline-flex", alignItems: "center" }}>{s.icon}</span>
+                    <span>{s.icon}</span>
                     <span>{s.name}</span>
                   </a>
                 ))}
