@@ -47,6 +47,7 @@ import rbWedding from "@/imports/Advertising/R&B Wedding/wedding 1 copy.jpg";
 import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
 import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import ewurabasCoutureLogo from "@/imports/Branding/EC LOGO/EC LOGO png.png";
+import ewurabasCoutureWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg";
 import trailblazersEmblem from "@/imports/Branding/Trailblazers/TRAILBLAZERS .png";
 import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1.png";
 import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
@@ -76,7 +77,8 @@ interface DesignProject extends LightboxItem {
     | "tinabundle"
     | "opensoon"
     | "swgc"
-    | "trailblazers";
+    | "trailblazers"
+    | "ewurabas-couture";
 }
 
 const CATEGORIES = [
@@ -514,6 +516,25 @@ const TRAILBLAZERS_GALLERY: LightboxItem[] = [
   },
 ];
 
+const EWURABAS_COUTURE_GALLERY: LightboxItem[] = [
+  {
+    img: ewurabasCoutureLogo,
+    title: "Ewuraba's Couture Logo",
+    category: "Branding & Identity",
+    client: "Ewuraba's Couture",
+    year: "2024",
+    description: "Fashion logo identity combining a needle, thread, and silhouette to express bespoke dressmaking.",
+  },
+  {
+    img: ewurabasCoutureWallMockup,
+    title: "Ewuraba's Couture 3D Wall Sign",
+    category: "Branding & Identity",
+    client: "Ewuraba's Couture",
+    year: "2024",
+    description: "3D wall-sign mockup demonstrating the Ewuraba's Couture identity in a physical retail setting.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
   {
     id: 24,
@@ -536,9 +557,10 @@ const PROJECTS: DesignProject[] = [
     img: ewurabasCoutureLogo,
     wide: false,
     discipline: "Branding & Identity",
+    gallery: "ewurabas-couture",
     category: "Branding & Identity",
     description:
-      "A fashion-focused logo identity for Ewuraba's Couture, combining a needle, thread, and silhouette to express bespoke dressmaking.",
+      "A fashion-focused logo identity for Ewuraba's Couture, with a 3D wall-sign application. Click to view the full branding gallery.",
   },
   {
     id: 1,
@@ -1203,6 +1225,12 @@ export function GraphicDesign() {
                   border: `1px solid ${BORDER}`,
                 }}
                 onClick={() => {
+                  if (p.gallery === "ewurabas-couture") {
+                    setLightboxItems(EWURABAS_COUTURE_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "trailblazers") {
                     setLightboxItems(TRAILBLAZERS_GALLERY);
                     setLightboxIndex(0);
