@@ -53,6 +53,11 @@ import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1
 import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
 import newLifeOrionEmblem from "@/imports/Branding/New Life SDA Church/ORION.png";
 import newLifeOrionFlag from "@/imports/Branding/New Life SDA Church/flag.jpg";
+import oasisCampoutPoster from "@/imports/Branding/UEW Campout 10.jpg";
+import oasisCampoutRules from "@/imports/Branding/camp rule 3.jpg";
+import oasisCampoutDressCode from "@/imports/Branding/dress code 7.jpg";
+import oasisCampoutPackingList from "@/imports/Branding/packing list 5.jpg";
+import oasisCampoutThankYou from "@/imports/Branding/thank you 2.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -81,7 +86,8 @@ interface DesignProject extends LightboxItem {
     | "swgc"
     | "trailblazers"
     | "ewurabas-couture"
-    | "new-life-sda";
+    | "new-life-sda"
+    | "oasis-campout";
 }
 
 const CATEGORIES = [
@@ -557,7 +563,63 @@ const NEW_LIFE_SDA_GALLERY: LightboxItem[] = [
   },
 ];
 
+const OASIS_CAMPOUT_GALLERY: LightboxItem[] = [
+  {
+    img: oasisCampoutPoster,
+    title: "Oasis Pathfinder Club Campout 2024",
+    category: "Advertising & Flyers",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    description: "Key campaign poster for the Oasis Pathfinder Club Campout, themed Dare to Be Different.",
+  },
+  {
+    img: oasisCampoutRules,
+    title: "Campout Rules",
+    category: "Advertising & Flyers",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    description: "Information design outlining rules and guidance for Campout 2024 participants.",
+  },
+  {
+    img: oasisCampoutDressCode,
+    title: "Campout Dress Code",
+    category: "Advertising & Flyers",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    description: "A clear visual dress-code guide created for Campout 2024.",
+  },
+  {
+    img: oasisCampoutPackingList,
+    title: "Campout Packing List",
+    category: "Advertising & Flyers",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    description: "Pre-event packing checklist designed for Campout 2024 attendees.",
+  },
+  {
+    img: oasisCampoutThankYou,
+    title: "Campout Thank You",
+    category: "Advertising & Flyers",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    description: "Closing appreciation graphic created for Campout 2024 participants and supporters.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 26,
+    title: "Oasis Pathfinder Club Campout",
+    client: "GNAAS UEW-Ajumako AYM",
+    year: "2024",
+    img: oasisCampoutPoster,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    gallery: "oasis-campout",
+    category: "Advertising & Flyers",
+    description:
+      "A five-piece event campaign for the Oasis Pathfinder Club Campout, including the event poster, rules, dress code, packing list, and thank-you graphic. Click to view the full campaign.",
+  },
   {
     id: 25,
     title: "Orion Pathfinder Club",
@@ -1236,6 +1298,12 @@ export function GraphicDesign() {
                   border: `1px solid ${BORDER}`,
                 }}
                 onClick={() => {
+                  if (p.gallery === "oasis-campout") {
+                    setLightboxItems(OASIS_CAMPOUT_GALLERY);
+                    setLightboxIndex(0);
+                    return;
+                  }
+
                   if (p.gallery === "new-life-sda") {
                     setLightboxItems(NEW_LIFE_SDA_GALLERY);
                     setLightboxIndex(0);
