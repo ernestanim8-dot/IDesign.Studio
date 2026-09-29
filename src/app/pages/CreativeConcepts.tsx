@@ -111,6 +111,7 @@ const formatGhs = (amount: number) => `GH₵${amount.toLocaleString("en-GH")}`
 interface ConceptProject extends LightboxItem {
   id: number
   client: string
+  year: string
   layout: "feature" | "landscape" | "portrait" | "square"
   imagePosition?: string
   disciplineType: "integrated" | "graphic-design" | "photography"
