@@ -1,21 +1,21 @@
-import { useRef, useState, useEffect, useMemo } from "react";
-import { Link } from "react-router";
-import { motion, AnimatePresence } from "framer-motion";
-import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
-import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
-import creativeConceptsBackground from "@/imports/Background CC.jpg";
-import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
-import idesignNotebook from "@/imports/Branding/IDesign/Notebook.jpg";
-import ewurabaWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg";
-import blueForMenPedestal from "@/imports/Photography/Commercial/Blue for men/blue-for-men-pedestal.jpg";
-import rightGuardAction from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
-import studioLifestyleDress from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
-import electricPopPortrait from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
-import matriculationRegalia from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-14-heritage-honor.jpg";
-import engineerStudioGlam from "@/imports/Photography/Engineer & Studio Glam/IMG_6892.jpg";
-import oasisCampout from "@/imports/Advertising/Oasis Pathfinder Club UEW/UEW Campout 10.jpg";
-import iceCreamPkg from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg";
-import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
+import { useRef, useState, useEffect, useMemo } from "react"
+import { Link } from "react-router"
+import { motion, AnimatePresence } from "framer-motion"
+import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens"
+import { Lightbox, type LightboxItem } from "@/app/components/Lightbox"
+import creativeConceptsBackground from "@/imports/Background CC.jpg"
+import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg"
+import idesignNotebook from "@/imports/Branding/IDesign/Notebook.jpg"
+import ewurabaWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg"
+import blueForMenPedestal from "@/imports/Photography/Commercial/Blue for men/blue-for-men-pedestal.jpg"
+import rightGuardAction from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg"
+import studioLifestyleDress from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg"
+import electricPopPortrait from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg"
+import matriculationRegalia from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-14-heritage-honor.jpg"
+import engineerStudioGlam from "@/imports/Photography/Engineer & Studio Glam/IMG_6892.jpg"
+import oasisCampout from "@/imports/Advertising/Oasis Pathfinder Club UEW/UEW Campout 10.jpg"
+import iceCreamPkg from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg"
+import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg"
 
 const PACKAGES = [
   {
@@ -64,13 +64,13 @@ const PACKAGES = [
     ],
     highlight: false,
   },
-];
+]
 
 interface AddOn {
-  id: string;
-  name: string;
-  price: number;
-  desc: string;
+  id: string
+  name: string
+  price: number
+  desc: string
 }
 
 const ADD_ONS: AddOn[] = [
@@ -104,16 +104,17 @@ const ADD_ONS: AddOn[] = [
     price: 4665,
     desc: "Dedicate front-of-queue scheduling to compress timeline by 40%.",
   },
-];
+]
 
-const formatGhs = (amount: number) => `GH₵${amount.toLocaleString("en-GH")}`;
+const formatGhs = (amount: number) => `GH₵${amount.toLocaleString("en-GH")}`
 
 interface ConceptProject extends LightboxItem {
-  id: number;
-  client: string;
-  wide: boolean;
-  disciplineType: "integrated" | "graphic-design" | "photography";
-  badgeLabel: string;
+  id: number
+  client: string
+  layout: "feature" | "landscape" | "portrait" | "square"
+  imagePosition?: string
+  disciplineType: "integrated" | "graphic-design" | "photography"
+  badgeLabel: string
 }
 
 const PROJECTS: ConceptProject[] = [
@@ -122,163 +123,209 @@ const PROJECTS: ConceptProject[] = [
     title: "SWGC Brand & Merchandise System",
     client: "SWGC",
     img: swgcMockup,
-    wide: true,
+    layout: "feature",
     category: "Brand Architecture & Merchandising",
     year: "2024",
     disciplineType: "integrated",
     badgeLabel: "Integrated Direction",
-    description: "Complete corporate identity system, apparel lineup, merchandise prototyping, and digital brand presence.",
+    description:
+      "Complete corporate identity system, apparel lineup, merchandise prototyping, and digital brand presence.",
   },
   {
     id: 2,
     title: "Blue for Men: Luxury Fragrance Campaign",
     client: "Blue for Men",
     img: blueForMenPedestal,
-    wide: false,
+    layout: "landscape",
     category: "Commercial Product Photography",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Commercial Photography",
-    description: "High-speed liquid splash photography, precision pedestal lighting, and luxury fragrance art direction.",
+    description:
+      "High-speed liquid splash photography, precision pedestal lighting, and luxury fragrance art direction.",
   },
   {
     id: 3,
     title: "iDESIGN Executive Stationery Suite",
     client: "iDESIGN Studio",
     img: idesignNotebook,
-    wide: false,
+    layout: "landscape",
     category: "Identity & Print Collateral",
     year: "2026",
     disciplineType: "graphic-design",
     badgeLabel: "Graphic Design",
-    description: "Bespoke studio collateral, embossed notebooks, luxury stationery systems, and tactile brand touchpoints.",
+    description:
+      "Bespoke studio collateral, embossed notebooks, luxury stationery systems, and tactile brand touchpoints.",
   },
   {
     id: 4,
     title: "Radiant Studio Lifestyle & Fashion Editorial",
     client: "Studio Lifestyle",
     img: studioLifestyleDress,
-    wide: false,
+    layout: "portrait",
+    imagePosition: "center 30%",
     category: "Fashion & Portraiture",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Editorial Photography",
-    description: "Editorial fashion storytelling, natural ambient lighting, and contemporary wardrobe styling.",
+    description:
+      "Editorial fashion storytelling, natural ambient lighting, and contemporary wardrobe styling.",
   },
   {
     id: 5,
     title: "Ewuraba's Couture Architectural Signage",
     client: "Ewuraba's Couture",
     img: ewurabaWallMockup,
-    wide: false,
+    layout: "landscape",
     category: "Spatial Branding",
     year: "2024",
     disciplineType: "graphic-design",
     badgeLabel: "Graphic Design",
-    description: "High-fashion house visual identity, 3D architectural signage, and premium retail presentation.",
+    description:
+      "High-fashion house visual identity, 3D architectural signage, and premium retail presentation.",
   },
   {
     id: 6,
     title: "Right Guard: High-Performance Commercial",
     client: "Right Guard",
     img: rightGuardAction,
-    wide: true,
+    layout: "portrait",
+    imagePosition: "center 38%",
     category: "Commercial Photography",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Commercial Photography",
-    description: "Dynamic commercial product photography, dramatic directional contrast lighting, and high-impact advertising.",
+    description:
+      "Dynamic commercial product photography, dramatic directional contrast lighting, and high-impact advertising.",
   },
   {
     id: 7,
     title: "Oasis Pathfinder Club Campout Campaign",
     client: "GNAAS UEW-Ajumako AYM",
     img: oasisCampout,
-    wide: false,
+    layout: "square",
     category: "Advertising & Campaign Systems",
     year: "2024",
     disciplineType: "integrated",
     badgeLabel: "Integrated Direction",
-    description: "Multi-asset youth event campaign including event posters, guideline cards, and social media announcements.",
+    description:
+      "Multi-asset youth event campaign including event posters, guideline cards, and social media announcements.",
   },
   {
     id: 8,
     title: "Electric Pop: Hoop & Plaid Chic",
     client: "Editorial Series",
     img: electricPopPortrait,
-    wide: false,
+    layout: "portrait",
+    imagePosition: "center 25%",
     category: "Portrait Photography",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Editorial Photography",
-    description: "Vibrant color-contrast studio portraiture featuring graphic styling, hoop accents, and expressive studio lighting.",
+    description:
+      "Vibrant color-contrast studio portraiture featuring graphic styling, hoop accents, and expressive studio lighting.",
   },
   {
     id: 9,
     title: "Artisanal Ice Cream Branding & Packaging",
     client: "Sweet Treats Co.",
     img: iceCreamPkg,
-    wide: false,
+    layout: "landscape",
     category: "Packaging & Labels",
     year: "2025",
     disciplineType: "graphic-design",
     badgeLabel: "Graphic Design",
-    description: "Whimsical yet sophisticated food packaging design, custom typography, and print-ready production files.",
+    description:
+      "Whimsical yet sophisticated food packaging design, custom typography, and print-ready production files.",
   },
   {
     id: 10,
     title: "Heritage & Honor: Ceremonial Academic Regalia",
     client: "GCTU Matriculation",
     img: matriculationRegalia,
-    wide: false,
+    layout: "portrait",
+    imagePosition: "center 28%",
     category: "Documentary & Events",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Documentary Photography",
-    description: "Celebratory milestone portraiture highlighting cultural Kente stoles, ceremonial gown dignity, and academic triumph.",
+    description:
+      "Celebratory milestone portraiture highlighting cultural Kente stoles, ceremonial gown dignity, and academic triumph.",
   },
   {
     id: 11,
     title: "Tina Special Bundle Promotional Campaign",
     client: "Tina Special Bundle",
     img: tinaBundle,
-    wide: false,
+    layout: "square",
     category: "Advertising & Flyers",
     year: "2025",
     disciplineType: "graphic-design",
     badgeLabel: "Graphic Design",
-    description: "High-converting promotional marketing flyer and digital campaign collateral designed for social media conversion.",
+    description:
+      "High-converting promotional marketing flyer and digital campaign collateral designed for social media conversion.",
   },
   {
     id: 12,
     title: "Studio Glam & Executive Portrait Series",
     client: "Executive Studio Series",
     img: engineerStudioGlam,
-    wide: true,
+    layout: "portrait",
+    imagePosition: "center 28%",
     category: "Portrait Photography",
     year: "2025",
     disciplineType: "photography",
     badgeLabel: "Editorial Photography",
-    description: "Polished executive studio portraiture combining precision rim lighting, subtle skin retouching, and poised elegance.",
+    description:
+      "Polished executive studio portraiture combining precision rim lighting, subtle skin retouching, and poised elegance.",
   },
-];
+]
 
-function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
+const PROJECTS_BY_YEAR = Object.entries(
+  PROJECTS.reduce<Record<string, ConceptProject[]>>((projects, project) => {
+    ;(projects[project.year] ??= []).push(project)
+    return projects
+  }, {}),
+).sort(([firstYear], [secondYear]) => Number(secondYear) - Number(firstYear))
+
+const PROJECT_LAYOUTS = {
+  feature: { className: "col-span-12 lg:col-span-8", aspectRatio: "16 / 10" },
+  landscape: {
+    className: "col-span-12 sm:col-span-6 lg:col-span-4",
+    aspectRatio: "4 / 3",
+  },
+  portrait: {
+    className: "col-span-12 sm:col-span-6 lg:col-span-3",
+    aspectRatio: "3 / 4",
+  },
+  square: {
+    className: "col-span-12 sm:col-span-6 lg:col-span-4",
+    aspectRatio: "1 / 1",
+  },
+} as const
+
+function FadeUp({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode
+  delay?: number
+}) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          setInView(true);
-          obs.disconnect();
+          setInView(true)
+          obs.disconnect()
         }
       },
-      { rootMargin: "100px" }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+      { rootMargin: "100px" },
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   return (
     <motion.div
       ref={ref}
@@ -288,46 +335,50 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     >
       {children}
     </motion.div>
-  );
+  )
 }
 
 export function CreativeConcepts() {
   useEffect(() => {
-    document.title = "Creative Concepts & Studio Packages — iDESIGN Studio";
-  }, []);
+    document.title = "Creative Concepts & Studio Packages — iDESIGN Studio"
+  }, [])
 
-  const [hovered, setHovered] = useState<number | null>(null);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   // Quote Calculator State
-  const [selectedPackageId, setSelectedPackageId] = useState<string>("studio");
-  const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>(["photo_session"]);
-  const [showWaPreview, setShowWaPreview] = useState(false);
+  const [selectedPackageId, setSelectedPackageId] = useState<string>("studio")
+  const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([
+    "photo_session",
+  ])
+  const [showWaPreview, setShowWaPreview] = useState(false)
 
   const currentPackage = useMemo(() => {
-    return PACKAGES.find((p) => p.id === selectedPackageId) || PACKAGES[1];
-  }, [selectedPackageId]);
+    return PACKAGES.find((p) => p.id === selectedPackageId) || PACKAGES[1]
+  }, [selectedPackageId])
 
   const activeAddOns = useMemo(() => {
-    return ADD_ONS.filter((a) => selectedAddOnIds.includes(a.id));
-  }, [selectedAddOnIds]);
+    return ADD_ONS.filter((a) => selectedAddOnIds.includes(a.id))
+  }, [selectedAddOnIds])
 
   const totalPrice = useMemo(() => {
-    const addOnsTotal = activeAddOns.reduce((acc, curr) => acc + curr.price, 0);
-    return currentPackage.basePrice + addOnsTotal;
-  }, [currentPackage, activeAddOns]);
+    const addOnsTotal = activeAddOns.reduce((acc, curr) => acc + curr.price, 0)
+    return currentPackage.basePrice + addOnsTotal
+  }, [currentPackage, activeAddOns])
 
   const toggleAddOn = (id: string) => {
     setSelectedAddOnIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    )
+  }
 
   const constructWhatsAppQuote = () => {
     const addOnsList =
       activeAddOns.length > 0
-        ? activeAddOns.map((a) => `  • ${a.name}: ${formatGhs(a.price)}`).join("\n")
-        : "  • None selected";
+        ? activeAddOns
+            .map((a) => `  • ${a.name}: ${formatGhs(a.price)}`)
+            .join("\n")
+        : "  • None selected"
 
     const message = [
       "👋 Hello iDESIGN Studio!",
@@ -344,20 +395,24 @@ export function CreativeConcepts() {
       `💰 My Estimated Total: ${formatGhs(totalPrice)}`,
       "",
       "Please confirm availability and next steps. Thank you! 🙏",
-    ].join("\n");
+    ].join("\n")
 
-    return message;
-  };
+    return message
+  }
 
   const handleSendOnWhatsApp = () => {
     if (!showWaPreview) {
-      setShowWaPreview(true);
-      return;
+      setShowWaPreview(true)
+      return
     }
-    const encoded = encodeURIComponent(constructWhatsAppQuote());
-    window.open(`https://wa.me/233502310663?text=${encoded}`, "_blank", "noopener,noreferrer");
-    setShowWaPreview(false);
-  };
+    const encoded = encodeURIComponent(constructWhatsAppQuote())
+    window.open(
+      `https://wa.me/233502310663?text=${encoded}`,
+      "_blank",
+      "noopener,noreferrer",
+    )
+    setShowWaPreview(false)
+  }
 
   return (
     <>
@@ -390,7 +445,15 @@ export function CreativeConcepts() {
             background: `linear-gradient(to right, transparent, ${GOLD}, transparent)`,
           }}
         />
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            maxWidth: "860px",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -435,10 +498,16 @@ export function CreativeConcepts() {
               margin: "0 auto 2rem",
             }}
           >
-            End-to-end creative identity packages — strategy, visual language, print collateral, and digital assets, all
-            developed together for total brand coherence.
+            End-to-end creative identity packages — strategy, visual language,
+            print collateral, and digital assets, all developed together for
+            total brand coherence.
           </motion.p>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="flex flex-wrap justify-center gap-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.35 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
             <a
               href="#calculator"
               style={{
@@ -459,7 +528,7 @@ export function CreativeConcepts() {
             </a>
             <a
               href={`https://wa.me/233502310663?text=${encodeURIComponent(
-                "Hello iDESIGN! I would like to discuss a custom creative package."
+                "Hello iDESIGN! I would like to discuss a custom creative package.",
               )}`}
               target="_blank"
               rel="noreferrer"
@@ -510,119 +579,156 @@ export function CreativeConcepts() {
               >
                 — Core Tiers
               </p>
-              <h2 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "clamp(1.8rem,3.5vw,2.75rem)", color: DARK }}>
+              <h2
+                style={{
+                  fontFamily: "'DM Serif Display',serif",
+                  fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
+                  color: DARK,
+                }}
+              >
                 Standard Creative Packages
               </h2>
             </div>
           </FadeUp>
           <div className="grid md:grid-cols-3 gap-6">
-            {PACKAGES.map(({ id, name, priceDisplay, features, highlight, turnaround }, i) => (
-              <FadeUp key={name} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    background: highlight ? GOLD : "#fff",
-                    border: `1px solid ${highlight ? GOLD : BORDER}`,
-                    borderRadius: "6px",
-                    padding: "2rem",
-                    boxShadow: highlight
-                      ? "0 12px 40px rgba(200,165,74,0.25)"
-                      : "0 2px 12px rgba(26,24,20,0.06)",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                >
-                  <p
+            {PACKAGES.map(
+              (
+                { id, name, priceDisplay, features, highlight, turnaround },
+                i,
+              ) => (
+                <FadeUp key={name} delay={i * 0.1}>
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3 }}
                     style={{
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.62rem",
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      color: highlight ? "rgba(255,255,255,0.75)" : GOLD,
-                      marginBottom: "0.5rem",
+                      background: highlight ? GOLD : "#fff",
+                      border: `1px solid ${highlight ? GOLD : BORDER}`,
+                      borderRadius: "6px",
+                      padding: "2rem",
+                      boxShadow: highlight
+                        ? "0 12px 40px rgba(200,165,74,0.25)"
+                        : "0 2px 12px rgba(26,24,20,0.06)",
+                      display: "flex",
+                      flexDirection: "column",
+                      height: "100%",
                     }}
                   >
-                    {name}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'DM Serif Display',serif",
-                      fontSize: "2rem",
-                      color: highlight ? WHITE : DARK,
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {priceDisplay}
-                  </p>
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.68rem",
-                      color: highlight ? "rgba(255,255,255,0.7)" : MUTED,
-                      marginBottom: "1.5rem",
-                      display: "block",
-                    }}
-                  >
-                    ⏱ {turnaround}
-                  </span>
+                    <p
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.62rem",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: highlight ? "rgba(255,255,255,0.75)" : GOLD,
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      {name}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'DM Serif Display',serif",
+                        fontSize: "2rem",
+                        color: highlight ? WHITE : DARK,
+                        marginBottom: "0.25rem",
+                      }}
+                    >
+                      {priceDisplay}
+                    </p>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "0.68rem",
+                        color: highlight ? "rgba(255,255,255,0.7)" : MUTED,
+                        marginBottom: "1.5rem",
+                        display: "block",
+                      }}
+                    >
+                      ⏱ {turnaround}
+                    </span>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "2rem", flex: 1 }}>
-                    {features.map((f) => (
-                      <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}>
-                        <span style={{ color: highlight ? "rgba(255,255,255,0.8)" : GOLD, fontSize: "0.8rem", marginTop: "1px" }}>
-                          ✓
-                        </span>
-                        <span
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.65rem",
+                        marginBottom: "2rem",
+                        flex: 1,
+                      }}
+                    >
+                      {features.map((f) => (
+                        <div
+                          key={f}
                           style={{
-                            fontFamily: "'Work Sans',sans-serif",
-                            fontSize: "0.875rem",
-                            fontWeight: 300,
-                            color: highlight ? "rgba(255,255,255,0.85)" : MUTED,
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: "0.6rem",
                           }}
                         >
-                          {f}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                          <span
+                            style={{
+                              color: highlight ? "rgba(255,255,255,0.8)" : GOLD,
+                              fontSize: "0.8rem",
+                              marginTop: "1px",
+                            }}
+                          >
+                            ✓
+                          </span>
+                          <span
+                            style={{
+                              fontFamily: "'Work Sans',sans-serif",
+                              fontSize: "0.875rem",
+                              fontWeight: 300,
+                              color: highlight
+                                ? "rgba(255,255,255,0.85)"
+                                : MUTED,
+                            }}
+                          >
+                            {f}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
 
-                  <button
-                    onClick={() => {
-                      setSelectedPackageId(id);
-                      const calcElem = document.getElementById("calculator");
-                      calcElem?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      textAlign: "center",
-                      fontFamily: "'Work Sans',sans-serif",
-                      fontWeight: 600,
-                      fontSize: "0.8rem",
-                      letterSpacing: "0.06em",
-                      textTransform: "uppercase",
-                      padding: "0.85rem",
-                      background: highlight ? WHITE : GOLD,
-                      color: highlight ? GOLD : WHITE,
-                      border: "none",
-                      borderRadius: "3px",
-                      cursor: "pointer",
-                      transition: "transform 0.2s",
-                    }}
-                  >
-                    Customize in Calculator ↓
-                  </button>
-                </motion.div>
-              </FadeUp>
-            ))}
+                    <button
+                      onClick={() => {
+                        setSelectedPackageId(id)
+                        const calcElem = document.getElementById("calculator")
+                        calcElem?.scrollIntoView({ behavior: "smooth" })
+                      }}
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        textAlign: "center",
+                        fontFamily: "'Work Sans',sans-serif",
+                        fontWeight: 600,
+                        fontSize: "0.8rem",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        padding: "0.85rem",
+                        background: highlight ? WHITE : GOLD,
+                        color: highlight ? GOLD : WHITE,
+                        border: "none",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        transition: "transform 0.2s",
+                      }}
+                    >
+                      Customize in Calculator ↓
+                    </button>
+                  </motion.div>
+                </FadeUp>
+              ),
+            )}
           </div>
         </div>
       </section>
 
       {/* Interactive Package & Quote Calculator */}
-      <section id="calculator" style={{ padding: "6rem 2rem", maxWidth: "1100px", margin: "0 auto" }}>
+      <section
+        id="calculator"
+        style={{ padding: "6rem 2rem", maxWidth: "1100px", margin: "0 auto" }}
+      >
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <p
@@ -637,7 +743,13 @@ export function CreativeConcepts() {
             >
               — Interactive Estimator
             </p>
-            <h2 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "clamp(2rem,4vw,3rem)", color: DARK }}>
+            <h2
+              style={{
+                fontFamily: "'DM Serif Display',serif",
+                fontSize: "clamp(2rem,4vw,3rem)",
+                color: DARK,
+              }}
+            >
               Build Your Custom Package
             </h2>
             <p
@@ -649,8 +761,8 @@ export function CreativeConcepts() {
                 margin: "0.5rem auto 0",
               }}
             >
-              Select your base framework and toggle optional services. You can dispatch your customized quote directly to
-              our WhatsApp.
+              Select your base framework and toggle optional services. You can
+              dispatch your customized quote directly to our WhatsApp.
             </p>
           </div>
         </FadeUp>
@@ -668,7 +780,14 @@ export function CreativeConcepts() {
                 boxShadow: "0 2px 12px rgba(26,24,20,0.04)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  marginBottom: "1.25rem",
+                }}
+              >
                 <span
                   style={{
                     background: GOLD,
@@ -685,14 +804,20 @@ export function CreativeConcepts() {
                 >
                   1
                 </span>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.25rem", color: DARK }}>
+                <h3
+                  style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: "1.25rem",
+                    color: DARK,
+                  }}
+                >
                   Select Base Framework
                 </h3>
               </div>
 
               <div className="grid sm:grid-cols-3 gap-3">
                 {PACKAGES.map((pkg) => {
-                  const isSelected = selectedPackageId === pkg.id;
+                  const isSelected = selectedPackageId === pkg.id
                   return (
                     <button
                       key={pkg.id}
@@ -701,7 +826,9 @@ export function CreativeConcepts() {
                         padding: "1.25rem 1rem",
                         borderRadius: "5px",
                         border: `2px solid ${isSelected ? GOLD : BORDER}`,
-                        background: isSelected ? "rgba(200,165,74,0.06)" : SURFACE,
+                        background: isSelected
+                          ? "rgba(200,165,74,0.06)"
+                          : SURFACE,
                         textAlign: "left",
                         cursor: "pointer",
                         transition: "all 0.2s",
@@ -725,7 +852,11 @@ export function CreativeConcepts() {
                         >
                           {pkg.name.split(" ")[0]}
                         </span>
-                        {isSelected && <span style={{ color: GOLD, fontWeight: "bold" }}>●</span>}
+                        {isSelected && (
+                          <span style={{ color: GOLD, fontWeight: "bold" }}>
+                            ●
+                          </span>
+                        )}
                       </div>
                       <p
                         style={{
@@ -748,7 +879,7 @@ export function CreativeConcepts() {
                         {pkg.turnaround}
                       </span>
                     </button>
-                  );
+                  )
                 })}
               </div>
             </div>
@@ -763,7 +894,14 @@ export function CreativeConcepts() {
                 boxShadow: "0 2px 12px rgba(26,24,20,0.04)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  marginBottom: "1.25rem",
+                }}
+              >
                 <span
                   style={{
                     background: GOLD,
@@ -780,14 +918,20 @@ export function CreativeConcepts() {
                 >
                   2
                 </span>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.25rem", color: DARK }}>
+                <h3
+                  style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: "1.25rem",
+                    color: DARK,
+                  }}
+                >
                   Modular Add-Ons & Extras
                 </h3>
               </div>
 
               <div className="flex flex-col gap-3">
                 {ADD_ONS.map((addon) => {
-                  const isChecked = selectedAddOnIds.includes(addon.id);
+                  const isChecked = selectedAddOnIds.includes(addon.id)
                   return (
                     <div
                       key={addon.id}
@@ -805,11 +949,17 @@ export function CreativeConcepts() {
                         transition: "all 0.18s",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1rem",
+                        }}
+                      >
                         <input
                           type="checkbox"
                           checked={isChecked}
-                          onChange={() => { }}
+                          onChange={() => {}}
                           style={{
                             accentColor: GOLD,
                             width: "18px",
@@ -853,7 +1003,7 @@ export function CreativeConcepts() {
                         +{formatGhs(addon.price)}
                       </span>
                     </div>
-                  );
+                  )
                 })}
               </div>
             </div>
@@ -895,18 +1045,49 @@ export function CreativeConcepts() {
               {currentPackage.name}
             </h4>
 
-            <div style={{ borderTop: "1px solid #2e2a22", paddingTop: "1rem", marginBottom: "1.25rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                <span style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.85rem", color: "#b5aea2" }}>
+            <div
+              style={{
+                borderTop: "1px solid #2e2a22",
+                paddingTop: "1rem",
+                marginBottom: "1.25rem",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Work Sans', sans-serif",
+                    fontSize: "0.85rem",
+                    color: "#b5aea2",
+                  }}
+                >
                   Base package:
                 </span>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", color: WHITE }}>
+                <span
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.85rem",
+                    color: WHITE,
+                  }}
+                >
                   {formatGhs(currentPackage.basePrice)}
                 </span>
               </div>
 
               {activeAddOns.map((a) => (
-                <div key={a.id} style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.35rem" }}>
+                <div
+                  key={a.id}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "0.35rem",
+                  }}
+                >
                   <span
                     style={{
                       fontFamily: "'Work Sans', sans-serif",
@@ -920,7 +1101,13 @@ export function CreativeConcepts() {
                   >
                     + {a.name}
                   </span>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.78rem", color: GOLD }}>
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "0.78rem",
+                      color: GOLD,
+                    }}
+                  >
                     {formatGhs(a.price)}
                   </span>
                 </div>
@@ -937,7 +1124,13 @@ export function CreativeConcepts() {
                 marginBottom: "1.5rem",
               }}
             >
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.75rem", letterSpacing: "0.08em" }}>
+              <span
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.08em",
+                }}
+              >
                 TOTAL ESTIMATE:
               </span>
               <span
@@ -957,7 +1150,11 @@ export function CreativeConcepts() {
               {showWaPreview && (
                 <motion.div
                   initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-                  animate={{ opacity: 1, height: "auto", marginBottom: "0.75rem" }}
+                  animate={{
+                    opacity: 1,
+                    height: "auto",
+                    marginBottom: "0.75rem",
+                  }}
                   exit={{ opacity: 0, height: 0, marginBottom: 0 }}
                   transition={{ duration: 0.3 }}
                   style={{ overflow: "hidden" }}
@@ -1030,16 +1227,23 @@ export function CreativeConcepts() {
                 cursor: "pointer",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.transform = "translateY(-2px)"
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.transform = "translateY(0)"
               }}
             >
-              <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width={18}
+                height={18}
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
-              {showWaPreview ? "✓ Confirm & Open WhatsApp" : "Book This Package on WhatsApp"}
+              {showWaPreview
+                ? "✓ Confirm & Open WhatsApp"
+                : "Book This Package on WhatsApp"}
             </button>
 
             {showWaPreview && (
@@ -1095,14 +1299,22 @@ export function CreativeConcepts() {
                 marginTop: "1rem",
               }}
             >
-              * Estimates are subject to review of asset files and custom specifications.
+              * Estimates are subject to review of asset files and custom
+              specifications.
             </span>
           </div>
         </div>
       </section>
 
       {/* Concept Portfolio Showcase with Lightbox */}
-      <section style={{ padding: "5rem 2rem", maxWidth: "1280px", margin: "0 auto", borderTop: `1px solid ${BORDER}` }}>
+      <section
+        style={{
+          padding: "5rem 2rem",
+          maxWidth: "1280px",
+          margin: "0 auto",
+          borderTop: `1px solid ${BORDER}`,
+        }}
+      >
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <p
@@ -1117,209 +1329,298 @@ export function CreativeConcepts() {
             >
               — Photography · Graphic Design · Integrated Direction
             </p>
-            <h2 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "clamp(1.8rem,3.5vw,2.75rem)", color: DARK }}>
+            <h2
+              style={{
+                fontFamily: "'DM Serif Display',serif",
+                fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
+                color: DARK,
+              }}
+            >
               Concept Work
             </h2>
-            <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.9rem", lineHeight: 1.75, color: MUTED, maxWidth: "520px", margin: "0 auto" }}>
-              A cross-discipline showcase where photography, graphic design, and art direction
-              converge into cohesive creative concepts. Click any project to view in full screen.
+            <p
+              style={{
+                fontFamily: "'Work Sans', sans-serif",
+                fontSize: "0.9rem",
+                lineHeight: 1.75,
+                color: MUTED,
+                maxWidth: "520px",
+                margin: "0 auto",
+              }}
+            >
+              A cross-discipline showcase where photography, graphic design, and
+              art direction converge into cohesive creative concepts. Click any
+              project to view in full screen.
             </p>
           </div>
         </FadeUp>
-        <div
-          className="grid gap-5"
-          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}
-        >
-          {PROJECTS.map((p, i) => {
-            const badgeColor =
-              p.disciplineType === "photography"
-                ? "rgba(100, 180, 220, 0.18)"
-                : p.disciplineType === "integrated"
-                ? "rgba(200, 165, 74, 0.18)"
-                : "rgba(255,255,255,0.12)";
-            const badgeBorder =
-              p.disciplineType === "photography"
-                ? "rgba(100, 180, 220, 0.55)"
-                : p.disciplineType === "integrated"
-                ? "rgba(200, 165, 74, 0.6)"
-                : "rgba(255,255,255,0.4)";
-            const badgeText =
-              p.disciplineType === "photography"
-                ? "#88c8e8"
-                : p.disciplineType === "integrated"
-                ? GOLD
-                : "rgba(255,255,255,0.9)";
-            return (
-              <FadeUp key={p.id} delay={i * 0.07}>
-                <div
-                  className={p.wide ? "md:col-span-2" : ""}
+        <div style={{ display: "grid", gap: "4.5rem" }}>
+          {PROJECTS_BY_YEAR.map(([year, projects]) => (
+            <section key={year} aria-labelledby={`concept-work-${year}`}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <h3
+                  id={`concept-work-${year}`}
                   style={{
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: "6px",
-                    background: SURFACE,
-                    cursor: "pointer",
-                    boxShadow: hovered === p.id ? "0 8px 32px rgba(0,0,0,0.18)" : "0 2px 8px rgba(0,0,0,0.06)",
-                    transition: "box-shadow 0.3s ease",
-                    willChange: "transform",
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: "clamp(1.65rem, 3vw, 2.25rem)",
+                    color: DARK,
+                    lineHeight: 1,
                   }}
-                  onMouseEnter={() => setHovered(p.id)}
-                  onMouseLeave={() => setHovered(null)}
-                  onClick={() => setLightboxIndex(i)}
                 >
-                  <div style={{ paddingBottom: p.wide ? "46%" : "66%", position: "relative" }}>
-                    <motion.img
-                      src={p.img}
-                      alt={p.title}
-                      loading="lazy"
-                      decoding="async"
-                      animate={{
-                        scale: hovered === p.id ? 1.07 : 1,
-                        filter: hovered === p.id ? "brightness(0.32)" : "brightness(0.88)",
-                      }}
-                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-
-                    {/* Discipline badge — top left */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "1rem",
-                        left: "1rem",
-                        zIndex: 2,
-                        background: badgeColor,
-                        border: `1px solid ${badgeBorder}`,
-                        borderRadius: "3px",
-                        padding: "0.22rem 0.55rem",
-                        backdropFilter: "blur(8px)",
-                      }}
-                    >
-                      <span
+                  {year}
+                </h3>
+                <span style={{ height: "1px", flex: 1, background: BORDER }} />
+                <span
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: MUTED,
+                  }}
+                >
+                  {projects.length}{" "}
+                  {projects.length === 1 ? "project" : "projects"}
+                </span>
+              </div>
+              <div className="grid grid-cols-12 gap-5">
+                {projects.map((p) => {
+                  const i = PROJECTS.indexOf(p)
+                  const layout = PROJECT_LAYOUTS[p.layout]
+                  const cardClassName =
+                    projects.length === 1
+                      ? "col-span-12 sm:col-span-8 sm:col-start-3 lg:col-span-6 lg:col-start-4"
+                      : layout.className
+                  const badgeColor =
+                    p.disciplineType === "photography"
+                      ? "rgba(100, 180, 220, 0.18)"
+                      : p.disciplineType === "integrated"
+                        ? "rgba(200, 165, 74, 0.18)"
+                        : "rgba(255,255,255,0.12)"
+                  const badgeBorder =
+                    p.disciplineType === "photography"
+                      ? "rgba(100, 180, 220, 0.55)"
+                      : p.disciplineType === "integrated"
+                        ? "rgba(200, 165, 74, 0.6)"
+                        : "rgba(255,255,255,0.4)"
+                  const badgeText =
+                    p.disciplineType === "photography"
+                      ? "#88c8e8"
+                      : p.disciplineType === "integrated"
+                        ? GOLD
+                        : "rgba(255,255,255,0.9)"
+                  return (
+                    <FadeUp key={p.id} delay={i * 0.07}>
+                      <div
+                        className={cardClassName}
                         style={{
-                          fontFamily: "'DM Mono', monospace",
-                          fontSize: "0.55rem",
-                          letterSpacing: "0.12em",
-                          textTransform: "uppercase",
-                          color: badgeText,
-                        }}
-                      >
-                        {p.badgeLabel}
-                      </span>
-                    </div>
-
-                    {/* Hover overlay — bottom reveal */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-end",
-                        padding: "1.5rem",
-                        zIndex: 2,
-                      }}
-                    >
-                      <motion.p
-                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 8 }}
-                        transition={{ duration: 0.2 }}
-                        style={{
-                          fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.58rem",
-                          letterSpacing: "0.12em",
-                          textTransform: "uppercase",
-                          color: GOLD,
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        {p.client} — {p.year}
-                      </motion.p>
-                      <motion.h3
-                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 10 }}
-                        transition={{ duration: 0.25, delay: 0.04 }}
-                        style={{
-                          fontFamily: "'DM Serif Display',serif",
-                          fontSize: "1.2rem",
-                          color: WHITE,
-                          marginBottom: "0.4rem",
-                          lineHeight: 1.25,
-                        }}
-                      >
-                        {p.title}
-                      </motion.h3>
-                      <motion.p
-                        animate={{ opacity: hovered === p.id ? 0.78 : 0, y: hovered === p.id ? 0 : 6 }}
-                        transition={{ duration: 0.22, delay: 0.08 }}
-                        style={{
-                          fontFamily: "'Work Sans', sans-serif",
-                          fontSize: "0.78rem",
-                          fontWeight: 300,
-                          color: WHITE,
-                          lineHeight: 1.55,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
+                          position: "relative",
                           overflow: "hidden",
+                          borderRadius: "6px",
+                          background: SURFACE,
+                          cursor: "pointer",
+                          boxShadow:
+                            hovered === p.id
+                              ? "0 8px 32px rgba(0,0,0,0.18)"
+                              : "0 2px 8px rgba(0,0,0,0.06)",
+                          transition: "box-shadow 0.3s ease",
+                          willChange: "transform",
                         }}
+                        onMouseEnter={() => setHovered(p.id)}
+                        onMouseLeave={() => setHovered(null)}
+                        onClick={() => setLightboxIndex(i)}
                       >
-                        {p.description}
-                      </motion.p>
-                    </div>
-                  </div>
+                        <div
+                          style={{
+                            aspectRatio: layout.aspectRatio,
+                            position: "relative",
+                            background: "#e9e6e0",
+                          }}
+                        >
+                          <motion.img
+                            src={p.img}
+                            alt={p.title}
+                            loading="lazy"
+                            decoding="async"
+                            animate={{
+                              scale: hovered === p.id ? 1.07 : 1,
+                              filter:
+                                hovered === p.id
+                                  ? "brightness(0.32)"
+                                  : "brightness(0.88)",
+                            }}
+                            transition={{
+                              duration: 0.45,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                            style={{
+                              position: "absolute",
+                              inset: 0,
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              objectPosition: p.imagePosition ?? "center",
+                            }}
+                          />
 
-                  {/* Always-visible bottom metadata strip */}
-                  <div
-                    style={{
-                      padding: "0.85rem 1.1rem",
-                      borderTop: `1px solid ${BORDER}`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      background: WHITE,
-                    }}
-                  >
-                    <div>
-                      <p
-                        style={{
-                          fontFamily: "'Work Sans', sans-serif",
-                          fontSize: "0.82rem",
-                          fontWeight: 600,
-                          color: DARK,
-                          marginBottom: "0.1rem",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {p.title}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "'DM Mono', monospace",
-                          fontSize: "0.58rem",
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                          color: MUTED,
-                        }}
-                      >
-                        {p.category}
-                      </p>
-                    </div>
-                    <span
-                      style={{
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "0.6rem",
-                        color: GOLD,
-                        letterSpacing: "0.05em",
-                        flexShrink: 0,
-                        marginLeft: "0.75rem",
-                      }}
-                    >
-                      {p.year}
-                    </span>
-                  </div>
-                </div>
-              </FadeUp>
-            );
-          })}
+                          {/* Discipline badge — top left */}
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: "1rem",
+                              left: "1rem",
+                              zIndex: 2,
+                              background: badgeColor,
+                              border: `1px solid ${badgeBorder}`,
+                              borderRadius: "3px",
+                              padding: "0.22rem 0.55rem",
+                              backdropFilter: "blur(8px)",
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontFamily: "'DM Mono', monospace",
+                                fontSize: "0.55rem",
+                                letterSpacing: "0.12em",
+                                textTransform: "uppercase",
+                                color: badgeText,
+                              }}
+                            >
+                              {p.badgeLabel}
+                            </span>
+                          </div>
+
+                          {/* Hover overlay — bottom reveal */}
+                          <div
+                            style={{
+                              position: "absolute",
+                              inset: 0,
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "flex-end",
+                              padding: "1.5rem",
+                              zIndex: 2,
+                            }}
+                          >
+                            <motion.p
+                              animate={{
+                                opacity: hovered === p.id ? 1 : 0,
+                                y: hovered === p.id ? 0 : 8,
+                              }}
+                              transition={{ duration: 0.2 }}
+                              style={{
+                                fontFamily: "'DM Mono',monospace",
+                                fontSize: "0.58rem",
+                                letterSpacing: "0.12em",
+                                textTransform: "uppercase",
+                                color: GOLD,
+                                marginBottom: "0.3rem",
+                              }}
+                            >
+                              {p.client} — {p.year}
+                            </motion.p>
+                            <motion.h3
+                              animate={{
+                                opacity: hovered === p.id ? 1 : 0,
+                                y: hovered === p.id ? 0 : 10,
+                              }}
+                              transition={{ duration: 0.25, delay: 0.04 }}
+                              style={{
+                                fontFamily: "'DM Serif Display',serif",
+                                fontSize: "1.2rem",
+                                color: WHITE,
+                                marginBottom: "0.4rem",
+                                lineHeight: 1.25,
+                              }}
+                            >
+                              {p.title}
+                            </motion.h3>
+                            <motion.p
+                              animate={{
+                                opacity: hovered === p.id ? 0.78 : 0,
+                                y: hovered === p.id ? 0 : 6,
+                              }}
+                              transition={{ duration: 0.22, delay: 0.08 }}
+                              style={{
+                                fontFamily: "'Work Sans', sans-serif",
+                                fontSize: "0.78rem",
+                                fontWeight: 300,
+                                color: WHITE,
+                                lineHeight: 1.55,
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                              }}
+                            >
+                              {p.description}
+                            </motion.p>
+                          </div>
+                        </div>
+
+                        {/* Always-visible bottom metadata strip */}
+                        <div
+                          style={{
+                            padding: "0.85rem 1.1rem",
+                            borderTop: `1px solid ${BORDER}`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            background: WHITE,
+                          }}
+                        >
+                          <div>
+                            <p
+                              style={{
+                                fontFamily: "'Work Sans', sans-serif",
+                                fontSize: "0.82rem",
+                                fontWeight: 600,
+                                color: DARK,
+                                marginBottom: "0.1rem",
+                                lineHeight: 1.2,
+                              }}
+                            >
+                              {p.title}
+                            </p>
+                            <p
+                              style={{
+                                fontFamily: "'DM Mono', monospace",
+                                fontSize: "0.58rem",
+                                letterSpacing: "0.08em",
+                                textTransform: "uppercase",
+                                color: MUTED,
+                              }}
+                            >
+                              {p.category}
+                            </p>
+                          </div>
+                          <span
+                            style={{
+                              fontFamily: "'DM Mono', monospace",
+                              fontSize: "0.6rem",
+                              color: GOLD,
+                              letterSpacing: "0.05em",
+                              flexShrink: 0,
+                              marginLeft: "0.75rem",
+                            }}
+                          >
+                            {p.year}
+                          </span>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  )
+                })}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
 
@@ -1331,5 +1632,5 @@ export function CreativeConcepts() {
         onNavigate={(idx) => setLightboxIndex(idx)}
       />
     </>
-  );
+  )
 }
