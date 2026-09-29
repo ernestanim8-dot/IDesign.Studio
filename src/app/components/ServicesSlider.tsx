@@ -9,6 +9,10 @@ import advertisingImg from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg
 import socialMediaImg from "@/imports/Advertising/3mma’s Glamour Banner/3mma’s Glamour Banner copy copy copy.jpg";
 import creativeDirectionImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
+import eventImg from "@/imports/Photography/Events/graduation-2025/gctu-2025-02-cap-and-scroll.jpg";
+import foodImg from "@/imports/Photography/Food/Frosty Bite/IMG_0006.jpg";
+import logoDesignImg from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg";
+import beautyImg from "@/imports/Advertising/Adom Beauty/Adom Beauty copy.jpg";
 
 export interface ServiceCardItem {
   id: string;
@@ -166,6 +170,94 @@ export const SERVICES: ServiceCardItem[] = [
       isDark: false,
     },
   },
+  {
+    id: "event-photography",
+    anchorId: "event-photography",
+    number: "07",
+    title: "Event Photography",
+    tag: "Ceremonies & Milestones",
+    desc: "Graduation ceremonies, corporate galas, investitures, and landmark occasions documented with unobtrusive precision and emotional clarity.",
+    img: eventImg,
+    to: "/photography",
+    theme: {
+      bg: "#0f0e17",
+      text: "#ffffff",
+      descColor: "rgba(255,255,255,0.62)",
+      border: "rgba(180,155,220,0.22)",
+      accent: "#b49bdc",
+      tagBg: "rgba(180,155,220,0.12)",
+      btnBg: "rgba(180,155,220,0.14)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(180,155,220,0.35)",
+      isDark: true,
+    },
+  },
+  {
+    id: "food-photography",
+    anchorId: "food-photography",
+    number: "08",
+    title: "Food Photography",
+    tag: "Product & Culinary",
+    desc: "Studio-controlled and on-location food styling, beverage campaigns, and restaurant menu visuals engineered for appetite appeal.",
+    img: foodImg,
+    to: "/photography",
+    theme: {
+      bg: "#fdf7ee",
+      text: "#1c1713",
+      descColor: "#6e6154",
+      border: "#e8dac8",
+      accent: "#c07c2a",
+      tagBg: "rgba(192, 124, 42, 0.1)",
+      btnBg: "#1c1713",
+      btnText: "#ffffff",
+      btnBorder: "#1c1713",
+      isDark: false,
+    },
+  },
+  {
+    id: "logo-design",
+    anchorId: "logo-design",
+    number: "09",
+    title: "Logo & Corporate ID",
+    tag: "Mark & Symbol Design",
+    desc: "Bespoke logomarks, wordmarks, and full corporate identity systems built to project authority across every medium and surface.",
+    img: logoDesignImg,
+    to: "/creative-concepts",
+    theme: {
+      bg: "#111318",
+      text: "#ffffff",
+      descColor: "rgba(255,255,255,0.63)",
+      border: "rgba(100,180,255,0.2)",
+      accent: "#64b4ff",
+      tagBg: "rgba(100,180,255,0.1)",
+      btnBg: "rgba(100,180,255,0.14)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(100,180,255,0.32)",
+      isDark: true,
+    },
+  },
+  {
+    id: "beauty-cosmetics",
+    anchorId: "beauty-cosmetics",
+    number: "10",
+    title: "Beauty & Cosmetics",
+    tag: "Glamour Campaigns",
+    desc: "High-gloss beauty campaigns, skincare and cosmetic brand visuals, and luxury product photography for premium market positioning.",
+    img: beautyImg,
+    to: "/graphic-design",
+    theme: {
+      bg: "#1a0d18",
+      text: "#ffffff",
+      descColor: "rgba(255,255,255,0.64)",
+      border: "rgba(230,140,180,0.22)",
+      accent: "#e68cb4",
+      tagBg: "rgba(230,140,180,0.12)",
+      btnBg: "rgba(230,140,180,0.14)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(230,140,180,0.32)",
+      isDark: true,
+    },
+  },
 ];
 
 // Duplicate for continuous seamless marquee loop
@@ -263,16 +355,6 @@ export function ServicesSlider() {
               {/* ── Top Bar inside Card ── */}
               <div className="flex items-center justify-between" style={{ zIndex: 2 }}>
                 <div className="flex items-center gap-2">
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.72rem",
-                      fontWeight: 700,
-                      color: theme.accent,
-                    }}
-                  >
-                    {service.number}
-                  </span>
                   <span style={{ width: 14, height: 1, background: theme.accent, opacity: 0.6 }} />
                   <span
                     style={{

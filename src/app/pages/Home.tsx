@@ -35,10 +35,10 @@ const LATEST_WORK = [
 
 
 const STATS = [
-  { value: "5+", label: "Years in Business" },
+  { value: "4", label: "Years in Business" },
   { value: "340+", label: "Projects Completed" },
   { value: "80+", label: "Happy Clients" },
-  { value: "3", label: "Services Under One Roof" },
+  { value: "4", label: "Services Under One Roof" },
 ];
 
 const TESTIMONIALS = [
