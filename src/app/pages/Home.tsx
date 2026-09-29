@@ -4,39 +4,13 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 import logoFull from "@/imports/i design logo.png";
 import homeBackground from "@/imports/Background H.jpg";
-import photographyImg from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
-import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
-import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 import blueForMenImg from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
 import rightGuardImg from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
 import studioLifestyleImg from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
 import aboutStudioImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
-
-const SERVICES = [
-  {
-    title: "Photography",
-    desc: "Commercial, portrait, and documentary photography that tells your brand's story with clarity and emotion.",
-    img: photographyImg,
-    icon: "📷",
-    to: "/photography",
-  },
-  {
-    title: "Creative Concepts",
-    desc: "End-to-end creative identity packages — strategy, visual language, print collateral, and digital assets under one roof.",
-    img: creativeConceptsImg,
-    icon: "✦",
-    to: "/creative-concepts",
-  },
-  {
-    title: "Graphic Design",
-    desc: "Logos, packaging, editorial layouts, and brand systems that communicate your values with confidence and style.",
-    img: graphicDesignImg,
-    icon: "◈",
-    to: "/graphic-design",
-  },
-];
+import { ServicesSlider } from "../components/ServicesSlider";
 
 const LATEST_WORK = [
   {
@@ -483,128 +457,67 @@ export function Home() {
         </div>
       </section>
 
-      <section id="services" style={{ padding: "6rem 2rem", maxWidth: "1280px", margin: "0 auto" }}>
-        <FadeUp>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <p
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: "0.65rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: GOLD,
-                marginBottom: "0.75rem",
-              }}
-            >
-              — What We Do
-            </p>
-            <h2
-              style={{
-                fontFamily: "'DM Serif Display',serif",
-                fontSize: "clamp(2rem,4vw,3rem)",
-                letterSpacing: "-0.02em",
-                color: DARK,
-              }}
-            >
-              Our Services
-            </h2>
-          </div>
-        </FadeUp>
-        <div className="grid md:grid-cols-3 gap-8">
-          {SERVICES.map((svc, i) => (
-            <FadeUp key={svc.title} delay={i * 0.12}>
-              <motion.div
-                id={
-                  svc.title === "Photography"
-                    ? "photography"
-                    : svc.title === "Graphic Design"
-                      ? "graphic-design"
-                      : "advertising"
-                }
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3 }}
+      <section
+        id="services"
+        style={{
+          padding: "6rem 0",
+          background: BG,
+          borderBottom: `1px solid ${BORDER}`,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem" }}>
+          <FadeUp>
+            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+              <p
                 style={{
-                  background: "#fff",
-                  borderRadius: "6px",
-                  overflow: "hidden",
-                  border: `1px solid ${BORDER}`,
-                  boxShadow: "0 2px 16px rgba(26,24,20,0.06)",
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  marginBottom: "0.75rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem",
                 }}
               >
-                <div style={{ position: "relative", overflow: "hidden" }}>
-                  <img
-                    src={svc.img}
-                    alt={svc.title}
-                    loading="lazy"
-                    decoding="async"
-                    style={{
-                      width: "100%",
-                      height: "240px",
-                      objectFit: "cover",
-                      display: "block",
-                      transition: "transform 0.55s ease",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "1rem",
-                      right: "1rem",
-                      background: "rgba(200,165,74,0.92)",
-                      backdropFilter: "blur(8px)",
-                      borderRadius: "4px",
-                      padding: "0.3rem 0.7rem",
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.75rem",
-                      color: WHITE,
-                    }}
-                  >
-                    {svc.icon}
-                  </div>
-                </div>
-                <div style={{ padding: "1.5rem" }}>
-                  <h3
-                    style={{
-                      fontFamily: "'DM Serif Display',serif",
-                      fontSize: "1.35rem",
-                      color: DARK,
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {svc.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Work Sans',sans-serif",
-                      fontSize: "0.875rem",
-                      fontWeight: 300,
-                      lineHeight: "1.7",
-                      color: MUTED,
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {svc.desc}
-                  </p>
-                  <Link
-                    to={svc.to}
-                    style={{
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.63rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: GOLD,
-                      textDecoration: "none",
-                    }}
-                  >
-                    Learn more →
-                  </Link>
-                </div>
-              </motion.div>
-            </FadeUp>
-          ))}
+                <span style={{ display: "inline-block", width: 28, height: 1.5, background: GOLD }} />
+                What We Do
+                <span style={{ display: "inline-block", width: 28, height: 1.5, background: GOLD }} />
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'DM Serif Display',serif",
+                  fontSize: "clamp(2.2rem,4.5vw,3.4rem)",
+                  letterSpacing: "-0.025em",
+                  color: DARK,
+                  marginBottom: "1rem",
+                }}
+              >
+                Our Services
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Work Sans',sans-serif",
+                  fontSize: "1.05rem",
+                  fontWeight: 300,
+                  lineHeight: "1.75",
+                  color: MUTED,
+                  maxWidth: "600px",
+                  margin: "0 auto",
+                }}
+              >
+                An integrated creative studio delivering photography, brand identity, advertising campaigns, and print craftsmanship with uncompromising excellence.
+              </p>
+            </div>
+          </FadeUp>
         </div>
+
+        {/* ── Services Horizontal Slider Component ── */}
+        <ServicesSlider />
       </section>
 
       {/* ── Stats ── */}
