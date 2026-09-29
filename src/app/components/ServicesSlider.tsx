@@ -6,7 +6,7 @@ import { GOLD, WHITE } from "@/tokens";
 import photographyImg from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
 import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import advertisingImg from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
-import socialMediaImg from "@/imports/Advertising/3mma's Glamour Banner/3mma's Glamour Banner copy copy copy.jpg";
+import socialMediaImg from "@/imports/Advertising/Fashion/Fashion copy.jpg";
 import creativeDirectionImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 import eventImg from "@/imports/Photography/Events/graduation-2025/gctu-2025-02-cap-and-scroll.jpg";
