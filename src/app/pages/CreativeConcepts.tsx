@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
+import creativeConceptsBackground from "@/imports/Background CC.jpg";
 
 const PACKAGES = [
   {
@@ -243,8 +244,7 @@ export function CreativeConcepts() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1200&h=500&fit=crop&auto=format&q=75')",
+            backgroundImage: `url(${creativeConceptsBackground})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.2,
