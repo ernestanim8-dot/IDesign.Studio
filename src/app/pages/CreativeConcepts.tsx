@@ -7,6 +7,15 @@ import creativeConceptsBackground from "@/imports/Background CC.jpg";
 import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import idesignNotebook from "@/imports/Branding/IDesign/Notebook.jpg";
 import ewurabaWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg";
+import blueForMenPedestal from "@/imports/Photography/Commercial/Blue for men/blue-for-men-pedestal.jpg";
+import rightGuardAction from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
+import studioLifestyleDress from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
+import electricPopPortrait from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
+import matriculationRegalia from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-14-heritage-honor.jpg";
+import engineerStudioGlam from "@/imports/Photography/Engineer & Studio Glam/IMG_6892.jpg";
+import oasisCampout from "@/imports/Advertising/Oasis Pathfinder Club UEW/UEW Campout 10.jpg";
+import iceCreamPkg from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg";
+import tinaBundle from "@/imports/Advertising/Tina Special Bundle/Tina-1.jpg";
 
 const PACKAGES = [
   {
@@ -103,6 +112,8 @@ interface ConceptProject extends LightboxItem {
   id: number;
   client: string;
   wide: boolean;
+  disciplineType: "integrated" | "graphic-design" | "photography";
+  badgeLabel: string;
 }
 
 const PROJECTS: ConceptProject[] = [
@@ -112,29 +123,143 @@ const PROJECTS: ConceptProject[] = [
     client: "SWGC",
     img: swgcMockup,
     wide: true,
-    category: "Brand & Packaging",
+    category: "Brand Architecture & Merchandising",
     year: "2024",
+    disciplineType: "integrated",
+    badgeLabel: "Integrated Direction",
     description: "Complete corporate identity system, apparel lineup, merchandise prototyping, and digital brand presence.",
   },
   {
     id: 2,
+    title: "Blue for Men: Luxury Fragrance Campaign",
+    client: "Blue for Men",
+    img: blueForMenPedestal,
+    wide: false,
+    category: "Commercial Product Photography",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Commercial Photography",
+    description: "High-speed liquid splash photography, precision pedestal lighting, and luxury fragrance art direction.",
+  },
+  {
+    id: 3,
     title: "iDESIGN Executive Stationery Suite",
     client: "iDESIGN Studio",
     img: idesignNotebook,
     wide: false,
     category: "Identity & Print Collateral",
     year: "2026",
+    disciplineType: "graphic-design",
+    badgeLabel: "Graphic Design",
     description: "Bespoke studio collateral, embossed notebooks, luxury stationery systems, and tactile brand touchpoints.",
   },
   {
-    id: 3,
+    id: 4,
+    title: "Radiant Studio Lifestyle & Fashion Editorial",
+    client: "Studio Lifestyle",
+    img: studioLifestyleDress,
+    wide: false,
+    category: "Fashion & Portraiture",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Editorial Photography",
+    description: "Editorial fashion storytelling, natural ambient lighting, and contemporary wardrobe styling.",
+  },
+  {
+    id: 5,
     title: "Ewuraba's Couture Architectural Signage",
     client: "Ewuraba's Couture",
     img: ewurabaWallMockup,
     wide: false,
     category: "Spatial Branding",
     year: "2024",
+    disciplineType: "graphic-design",
+    badgeLabel: "Graphic Design",
     description: "High-fashion house visual identity, 3D architectural signage, and premium retail presentation.",
+  },
+  {
+    id: 6,
+    title: "Right Guard: High-Performance Commercial",
+    client: "Right Guard",
+    img: rightGuardAction,
+    wide: true,
+    category: "Commercial Photography",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Commercial Photography",
+    description: "Dynamic commercial product photography, dramatic directional contrast lighting, and high-impact advertising.",
+  },
+  {
+    id: 7,
+    title: "Oasis Pathfinder Club Campout Campaign",
+    client: "GNAAS UEW-Ajumako AYM",
+    img: oasisCampout,
+    wide: false,
+    category: "Advertising & Campaign Systems",
+    year: "2024",
+    disciplineType: "integrated",
+    badgeLabel: "Integrated Direction",
+    description: "Multi-asset youth event campaign including event posters, guideline cards, and social media announcements.",
+  },
+  {
+    id: 8,
+    title: "Electric Pop: Hoop & Plaid Chic",
+    client: "Editorial Series",
+    img: electricPopPortrait,
+    wide: false,
+    category: "Portrait Photography",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Editorial Photography",
+    description: "Vibrant color-contrast studio portraiture featuring graphic styling, hoop accents, and expressive studio lighting.",
+  },
+  {
+    id: 9,
+    title: "Artisanal Ice Cream Branding & Packaging",
+    client: "Sweet Treats Co.",
+    img: iceCreamPkg,
+    wide: false,
+    category: "Packaging & Labels",
+    year: "2025",
+    disciplineType: "graphic-design",
+    badgeLabel: "Graphic Design",
+    description: "Whimsical yet sophisticated food packaging design, custom typography, and print-ready production files.",
+  },
+  {
+    id: 10,
+    title: "Heritage & Honor: Ceremonial Academic Regalia",
+    client: "GCTU Matriculation",
+    img: matriculationRegalia,
+    wide: false,
+    category: "Documentary & Events",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Documentary Photography",
+    description: "Celebratory milestone portraiture highlighting cultural Kente stoles, ceremonial gown dignity, and academic triumph.",
+  },
+  {
+    id: 11,
+    title: "Tina Special Bundle Promotional Campaign",
+    client: "Tina Special Bundle",
+    img: tinaBundle,
+    wide: false,
+    category: "Advertising & Flyers",
+    year: "2025",
+    disciplineType: "graphic-design",
+    badgeLabel: "Graphic Design",
+    description: "High-converting promotional marketing flyer and digital campaign collateral designed for social media conversion.",
+  },
+  {
+    id: 12,
+    title: "Studio Glam & Executive Portrait Series",
+    client: "Executive Studio Series",
+    img: engineerStudioGlam,
+    wide: true,
+    category: "Portrait Photography",
+    year: "2025",
+    disciplineType: "photography",
+    badgeLabel: "Editorial Photography",
+    description: "Polished executive studio portraiture combining precision rim lighting, subtle skin retouching, and poised elegance.",
   },
 ];
 
@@ -990,82 +1115,211 @@ export function CreativeConcepts() {
                 marginBottom: "0.75rem",
               }}
             >
-              — Case Studies
+              — Photography · Graphic Design · Integrated Direction
             </p>
             <h2 style={{ fontFamily: "'DM Serif Display',serif", fontSize: "clamp(1.8rem,3.5vw,2.75rem)", color: DARK }}>
               Concept Work
             </h2>
-            <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.85rem", color: MUTED }}>
-              Click any project to view complete art direction in full screen.
+            <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.9rem", lineHeight: 1.75, color: MUTED, maxWidth: "520px", margin: "0 auto" }}>
+              A cross-discipline showcase where photography, graphic design, and art direction
+              converge into cohesive creative concepts. Click any project to view in full screen.
             </p>
           </div>
         </FadeUp>
-        <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
-          {PROJECTS.map((p, i) => (
-            <FadeUp key={p.id} delay={i * 0.1}>
-              <div
-                className={p.wide ? "md:col-span-2" : ""}
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: "5px",
-                  background: SURFACE,
-                  cursor: "pointer",
-                  willChange: "transform",
-                }}
-                onMouseEnter={() => setHovered(p.id)}
-                onMouseLeave={() => setHovered(null)}
-                onClick={() => setLightboxIndex(i)}
-              >
-                <div style={{ paddingBottom: p.wide ? "48%" : "70%", position: "relative" }}>
-                  <motion.img
-                    src={p.img}
-                    alt={p.title}
-                    loading="lazy"
-                    decoding="async"
-                    animate={{
-                      scale: hovered === p.id ? 1.06 : 1,
-                      filter: hovered === p.id ? "brightness(0.38)" : "brightness(0.9)",
-                    }}
-                    transition={{ duration: 0.5 }}
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      padding: "1.5rem",
-                    }}
-                  >
-                    <motion.p
-                      animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 8 }}
-                      transition={{ duration: 0.25 }}
+        <div
+          className="grid gap-5"
+          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}
+        >
+          {PROJECTS.map((p, i) => {
+            const badgeColor =
+              p.disciplineType === "photography"
+                ? "rgba(100, 180, 220, 0.18)"
+                : p.disciplineType === "integrated"
+                ? "rgba(200, 165, 74, 0.18)"
+                : "rgba(255,255,255,0.12)";
+            const badgeBorder =
+              p.disciplineType === "photography"
+                ? "rgba(100, 180, 220, 0.55)"
+                : p.disciplineType === "integrated"
+                ? "rgba(200, 165, 74, 0.6)"
+                : "rgba(255,255,255,0.4)";
+            const badgeText =
+              p.disciplineType === "photography"
+                ? "#88c8e8"
+                : p.disciplineType === "integrated"
+                ? GOLD
+                : "rgba(255,255,255,0.9)";
+            return (
+              <FadeUp key={p.id} delay={i * 0.07}>
+                <div
+                  className={p.wide ? "md:col-span-2" : ""}
+                  style={{
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "6px",
+                    background: SURFACE,
+                    cursor: "pointer",
+                    boxShadow: hovered === p.id ? "0 8px 32px rgba(0,0,0,0.18)" : "0 2px 8px rgba(0,0,0,0.06)",
+                    transition: "box-shadow 0.3s ease",
+                    willChange: "transform",
+                  }}
+                  onMouseEnter={() => setHovered(p.id)}
+                  onMouseLeave={() => setHovered(null)}
+                  onClick={() => setLightboxIndex(i)}
+                >
+                  <div style={{ paddingBottom: p.wide ? "46%" : "66%", position: "relative" }}>
+                    <motion.img
+                      src={p.img}
+                      alt={p.title}
+                      loading="lazy"
+                      decoding="async"
+                      animate={{
+                        scale: hovered === p.id ? 1.07 : 1,
+                        filter: hovered === p.id ? "brightness(0.32)" : "brightness(0.88)",
+                      }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+
+                    {/* Discipline badge — top left */}
+                    <div
                       style={{
-                        fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.58rem",
-                        letterSpacing: "0.12em",
-                        textTransform: "uppercase",
-                        color: GOLD,
-                        marginBottom: "0.25rem",
+                        position: "absolute",
+                        top: "1rem",
+                        left: "1rem",
+                        zIndex: 2,
+                        background: badgeColor,
+                        border: `1px solid ${badgeBorder}`,
+                        borderRadius: "3px",
+                        padding: "0.22rem 0.55rem",
+                        backdropFilter: "blur(8px)",
                       }}
                     >
-                      {p.client} — {p.year}
-                    </motion.p>
-                    <motion.h3
-                      animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 10 }}
-                      transition={{ duration: 0.28, delay: 0.04 }}
-                      style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.3rem", color: WHITE }}
+                      <span
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "0.55rem",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: badgeText,
+                        }}
+                      >
+                        {p.badgeLabel}
+                      </span>
+                    </div>
+
+                    {/* Hover overlay — bottom reveal */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-end",
+                        padding: "1.5rem",
+                        zIndex: 2,
+                      }}
                     >
-                      {p.title}
-                    </motion.h3>
+                      <motion.p
+                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 8 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                          fontFamily: "'DM Mono',monospace",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: GOLD,
+                          marginBottom: "0.3rem",
+                        }}
+                      >
+                        {p.client} — {p.year}
+                      </motion.p>
+                      <motion.h3
+                        animate={{ opacity: hovered === p.id ? 1 : 0, y: hovered === p.id ? 0 : 10 }}
+                        transition={{ duration: 0.25, delay: 0.04 }}
+                        style={{
+                          fontFamily: "'DM Serif Display',serif",
+                          fontSize: "1.2rem",
+                          color: WHITE,
+                          marginBottom: "0.4rem",
+                          lineHeight: 1.25,
+                        }}
+                      >
+                        {p.title}
+                      </motion.h3>
+                      <motion.p
+                        animate={{ opacity: hovered === p.id ? 0.78 : 0, y: hovered === p.id ? 0 : 6 }}
+                        transition={{ duration: 0.22, delay: 0.08 }}
+                        style={{
+                          fontFamily: "'Work Sans', sans-serif",
+                          fontSize: "0.78rem",
+                          fontWeight: 300,
+                          color: WHITE,
+                          lineHeight: 1.55,
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {p.description}
+                      </motion.p>
+                    </div>
+                  </div>
+
+                  {/* Always-visible bottom metadata strip */}
+                  <div
+                    style={{
+                      padding: "0.85rem 1.1rem",
+                      borderTop: `1px solid ${BORDER}`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      background: WHITE,
+                    }}
+                  >
+                    <div>
+                      <p
+                        style={{
+                          fontFamily: "'Work Sans', sans-serif",
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          color: DARK,
+                          marginBottom: "0.1rem",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {p.title}
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: MUTED,
+                        }}
+                      >
+                        {p.category}
+                      </p>
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "0.6rem",
+                        color: GOLD,
+                        letterSpacing: "0.05em",
+                        flexShrink: 0,
+                        marginLeft: "0.75rem",
+                      }}
+                    >
+                      {p.year}
+                    </span>
                   </div>
                 </div>
-              </div>
-            </FadeUp>
-          ))}
+              </FadeUp>
+            );
+          })}
         </div>
       </section>
 

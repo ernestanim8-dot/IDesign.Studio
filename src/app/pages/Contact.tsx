@@ -346,8 +346,8 @@ export function Contact() {
                 {
                   key: "addr",
                   label: "Studio Location",
-                  value: "Accra, Ghana (By Appointment & Worldwide Commissions)",
-                  href: "https://maps.google.com/?q=Accra,+Ghana",
+                  value: "Nii Awuley Lartey St, Odorkor, Accra, Ghana",
+                  href: "https://maps.google.com/?q=Nii+Awuley+Lartey+St,+Odorkor,+Accra,+Ghana",
                   copyable: false,
                 },
               ].map(({ key, label, value, href, copyable }) => (
