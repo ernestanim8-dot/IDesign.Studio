@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
 import creativeConceptsBackground from "@/imports/Background CC.jpg";
+import swgcMockup from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
+import idesignNotebook from "@/imports/Branding/IDesign/Notebook.jpg";
+import ewurabaWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo MockUp 2.jpg";
 
 const PACKAGES = [
   {
@@ -105,33 +108,33 @@ interface ConceptProject extends LightboxItem {
 const PROJECTS: ConceptProject[] = [
   {
     id: 1,
-    title: "Vessel Brand Identity",
-    client: "Vessel Co.",
-    img: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=1200&h=750&fit=crop&auto=format&q=75",
+    title: "SWGC Brand & Merchandise System",
+    client: "SWGC",
+    img: swgcMockup,
     wide: true,
     category: "Brand & Packaging",
     year: "2024",
-    description: "Complete identity system, packaging range, and botanical art direction.",
+    description: "Complete corporate identity system, apparel lineup, merchandise prototyping, and digital brand presence.",
   },
   {
     id: 2,
-    title: "Arbor Full Concept & Print",
-    client: "Arbor Foods",
-    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&h=900&fit=crop&auto=format&q=75",
+    title: "iDESIGN Executive Stationery Suite",
+    client: "iDESIGN Studio",
+    img: idesignNotebook,
     wide: false,
-    category: "Identity & Strategy",
-    year: "2023",
-    description: "Eco-conscious visual language, bespoke iconography, and printed brand collateral.",
+    category: "Identity & Print Collateral",
+    year: "2026",
+    description: "Bespoke studio collateral, embossed notebooks, luxury stationery systems, and tactile brand touchpoints.",
   },
   {
     id: 3,
-    title: "Soleil Identity & Campaign",
-    client: "Soleil Spa",
-    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=900&fit=crop&auto=format&q=75",
+    title: "Ewuraba's Couture Architectural Signage",
+    client: "Ewuraba's Couture",
+    img: ewurabaWallMockup,
     wide: false,
-    category: "Art Direction",
-    year: "2023",
-    description: "Serene warm minimalism, editorial photography direction, and print suite.",
+    category: "Spatial Branding",
+    year: "2024",
+    description: "High-fashion house visual identity, 3D architectural signage, and premium retail presentation.",
   },
 ];
 

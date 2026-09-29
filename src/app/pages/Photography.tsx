@@ -2557,11 +2557,10 @@ export function Photography() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&h=400&fit=crop&auto=format&q=75')",
+            backgroundImage: `url(${photographyBackground})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.12,
+            opacity: 0.16,
           }}
         />
         <div style={{ position: "relative", zIndex: 1 }}>
