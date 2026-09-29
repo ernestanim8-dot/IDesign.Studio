@@ -15,6 +15,7 @@ import lawrenciaTakyiImg from "@/imports/What Our Clients Say/IMG_6777.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 import { ServicesSlider } from "../components/ServicesSlider";
+import { TestimonialsSlider } from "../components/TestimonialsSlider";
 
 const LATEST_WORK = [
   {
@@ -742,97 +743,9 @@ export function Home() {
           </div>
         </FadeUp>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((t, i) => (
-            <FadeUp key={t.author} delay={i * 0.1}>
-              <div
-                style={{
-                  background: WHITE,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: "6px",
-                  padding: "2.25rem",
-                  boxShadow: "0 4px 16px rgba(26,24,20,0.04)",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  height: "100%",
-                }}
-              >
-                <div>
-                  <div style={{ color: GOLD, fontSize: "0.95rem", marginBottom: "1rem", letterSpacing: "2px" }}>
-                    {"★".repeat(t.rating)}
-                  </div>
-                  <p
-                    style={{
-                      fontFamily: "'Work Sans', sans-serif",
-                      fontSize: "0.92rem",
-                      fontWeight: 300,
-                      lineHeight: "1.75",
-                      color: DARK,
-                      marginBottom: "1.75rem",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    "{t.quote}"
-                  </p>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "0.9rem", borderTop: `1px solid ${BORDER}`, paddingTop: "1rem" }}>
-                  {t.image ? (
-                    <img
-                      src={t.image}
-                      alt={t.author}
-                      style={{
-                        width: "44px",
-                        height: "44px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        border: `1.5px solid ${GOLD}`,
-                        boxShadow: "0 2px 8px rgba(200, 165, 74, 0.2)",
-                        flexShrink: 0,
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "44px",
-                        height: "44px",
-                        borderRadius: "50%",
-                        background: "rgba(200, 165, 74, 0.12)",
-                        border: `1px solid ${GOLD}`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "0.82rem",
-                        fontWeight: 700,
-                        color: GOLD,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {t.initials}
-                    </div>
-                  )}
-                  <div>
-                    <h4
-                      style={{
-                        fontFamily: "'Work Sans', sans-serif",
-                        fontWeight: 600,
-                        fontSize: "0.9rem",
-                        color: DARK,
-                      }}
-                    >
-                      {t.author}
-                    </h4>
-                    <p style={{ fontFamily: "'Work Sans', sans-serif", fontSize: "0.75rem", color: MUTED }}>
-                      {t.role}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </FadeUp>
-          ))}
-        </div>
+        <FadeUp delay={0.1}>
+          <TestimonialsSlider testimonials={TESTIMONIALS} />
+        </FadeUp>
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <a
             href={`https://wa.me/233502310663?text=${encodeURIComponent("Hello iDESIGN! I would like to share a short testimonial about my experience working with you.")}`}
