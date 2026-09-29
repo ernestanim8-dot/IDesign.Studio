@@ -112,8 +112,6 @@ interface ConceptProject extends LightboxItem {
   id: number
   client: string
   year: string
-  layout: "feature" | "landscape" | "portrait" | "square"
-  imagePosition?: string
   disciplineType: "integrated" | "graphic-design" | "photography"
   badgeLabel: string
 }
@@ -124,7 +122,6 @@ const PROJECTS: ConceptProject[] = [
     title: "SWGC Brand & Merchandise System",
     client: "SWGC",
     img: swgcMockup,
-    layout: "feature",
     category: "Brand Architecture & Merchandising",
     year: "2024",
     disciplineType: "integrated",
@@ -137,7 +134,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Blue for Men: Luxury Fragrance Campaign",
     client: "Blue for Men",
     img: blueForMenPedestal,
-    layout: "landscape",
     category: "Commercial Product Photography",
     year: "2025",
     disciplineType: "photography",
@@ -150,7 +146,6 @@ const PROJECTS: ConceptProject[] = [
     title: "iDESIGN Executive Stationery Suite",
     client: "iDESIGN Studio",
     img: idesignNotebook,
-    layout: "landscape",
     category: "Identity & Print Collateral",
     year: "2026",
     disciplineType: "graphic-design",
@@ -163,8 +158,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Radiant Studio Lifestyle & Fashion Editorial",
     client: "Studio Lifestyle",
     img: studioLifestyleDress,
-    layout: "portrait",
-    imagePosition: "center 30%",
     category: "Fashion & Portraiture",
     year: "2025",
     disciplineType: "photography",
@@ -177,7 +170,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Ewuraba's Couture Architectural Signage",
     client: "Ewuraba's Couture",
     img: ewurabaWallMockup,
-    layout: "landscape",
     category: "Spatial Branding",
     year: "2024",
     disciplineType: "graphic-design",
@@ -190,8 +182,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Right Guard: High-Performance Commercial",
     client: "Right Guard",
     img: rightGuardAction,
-    layout: "portrait",
-    imagePosition: "center 38%",
     category: "Commercial Photography",
     year: "2025",
     disciplineType: "photography",
@@ -204,7 +194,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Oasis Pathfinder Club Campout Campaign",
     client: "GNAAS UEW-Ajumako AYM",
     img: oasisCampout,
-    layout: "square",
     category: "Advertising & Campaign Systems",
     year: "2024",
     disciplineType: "integrated",
@@ -217,8 +206,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Electric Pop: Hoop & Plaid Chic",
     client: "Editorial Series",
     img: electricPopPortrait,
-    layout: "portrait",
-    imagePosition: "center 25%",
     category: "Portrait Photography",
     year: "2025",
     disciplineType: "photography",
@@ -231,7 +218,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Artisanal Ice Cream Branding & Packaging",
     client: "Sweet Treats Co.",
     img: iceCreamPkg,
-    layout: "landscape",
     category: "Packaging & Labels",
     year: "2025",
     disciplineType: "graphic-design",
@@ -244,8 +230,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Heritage & Honor: Ceremonial Academic Regalia",
     client: "GCTU Matriculation",
     img: matriculationRegalia,
-    layout: "portrait",
-    imagePosition: "center 28%",
     category: "Documentary & Events",
     year: "2025",
     disciplineType: "photography",
@@ -258,7 +242,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Tina Special Bundle Promotional Campaign",
     client: "Tina Special Bundle",
     img: tinaBundle,
-    layout: "square",
     category: "Advertising & Flyers",
     year: "2025",
     disciplineType: "graphic-design",
@@ -271,8 +254,6 @@ const PROJECTS: ConceptProject[] = [
     title: "Studio Glam & Executive Portrait Series",
     client: "Executive Studio Series",
     img: engineerStudioGlam,
-    layout: "portrait",
-    imagePosition: "center 28%",
     category: "Portrait Photography",
     year: "2025",
     disciplineType: "photography",
@@ -288,22 +269,6 @@ const PROJECTS_BY_YEAR = Object.entries(
     return projects
   }, {}),
 ).sort(([firstYear], [secondYear]) => Number(secondYear) - Number(firstYear))
-
-const PROJECT_LAYOUTS = {
-  feature: { className: "col-span-12 lg:col-span-8", aspectRatio: "16 / 10" },
-  landscape: {
-    className: "col-span-12 sm:col-span-6 lg:col-span-4",
-    aspectRatio: "4 / 3",
-  },
-  portrait: {
-    className: "col-span-12 sm:col-span-6 lg:col-span-3",
-    aspectRatio: "3 / 4",
-  },
-  square: {
-    className: "col-span-12 sm:col-span-6 lg:col-span-4",
-    aspectRatio: "1 / 1",
-  },
-} as const
 
 function FadeUp({
   children,
@@ -1394,11 +1359,10 @@ export function CreativeConcepts() {
               <div className="grid grid-cols-12 gap-5">
                 {projects.map((p) => {
                   const i = PROJECTS.indexOf(p)
-                  const layout = PROJECT_LAYOUTS[p.layout]
                   const cardClassName =
                     projects.length === 1
                       ? "col-span-12 sm:col-span-8 sm:col-start-3 lg:col-span-6 lg:col-start-4"
-                      : layout.className
+                      : "col-span-12 sm:col-span-6 lg:col-span-4"
                   const badgeColor =
                     p.disciplineType === "photography"
                       ? "rgba(100, 180, 220, 0.18)"
@@ -1440,7 +1404,7 @@ export function CreativeConcepts() {
                       >
                         <div
                           style={{
-                            aspectRatio: layout.aspectRatio,
+                            aspectRatio: "4 / 3",
                             position: "relative",
                             background: "#e9e6e0",
                           }}
@@ -1466,8 +1430,8 @@ export function CreativeConcepts() {
                               inset: 0,
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
-                              objectPosition: p.imagePosition ?? "center",
+                              objectFit: "contain",
+                              objectPosition: "center",
                             }}
                           />
 
