@@ -294,6 +294,24 @@ export function Layout() {
               <span>{label}</span>
             </NavLink>
           ))}
+          <NavLink
+            to="/contact"
+            className="book-project-link"
+            style={{
+              fontFamily: "'Work Sans', sans-serif",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: WHITE,
+              background: GOLD,
+              textDecoration: "none",
+              padding: "0.65rem 1rem",
+              borderRadius: "3px",
+            }}
+          >
+            Book a Project
+          </NavLink>
         </div>
 
         {/* mobile toggle - strictly hidden on desktop */}
@@ -358,6 +376,26 @@ export function Layout() {
                   {label}
                 </NavLink>
               ))}
+              <NavLink
+                to="/contact"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  marginTop: "0.75rem",
+                  padding: "0.75rem",
+                  borderRadius: "4px",
+                  background: GOLD,
+                  color: WHITE,
+                  fontFamily: "'Work Sans', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.85rem",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Book a Project
+              </NavLink>
               {/* Social icons in mobile menu */}
               <div style={{ borderTop: `1px solid ${BORDER}`, marginTop: "0.75rem", paddingTop: "1rem", display: "flex", gap: "16px" }}>
                 {SOCIAL_LINKS.map(({ key, icon, href, label }) => (

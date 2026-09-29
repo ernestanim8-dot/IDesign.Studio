@@ -604,6 +604,28 @@ export function Home() {
             </FadeUp>
           ))}
         </div>
+        <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+          <a
+            href={`https://wa.me/233502310663?text=${encodeURIComponent("Hello iDESIGN! I would like to share a short testimonial about my experience working with you.")}`}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0.85rem 1.25rem",
+              border: `1px solid ${GOLD}`,
+              borderRadius: "3px",
+              color: DARK,
+              fontFamily: "'Work Sans', sans-serif",
+              fontSize: "0.82rem",
+              fontWeight: 600,
+              textDecoration: "none",
+            }}
+          >
+            Worked with us? Share your testimonial
+          </a>
+        </div>
       </section>
 
       {/* ── Stats ── */}

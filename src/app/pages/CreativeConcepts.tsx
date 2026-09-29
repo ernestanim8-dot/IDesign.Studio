@@ -9,8 +9,8 @@ const PACKAGES = [
   {
     id: "starter",
     name: "Starter Package",
-    basePrice: 800,
-    priceDisplay: "From $800",
+    basePrice: 9300,
+    priceDisplay: "From GH₵9,300",
     turnaround: "10-14 business days",
     features: [
       "Logo design (2 core concepts + 2 revision rounds)",
@@ -23,8 +23,8 @@ const PACKAGES = [
   {
     id: "studio",
     name: "Studio Complete",
-    basePrice: 2200,
-    priceDisplay: "From $2,200",
+    basePrice: 25650,
+    priceDisplay: "From GH₵25,650",
     turnaround: "3-4 weeks",
     features: [
       "Full brand visual identity & logo marks",
@@ -39,8 +39,8 @@ const PACKAGES = [
   {
     id: "enterprise",
     name: "Enterprise Brand Suite",
-    basePrice: 4500,
-    priceDisplay: "From $4,500",
+    basePrice: 52470,
+    priceDisplay: "From GH₵52,470",
     turnaround: "5-6 weeks",
     features: [
       "Everything in Studio Complete",
@@ -65,34 +65,36 @@ const ADD_ONS: AddOn[] = [
   {
     id: "photo_session",
     name: "Extra Half-Day Photography Session",
-    price: 450,
+    price: 5250,
     desc: "3 hours on location or studio, 25 retouched high-res images.",
   },
   {
     id: "stationery_print",
     name: "Premium Stationery Print Run (500 units)",
-    price: 280,
+    price: 3265,
     desc: "350gsm matte paper with gold foil stamped accents.",
   },
   {
     id: "social_templates",
     name: "Animated Social Media Templates",
-    price: 350,
+    price: 4080,
     desc: "Figma & Canva kit with motion graphics for Instagram/LinkedIn.",
   },
   {
     id: "website_build",
     name: "Custom Responsive Portfolio / Web App",
-    price: 1200,
+    price: 13990,
     desc: "Modern, high-performance website with custom domain wiring.",
   },
   {
     id: "express_delivery",
     name: "Express Priority Turnaround",
-    price: 400,
+    price: 4665,
     desc: "Dedicate front-of-queue scheduling to compress timeline by 40%.",
   },
 ];
+
+const formatGhs = (amount: number) => `GH₵${amount.toLocaleString("en-GH")}`;
 
 interface ConceptProject extends LightboxItem {
   id: number;
@@ -196,7 +198,7 @@ export function CreativeConcepts() {
   const constructWhatsAppQuote = () => {
     const addOnsList =
       activeAddOns.length > 0
-        ? activeAddOns.map((a) => `  • ${a.name}: $${a.price}`).join("\n")
+        ? activeAddOns.map((a) => `  • ${a.name}: ${formatGhs(a.price)}`).join("\n")
         : "  • None selected";
 
     const message = [
@@ -205,13 +207,13 @@ export function CreativeConcepts() {
       "I've used your online package calculator to build a custom quote and I'd like to proceed:",
       "",
       `📦 Package: ${currentPackage.name}`,
-      `   Base Price: $${currentPackage.basePrice.toLocaleString()}`,
+      `   Base Price: ${formatGhs(currentPackage.basePrice)}`,
       `   Expected Turnaround: ${currentPackage.turnaround}`,
       "",
       "➕ Add-Ons Selected:",
       addOnsList,
       "",
-      `💰 My Estimated Total: $${totalPrice.toLocaleString()}`,
+      `💰 My Estimated Total: ${formatGhs(totalPrice)}`,
       "",
       "Please confirm availability and next steps. Thank you! 🙏",
     ].join("\n");
@@ -605,7 +607,7 @@ export function CreativeConcepts() {
                           marginBottom: "0.2rem",
                         }}
                       >
-                        ${pkg.basePrice}
+                        {formatGhs(pkg.basePrice)}
                       </p>
                       <span
                         style={{
@@ -720,7 +722,7 @@ export function CreativeConcepts() {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        +${addon.price}
+                        +{formatGhs(addon.price)}
                       </span>
                     </div>
                   );
@@ -771,7 +773,7 @@ export function CreativeConcepts() {
                   Base package:
                 </span>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", color: WHITE }}>
-                  ${currentPackage.basePrice}
+                  {formatGhs(currentPackage.basePrice)}
                 </span>
               </div>
 
@@ -791,7 +793,7 @@ export function CreativeConcepts() {
                     + {a.name}
                   </span>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.78rem", color: GOLD }}>
-                    ${a.price}
+                    {formatGhs(a.price)}
                   </span>
                 </div>
               ))}
@@ -818,7 +820,7 @@ export function CreativeConcepts() {
                   lineHeight: 1,
                 }}
               >
-                ${totalPrice.toLocaleString()}
+                {formatGhs(totalPrice)}
               </span>
             </div>
 
