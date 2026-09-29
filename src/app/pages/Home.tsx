@@ -9,6 +9,9 @@ import rightGuardImg from "@/imports/Photography/Commercial/Right Guard/IMG_0083
 import studioLifestyleImg from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
 import aboutStudioImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
 import elizabethSimpsonImg from "@/imports/What Our Clients Say/IMG_6437.jpg";
+import deborahSimpsonImg from "@/imports/What Our Clients Say/IMG_0906.jpg";
+import ashamiImg from "@/imports/What Our Clients Say/IMG_6838.jpg";
+import lawrenciaTakyiImg from "@/imports/What Our Clients Say/IMG_6777.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 import { ServicesSlider } from "../components/ServicesSlider";
@@ -54,7 +57,7 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "IDesign turned my photo session into a completely different experience. I loved how creative they were with the concepts, props, poses, and different backgrounds. Every setup had its own personality, and the final images looked professional, vibrant, and full of life. They understood the vision I had and added their own creative touch to make the pictures stand out. I’m genuinely impressed with the results!",
+      "I loved how creative they were with the concepts, props, poses, and different backgrounds. Every setup had its own personality, and the final images looked professional, vibrant, and full of life. I’m genuinely impressed with the results!",
     author: "Elizabeth Simpson",
     role: "Student",
     rating: 5,
@@ -63,19 +66,38 @@ const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "The photography session was seamless, and the turnaround on print assets was lightning fast. They are our go-to creative partners in West Africa.",
-    author: "Sarah Lindqvist",
-    role: "Creative Director, Nordic Living Studio",
-    rating: 4,
-    initials: "SL",
+      "I absolutely loved my experience with IDesign! The photos came out even better than I imagined. I’m really happy with the final results and would definitely recommend their photography services.",
+    author: "Deborah Simpson",
+    role: "Fashion Designer",
+    rating: 4.5,
+    initials: "DS",
+    image: deborahSimpsonImg,
   },
   {
     quote:
-      "Exceptional attention to typographic nuance and paper stock choices. The packaging design elevated our products directly onto luxury retail shelves.",
-    author: "Nana Yaa Boateng",
-    role: "Brand Strategist, Flora Botanicals",
+      "This photoshoot was such a wonderful experience! I felt confident and comfortable throughout the session, and the final images exceeded my expectations. Every detail was beautifully captured, from the lighting to the vibrant colors. I’m truly grateful for these stunning portraits and would definitely recommend iDesign Photography!",
+    author: "Ashami",
+    role: "Student",
+    rating: 4,
+    initials: "AS",
+    image: ashamiImg,
+  },
+  {
+    quote:
+      "I really love my shoot with iDesign. It was an amazing moment with him. The pictures came out standing. The images looked real and nice also the posses were on point and the colors made it beautiful. He made me enjoy my shoot and also made me know that taking shoot involve nature and involvement. I will also love to take my next shot with him.",
+    author: "Lawrencia Takyi",
+    role: "Sales Personnel",
     rating: 5,
-    initials: "NY",
+    initials: "LT",
+    image: lawrenciaTakyiImg,
+  },
+  {
+    quote:
+      "Thank you so much! You really helped me a lot with my presentation today. I honestly don’t think I would’ve felt this confident without your help. I really appreciate you taking the time to help me put everything together. It means a lot to me!",
+    author: "Nicole",
+    role: "Trader",
+    rating: 5,
+    initials: "N",
   },
 ];
 
@@ -720,7 +742,7 @@ export function Home() {
           </div>
         </FadeUp>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, i) => (
             <FadeUp key={t.author} delay={i * 0.1}>
               <div
