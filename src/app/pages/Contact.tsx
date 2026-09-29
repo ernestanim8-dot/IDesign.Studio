@@ -882,32 +882,37 @@ export function Contact() {
                       >
                         Service Required
                       </label>
-                      <div className="flex flex-wrap gap-2">
-                        {serviceOptions.map(
-                          (opt) => (
-                            <button
-                              type="button"
-                              key={opt}
-                              onClick={() => setInterest(opt)}
-                              style={{
-                                fontFamily: "'DM Mono',monospace",
-                                fontSize: "0.62rem",
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                padding: "0.45rem 0.9rem",
-                                border: `1px solid ${interest === opt ? GOLD : BORDER}`,
-                                background: interest === opt ? GOLD : "transparent",
-                                color: interest === opt ? WHITE : MUTED,
-                                cursor: "pointer",
-                                borderRadius: "3px",
-                                transition: "all 0.18s",
-                              }}
-                            >
-                              {opt}
-                            </button>
-                          )
-                        )}
-                      </div>
+                      <select
+                        value={interest}
+                        onChange={(e) => setInterest(e.target.value)}
+                        style={{
+                          background: SURFACE,
+                          border: `1px solid ${BORDER}`,
+                          color: DARK,
+                          fontFamily: "'Work Sans', sans-serif",
+                          fontSize: "0.9rem",
+                          fontWeight: 300,
+                          padding: "0.75rem 1rem",
+                          outline: "none",
+                          borderRadius: "3px",
+                          width: "100%",
+                          cursor: "pointer",
+                          appearance: "none",
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A54A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "right 1rem center",
+                          paddingRight: "2.5rem",
+                          transition: "border-color 0.2s",
+                        }}
+                        onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
+                        onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                      >
+                        {serviceOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     {/* Timeline */}
