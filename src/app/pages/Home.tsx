@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 import logoFull from "@/imports/i design logo.png";
+import homeBackground from "@/imports/Background H.jpg";
 import photographyImg from "@/imports/Photography/Portrait/Birthday/IMG_1168.jpg";
 import creativeConceptsImg from "@/imports/Branding/SWGC/SWGC MOCKUP copy.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
@@ -219,8 +220,7 @@ export function Home() {
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=750&fit=crop&auto=format&q=75')",
+              backgroundImage: `url(${homeBackground})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
