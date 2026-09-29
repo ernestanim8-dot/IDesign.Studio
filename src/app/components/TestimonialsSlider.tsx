@@ -247,6 +247,8 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
                   <img
                     src={t.image}
                     alt={t.author}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       width: "46px",
                       height: "46px",
