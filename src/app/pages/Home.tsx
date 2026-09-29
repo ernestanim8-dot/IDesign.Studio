@@ -36,9 +36,9 @@ const LATEST_WORK = [
 
 const STATS = [
   { value: "4", label: "Years in Business" },
-  { value: "340+", label: "Projects Completed" },
-  { value: "80+", label: "Happy Clients" },
-  { value: "4", label: "Services Under One Roof" },
+  { value: "184+", label: "Projects Completed" },
+  { value: "99.4%", label: "Client Satisfaction" },
+  { value: "14", label: "Design Awards" },
 ];
 
 const TESTIMONIALS = [
@@ -144,7 +144,7 @@ export function Home() {
     getStats().then((data) => {
       if (data) {
         setLiveStats([
-          { value: `${data.yearsExperience}+`, label: "Years in Business" },
+          { value: `${data.yearsExperience}`, label: "Years in Business" },
           { value: `${data.projectsCompleted}+`, label: "Projects Completed" },
           { value: data.clientSatisfaction, label: "Client Satisfaction" },
           { value: `${data.awardsWon}`, label: "Design Awards" },
