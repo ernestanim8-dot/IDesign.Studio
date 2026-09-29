@@ -10,146 +10,222 @@ import socialMediaImg from "@/imports/Advertising/3mma’s Glamour Banner/3mma�
 import creativeDirectionImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
 import graphicDesignImg from "@/imports/Branding/IDesign/Notebook.jpg";
 
-export interface ServiceItem {
+export interface ServiceCardItem {
   id: string;
-  anchorId?: string;
+  anchorId: string;
   number: string;
   title: string;
   tag: string;
   desc: string;
-  features: string[];
   img: string;
   to: string;
-  ctaText: string;
+  theme: {
+    bg: string;
+    text: string;
+    descColor: string;
+    border: string;
+    accent: string;
+    tagBg: string;
+    btnBg: string;
+    btnText: string;
+    btnBorder: string;
+    isDark: boolean;
+  };
 }
 
-export const SERVICES_DATA: ServiceItem[] = [
+export const SERVICES: ServiceCardItem[] = [
   {
     id: "photography",
     anchorId: "photography",
     number: "01",
     title: "Photography",
-    tag: "Commercial · Portrait · Fashion",
-    desc: "Commercial, portrait, and documentary photography engineered with disciplined lighting, editorial composition, and raw emotional resonance.",
-    features: ["Studio & Fashion Sessions", "Commercial Campaigns", "Event Documentary", "Editorial Retouching"],
+    tag: "Commercial & Portrait",
+    desc: "Studio fashion, high-performance commercial campaigns, and editorial portraiture with calibrated lighting and emotional depth.",
     img: photographyImg,
     to: "/photography",
-    ctaText: "Explore Photography",
+    theme: {
+      bg: "#141310",
+      text: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.65)",
+      border: "rgba(200, 165, 74, 0.28)",
+      accent: "#c8a54a",
+      tagBg: "rgba(200, 165, 74, 0.12)",
+      btnBg: "rgba(255, 255, 255, 0.08)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(200, 165, 74, 0.4)",
+      isDark: true,
+    },
   },
   {
     id: "branding",
     anchorId: "branding",
     number: "02",
     title: "Branding & Identity",
-    tag: "Visual Systems · Strategy · Guidelines",
-    desc: "Comprehensive brand architectures, bespoke logo marks, typography standards, and cohesive corporate identity packages built for longevity.",
-    features: ["Bespoke Logo Design", "Full Brand Guidelines", "Stationery & Collateral", "Typography & Color Systems"],
+    tag: "Visual Architecture",
+    desc: "Complete visual identity packages, bespoke logo marks, typography standards, and comprehensive brand books engineered for longevity.",
     img: creativeConceptsImg,
     to: "/creative-concepts",
-    ctaText: "Explore Branding",
+    theme: {
+      bg: "#f5f0e6",
+      text: "#1a1814",
+      descColor: "#6c6559",
+      border: "#ded4c3",
+      accent: "#b08530",
+      tagBg: "rgba(176, 133, 48, 0.1)",
+      btnBg: "#1a1814",
+      btnText: "#ffffff",
+      btnBorder: "#1a1814",
+      isDark: false,
+    },
   },
   {
     id: "advertising",
     anchorId: "advertising",
     number: "03",
     title: "Advertising Design",
-    tag: "Campaigns · Billboards · Rollouts",
-    desc: "High-conversion commercial campaign visuals, outdoor billboards, launch banners, and promotional collateral designed to capture instant attention.",
-    features: ["Campaign Key Visuals", "Billboards & Large Format", "Promotional Rollouts", "Retail Graphics"],
+    tag: "Campaigns & Rollouts",
+    desc: "Commercial launch visuals, outdoor billboards, and promotional campaign collateral designed to command instant attention.",
     img: advertisingImg,
     to: "/graphic-design",
-    ctaText: "Explore Advertising",
+    theme: {
+      bg: "#1c1715",
+      text: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.68)",
+      border: "rgba(228, 168, 106, 0.25)",
+      accent: "#e4a86a",
+      tagBg: "rgba(228, 168, 106, 0.12)",
+      btnBg: "rgba(255, 255, 255, 0.08)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(228, 168, 106, 0.35)",
+      isDark: true,
+    },
   },
   {
     id: "social-media",
     anchorId: "social-media",
     number: "04",
     title: "Social Media Creatives",
-    tag: "Feed Systems · Carousels · Digital",
-    desc: "Dynamic social suites, visual storytelling carousels, and high-impact digital graphics optimized for Instagram, LinkedIn, and omnichannel feeds.",
-    features: ["Instagram Carousels", "Brand Social Suites", "Digital Ad Creatives", "Content Strategy Templates"],
+    tag: "Digital Feed Systems",
+    desc: "Dynamic social suites, visual storytelling carousels, and high-impact digital banners optimized for omnichannel feeds.",
     img: socialMediaImg,
     to: "/graphic-design",
-    ctaText: "Explore Social Creatives",
+    theme: {
+      bg: "#ffffff",
+      text: "#1a1814",
+      descColor: "#726b61",
+      border: "#e5ded3",
+      accent: "#c8a54a",
+      tagBg: "rgba(200, 165, 74, 0.1)",
+      btnBg: "#f4efe6",
+      btnText: "#1a1814",
+      btnBorder: "#ded4c3",
+      isDark: false,
+    },
   },
   {
     id: "creative-concepts",
     anchorId: "creative-concepts",
     number: "05",
-    title: "Creative Concepts & UI/UX",
-    tag: "Art Direction · Digital · Strategy",
-    desc: "Multi-disciplinary art direction, bespoke web & digital interface concepts, and unified creative packages that blend photography with modern digital craft.",
-    features: ["Creative Direction", "Digital Product UI/UX", "Interactive Prototypes", "Cross-Media Styling"],
+    title: "Creative Concepts & UI",
+    tag: "Art Direction & Digital",
+    desc: "Multi-disciplinary art direction, bespoke web interfaces, and unified creative packages uniting photography and digital craft.",
     img: creativeDirectionImg,
     to: "/creative-concepts",
-    ctaText: "Explore Concepts",
+    theme: {
+      bg: "#0d0f10",
+      text: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.65)",
+      border: "rgba(200, 165, 74, 0.22)",
+      accent: "#c8a54a",
+      tagBg: "rgba(200, 165, 74, 0.12)",
+      btnBg: "rgba(200, 165, 74, 0.15)",
+      btnText: "#ffffff",
+      btnBorder: "rgba(200, 165, 74, 0.35)",
+      isDark: true,
+    },
   },
   {
     id: "graphic-design",
     anchorId: "graphic-design",
     number: "06",
-    title: "Print & Packaging Design",
-    tag: "Packaging · Editorial · Merchandise",
-    desc: "Tactile print materials, luxury stationery, merchandise, custom apparel, and retail packaging crafted with precise typographic finesse and print oversight.",
-    features: ["Product & Box Packaging", "Apparel & Merchandise", "Editorial Publications", "Print Oversight & Proofing"],
+    title: "Print & Packaging",
+    tag: "Packaging & Craft",
+    desc: "Luxury stationery, custom apparel, retail packaging, and editorial publications crafted with typographic finesse and print oversight.",
     img: graphicDesignImg,
     to: "/graphic-design",
-    ctaText: "Explore Print Design",
+    theme: {
+      bg: "#eee8dc",
+      text: "#1a1814",
+      descColor: "#686154",
+      border: "#d6cca1",
+      accent: "#8c6b2b",
+      tagBg: "rgba(140, 107, 43, 0.1)",
+      btnBg: "#1a1814",
+      btnText: "#ffffff",
+      btnBorder: "#1a1814",
+      isDark: false,
+    },
   },
 ];
 
 export function ServicesSlider() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sliderTrackRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(1200);
 
-  // Measure container for responsive peek calculation
-  const updateDimensions = useCallback(() => {
+  const updateWidth = useCallback(() => {
     if (containerRef.current) {
       setContainerWidth(containerRef.current.offsetWidth);
     }
   }, []);
 
   useEffect(() => {
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, [updateDimensions]);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [updateWidth]);
 
-  // Support hash navigation if user lands on or clicks #photography, #advertising, or #graphic-design
+  // Support hash navigation (#photography, #graphic-design, etc.)
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace("#", "");
       if (!hash) return;
-      const index = SERVICES_DATA.findIndex((s) => s.anchorId === hash || s.id === hash);
-      if (index !== -1) {
-        setCurrentIndex(index);
-      }
+      const idx = SERVICES.findIndex((s) => s.anchorId === hash || s.id === hash);
+      if (idx !== -1) setCurrentIndex(idx);
     };
     handleHash();
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
   }, []);
 
-  const total = SERVICES_DATA.length;
+  const total = SERVICES.length;
+  const isMobile = containerWidth < 640;
+  const isTablet = containerWidth >= 640 && containerWidth < 1024;
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev < total - 1 ? prev + 1 : prev));
-  }, [total]);
+  // Exact landscape card proportions matching sample video
+  const cardWidth = isMobile ? Math.min(containerWidth - 64, 305) : isTablet ? 340 : 380;
+  const cardHeight = isMobile ? 360 : 390;
+  const gap = isMobile ? 16 : 22;
 
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  }, []);
+  // Max scroll distance
+  const totalTrackWidth = total * cardWidth + (total - 1) * gap;
+  const visibleWidth = containerWidth;
+  const maxScroll = Math.max(0, totalTrackWidth - visibleWidth + 48);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => Math.min(prev + 1, total - 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  };
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const activeTag = (document.activeElement as HTMLElement)?.tagName;
-      if (activeTag === "INPUT" || activeTag === "TEXTAREA" || activeTag === "SELECT") {
-        return;
-      }
+      if (["INPUT", "TEXTAREA", "SELECT"].includes(activeTag)) return;
       if (containerRef.current && containerRef.current.contains(document.activeElement)) {
         if (e.key === "ArrowLeft") {
           e.preventDefault();
@@ -162,29 +238,13 @@ export function ServicesSlider() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  }, [total]);
 
-  // Determine refined, compact card widths based on viewport container
-  const isMobile = containerWidth < 640;
-  const isTablet = containerWidth >= 640 && containerWidth < 1024;
+  // Calculate target X scroll offset
+  const targetX = Math.min(currentIndex * (cardWidth + gap), maxScroll);
 
-  const cardWidth = isMobile
-    ? Math.min(containerWidth - 56, 320)
-    : isTablet
-      ? Math.min(containerWidth * 0.48, 380)
-      : Math.min(containerWidth * 0.35, 430);
-
-  const gap = isMobile ? 14 : isTablet ? 18 : 22;
-
-  // Center the active card in the container
-  const centerOffset = containerWidth / 2 - cardWidth / 2;
-  const targetX = centerOffset - currentIndex * (cardWidth + gap);
-
-  // Check prefers-reduced-motion
   const prefersReducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const activeService = SERVICES_DATA[currentIndex];
 
   return (
     <div
@@ -193,139 +253,67 @@ export function ServicesSlider() {
       role="region"
       aria-roledescription="carousel"
       aria-label="iDESIGN Studio Services"
-      className="outline-none focus-visible:ring-2 focus-visible:ring-[#c8a54a]/50 rounded-xl"
+      className="outline-none focus-visible:ring-1 focus-visible:ring-[#c8a54a]/40"
       style={{ position: "relative", width: "100%", overflow: "hidden" }}
     >
-      {/* ── Slider Navigation & Editorial Header Strip ── */}
+      {/* ── Subtitle, Counter & Navigation Controls ── */}
       <div
-        className="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+        className="flex items-center justify-between"
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 1.5rem 1.5rem 1.5rem",
+          padding: "0 1.5rem 1.75rem 1.5rem",
         }}
       >
-        <div>
-          <div className="flex items-center gap-3" style={{ marginBottom: "0.5rem" }}>
-            <span
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: "0.68rem",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: GOLD,
-                fontWeight: 600,
-              }}
-            >
-              Service {activeService.number} of {String(total).padStart(2, "0")}
-            </span>
-            <span style={{ width: 32, height: 1, background: GOLD, opacity: 0.6 }} />
-            <span
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: "0.62rem",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: MUTED,
-              }}
-            >
-              {activeService.tag}
-            </span>
-          </div>
-
-          {/* Minimal visual progress bar */}
-          <div className="flex items-center gap-3" style={{ marginTop: "0.5rem" }}>
-            <span
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: "0.65rem",
-                color: currentIndex === 0 ? GOLD : MUTED,
-                fontWeight: 600,
-              }}
-            >
-              01
-            </span>
-            <div
-              style={{
-                width: "clamp(120px, 20vw, 220px)",
-                height: "2px",
-                background: BORDER,
-                borderRadius: "2px",
-                overflow: "hidden",
-                position: "relative",
-              }}
-            >
-              <motion.div
-                animate={{
-                  width: `${((currentIndex + 1) / total) * 100}%`,
-                }}
-                transition={{
-                  duration: prefersReducedMotion ? 0 : 0.65,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                style={{
-                  height: "100%",
-                  background: `linear-gradient(90deg, ${GOLD}, ${GOLD_LIGHT})`,
-                  borderRadius: "2px",
-                }}
-              />
-            </div>
-            <span
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: "0.65rem",
-                color: currentIndex === total - 1 ? GOLD : MUTED,
-                fontWeight: 600,
-              }}
-            >
-              {String(total).padStart(2, "0")}
-            </span>
-          </div>
+        {/* Left: Counter & drag prompt */}
+        <div className="flex items-center gap-3">
+          <span
+            style={{
+              fontFamily: "'DM Mono',monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: GOLD,
+              fontWeight: 600,
+            }}
+          >
+            {String(currentIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
+          <span style={{ width: 24, height: 1, background: BORDER }} />
+          <span
+            className="hidden sm:inline"
+            style={{
+              fontFamily: "'DM Mono',monospace",
+              fontSize: "0.62rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: MUTED,
+            }}
+          >
+            Drag or swipe cards horizontally
+          </span>
         </div>
 
-        {/* Minimal Previous & Next Controls */}
-        <div className="flex items-center gap-3">
-          {/* Dot navigation */}
-          <div className="hidden md:flex items-center gap-1.5" style={{ marginRight: "0.75rem" }}>
-            {SERVICES_DATA.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setCurrentIndex(idx)}
-                aria-label={`Jump to service ${idx + 1}`}
-                style={{
-                  width: idx === currentIndex ? "24px" : "6px",
-                  height: "6px",
-                  borderRadius: "3px",
-                  background: idx === currentIndex ? GOLD : BORDER,
-                  transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Prev Arrow */}
+        {/* Right: Prev & Next Arrow Controls */}
+        <div className="flex items-center gap-2">
+          {/* Previous Arrow */}
           <button
             type="button"
             onClick={prevSlide}
             disabled={currentIndex === 0}
             aria-label="Previous service"
-            className="group"
             style={{
-              width: "48px",
-              height: "48px",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: currentIndex === 0 ? "rgba(255,255,255,0.4)" : "#fff",
+              background: currentIndex === 0 ? "rgba(255,255,255,0.4)" : "#ffffff",
               border: `1px solid ${currentIndex === 0 ? "rgba(224,216,204,0.4)" : BORDER}`,
               color: currentIndex === 0 ? "#bbb" : DARK,
               cursor: currentIndex === 0 ? "not-allowed" : "pointer",
-              boxShadow: currentIndex === 0 ? "none" : "0 2px 10px rgba(26,24,20,0.05)",
+              boxShadow: currentIndex === 0 ? "none" : "0 2px 8px rgba(26,24,20,0.05)",
               transition: "all 0.25s ease",
             }}
             onMouseEnter={(e) => {
@@ -333,7 +321,6 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = GOLD;
                 e.currentTarget.style.color = GOLD;
                 e.currentTarget.style.transform = "translateX(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(200,165,74,0.2)";
               }
             }}
             onMouseLeave={(e) => {
@@ -341,11 +328,10 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = BORDER;
                 e.currentTarget.style.color = DARK;
                 e.currentTarget.style.transform = "translateX(0)";
-                e.currentTarget.style.boxShadow = "0 2px 10px rgba(26,24,20,0.05)";
               }
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </button>
@@ -356,62 +342,18 @@ export function ServicesSlider() {
             onClick={nextSlide}
             disabled={currentIndex === total - 1}
             aria-label="Next service"
-            className="group"
             style={{
-              width: "40px",
-              height: "40px",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: currentIndex === 0 ? "rgba(255,255,255,0.4)" : "#fff",
-              border: `1px solid ${currentIndex === 0 ? "rgba(224,216,204,0.4)" : BORDER}`,
-              color: currentIndex === 0 ? "#bbb" : DARK,
-              cursor: currentIndex === 0 ? "not-allowed" : "pointer",
-              boxShadow: currentIndex === 0 ? "none" : "0 2px 8px rgba(26,24,20,0.04)",
-              transition: "all 0.25s ease",
-            }}
-            onMouseEnter={(e) => {
-              if (currentIndex > 0) {
-                e.currentTarget.style.borderColor = GOLD;
-                e.currentTarget.style.color = GOLD;
-                e.currentTarget.style.transform = "translateX(-2px)";
-                e.currentTarget.style.boxShadow = "0 4px 14px rgba(200,165,74,0.2)";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (currentIndex > 0) {
-                e.currentTarget.style.borderColor = BORDER;
-                e.currentTarget.style.color = DARK;
-                e.currentTarget.style.transform = "translateX(0)";
-                e.currentTarget.style.boxShadow = "0 2px 8px rgba(26,24,20,0.04)";
-              }
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          {/* Next Arrow */}
-          <button
-            type="button"
-            onClick={nextSlide}
-            disabled={currentIndex === total - 1}
-            aria-label="Next service"
-            className="group"
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: currentIndex === total - 1 ? "rgba(255,255,255,0.4)" : "#fff",
+              background: currentIndex === total - 1 ? "rgba(255,255,255,0.4)" : "#ffffff",
               border: `1px solid ${currentIndex === total - 1 ? "rgba(224,216,204,0.4)" : BORDER}`,
               color: currentIndex === total - 1 ? "#bbb" : DARK,
               cursor: currentIndex === total - 1 ? "not-allowed" : "pointer",
-              boxShadow: currentIndex === total - 1 ? "none" : "0 2px 8px rgba(26,24,20,0.04)",
+              boxShadow: currentIndex === total - 1 ? "none" : "0 2px 8px rgba(26,24,20,0.05)",
               transition: "all 0.25s ease",
             }}
             onMouseEnter={(e) => {
@@ -419,7 +361,6 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = GOLD;
                 e.currentTarget.style.color = GOLD;
                 e.currentTarget.style.transform = "translateX(2px)";
-                e.currentTarget.style.boxShadow = "0 4px 14px rgba(200,165,74,0.2)";
               }
             }}
             onMouseLeave={(e) => {
@@ -427,52 +368,52 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = BORDER;
                 e.currentTarget.style.color = DARK;
                 e.currentTarget.style.transform = "translateX(0)";
-                e.currentTarget.style.boxShadow = "0 2px 8px rgba(26,24,20,0.04)";
               }
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </div>
       </div>
 
-      {/* ── Horizontal Draggable Track ── */}
-      <div style={{ position: "relative", width: "100%", padding: "0.25rem 0 1.5rem 0" }}>
+      {/* ── Flowing Horizontal Cards Track ── */}
+      <div style={{ position: "relative", width: "100%", paddingBottom: "1.5rem" }}>
         <motion.div
-          ref={sliderTrackRef}
           drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.16}
+          dragConstraints={{ left: -maxScroll, right: 0 }}
+          dragElastic={0.12}
           onDragStart={() => setIsDragging(true)}
           onDragEnd={(_, info) => {
             setTimeout(() => setIsDragging(false), 60);
-            const threshold = 45;
-            const velocityThreshold = 220;
-            if (info.offset.x < -threshold || info.velocity.x < -velocityThreshold) {
+            const threshold = 35;
+            if (info.offset.x < -threshold) {
               nextSlide();
-            } else if (info.offset.x > threshold || info.velocity.x > velocityThreshold) {
+            } else if (info.offset.x > threshold) {
               prevSlide();
             }
           }}
-          animate={{ x: targetX }}
+          animate={{ x: -targetX }}
           transition={{
-            duration: prefersReducedMotion ? 0.01 : 0.65,
+            duration: prefersReducedMotion ? 0.01 : 0.6,
             ease: [0.16, 1, 0.3, 1],
           }}
           style={{
             display: "flex",
             gap: `${gap}px`,
+            paddingLeft: isMobile
+              ? "1.5rem"
+              : `clamp(1.5rem, calc((100vw - 1280px) / 2 + 1.5rem), 8rem)`,
+            paddingRight: "2.5rem",
             cursor: isDragging ? "grabbing" : "grab",
             willChange: "transform",
             userSelect: "none",
           }}
         >
-          {SERVICES_DATA.map((service, index) => {
-            const isActive = index === currentIndex;
-            const isPrev = index === currentIndex - 1;
-            const isNext = index === currentIndex + 1;
+          {SERVICES.map((service, index) => {
+            const isCurrent = index === currentIndex;
+            const { theme } = service;
 
             return (
               <motion.article
@@ -480,62 +421,121 @@ export function ServicesSlider() {
                 id={service.anchorId}
                 aria-roledescription="slide"
                 aria-label={`${service.number} of ${total}: ${service.title}`}
-                aria-current={isActive ? "true" : undefined}
-                animate={{
-                  scale: isActive ? 1 : 0.94,
-                  opacity: isActive ? 1 : 0.45,
-                }}
-                transition={{
-                  duration: prefersReducedMotion ? 0.01 : 0.55,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => {
                   if (isDragging) {
                     e.preventDefault();
                     return;
                   }
-                  if (!isActive) {
-                    e.preventDefault();
+                  if (index !== currentIndex) {
                     setCurrentIndex(index);
                   }
                 }}
                 style={{
                   flex: `0 0 ${cardWidth}px`,
                   width: `${cardWidth}px`,
-                  background: "#ffffff",
-                  borderRadius: "10px",
+                  height: `${cardHeight}px`,
+                  backgroundColor: theme.bg,
+                  borderRadius: "14px",
+                  border: `1px solid ${theme.border}`,
+                  boxShadow: isCurrent
+                    ? "0 18px 45px -10px rgba(26,24,20,0.14), 0 2px 8px rgba(200,165,74,0.12)"
+                    : "0 6px 24px rgba(26,24,20,0.05)",
                   overflow: "hidden",
-                  border: `1px solid ${isActive ? "rgba(200,165,74,0.4)" : BORDER}`,
-                  boxShadow: isActive
-                    ? "0 24px 60px -15px rgba(26,24,20,0.12), 0 2px 8px rgba(200,165,74,0.1)"
-                    : "0 4px 20px rgba(26,24,20,0.04)",
-                  cursor: isActive ? "default" : "pointer",
-                  transition: "border-color 0.4s ease, box-shadow 0.4s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  padding: isMobile ? "1.15rem" : "1.35rem",
+                  transition: "box-shadow 0.35s ease, border-color 0.35s ease",
                   position: "relative",
                 }}
               >
-                {/* Image Container with Refined Aspect Ratio */}
+                {/* ── Top Bar inside Card (like editorial browser card) ── */}
+                <div className="flex items-center justify-between" style={{ zIndex: 2 }}>
+                  <div className="flex items-center gap-2">
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        color: theme.accent,
+                      }}
+                    >
+                      {service.number}
+                    </span>
+                    <span style={{ width: 14, height: 1, background: theme.accent, opacity: 0.6 }} />
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.6rem",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: theme.descColor,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {service.tag}
+                    </span>
+                  </div>
+
+                  {/* Explore Pill Button */}
+                  <Link
+                    to={service.to}
+                    onClick={(e) => {
+                      if (isDragging) e.preventDefault();
+                    }}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      fontFamily: "'Work Sans',sans-serif",
+                      fontSize: "0.68rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      padding: "0.35rem 0.75rem",
+                      borderRadius: "20px",
+                      backgroundColor: theme.btnBg,
+                      color: theme.btnText,
+                      border: `1px solid ${theme.btnBorder}`,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = GOLD;
+                      e.currentTarget.style.borderColor = GOLD;
+                      e.currentTarget.style.color = WHITE;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = theme.btnBg;
+                      e.currentTarget.style.borderColor = theme.btnBorder;
+                      e.currentTarget.style.color = theme.btnText;
+                    }}
+                  >
+                    <span>Explore</span>
+                    <span style={{ fontSize: "0.75rem", lineHeight: 1 }}>↗</span>
+                  </Link>
+                </div>
+
+                {/* ── Center Framed Visual (Hero Artwork inside card) ── */}
                 <div
                   style={{
                     position: "relative",
                     width: "100%",
-                    height: isMobile ? "160px" : isTablet ? "185px" : "210px",
+                    height: isMobile ? "165px" : "185px",
+                    borderRadius: "8px",
                     overflow: "hidden",
-                    backgroundColor: DARKER,
+                    backgroundColor: theme.isDark ? "#080706" : "#e8e2d5",
+                    border: `1px solid ${theme.border}`,
+                    margin: "0.75rem 0",
                   }}
                 >
-                  <motion.img
+                  <img
                     src={service.img}
                     alt={service.title}
                     loading={index <= 2 ? "eager" : "lazy"}
                     decoding="async"
-                    animate={{
-                      scale: isActive ? 1.02 : 1,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
                     style={{
                       width: "100%",
                       height: "100%",
@@ -543,256 +543,58 @@ export function ServicesSlider() {
                       objectPosition: "center",
                       display: "block",
                       pointerEvents: "none",
+                      transition: "transform 0.5s ease",
                     }}
                   />
-
-                  {/* Dark subtle vignette overlay for contrast and typography */}
+                  {/* Subtle darkening vignette on bottom */}
                   <div
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background:
-                        "linear-gradient(to top, rgba(13,12,9,0.55) 0%, rgba(13,12,9,0.1) 40%, transparent 80%)",
+                      background: theme.isDark
+                        ? "linear-gradient(to top, rgba(13,12,9,0.45) 0%, transparent 55%)"
+                        : "linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 50%)",
                       pointerEvents: "none",
                     }}
                   />
-
-                  {/* Top Badges */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "0.9rem",
-                      left: "0.9rem",
-                      right: "0.9rem",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    {/* Service Number Tag */}
-                    <div
-                      style={{
-                        background: "rgba(13,12,9,0.78)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(200,165,74,0.35)",
-                        padding: "0.25rem 0.6rem",
-                        borderRadius: "4px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                      }}
-                    >
-                      <span
-                        style={{
-                          display: "inline-block",
-                          width: "5px",
-                          height: "5px",
-                          borderRadius: "50%",
-                          background: GOLD,
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.68rem",
-                          letterSpacing: "0.15em",
-                          color: WHITE,
-                          fontWeight: 600,
-                        }}
-                      >
-                        {service.number}
-                      </span>
-                    </div>
-
-                    {/* Active Status Badge */}
-                    {isActive && (
-                      <div
-                        style={{
-                          background: "rgba(200,165,74,0.92)",
-                          backdropFilter: "blur(8px)",
-                          padding: "0.25rem 0.6rem",
-                          borderRadius: "4px",
-                          fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.58rem",
-                          letterSpacing: "0.14em",
-                          textTransform: "uppercase",
-                          color: WHITE,
-                          fontWeight: 600,
-                        }}
-                      >
-                        Active Focus
-                      </div>
-                    )}
-                  </div>
                 </div>
 
-                {/* Card Editorial Content */}
-                <div
-                  style={{
-                    padding: isMobile ? "1rem 1.15rem" : "1.25rem 1.45rem 1.35rem 1.45rem",
-                  }}
-                >
-                  {/* Category Tag */}
-                  <div className="flex items-center gap-2" style={{ marginBottom: "0.45rem" }}>
-                    <span
-                      style={{
-                        fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.62rem",
-                        letterSpacing: "0.16em",
-                        textTransform: "uppercase",
-                        color: GOLD,
-                        fontWeight: 600,
-                      }}
-                    >
-                      {service.tag}
-                    </span>
-                  </div>
-
-                  {/* Title */}
+                {/* ── Bottom Editorial Content ── */}
+                <div style={{ zIndex: 2 }}>
                   <h3
                     style={{
                       fontFamily: "'DM Serif Display',serif",
-                      fontSize: isMobile ? "1.2rem" : "1.45rem",
+                      fontSize: isMobile ? "1.25rem" : "1.45rem",
                       lineHeight: "1.15",
-                      letterSpacing: "-0.02em",
-                      color: DARK,
-                      marginBottom: "0.45rem",
+                      letterSpacing: "-0.015em",
+                      color: theme.text,
+                      marginBottom: "0.35rem",
                     }}
                   >
                     {service.title}
                   </h3>
 
-                  {/* Description */}
                   <p
                     style={{
                       fontFamily: "'Work Sans',sans-serif",
-                      fontSize: "0.84rem",
+                      fontSize: "0.8rem",
                       fontWeight: 300,
-                      lineHeight: "1.6",
-                      color: MUTED,
-                      marginBottom: "1rem",
-                      maxWidth: "580px",
+                      lineHeight: "1.55",
+                      color: theme.descColor,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      margin: 0,
                     }}
                   >
                     {service.desc}
                   </p>
-
-                  {/* Key Capabilities Pills */}
-                  <div
-                    className="flex flex-wrap gap-1.5"
-                    style={{
-                      marginBottom: "1.1rem",
-                      paddingBottom: "0.9rem",
-                      borderBottom: `1px solid ${BORDER}`,
-                    }}
-                  >
-                    {service.features.map((feat, fIdx) => (
-                      <span
-                        key={fIdx}
-                        style={{
-                          fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.58rem",
-                          letterSpacing: "0.05em",
-                          color: DARK,
-                          background: SURFACE,
-                          padding: "0.22rem 0.55rem",
-                          borderRadius: "3px",
-                          border: `1px solid ${BORDER}`,
-                        }}
-                      >
-                        {feat}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action Link Footer */}
-                  <div className="flex items-center justify-between">
-                    <Link
-                      to={service.to}
-                      onClick={(e) => {
-                        if (isDragging) {
-                          e.preventDefault();
-                        }
-                      }}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                        fontFamily: "'Work Sans',sans-serif",
-                        fontSize: "0.75rem",
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        fontWeight: 600,
-                        padding: "0.55rem 1.25rem",
-                        background: isActive ? GOLD : "transparent",
-                        color: isActive ? WHITE : GOLD,
-                        border: `1px solid ${GOLD}`,
-                        borderRadius: "3px",
-                        textDecoration: "none",
-                        transition: "all 0.25s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (isActive) {
-                          e.currentTarget.style.background = GOLD_LIGHT;
-                          e.currentTarget.style.borderColor = GOLD_LIGHT;
-                          e.currentTarget.style.boxShadow = "0 6px 18px rgba(200,165,74,0.3)";
-                        } else {
-                          e.currentTarget.style.background = GOLD;
-                          e.currentTarget.style.color = WHITE;
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (isActive) {
-                          e.currentTarget.style.background = GOLD;
-                          e.currentTarget.style.borderColor = GOLD;
-                          e.currentTarget.style.boxShadow = "none";
-                        } else {
-                          e.currentTarget.style.background = "transparent";
-                          e.currentTarget.style.color = GOLD;
-                        }
-                      }}
-                    >
-                      <span>{service.ctaText}</span>
-                      <span style={{ fontSize: "0.9rem", lineHeight: 1 }}>→</span>
-                    </Link>
-
-                    {/* Subtle status indicator */}
-                    <span
-                      style={{
-                        fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.62rem",
-                        letterSpacing: "0.1em",
-                        color: MUTED,
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {isActive ? "Viewing 0" + (index + 1) : "Click to view"}
-                    </span>
-                  </div>
                 </div>
               </motion.article>
             );
           })}
         </motion.div>
-      </div>
-
-      {/* ── Mobile/Tablet Swipe Hint ── */}
-      <div
-        className="flex items-center justify-center gap-2 text-center md:hidden"
-        style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
-      >
-        <span
-          style={{
-            fontFamily: "'DM Mono',monospace",
-            fontSize: "0.62rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: MUTED,
-          }}
-        >
-          ← Drag or swipe cards to navigate →
-        </span>
       </div>
     </div>
   );
