@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import logoMark from "@/imports/i design logo gh.png";
-import { GOLD, DARK, DARKER, MUTED, BG, BORDER } from "@/tokens";
+import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { Preloader } from "./components/Preloader";
 
 // Lazy-load non-critical components — they're only visible after user action
