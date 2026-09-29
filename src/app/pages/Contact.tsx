@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { submitInquiry } from "../api";
+import contactBackground from "@/imports/Background C.jpg";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
@@ -152,8 +153,7 @@ export function Contact() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=500&fit=crop&auto=format&q=75')",
+            backgroundImage: `url(${contactBackground})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.14,
