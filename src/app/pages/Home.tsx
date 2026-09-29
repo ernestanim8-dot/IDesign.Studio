@@ -460,7 +460,7 @@ export function Home() {
       <section
         id="services"
         style={{
-          padding: "6rem 0",
+          padding: "4.25rem 0",
           background: BG,
           borderBottom: `1px solid ${BORDER}`,
           position: "relative",
@@ -469,32 +469,32 @@ export function Home() {
       >
         <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem" }}>
           <FadeUp>
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "2rem" }}>
               <p
                 style={{
                   fontFamily: "'DM Mono',monospace",
-                  fontSize: "0.68rem",
+                  fontSize: "0.65rem",
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   color: GOLD,
-                  marginBottom: "0.75rem",
+                  marginBottom: "0.6rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "0.6rem",
+                  gap: "0.5rem",
                 }}
               >
-                <span style={{ display: "inline-block", width: 28, height: 1.5, background: GOLD }} />
+                <span style={{ display: "inline-block", width: 22, height: 1.5, background: GOLD }} />
                 What We Do
-                <span style={{ display: "inline-block", width: 28, height: 1.5, background: GOLD }} />
+                <span style={{ display: "inline-block", width: 22, height: 1.5, background: GOLD }} />
               </p>
               <h2
                 style={{
                   fontFamily: "'DM Serif Display',serif",
-                  fontSize: "clamp(2.2rem,4.5vw,3.4rem)",
+                  fontSize: "clamp(1.8rem, 3.2vw, 2.5rem)",
                   letterSpacing: "-0.025em",
                   color: DARK,
-                  marginBottom: "1rem",
+                  marginBottom: "0.65rem",
                 }}
               >
                 Our Services
@@ -502,11 +502,11 @@ export function Home() {
               <p
                 style={{
                   fontFamily: "'Work Sans',sans-serif",
-                  fontSize: "1.05rem",
+                  fontSize: "0.95rem",
                   fontWeight: 300,
-                  lineHeight: "1.75",
+                  lineHeight: "1.7",
                   color: MUTED,
-                  maxWidth: "600px",
+                  maxWidth: "560px",
                   margin: "0 auto",
                 }}
               >

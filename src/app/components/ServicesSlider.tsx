@@ -164,17 +164,17 @@ export function ServicesSlider() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [nextSlide, prevSlide]);
 
-  // Determine card widths based on viewport container
+  // Determine refined, compact card widths based on viewport container
   const isMobile = containerWidth < 640;
   const isTablet = containerWidth >= 640 && containerWidth < 1024;
 
   const cardWidth = isMobile
-    ? Math.min(containerWidth - 56, 360)
+    ? Math.min(containerWidth - 56, 320)
     : isTablet
-      ? Math.min(containerWidth * 0.72, 540)
-      : Math.min(containerWidth * 0.60, 720);
+      ? Math.min(containerWidth * 0.48, 380)
+      : Math.min(containerWidth * 0.35, 430);
 
-  const gap = isMobile ? 16 : isTablet ? 24 : 32;
+  const gap = isMobile ? 14 : isTablet ? 18 : 22;
 
   // Center the active card in the container
   const centerOffset = containerWidth / 2 - cardWidth / 2;
@@ -198,11 +198,11 @@ export function ServicesSlider() {
     >
       {/* ── Slider Navigation & Editorial Header Strip ── */}
       <div
-        className="flex flex-col sm:flex-row sm:items-end justify-between gap-6"
+        className="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 1.5rem 2.5rem 1.5rem",
+          padding: "0 1.5rem 1.5rem 1.5rem",
         }}
       >
         <div>
@@ -358,8 +358,51 @@ export function ServicesSlider() {
             aria-label="Next service"
             className="group"
             style={{
-              width: "48px",
-              height: "48px",
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: currentIndex === 0 ? "rgba(255,255,255,0.4)" : "#fff",
+              border: `1px solid ${currentIndex === 0 ? "rgba(224,216,204,0.4)" : BORDER}`,
+              color: currentIndex === 0 ? "#bbb" : DARK,
+              cursor: currentIndex === 0 ? "not-allowed" : "pointer",
+              boxShadow: currentIndex === 0 ? "none" : "0 2px 8px rgba(26,24,20,0.04)",
+              transition: "all 0.25s ease",
+            }}
+            onMouseEnter={(e) => {
+              if (currentIndex > 0) {
+                e.currentTarget.style.borderColor = GOLD;
+                e.currentTarget.style.color = GOLD;
+                e.currentTarget.style.transform = "translateX(-2px)";
+                e.currentTarget.style.boxShadow = "0 4px 14px rgba(200,165,74,0.2)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (currentIndex > 0) {
+                e.currentTarget.style.borderColor = BORDER;
+                e.currentTarget.style.color = DARK;
+                e.currentTarget.style.transform = "translateX(0)";
+                e.currentTarget.style.boxShadow = "0 2px 8px rgba(26,24,20,0.04)";
+              }
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Next Arrow */}
+          <button
+            type="button"
+            onClick={nextSlide}
+            disabled={currentIndex === total - 1}
+            aria-label="Next service"
+            className="group"
+            style={{
+              width: "40px",
+              height: "40px",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
@@ -368,7 +411,7 @@ export function ServicesSlider() {
               border: `1px solid ${currentIndex === total - 1 ? "rgba(224,216,204,0.4)" : BORDER}`,
               color: currentIndex === total - 1 ? "#bbb" : DARK,
               cursor: currentIndex === total - 1 ? "not-allowed" : "pointer",
-              boxShadow: currentIndex === total - 1 ? "none" : "0 2px 10px rgba(26,24,20,0.05)",
+              boxShadow: currentIndex === total - 1 ? "none" : "0 2px 8px rgba(26,24,20,0.04)",
               transition: "all 0.25s ease",
             }}
             onMouseEnter={(e) => {
@@ -376,7 +419,7 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = GOLD;
                 e.currentTarget.style.color = GOLD;
                 e.currentTarget.style.transform = "translateX(2px)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(200,165,74,0.2)";
+                e.currentTarget.style.boxShadow = "0 4px 14px rgba(200,165,74,0.2)";
               }
             }}
             onMouseLeave={(e) => {
@@ -384,11 +427,11 @@ export function ServicesSlider() {
                 e.currentTarget.style.borderColor = BORDER;
                 e.currentTarget.style.color = DARK;
                 e.currentTarget.style.transform = "translateX(0)";
-                e.currentTarget.style.boxShadow = "0 2px 10px rgba(26,24,20,0.05)";
+                e.currentTarget.style.boxShadow = "0 2px 8px rgba(26,24,20,0.04)";
               }
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
@@ -396,7 +439,7 @@ export function ServicesSlider() {
       </div>
 
       {/* ── Horizontal Draggable Track ── */}
-      <div style={{ position: "relative", width: "100%", padding: "1rem 0 2.5rem 0" }}>
+      <div style={{ position: "relative", width: "100%", padding: "0.25rem 0 1.5rem 0" }}>
         <motion.div
           ref={sliderTrackRef}
           drag="x"
@@ -471,12 +514,12 @@ export function ServicesSlider() {
                   position: "relative",
                 }}
               >
-                {/* Image Container with Editorial Aspect Ratio */}
+                {/* Image Container with Refined Aspect Ratio */}
                 <div
                   style={{
                     position: "relative",
                     width: "100%",
-                    height: isMobile ? "220px" : isTablet ? "290px" : "360px",
+                    height: isMobile ? "160px" : isTablet ? "185px" : "210px",
                     overflow: "hidden",
                     backgroundColor: DARKER,
                   }}
@@ -518,9 +561,9 @@ export function ServicesSlider() {
                   <div
                     style={{
                       position: "absolute",
-                      top: "1.25rem",
-                      left: "1.25rem",
-                      right: "1.25rem",
+                      top: "0.9rem",
+                      left: "0.9rem",
+                      right: "0.9rem",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
@@ -533,18 +576,18 @@ export function ServicesSlider() {
                         background: "rgba(13,12,9,0.78)",
                         backdropFilter: "blur(10px)",
                         border: "1px solid rgba(200,165,74,0.35)",
-                        padding: "0.35rem 0.75rem",
+                        padding: "0.25rem 0.6rem",
                         borderRadius: "4px",
                         display: "flex",
                         alignItems: "center",
-                        gap: "0.45rem",
+                        gap: "0.4rem",
                       }}
                     >
                       <span
                         style={{
                           display: "inline-block",
-                          width: "6px",
-                          height: "6px",
+                          width: "5px",
+                          height: "5px",
                           borderRadius: "50%",
                           background: GOLD,
                         }}
@@ -552,7 +595,7 @@ export function ServicesSlider() {
                       <span
                         style={{
                           fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.75rem",
+                          fontSize: "0.68rem",
                           letterSpacing: "0.15em",
                           color: WHITE,
                           fontWeight: 600,
@@ -568,11 +611,11 @@ export function ServicesSlider() {
                         style={{
                           background: "rgba(200,165,74,0.92)",
                           backdropFilter: "blur(8px)",
-                          padding: "0.35rem 0.75rem",
+                          padding: "0.25rem 0.6rem",
                           borderRadius: "4px",
                           fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.62rem",
-                          letterSpacing: "0.16em",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.14em",
                           textTransform: "uppercase",
                           color: WHITE,
                           fontWeight: 600,
@@ -587,16 +630,16 @@ export function ServicesSlider() {
                 {/* Card Editorial Content */}
                 <div
                   style={{
-                    padding: isMobile ? "1.5rem" : "2rem 2.25rem 2.25rem 2.25rem",
+                    padding: isMobile ? "1rem 1.15rem" : "1.25rem 1.45rem 1.35rem 1.45rem",
                   }}
                 >
                   {/* Category Tag */}
-                  <div className="flex items-center gap-2" style={{ marginBottom: "0.65rem" }}>
+                  <div className="flex items-center gap-2" style={{ marginBottom: "0.45rem" }}>
                     <span
                       style={{
                         fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.65rem",
-                        letterSpacing: "0.18em",
+                        fontSize: "0.62rem",
+                        letterSpacing: "0.16em",
                         textTransform: "uppercase",
                         color: GOLD,
                         fontWeight: 600,
@@ -610,11 +653,11 @@ export function ServicesSlider() {
                   <h3
                     style={{
                       fontFamily: "'DM Serif Display',serif",
-                      fontSize: isMobile ? "1.5rem" : "1.9rem",
+                      fontSize: isMobile ? "1.2rem" : "1.45rem",
                       lineHeight: "1.15",
                       letterSpacing: "-0.02em",
                       color: DARK,
-                      marginBottom: "0.75rem",
+                      marginBottom: "0.45rem",
                     }}
                   >
                     {service.title}
@@ -624,11 +667,11 @@ export function ServicesSlider() {
                   <p
                     style={{
                       fontFamily: "'Work Sans',sans-serif",
-                      fontSize: isMobile ? "0.85rem" : "0.925rem",
+                      fontSize: "0.84rem",
                       fontWeight: 300,
-                      lineHeight: "1.7",
+                      lineHeight: "1.6",
                       color: MUTED,
-                      marginBottom: "1.5rem",
+                      marginBottom: "1rem",
                       maxWidth: "580px",
                     }}
                   >
@@ -637,10 +680,10 @@ export function ServicesSlider() {
 
                   {/* Key Capabilities Pills */}
                   <div
-                    className="flex flex-wrap gap-2"
+                    className="flex flex-wrap gap-1.5"
                     style={{
-                      marginBottom: "1.75rem",
-                      paddingBottom: "1.25rem",
+                      marginBottom: "1.1rem",
+                      paddingBottom: "0.9rem",
                       borderBottom: `1px solid ${BORDER}`,
                     }}
                   >
@@ -649,11 +692,11 @@ export function ServicesSlider() {
                         key={fIdx}
                         style={{
                           fontFamily: "'DM Mono',monospace",
-                          fontSize: "0.62rem",
-                          letterSpacing: "0.06em",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.05em",
                           color: DARK,
                           background: SURFACE,
-                          padding: "0.28rem 0.65rem",
+                          padding: "0.22rem 0.55rem",
                           borderRadius: "3px",
                           border: `1px solid ${BORDER}`,
                         }}
@@ -675,13 +718,13 @@ export function ServicesSlider() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "0.6rem",
+                        gap: "0.5rem",
                         fontFamily: "'Work Sans',sans-serif",
-                        fontSize: "0.82rem",
+                        fontSize: "0.75rem",
                         letterSpacing: "0.08em",
                         textTransform: "uppercase",
                         fontWeight: 600,
-                        padding: "0.75rem 1.6rem",
+                        padding: "0.55rem 1.25rem",
                         background: isActive ? GOLD : "transparent",
                         color: isActive ? WHITE : GOLD,
                         border: `1px solid ${GOLD}`,
@@ -711,14 +754,14 @@ export function ServicesSlider() {
                       }}
                     >
                       <span>{service.ctaText}</span>
-                      <span style={{ fontSize: "1rem", lineHeight: 1 }}>→</span>
+                      <span style={{ fontSize: "0.9rem", lineHeight: 1 }}>→</span>
                     </Link>
 
                     {/* Subtle status indicator */}
                     <span
                       style={{
                         fontFamily: "'DM Mono',monospace",
-                        fontSize: "0.65rem",
+                        fontSize: "0.62rem",
                         letterSpacing: "0.1em",
                         color: MUTED,
                         textTransform: "uppercase",
