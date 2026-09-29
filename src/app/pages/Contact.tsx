@@ -453,6 +453,76 @@ export function Contact() {
               </div>
             </div>
 
+            {/* Studio Map */}
+            <div
+              style={{
+                marginBottom: "2.5rem",
+                borderRadius: "8px",
+                overflow: "hidden",
+                border: `1px solid ${BORDER}`,
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+              }}
+            >
+              <div
+                style={{
+                  padding: "0.7rem 1rem",
+                  background: SURFACE,
+                  borderBottom: `1px solid ${BORDER}`,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <span style={{ fontSize: "0.9rem" }}>📍</span>
+                <p
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: GOLD,
+                    margin: 0,
+                  }}
+                >
+                  Nii Awuley Lartey St, Odorkor — Accra, Ghana
+                </p>
+              </div>
+              <iframe
+                title="iDESIGN Studio Location"
+                src="https://maps.google.com/maps?q=Nii+Awuley+Lartey+St,+Odorkor,+Accra,+Ghana&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="260"
+                style={{ display: "block", border: "none" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                href="https://maps.google.com/?q=Nii+Awuley+Lartey+St,+Odorkor,+Accra,+Ghana"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.4rem",
+                  padding: "0.65rem",
+                  background: SURFACE,
+                  borderTop: `1px solid ${BORDER}`,
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: MUTED,
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = MUTED)}
+              >
+                Open in Google Maps ↗
+              </a>
+            </div>
+
             {/* Service quick links */}
             <p
               style={{
