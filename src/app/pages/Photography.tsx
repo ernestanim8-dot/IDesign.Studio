@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
+import photographyBackground from "@/imports/Background P.jpg";
 
 import blueMenPedestal from "@/imports/Photography/Commercial/Blue for men/blue-for-men-pedestal.jpg";
 import blueMenSplashLight from "@/imports/Photography/Commercial/Blue for men/blue-for-men-splash-light.jpg";
@@ -2104,8 +2105,7 @@ export function Photography() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=600&fit=crop&auto=format&q=75')",
+            backgroundImage: `url(${photographyBackground})`,
             backgroundSize: "cover",
             backgroundPosition: "center 35%",
           }}
