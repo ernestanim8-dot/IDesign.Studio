@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { Lightbox, type LightboxItem } from "@/app/components/Lightbox";
+import graphicDesignBackground from "@/imports/background GD.jpg";
 import callCardBack from "@/imports/Branding/IDesign/call card back.jpg";
 import callCardFront from "@/imports/Branding/IDesign/call card front.jpg";
 import clockMockup from "@/imports/Branding/IDesign/Clock.jpg";
@@ -1027,8 +1028,7 @@ export function GraphicDesign() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=1200&h=500&fit=crop&auto=format&q=75')",
+            backgroundImage: `url(${graphicDesignBackground})`,
             backgroundSize: "cover",
             backgroundPosition: "center 40%",
             opacity: 0.18,
