@@ -8,6 +8,7 @@ import blueForMenImg from "@/imports/Photography/Commercial/Blue for men/blue-fo
 import rightGuardImg from "@/imports/Photography/Commercial/Right Guard/IMG_0083.jpg";
 import studioLifestyleImg from "@/imports/Photography/Portrait/Studio Lifestyle/lifestyle-1-baby-blue-dress.jpg";
 import aboutStudioImg from "@/imports/Branding/IDesign/Notebook 2.jpg";
+import elizabethSimpsonImg from "@/imports/What Our Clients Say/IMG_6437.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
 import { getStats } from "../api";
 import { ServicesSlider } from "../components/ServicesSlider";
@@ -35,27 +36,37 @@ const LATEST_WORK = [
 
 
 const STATS = [
-  { value: "4", label: "Years in Business" },
-  { value: "184+", label: "Projects Completed" },
-  { value: "99.4%", label: "Client Satisfaction" },
-  { value: "14", label: "Design Awards" },
+  { value: "4+", label: "Years in Business" },
+  { value: "340+", label: "Projects Completed" },
+  { value: "80+", label: "Happy Clients" },
+  { value: "3", label: "Services Under One Roof" },
 ];
 
-const TESTIMONIALS = [
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  rating: number;
+  initials: string;
+  image?: string;
+}
+
+const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "iDESIGN transformed our entire brand architecture. Having photography and graphic design done by the same team gave our launch unprecedented visual coherence.",
-    author: "Kofi Owusu",
-    role: "Founder & CEO, Meridian Goods",
+      "IDesign turned my photo session into a completely different experience. I loved how creative they were with the concepts, props, poses, and different backgrounds. Every setup had its own personality, and the final images looked professional, vibrant, and full of life. They understood the vision I had and added their own creative touch to make the pictures stand out. I’m genuinely impressed with the results!",
+    author: "Elizabeth Simpson",
+    role: "Student",
     rating: 5,
-    initials: "KO",
+    initials: "ES",
+    image: elizabethSimpsonImg,
   },
   {
     quote:
       "The photography session was seamless, and the turnaround on print assets was lightning fast. They are our go-to creative partners in West Africa.",
     author: "Sarah Lindqvist",
     role: "Creative Director, Nordic Living Studio",
-    rating: 5,
+    rating: 4,
     initials: "SL",
   },
   {
@@ -144,7 +155,7 @@ export function Home() {
     getStats().then((data) => {
       if (data) {
         setLiveStats([
-          { value: `${data.yearsExperience}`, label: "Years in Business" },
+          { value: `${data.yearsExperience}+`, label: "Years in Business" },
           { value: `${data.projectsCompleted}+`, label: "Projects Completed" },
           { value: data.clientSatisfaction, label: "Client Satisfaction" },
           { value: `${data.awardsWon}`, label: "Design Awards" },
@@ -745,25 +756,41 @@ export function Home() {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "0.9rem", borderTop: `1px solid ${BORDER}`, paddingTop: "1rem" }}>
-                  <div
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "50%",
-                      background: "rgba(200, 165, 74, 0.12)",
-                      border: `1px solid ${GOLD}`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.82rem",
-                      fontWeight: 700,
-                      color: GOLD,
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t.initials}
-                  </div>
+                  {t.image ? (
+                    <img
+                      src={t.image}
+                      alt={t.author}
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        border: `1.5px solid ${GOLD}`,
+                        boxShadow: "0 2px 8px rgba(200, 165, 74, 0.2)",
+                        flexShrink: 0,
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "50%",
+                        background: "rgba(200, 165, 74, 0.12)",
+                        border: `1px solid ${GOLD}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "0.82rem",
+                        fontWeight: 700,
+                        color: GOLD,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {t.initials}
+                    </div>
+                  )}
                   <div>
                     <h4
                       style={{
