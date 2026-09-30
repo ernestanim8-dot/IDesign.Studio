@@ -1924,12 +1924,13 @@ export function CreativeConcepts() {
 
                     {/* Discipline badge — top left */}
                     <div
+                      className="category-discipline-badge"
                       style={{
                         position: "absolute",
 
-                        top: "1rem",
+                        top: "0.75rem",
 
-                        left: "1rem",
+                        left: "0.75rem",
 
                         zIndex: 2,
 
@@ -1937,20 +1938,13 @@ export function CreativeConcepts() {
 
                         border: `1px solid ${badgeBorder}`,
 
-                        borderRadius: "3px",
-
-                        padding: "0.22rem 0.55rem",
-
                         backdropFilter: "blur(8px)",
                       }}
                     >
                       <span
+                        className="category-discipline-badge__label"
                         style={{
                           fontFamily: "'DM Mono', monospace",
-
-                          fontSize: "0.55rem",
-
-                          letterSpacing: "0.12em",
 
                           textTransform: "uppercase",
 
