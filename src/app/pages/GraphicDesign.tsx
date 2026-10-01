@@ -100,6 +100,10 @@ import bossCloth1 from "@/imports/Branding/Boss Clothing/Boss Cloth 1.jpg";
 import bossCloth2 from "@/imports/Branding/Boss Clothing/Boss Cloth 2.jpg";
 import bossShirtMockup1 from "@/imports/Branding/Boss Clothing/Shirt Mockup 1.jpg";
 import bossShirtMockup2 from "@/imports/Branding/Boss Clothing/Shirt Mockup 2.jpg";
+import bachelorParty1 from "@/imports/Advertising/Bachelor Party/Bachelor Party 1.jpg";
+import bachelorParty2 from "@/imports/Advertising/Bachelor Party/Bachelor Party 2.jpg";
+import bachelorParty3 from "@/imports/Advertising/Bachelor Party/Bachelor Party 3.jpg";
+import bachelorParty4 from "@/imports/Advertising/Bachelor Party/Bachelor Party 4.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -134,6 +138,7 @@ interface DesignProject extends LightboxItem {
   | "gnaas-ttu"
   | "djago-design-build"
   | "boss-clothing"
+  | "bachelor-party"
   | "citation-series";
 }
 
@@ -904,7 +909,55 @@ const BOSS_CLOTHING_GALLERY: LightboxItem[] = [
   },
 ];
 
+const BACHELOR_PARTY_GALLERY: LightboxItem[] = [
+  {
+    img: bachelorParty1,
+    title: "Bachelor Party — Flyer Design I",
+    category: "Advertising & Flyers",
+    client: "Bachelor Party Event",
+    year: "2024",
+    description: "First in a series of bachelor party event flyers, combining bold typography with a premium celebratory aesthetic.",
+  },
+  {
+    img: bachelorParty2,
+    title: "Bachelor Party — Flyer Design II",
+    category: "Advertising & Flyers",
+    client: "Bachelor Party Event",
+    year: "2024",
+    description: "Second flyer variant for the bachelor party campaign, maintaining visual consistency with dynamic layout energy.",
+  },
+  {
+    img: bachelorParty3,
+    title: "Bachelor Party — Flyer Design III",
+    category: "Advertising & Flyers",
+    client: "Bachelor Party Event",
+    year: "2024",
+    description: "Third design in the bachelor party flyer series, reinforcing the event's brand tone and guest appeal.",
+  },
+  {
+    img: bachelorParty4,
+    title: "Bachelor Party — Flyer Design IV",
+    category: "Advertising & Flyers",
+    client: "Bachelor Party Event",
+    year: "2024",
+    description: "Final flyer design in the bachelor party campaign, completing a cohesive four-piece promotional suite.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 33,
+    title: "Bachelor Party Campaign",
+    client: "Bachelor Party Event",
+    year: "2024",
+    img: bachelorParty1,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    gallery: "bachelor-party",
+    category: "Advertising & Flyers",
+    description:
+      "A four-piece promotional flyer suite for a bachelor party event, featuring bold typography, high-energy layouts, and a premium celebratory visual theme. Click to view the full campaign.",
+  },
   {
     id: 32,
     title: "Boss Clothing Brand Identity",
@@ -1819,6 +1872,12 @@ export function GraphicDesign() {
 
                     if (p.gallery === "boss-clothing") {
                       setLightboxItems(BOSS_CLOTHING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "bachelor-party") {
+                      setLightboxItems(BACHELOR_PARTY_GALLERY);
                       setLightboxIndex(0);
                       return;
                     }
