@@ -229,7 +229,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Commercial Product Photography",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "photography",
 
@@ -275,7 +275,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Fashion & Portraiture",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "photography",
 
@@ -321,7 +321,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Commercial Photography",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "photography",
 
@@ -367,7 +367,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Portrait Photography",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "photography",
 
@@ -436,7 +436,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Advertising & Flyers",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "graphic-design",
 
@@ -459,7 +459,7 @@ const PROJECTS: ConceptProject[] = [
 
     category: "Portrait Photography",
 
-    year: "2025",
+    year: "2026",
 
     disciplineType: "photography",
 
@@ -554,8 +554,8 @@ export function CreativeConcepts() {
     const addOnsList =
       activeAddOns.length > 0
         ? activeAddOns
-            .map((a) => `  • ${a.name}: ${formatGhs(a.price)}`)
-            .join("\n")
+          .map((a) => `  • ${a.name}: ${formatGhs(a.price)}`)
+          .join("\n")
         : "  • None selected"
 
     const message = [
@@ -1316,7 +1316,7 @@ export function CreativeConcepts() {
                         <input
                           type="checkbox"
                           checked={isChecked}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           style={{
                             accentColor: GOLD,
 

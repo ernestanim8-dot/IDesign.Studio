@@ -72,6 +72,7 @@ import citationMaxwell from "@/imports/Advertising/Citation/Mr Maxwell Smith1.jp
 import citationRansford from "@/imports/Advertising/Citation/Pastor Ransford Osarfo Gyasi_.jpg";
 import citationDaniel from "@/imports/Advertising/Citation/Ps Daniel Amissah A3.jpg";
 import citationThomas from "@/imports/Advertising/Citation/Thomas Owusu SYL Rep.jpg";
+import blistavoCertificate from "@/imports/Advertising/Blistavo Events/Certificate of Honour.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -645,6 +646,18 @@ const CITATION_SERIES_GALLERY: LightboxItem[] = [
 }));
 
 const PROJECTS: DesignProject[] = [
+  {
+    id: 28,
+    title: "Blistavo Events Certificate of Honour",
+    client: "Blistavo Events",
+    year: "2026",
+    img: blistavoCertificate,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    category: "Advertising & Flyers",
+    description:
+      "A bespoke Certificate of Honour designed for Blistavo Events to celebrate dedicated service and meritorious commitment with luxury event framing, regal seal, and celebratory typography.",
+  },
   {
     id: 27,
     title: "Adventist Youth Ministry Citation Series",

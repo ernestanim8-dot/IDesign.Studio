@@ -2,6 +2,7 @@
   "files.associations": {
     "supabase.sql": "pgsql",
     "*.sql": "pgsql",
-    "*.css": "css"
+    "*.css": "css",
+    "**/*.css": "css"
   }
 }
