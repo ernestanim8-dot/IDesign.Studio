@@ -52,6 +52,11 @@ import ewurabasCoutureWallMockup from "@/imports/Branding/EC LOGO/3D Wall Logo M
 import trailblazersEmblem from "@/imports/Branding/Trailblazers/TRAILBLAZERS .png";
 import trailblazersWordmark from "@/imports/Branding/Trailblazers/TRAILBLAZERS 1.png";
 import trailblazersFlag from "@/imports/Branding/Trailblazers/flags back.jpg";
+import trailblazersPhoto from "@/imports/Branding/Trailblazers/Trailblazer.jpg";
+import trailblazersPhotoTwo from "@/imports/Branding/Trailblazers/Trailblazer 2.jpg";
+import trailblazersPhotoThree from "@/imports/Branding/Trailblazers/Trailblazer 3.jpg";
+import trailblazersPhotoFour from "@/imports/Branding/Trailblazers/Trailblazer 4.jpg";
+import trailblazersPhotoFive from "@/imports/Branding/Trailblazers/Trailblazer 5.jpg";
 import newLifeOrionEmblem from "@/imports/Branding/New Life SDA Church/ORION.png";
 import newLifeOrionFlag from "@/imports/Branding/New Life SDA Church/flag.jpg";
 import oasisCampoutPoster from "@/imports/Advertising/Oasis Pathfinder Club UEW/UEW Campout 10.jpg";
@@ -539,6 +544,46 @@ const TRAILBLAZERS_GALLERY: LightboxItem[] = [
     year: "2024",
     description: "Flag mockup showing the Pathfinder Club identity applied in a physical setting.",
   },
+  {
+    img: trailblazersPhoto,
+    title: "Trailblazers Pathfinder Club — In the Field",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Members of the Trailblazers Pathfinder Club proudly wearing the club identity in action.",
+  },
+  {
+    img: trailblazersPhotoTwo,
+    title: "Trailblazers Pathfinder Club — Group II",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Group photo showcasing the Trailblazers brand identity worn by club members.",
+  },
+  {
+    img: trailblazersPhotoThree,
+    title: "Trailblazers Pathfinder Club — Group III",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Club members in uniform demonstrating the Trailblazers visual identity in a real-world context.",
+  },
+  {
+    img: trailblazersPhotoFour,
+    title: "Trailblazers Pathfinder Club — Group IV",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Trailblazers club members assembled, displaying the branding applied to club apparel and flags.",
+  },
+  {
+    img: trailblazersPhotoFive,
+    title: "Trailblazers Pathfinder Club — Group V",
+    category: "Branding & Identity",
+    client: "Trailblazers Pathfinder Club",
+    year: "2024",
+    description: "Final group shot of Trailblazers Pathfinder Club members, celebrating unity and adventure.",
+  },
 ];
 
 const EWURABAS_COUTURE_GALLERY: LightboxItem[] = [
@@ -650,7 +695,7 @@ const PROJECTS: DesignProject[] = [
     id: 28,
     title: "Blistavo Events Certificate of Honour",
     client: "Blistavo Events",
-    year: "2026",
+    year: "2024",
     img: blistavoCertificate,
     wide: false,
     discipline: "Advertising & Flyers",
