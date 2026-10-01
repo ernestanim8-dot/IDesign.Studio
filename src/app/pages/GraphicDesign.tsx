@@ -78,6 +78,10 @@ import citationRansford from "@/imports/Advertising/Citation/Pastor Ransford Osa
 import citationDaniel from "@/imports/Advertising/Citation/Ps Daniel Amissah A3.jpg";
 import citationThomas from "@/imports/Advertising/Citation/Thomas Owusu SYL Rep.jpg";
 import blistavoCertificate from "@/imports/Advertising/Blistavo Events/Certificate of Honour.jpg";
+import odorkorYouthCampPoster from "@/imports/Advertising/Odorkor District AYM Youth Camp/Youth Camp Poster.jpg";
+import odorkorMountainJai from "@/imports/Advertising/Odorkor District AYM Youth Camp/Mountain Jai Excursion.jpg";
+import odorkorDressCode from "@/imports/Advertising/Odorkor District AYM Youth Camp/Dress Code.jpg";
+import odorkorPackingList from "@/imports/Advertising/Odorkor District AYM Youth Camp/Packing List.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -108,6 +112,7 @@ interface DesignProject extends LightboxItem {
   | "ewurabas-couture"
   | "new-life-sda"
   | "oasis-campout"
+  | "odorkor-youth-camp"
   | "citation-series";
 }
 
@@ -667,6 +672,41 @@ const OASIS_CAMPOUT_GALLERY: LightboxItem[] = [
   },
 ];
 
+const ODORKOR_YOUTH_CAMP_GALLERY: LightboxItem[] = [
+  {
+    img: odorkorYouthCampPoster,
+    title: "Youth Camp 2025 — Main Poster",
+    category: "Advertising & Flyers",
+    client: "Odorkor District Youth Ministry",
+    year: "2025",
+    description: "Key event poster for the Odorkor District AYM Youth Camp 2025, themed Righteousness: The Story of Noah and the Flood.",
+  },
+  {
+    img: odorkorMountainJai,
+    title: "Mountain Jai Hike & Excursion",
+    category: "Advertising & Flyers",
+    client: "Odorkor District Youth Ministry",
+    year: "2025",
+    description: "Promotional graphic for the Mountain Jai hike and excursion on 26th December 2025, highlighting tourist attractions.",
+  },
+  {
+    img: odorkorDressCode,
+    title: "Youth Camp Dress Codes",
+    category: "Advertising & Flyers",
+    client: "Odorkor District Youth Ministry",
+    year: "2025",
+    description: "Visual dress-code guide for each day of the Youth Camp, designed for clarity and camp identity.",
+  },
+  {
+    img: odorkorPackingList,
+    title: "Righteousness Packing List",
+    category: "Advertising & Flyers",
+    client: "Odorkor District Youth Ministry",
+    year: "2025",
+    description: "Pre-event packing checklist designed for Youth Camp 2025 attendees, themed around the Righteousness campaign.",
+  },
+];
+
 const CITATION_SERIES_GALLERY: LightboxItem[] = [
   [citationAbora, "Commander Abora Emmanuel"],
   [citationAwuni, "Commander Awuni Gershon"],
@@ -691,6 +731,19 @@ const CITATION_SERIES_GALLERY: LightboxItem[] = [
 }));
 
 const PROJECTS: DesignProject[] = [
+  {
+    id: 29,
+    title: "Odorkor District AYM Youth Camp 2025",
+    client: "Odorkor District Youth Ministry",
+    year: "2025",
+    img: odorkorYouthCampPoster,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    gallery: "odorkor-youth-camp",
+    category: "Advertising & Flyers",
+    description:
+      "A four-piece event campaign for the Odorkor District AYM Youth Camp 2025, including the main poster, Mountain Jai excursion graphic, dress codes, and packing list. Click to view the full campaign.",
+  },
   {
     id: 28,
     title: "Blistavo Events Certificate of Honour",
@@ -1529,6 +1582,12 @@ export function GraphicDesign() {
 
                     if (p.gallery === "idesign") {
                       setLightboxItems(BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "odorkor-youth-camp") {
+                      setLightboxItems(ODORKOR_YOUTH_CAMP_GALLERY);
                       setLightboxIndex(0);
                       return;
                     }
