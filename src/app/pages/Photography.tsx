@@ -2342,7 +2342,7 @@ const PHOTOS: PhotoItem[] = [
     img: uccGrad08,
     tall: true,
     client: "UCC Graduation 2026",
-    year: "2026",
+    year: "2025",
     description:
       "A 9-image graduation milestone editorial celebrating Mary Nyarko (B.A. Arts Classics & Philosophy) at the University of Cape Coast — featuring academic regalia, honors medal display, family cake-cutting, and joyful champagne moments.",
     gallery: "ucc-graduation-2026",

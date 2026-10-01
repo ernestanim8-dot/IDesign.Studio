@@ -3,6 +3,21 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 import { VitePWA } from 'vite-plugin-pwa'
+import { readFileSync } from 'node:fs'
+
+// Load .env into process.env so the API middleware can access server-side vars (e.g. RESEND_API_KEY)
+try {
+  const envFile = readFileSync(new URL('./.env', import.meta.url), 'utf8')
+  for (const line of envFile.split('\n')) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+    const eqIdx = trimmed.indexOf('=')
+    if (eqIdx === -1) continue
+    const key = trimmed.slice(0, eqIdx).trim()
+    const value = trimmed.slice(eqIdx + 1).trim()
+    if (key && !(key in process.env)) process.env[key] = value
+  }
+} catch { /* .env not present — that's fine */ }
 
 import siteConfiguration from './.figma/make/site.json' with { type: 'json' }
 
@@ -103,6 +118,7 @@ export default defineConfig(({ mode }) => {
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
+      idesignApiMiddleware(),
     ],
     resolve: {
       alias: {
@@ -113,16 +129,10 @@ export default defineConfig(({ mode }) => {
       host: process.env.FIGMA_DEV_SERVER_HOST || '0.0.0.0',
       port: parseInt(process.env.PORT || '8443'),
       strictPort: true,
-      proxy: {
-        '/api': {
-          target: `http://127.0.0.1:${process.env.API_PORT || '8787'}`,
-          changeOrigin: true,
-        },
-      },
       watch: {
         ignored: [
           '**/.figma/**',
-],
+        ],
       },
     },
     preview: {
@@ -440,6 +450,35 @@ function figmaMakeKitPlugin(options: { storiesGlob: string | string[] }): Plugin
         } catch (err) {
           next(err as Error)
         }
+      })
+    },
+  }
+}
+
+/** Connect middleware for serving /api endpoints directly inside the Vite dev server */
+function idesignApiMiddleware(): Plugin {
+  return {
+    name: 'idesign-api-middleware',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const url = req.url || ''
+        const pathname = url.split('?')[0]
+        if (pathname === '/api' || pathname.startsWith('/api/')) {
+          try {
+            const { handleRequest } = await import('./server/index.js')
+            await handleRequest(req, res)
+            return
+          } catch (err) {
+            console.error('API middleware error:', err)
+            if (!res.headersSent) {
+              res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' })
+              res.end(JSON.stringify({ ok: false, errors: [(err as Error)?.message || 'Internal server error'] }))
+            }
+            return
+          }
+        }
+        next()
       })
     },
   }

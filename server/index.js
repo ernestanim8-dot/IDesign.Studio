@@ -295,20 +295,19 @@ async function handleContact(req, res) {
 
     // Automated email notifications via Resend API (fires in parallel — does not block response)
     if (process.env.RESEND_API_KEY) {
-      const savedInquiry = inquiry;
-      const inquiry = {
-        ...savedInquiry,
-        fullName: escapeHtml(savedInquiry.fullName),
-        email: escapeHtml(savedInquiry.email),
-        phone: escapeHtml(savedInquiry.phone),
-        interest: escapeHtml(savedInquiry.interest),
-        timeline: escapeHtml(savedInquiry.timeline),
-        budget: escapeHtml(savedInquiry.budget),
-        message: escapeHtml(savedInquiry.message),
+      const escapedInquiry = {
+        ...inquiry,
+        fullName: escapeHtml(inquiry.fullName),
+        email: escapeHtml(inquiry.email),
+        phone: escapeHtml(inquiry.phone),
+        interest: escapeHtml(inquiry.interest),
+        timeline: escapeHtml(inquiry.timeline),
+        budget: escapeHtml(inquiry.budget),
+        message: escapeHtml(inquiry.message),
       };
       const fromAddress = process.env.RESEND_FROM_EMAIL || "iDESIGN Studio <onboarding@resend.dev>";
       const notifyAddress = process.env.NOTIFICATION_EMAIL || "idesign6048@gmail.com";
-      const receivedDate = new Date(inquiry.createdAt).toLocaleString("en-US", {
+      const receivedDate = new Date(escapedInquiry.createdAt).toLocaleString("en-US", {
         weekday: "long", year: "numeric", month: "long", day: "numeric",
         hour: "2-digit", minute: "2-digit", timeZoneName: "short",
       });
@@ -347,15 +346,15 @@ async function handleContact(req, res) {
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Full Name</td>
-                <td style="padding:8px 0;font-size:14px;color:#1a1814;font-weight:600;">${inquiry.fullName}</td>
+                <td style="padding:8px 0;font-size:14px;color:#1a1814;font-weight:600;">${escapedInquiry.fullName}</td>
               </tr>
               <tr style="background:#fafaf8;">
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Email</td>
-                <td style="padding:8px 0;font-size:14px;"><a href="mailto:${inquiry.email}" style="color:#c8a54a;text-decoration:none;">${inquiry.email}</a></td>
+                <td style="padding:8px 0;font-size:14px;"><a href="mailto:${escapedInquiry.email}" style="color:#c8a54a;text-decoration:none;">${escapedInquiry.email}</a></td>
               </tr>
               <tr>
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Phone / WhatsApp</td>
-                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${inquiry.phone || "<em style='color:#aaa;'>Not provided</em>"}</td>
+                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${escapedInquiry.phone || "<em style='color:#aaa;'>Not provided</em>"}</td>
               </tr>
             </table>
           </td>
@@ -368,15 +367,15 @@ async function handleContact(req, res) {
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Service</td>
-                <td style="padding:8px 0;font-size:14px;color:#1a1814;font-weight:600;">${inquiry.interest}</td>
+                <td style="padding:8px 0;font-size:14px;color:#1a1814;font-weight:600;">${escapedInquiry.interest}</td>
               </tr>
               <tr style="background:#fafaf8;">
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Timeline</td>
-                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${inquiry.timeline}</td>
+                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${escapedInquiry.timeline}</td>
               </tr>
               <tr>
                 <td width="160" style="padding:8px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:0.1em;">Budget</td>
-                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${inquiry.budget || "Flexible"}</td>
+                <td style="padding:8px 0;font-size:14px;color:#1a1814;">${escapedInquiry.budget || "Flexible"}</td>
               </tr>
             </table>
           </td>
@@ -387,7 +386,7 @@ async function handleContact(req, res) {
           <td style="padding:20px 40px 0;">
             <h2 style="margin:0 0 12px;font-size:18px;color:#1a1814;border-bottom:1px solid #ede8df;padding-bottom:10px;">Message</h2>
             <div style="background:#f7f5f0;border-left:3px solid #c8a54a;padding:16px 18px;border-radius:0 4px 4px 0;">
-              <p style="margin:0;font-size:14px;line-height:1.75;color:#3a3530;white-space:pre-wrap;">${inquiry.message}</p>
+              <p style="margin:0;font-size:14px;line-height:1.75;color:#3a3530;white-space:pre-wrap;">${escapedInquiry.message}</p>
             </div>
           </td>
         </tr>
@@ -398,9 +397,9 @@ async function handleContact(req, res) {
             <table cellpadding="0" cellspacing="0">
               <tr>
                 <td style="background:#c8a54a;border-radius:4px;">
-                  <a href="mailto:${inquiry.email}?subject=Re: Your iDESIGN Studio Inquiry&body=Hi ${encodeURIComponent(inquiry.fullName)},%0A%0AThank you for reaching out to iDESIGN Studio!" style="display:inline-block;padding:13px 28px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;text-decoration:none;">Reply to ${inquiry.fullName} &rarr;</a>
+                  <a href="mailto:${escapedInquiry.email}?subject=Re: Your iDESIGN Studio Inquiry&body=Hi ${encodeURIComponent(inquiry.fullName)},%0A%0AThank you for reaching out to iDESIGN Studio!" style="display:inline-block;padding:13px 28px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;text-decoration:none;">Reply to ${escapedInquiry.fullName} &rarr;</a>
                 </td>
-                ${inquiry.phone ? `<td width="12"></td><td style="border:1px solid #c8a54a;border-radius:4px;"><a href="https://wa.me/${inquiry.phone.replace(/[^0-9]/g, "")}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#c8a54a;text-decoration:none;">WhatsApp &rarr;</a></td>` : ""}
+                ${escapedInquiry.phone ? `<td width="12"></td><td style="border:1px solid #c8a54a;border-radius:4px;"><a href="https://wa.me/${escapedInquiry.phone.replace(/[^0-9]/g, "")}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#c8a54a;text-decoration:none;">WhatsApp &rarr;</a></td>` : ""}
               </tr>
             </table>
           </td>
@@ -410,7 +409,7 @@ async function handleContact(req, res) {
         <tr>
           <td style="background:#f7f5f0;padding:20px 40px;border-top:1px solid #ede8df;">
             <p style="margin:0;font-size:11px;color:#aaa;font-family:'Courier New',monospace;letter-spacing:0.08em;">
-              Inquiry ID: ${inquiry.id} &nbsp;&bull;&nbsp; iDESIGN Studio Notification System &nbsp;&bull;&nbsp; This email was generated automatically.
+              Inquiry ID: ${escapedInquiry.id} &nbsp;&bull;&nbsp; iDESIGN Studio Notification System &nbsp;&bull;&nbsp; This email was generated automatically.
             </p>
           </td>
         </tr>
@@ -439,7 +438,7 @@ async function handleContact(req, res) {
         <!-- Body -->
         <tr>
           <td style="padding:36px 40px 0;">
-            <p style="margin:0 0 16px;font-size:16px;color:#1a1814;font-weight:600;">Hi ${inquiry.fullName},</p>
+            <p style="margin:0 0 16px;font-size:16px;color:#1a1814;font-weight:600;">Hi ${escapedInquiry.fullName},</p>
             <p style="margin:0 0 16px;font-size:14px;line-height:1.75;color:#5a5248;">Thank you for reaching out to <strong>iDESIGN Studio</strong>. We've received your project inquiry and our team will review your brief carefully.</p>
             <p style="margin:0 0 28px;font-size:14px;line-height:1.75;color:#5a5248;">You can expect a personal response from us within <strong>1–2 business days</strong>. If your project is time-sensitive, feel free to reach out on WhatsApp for a faster reply.</p>
 
@@ -449,19 +448,19 @@ async function handleContact(req, res) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding:6px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;width:130px;text-transform:uppercase;letter-spacing:0.1em;">Service</td>
-                  <td style="padding:6px 0;font-size:13px;color:#1a1814;font-weight:600;">${inquiry.interest}</td>
+                  <td style="padding:6px 0;font-size:13px;color:#1a1814;font-weight:600;">${escapedInquiry.interest}</td>
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;width:130px;text-transform:uppercase;letter-spacing:0.1em;">Timeline</td>
-                  <td style="padding:6px 0;font-size:13px;color:#1a1814;">${inquiry.timeline}</td>
+                  <td style="padding:6px 0;font-size:13px;color:#1a1814;">${escapedInquiry.timeline}</td>
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;width:130px;text-transform:uppercase;letter-spacing:0.1em;">Budget</td>
-                  <td style="padding:6px 0;font-size:13px;color:#1a1814;">${inquiry.budget || "Flexible"}</td>
+                  <td style="padding:6px 0;font-size:13px;color:#1a1814;">${escapedInquiry.budget || "Flexible"}</td>
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-size:12px;color:#8a8070;font-family:'Courier New',monospace;width:130px;text-transform:uppercase;letter-spacing:0.1em;">Reference ID</td>
-                  <td style="padding:6px 0;font-size:12px;color:#aaa;font-family:'Courier New',monospace;">${inquiry.id}</td>
+                  <td style="padding:6px 0;font-size:12px;color:#aaa;font-family:'Courier New',monospace;">${escapedInquiry.id}</td>
                 </tr>
               </table>
             </div>
@@ -470,7 +469,7 @@ async function handleContact(req, res) {
             <table cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
               <tr>
                 <td style="background:#22c55e;border-radius:4px;">
-                  <a href="https://wa.me/233502310663?text=${encodeURIComponent(`Hi iDESIGN! I submitted an inquiry (${inquiry.id}) and wanted to follow up.`)}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#ffffff;text-decoration:none;">Chat on WhatsApp &#128172;</a>
+                  <a href="https://wa.me/233502310663?text=${encodeURIComponent(`Hi iDESIGN! I submitted an inquiry (${escapedInquiry.id}) and wanted to follow up.`)}" style="display:inline-block;padding:13px 24px;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#ffffff;text-decoration:none;">Chat on WhatsApp &#128172;</a>
                 </td>
               </tr>
             </table>
@@ -508,7 +507,7 @@ async function handleContact(req, res) {
             from: fromAddress,
             to: [notifyAddress],
             reply_to: savedInquiry.email,
-            subject: `✦ New Inquiry [${inquiry.id}]: ${inquiry.fullName} — ${inquiry.interest}`,
+            subject: `✦ New Inquiry [${escapedInquiry.id}]: ${escapedInquiry.fullName} — ${escapedInquiry.interest}`,
             html: studioNotificationHtml,
           }),
         }),
@@ -779,7 +778,9 @@ export async function handleRequest(req, res) {
 
 const server = createServer(handleRequest);
 
-if (!process.env.VERCEL) {
+const isDirectRun = Boolean(process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]));
+
+if (isDirectRun && !process.env.VERCEL) {
   server.listen(port, () => {
     console.log(`Backend running at http://localhost:${port}`);
   });
