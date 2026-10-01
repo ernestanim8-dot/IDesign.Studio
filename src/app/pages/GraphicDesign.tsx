@@ -88,12 +88,12 @@ import gnaasHarvestAppeal from "@/imports/Advertising/GNAAS TTU/Harvest Appeal B
 import gnaasZecMeeting from "@/imports/Advertising/GNAAS TTU/1st ZEC Meeting.jpg";
 import gnaasFragranceOfPraise from "@/imports/Advertising/GNAAS TTU/The Fragrance of Praise.jpg";
 import gnaasFriendToHave from "@/imports/Advertising/GNAAS TTU/The Friend to Have.jpg";
-import djagoFullBlack from "@/imports/Branding/Djago Design & Build/Djago Full Logo Black.png";
-import djagoLogotypeBlack from "@/imports/Branding/Djago Design & Build/Djago Logotype Black.png";
-import djagoEmblemBlack from "@/imports/Branding/Djago Design & Build/Djago Emblem Black.png";
-import djagoFullGold from "@/imports/Branding/Djago Design & Build/Djago Full Logo Gold.png";
-import djagoLogotypeGold from "@/imports/Branding/Djago Design & Build/Djago Logotype Gold.png";
-import djagoEmblemGold from "@/imports/Branding/Djago Design & Build/Djago Emblem Gold.png";
+import djagoFullBlack from "@/imports/Branding/Djago Design & Build/Djago Full Logo Black.jpg";
+import djagoLogotypeBlack from "@/imports/Branding/Djago Design & Build/Djago Logotype Black.jpg";
+import djagoEmblemBlack from "@/imports/Branding/Djago Design & Build/Djago Emblem Black.jpg";
+import djagoFullGold from "@/imports/Branding/Djago Design & Build/Djago Full Logo Gold.jpg";
+import djagoLogotypeGold from "@/imports/Branding/Djago Design & Build/Djago Logotype Gold.jpg";
+import djagoEmblemGold from "@/imports/Branding/Djago Design & Build/Djago Emblem Gold.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;

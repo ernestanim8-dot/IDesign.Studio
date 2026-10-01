@@ -210,6 +210,28 @@ import ghanaMonthImg10 from "@/imports/Photography/Documentary/Ghana Month/IMG_6
 import ghanaMonthImg11 from "@/imports/Photography/Documentary/Ghana Month/IMG_6482.jpg";
 import ghanaMonthImg12 from "@/imports/Photography/Documentary/Ghana Month/IMG_6503.jpg";
 
+// Documentary Campaign: Edina Bakatue Festival 2026 — Sacred Lagoon & Royal Heritage
+import bakatueImg01 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_7140.jpg";
+import bakatueImg02 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_7145.jpg";
+import bakatueImg03 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_7165.jpg";
+import bakatueImg04 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_7231.jpg";
+import bakatueImg05 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_7238.jpg";
+import bakatueImg06 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9753.jpg";
+import bakatueImg07 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9838.jpg";
+import bakatueImg08 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9848.jpg";
+import bakatueImg09 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9856.jpg";
+import bakatueImg10 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9867.jpg";
+import bakatueImg11 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9897.jpg";
+import bakatueImg12 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9898.jpg";
+import bakatueImg13 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9899.jpg";
+import bakatueImg14 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9919.jpg";
+import bakatueImg15 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9935.jpg";
+import bakatueImg16 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9965.jpg";
+import bakatueImg17 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9982.jpg";
+import bakatueImg18 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_9999.jpg";
+import bakatueImg19 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_0011.jpg";
+import bakatueImg20 from "@/imports/Photography/Documentary/Edina Bakatue Festival/IMG_0016.jpg";
+
 // Commercial Campaign: The Engineer — Bold & Professional
 import engineerImg01 from "@/imports/Photography/Engineer & Studio Glam/IMG_6838.jpg";
 import engineerImg02 from "@/imports/Photography/Engineer & Studio Glam/IMG_6865.jpg";
@@ -1106,6 +1128,170 @@ const GHANA_MONTH_GALLERY: LightboxItem[] = [
     client: "Ghana Cultural Heritage Initiative",
     year: "2026",
     description: "A poignant finale portrait capturing the enduring pride and vibrant future of Ghanaian cultural heritage.",
+  },
+];
+
+/* ─── Gallery 13b: Edina Bakatue Festival — Sacred Lagoon & Royal Heritage (Documentary) ── */
+const EDINA_BAKATUE_GALLERY: LightboxItem[] = [
+  {
+    img: bakatueImg01,
+    title: "Edina Bakatue — Royal Procession Vanguard",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Opening moments of the royal procession through the historic coastal streets of Elmina.",
+  },
+  {
+    img: bakatueImg02,
+    title: "Edina Bakatue — Benya Lagoon Gathering",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Vibrant assembly of citizens and elders gathering alongside the historic Benya Lagoon.",
+  },
+  {
+    img: bakatueImg03,
+    title: "Edina Bakatue — Sacred Waters of Elmina",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Panoramic coastal view capturing the decorated canoes and anticipation before the casting of the net.",
+  },
+  {
+    img: bakatueImg04,
+    title: "Edina Bakatue — Custodian of Tradition",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Dignified portrait of a traditional elder adorned in heritage beads and authentic Fante regalia.",
+  },
+  {
+    img: bakatueImg05,
+    title: "Edina Bakatue — Asafo Warrior Pride",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Striking close-up portrait of an Asafo company warrior embodying strength, heritage, and civic protection.",
+  },
+  {
+    img: bakatueImg06,
+    title: "Edina Bakatue — Lagoon Regatta Formation",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Colourful fleet of fishing vessels positioned across the lagoon awaiting the high priest's proclamation.",
+  },
+  {
+    img: bakatueImg07,
+    title: "Edina Bakatue — Palanquin Pageantry",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "A revered paramount chief carried aloft in a majestic palanquin beneath vibrant ceremonial umbrellas.",
+  },
+  {
+    img: bakatueImg08,
+    title: "Edina Bakatue — Queen Mother's Grace",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Poised and regal presence of an Edina queen mother adorned with exquisite gold ornaments.",
+  },
+  {
+    img: bakatueImg09,
+    title: "Edina Bakatue — The Sea Goddess Invocation",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Traditional priests performing sacred invocations to Nana Benya for an abundant fishing harvest.",
+  },
+  {
+    img: bakatueImg10,
+    title: "Edina Bakatue — Youthful Heritage Bearer",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Next-generation cultural custodian proudly participating in the ancestral festival rites.",
+  },
+  {
+    img: bakatueImg11,
+    title: "Edina Bakatue — Golden Crown & Adornments",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Intricate gold regalia, handwoven textiles, and royal symbols shining under the coastal sun.",
+  },
+  {
+    img: bakatueImg12,
+    title: "Edina Bakatue — Rhythm of the Fontomfrom",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Master drummers driving the pulsating rhythm and royal court dance through the Elmina streets.",
+  },
+  {
+    img: bakatueImg13,
+    title: "Edina Bakatue — Chieftaincy Poise",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Commanding gaze of an Edina sub-chief receiving homage from community members.",
+  },
+  {
+    img: bakatueImg14,
+    title: "Edina Bakatue — Casting of the Sacred Net",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "The climactic ceremonial moment as the traditional net is cast across the Benya Lagoon to inaugurate the harvest season.",
+  },
+  {
+    img: bakatueImg15,
+    title: "Edina Bakatue — Coastal Reverence",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "A candid documentary portrait reflecting the deep spiritual bond between the Edina people and the sea.",
+  },
+  {
+    img: bakatueImg16,
+    title: "Edina Bakatue — Carnival of the Canoes",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "The thrilling ceremonial boat race and regatta display bursting with company banners and coastal excitement.",
+  },
+  {
+    img: bakatueImg17,
+    title: "Edina Bakatue — Royal Guard & Herald",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Steadfast ceremonial herald safeguarding the paramount chief's palanquin procession.",
+  },
+  {
+    img: bakatueImg18,
+    title: "Edina Bakatue — Jubilation on the Waterfront",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Sea of celebratory spectators lining the bridges and embankments cheering the successful lagoon opening.",
+  },
+  {
+    img: bakatueImg19,
+    title: "Edina Bakatue — Twilight Festival Splendor",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "Evening light cascading across the historic Elmina landscape as festivities transition into night celebrations.",
+  },
+  {
+    img: bakatueImg20,
+    title: "Edina Bakatue — Living Ancestral Legacy",
+    category: "Documentary",
+    client: "Edina Traditional Council",
+    year: "2026",
+    description: "A triumphant panoramic documentary capture immortalizing the rich cultural soul and timeless resilience of Edina.",
   },
 ];
 
@@ -2194,6 +2380,22 @@ const PHOTOS: PhotoItem[] = [
     gallery: "ghanamonth",
     galleryItems: GHANA_MONTH_GALLERY,
     galleryCount: 12,
+  },
+
+  {
+    id: 32,
+    title: "Edina Bakatue Festival — Sacred Lagoon & Royal Heritage",
+    cat: "Documentary",
+    category: "Documentary",
+    img: bakatueImg07,
+    tall: true,
+    client: "Edina Traditional Council",
+    year: "2026",
+    description:
+      "A 20-image visual documentary chronicling the historic Edina Bakatue Festival in Elmina — capturing the ceremonial opening of the Benya Lagoon, royal procession of chiefs, vibrant Asafo company regalia, and coastal heritage rituals.",
+    gallery: "edina-bakatue",
+    galleryItems: EDINA_BAKATUE_GALLERY,
+    galleryCount: 20,
   },
 
   /* ── Grouped Campaigns: Commercial ─────────────────── */
