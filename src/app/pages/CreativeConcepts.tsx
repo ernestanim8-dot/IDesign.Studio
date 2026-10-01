@@ -180,6 +180,173 @@ const ADD_ONS: AddOn[] = [
 
 const formatGhs = (amount: number) => `GH₵${amount.toLocaleString("en-GH")}`
 
+// ─── Studio Shoot Pricing Data ───────────────────────────────────────────────
+
+interface ShootPackageTier {
+  tier: "GOLD" | "SILVER"
+  price: string
+  priceNum: number
+  inclusions: string[]
+  addOns: string[]
+}
+
+interface ShootCategory {
+  id: string
+  label: string
+  icon: string
+  tiers: ShootPackageTier[]
+}
+
+const SHOOT_CATEGORIES: ShootCategory[] = [
+  {
+    id: "studio",
+    label: "Studio Rates",
+    icon: "📸",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵650",
+        priceNum: 650,
+        inclusions: ["10 retouched images", "3 outfits"],
+        addOns: ["Extra outfit: GH₵150", "Extra edited picture: GH₵30"],
+      },
+      {
+        tier: "SILVER",
+        price: "GH₵300",
+        priceNum: 300,
+        inclusions: ["10 retouched images", "3 outfits"],
+        addOns: ["Extra outfit: GH₵100", "Extra edited picture: GH₵20"],
+      },
+    ],
+  },
+  {
+    id: "couples",
+    label: "Couples Shoot",
+    icon: "💑",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵600",
+        priceNum: 600,
+        inclusions: ["7 retouched images", "2 outfits"],
+        addOns: ["Extra outfit: GH₵150", "Extra edited picture: GH₵300"],
+      },
+      {
+        tier: "SILVER",
+        price: "GH₵300",
+        priceNum: 300,
+        inclusions: ["7 retouched images", "2 outfits"],
+        addOns: ["Extra outfit: GH₵100", "Extra edited picture: GH₵20"],
+      },
+    ],
+  },
+  {
+    id: "location",
+    label: "Location Shoot",
+    icon: "🌇",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵700",
+        priceNum: 700,
+        inclusions: ["10 retouched images", "3 outfits"],
+        addOns: ["Extra outfit: GH₵200", "Extra edited picture: GH₵30"],
+      },
+      {
+        tier: "SILVER",
+        price: "GH₵300",
+        priceNum: 300,
+        inclusions: ["10 retouched images", "3 outfits"],
+        addOns: ["Extra outfit: GH₵100", "Extra edited picture: GH₵20"],
+      },
+    ],
+  },
+  {
+    id: "location-couples",
+    label: "Location Couples",
+    icon: "🏙️",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵650",
+        priceNum: 650,
+        inclusions: ["7 retouched images", "2 outfits"],
+        addOns: ["Extra outfit: GH₵150", "Extra edited picture: GH₵300"],
+      },
+    ],
+  },
+  {
+    id: "pre-wedding",
+    label: "Pre-Wedding Shoot",
+    icon: "💍",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵1,500",
+        priceNum: 1500,
+        inclusions: [
+          "15 retouched images",
+          "3 locations",
+          "3 outfits",
+          "Professional posing & creative direction",
+        ],
+        addOns: ["Extra outfit: GH₵150", "Extra edited picture: GH₵30"],
+      },
+      {
+        tier: "SILVER",
+        price: "GH₵900",
+        priceNum: 900,
+        inclusions: [
+          "10 retouched images",
+          "2 locations",
+          "2 outfits",
+          "Professional posing & creative direction",
+        ],
+        addOns: ["Extra outfit: GH₵100", "Extra edited picture: GH₵20"],
+      },
+    ],
+  },
+  {
+    id: "wedding",
+    label: "Wedding Shoot",
+    icon: "💒",
+    tiers: [
+      {
+        tier: "GOLD",
+        price: "GH₵3,500",
+        priceNum: 3500,
+        inclusions: [
+          "Full-day wedding coverage",
+          "Getting-ready session",
+          "Wedding ceremony coverage",
+          "Reception coverage",
+          "Couple portraits",
+          "300+ professionally captured images",
+          "50 retouched images",
+          "Online gallery",
+          "Professional photo editing",
+        ],
+        addOns: [],
+      },
+      {
+        tier: "SILVER",
+        price: "GH₵2,500",
+        priceNum: 2500,
+        inclusions: [
+          "Wedding ceremony coverage",
+          "Reception coverage",
+          "Couple portraits",
+          "200+ professionally captured images",
+          "30 retouched images",
+          "Online gallery",
+          "Professional photo editing",
+        ],
+        addOns: [],
+      },
+    ],
+  },
+]
+
 interface ConceptProject extends LightboxItem {
   id: number
 
@@ -529,6 +696,9 @@ export function CreativeConcepts() {
   ])
 
   const [showWaPreview, setShowWaPreview] = useState(false)
+
+  // Shoot Pricing Tab State
+  const [activeShootTab, setActiveShootTab] = useState("studio")
 
   const currentPackage = useMemo(() => {
     return PACKAGES.find((p) => p.id === selectedPackageId) || PACKAGES[1]
@@ -1766,8 +1936,429 @@ export function CreativeConcepts() {
         </div>
       </section>
 
+      {/* ─── Studio Shoot Rates ─────────────────────────────────────────── */}
+      <section
+        id="studio-rates"
+        style={{
+          background: DARKER,
+          padding: "5rem 2rem",
+          borderTop: `1px solid #2a2520`,
+        }}
+      >
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          {/* Section header */}
+          <FadeUp>
+            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+              <p
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                — Creative Concept &amp; Studio
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'DM Serif Display',serif",
+                  fontSize: "clamp(1.9rem,3.8vw,3rem)",
+                  color: WHITE,
+                  marginBottom: "0.75rem",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Studio Rates
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Work Sans',sans-serif",
+                  fontSize: "0.9rem",
+                  color: "rgba(255,255,255,0.5)",
+                  maxWidth: "500px",
+                  margin: "0 auto",
+                  lineHeight: 1.7,
+                }}
+              >
+                Transparent, flat-rate packages for every session type. Select a
+                category below to explore Gold &amp; Silver tiers.
+              </p>
+            </div>
+          </FadeUp>
+
+          {/* Category pill tabs */}
+          <FadeUp delay={0.08}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                justifyContent: "center",
+                marginBottom: "3rem",
+              }}
+            >
+              {SHOOT_CATEGORIES.map((cat) => {
+                const isActive = activeShootTab === cat.id
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveShootTab(cat.id)}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      padding: "0.55rem 1.15rem",
+                      borderRadius: "50px",
+                      border: `1px solid ${isActive ? GOLD : "#3a342a"}`,
+                      background: isActive
+                        ? "rgba(200,165,74,0.14)"
+                        : "transparent",
+                      color: isActive ? GOLD : "rgba(255,255,255,0.45)",
+                      fontFamily: "'Work Sans',sans-serif",
+                      fontWeight: isActive ? 600 : 400,
+                      fontSize: "0.8rem",
+                      letterSpacing: "0.02em",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <span>{cat.icon}</span>
+                    {cat.label}
+                  </button>
+                )
+              })}
+            </div>
+          </FadeUp>
+
+          {/* Active category tiers */}
+          <AnimatePresence mode="wait">
+            {SHOOT_CATEGORIES.filter((c) => c.id === activeShootTab).map(
+              (cat) => (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {/* Category heading strip */}
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.62rem",
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.3)",
+                      }}
+                    >
+                      {cat.icon} {cat.label}
+                    </p>
+                  </div>
+
+                  {/* Tier cards grid */}
+                  <div
+                    className={
+                      cat.tiers.length === 1
+                        ? "flex justify-center"
+                        : "grid md:grid-cols-2 gap-6"
+                    }
+                    style={{ maxWidth: cat.tiers.length === 1 ? "460px" : "100%", margin: "0 auto" }}
+                  >
+                    {cat.tiers.map((tier) => {
+                      const isGold = tier.tier === "GOLD"
+                      const waMsg = encodeURIComponent(
+                        `Hello iDESIGN! I would like to book the ${cat.label} — ${tier.tier} package (${tier.price}). Please let me know your availability.`,
+                      )
+                      return (
+                        <motion.div
+                          key={tier.tier}
+                          whileHover={{ y: -5 }}
+                          transition={{ duration: 0.28 }}
+                          style={{
+                            background: isGold
+                              ? "linear-gradient(145deg,#1e1a13 0%,#16130c 100%)"
+                              : "#141210",
+                            border: `1px solid ${isGold ? GOLD : "#2e2a22"}`,
+                            borderRadius: "8px",
+                            padding: "2.25rem 2rem",
+                            boxShadow: isGold
+                              ? "0 0 0 1px rgba(200,165,74,0.08), 0 16px 48px rgba(0,0,0,0.35)"
+                              : "0 4px 16px rgba(0,0,0,0.25)",
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
+                          {/* Tier badge */}
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              marginBottom: "1.5rem",
+                            }}
+                          >
+                            <span
+                              style={{
+                                display: "inline-block",
+                                padding: "0.3rem 0.8rem",
+                                borderRadius: "50px",
+                                background: isGold
+                                  ? "rgba(200,165,74,0.16)"
+                                  : "rgba(255,255,255,0.07)",
+                                border: `1px solid ${isGold ? "rgba(200,165,74,0.5)" : "rgba(255,255,255,0.15)"}`,
+                                fontFamily: "'DM Mono',monospace",
+                                fontSize: "0.6rem",
+                                letterSpacing: "0.15em",
+                                textTransform: "uppercase",
+                                color: isGold ? GOLD : "rgba(255,255,255,0.55)",
+                              }}
+                            >
+                              {isGold ? "✦ Gold" : "◈ Silver"}
+                            </span>
+                            {isGold && (
+                              <span
+                                style={{
+                                  fontFamily: "'DM Mono',monospace",
+                                  fontSize: "0.58rem",
+                                  color: GOLD,
+                                  letterSpacing: "0.08em",
+                                  opacity: 0.7,
+                                }}
+                              >
+                                Premium
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Price */}
+                          <p
+                            style={{
+                              fontFamily: "'DM Serif Display',serif",
+                              fontSize: "clamp(2.2rem,4vw,2.8rem)",
+                              color: isGold ? GOLD : WHITE,
+                              lineHeight: 1,
+                              marginBottom: "0.3rem",
+                              letterSpacing: "-0.02em",
+                            }}
+                          >
+                            {tier.price}
+                          </p>
+                          <p
+                            style={{
+                              fontFamily: "'Work Sans',sans-serif",
+                              fontSize: "0.75rem",
+                              color: "rgba(255,255,255,0.3)",
+                              marginBottom: "1.75rem",
+                            }}
+                          >
+                            Flat rate · {cat.label}
+                          </p>
+
+                          {/* Divider */}
+                          <div
+                            style={{
+                              height: "1px",
+                              background: isGold
+                                ? "rgba(200,165,74,0.18)"
+                                : "rgba(255,255,255,0.07)",
+                              marginBottom: "1.5rem",
+                            }}
+                          />
+
+                          {/* Inclusions */}
+                          <div
+                            style={{
+                              flex: 1,
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "0.65rem",
+                              marginBottom: "1.5rem",
+                            }}
+                          >
+                            <p
+                              style={{
+                                fontFamily: "'DM Mono',monospace",
+                                fontSize: "0.58rem",
+                                letterSpacing: "0.14em",
+                                textTransform: "uppercase",
+                                color: "rgba(255,255,255,0.3)",
+                                marginBottom: "0.4rem",
+                              }}
+                            >
+                              Included
+                            </p>
+                            {tier.inclusions.map((item) => (
+                              <div
+                                key={item}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                  gap: "0.6rem",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    color: isGold
+                                      ? GOLD
+                                      : "rgba(255,255,255,0.4)",
+                                    fontSize: "0.75rem",
+                                    marginTop: "1px",
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  ✓
+                                </span>
+                                <span
+                                  style={{
+                                    fontFamily: "'Work Sans',sans-serif",
+                                    fontSize: "0.875rem",
+                                    fontWeight: 300,
+                                    color: "rgba(255,255,255,0.72)",
+                                    lineHeight: 1.4,
+                                  }}
+                                >
+                                  {item}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Add-ons */}
+                          {tier.addOns.length > 0 && (
+                            <div
+                              style={{
+                                background: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.07)",
+                                borderRadius: "5px",
+                                padding: "0.85rem 1rem",
+                                marginBottom: "1.5rem",
+                              }}
+                            >
+                              <p
+                                style={{
+                                  fontFamily: "'DM Mono',monospace",
+                                  fontSize: "0.56rem",
+                                  letterSpacing: "0.14em",
+                                  textTransform: "uppercase",
+                                  color: "rgba(255,255,255,0.28)",
+                                  marginBottom: "0.6rem",
+                                }}
+                              >
+                                Optional Add-ons
+                              </p>
+                              {tier.addOns.map((ao) => (
+                                <p
+                                  key={ao}
+                                  style={{
+                                    fontFamily: "'Work Sans',sans-serif",
+                                    fontSize: "0.78rem",
+                                    color: "rgba(255,255,255,0.45)",
+                                    lineHeight: 1.5,
+                                  }}
+                                >
+                                  + {ao}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* CTA buttons */}
+                          <a
+                            href={`https://wa.me/233502310663?text=${waMsg}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "0.5rem",
+                              padding: "0.9rem 1rem",
+                              borderRadius: "4px",
+                              background: isGold
+                                ? GOLD
+                                : "rgba(255,255,255,0.08)",
+                              border: isGold
+                                ? "none"
+                                : "1px solid rgba(255,255,255,0.15)",
+                              color: isGold ? "#14110c" : WHITE,
+                              fontFamily: "'Work Sans',sans-serif",
+                              fontWeight: 700,
+                              fontSize: "0.8rem",
+                              letterSpacing: "0.05em",
+                              textTransform: "uppercase",
+                              textDecoration: "none",
+                              transition: "opacity 0.2s",
+                              marginBottom: "0.6rem",
+                            }}
+                          >
+                            <svg
+                              width={15}
+                              height={15}
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Book Now on WhatsApp
+                          </a>
+                          <Link
+                            to="/contact"
+                            style={{
+                              display: "block",
+                              textAlign: "center",
+                              padding: "0.7rem",
+                              borderRadius: "4px",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                              color: "rgba(255,255,255,0.4)",
+                              fontFamily: "'Work Sans',sans-serif",
+                              fontSize: "0.75rem",
+                              letterSpacing: "0.05em",
+                              textDecoration: "none",
+                              transition: "color 0.2s",
+                            }}
+                          >
+                            Contact Us Instead →
+                          </Link>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              ),
+            )}
+          </AnimatePresence>
+
+          {/* Bottom note */}
+          <FadeUp delay={0.15}>
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "'DM Mono',monospace",
+                fontSize: "0.58rem",
+                letterSpacing: "0.1em",
+                color: "rgba(255,255,255,0.22)",
+                marginTop: "3rem",
+              }}
+            >
+              * All prices are flat-rate. Add-on pricing applies per item.
+              Sessions subject to scheduling availability.
+            </p>
+          </FadeUp>
+        </div>
+      </section>
+
       {/* Concept Portfolio Showcase with Lightbox */}
       <section
+
         style={{
           padding: "5rem 2rem",
           maxWidth: "1280px",

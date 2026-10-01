@@ -134,6 +134,29 @@ import gctu11 from "@/imports/Photography/Events/graduation-2025/gctu-2025-11-mi
 import gctu12 from "@/imports/Photography/Events/graduation-2025/gctu-2025-12-bsc-accounting.jpg";
 import gctu13 from "@/imports/Photography/Events/graduation-2025/gctu-2025-13-triumph-pose.jpg";
 
+// Event Campaign: UCC Congregation 2026 — Mary Nyarko
+import uccGrad01 from "@/imports/Photography/Events/graduation-2026/ucc-2026-01-radiant-graduate.jpg";
+import uccGrad02 from "@/imports/Photography/Events/graduation-2026/ucc-2026-02-sash-reflection.jpg";
+import uccGrad03 from "@/imports/Photography/Events/graduation-2026/ucc-2026-03-cake-celebration.jpg";
+import uccGrad04 from "@/imports/Photography/Events/graduation-2026/ucc-2026-04-champagne-pop.jpg";
+import uccGrad05 from "@/imports/Photography/Events/graduation-2026/ucc-2026-05-joyful-smile.jpg";
+import uccGrad06 from "@/imports/Photography/Events/graduation-2026/ucc-2026-06-scroll-with-mother.jpg";
+import uccGrad07 from "@/imports/Photography/Events/graduation-2026/ucc-2026-07-regalia-and-scroll.jpg";
+import uccGrad08 from "@/imports/Photography/Events/graduation-2026/ucc-2026-08-medal-of-excellence.jpg";
+import uccGrad09 from "@/imports/Photography/Events/graduation-2026/ucc-2026-09-evening-portrait-mother.jpg";
+
+// Event Campaign: The Fashion Designer — Freedom & Graduation 2025
+import fashionGrad01 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-01-fabric-swatch-ritual.jpg";
+import fashionGrad02 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-02-whichone-fashion-hub.jpg";
+import fashionGrad03 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-03-commencement-gathering.jpg";
+import fashionGrad04 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-04-runway-plaid-creations.jpg";
+import fashionGrad05 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-05-runway-model-stride.jpg";
+import fashionGrad06 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-06-menswear-batik-runway.jpg";
+import fashionGrad07 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-07-couture-graduate-portrait.jpg";
+import fashionGrad08 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-08-mentors-prayer-and-speech.jpg";
+import fashionGrad09 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-09-traditional-powdering-blessing.jpg";
+import fashionGrad10 from "@/imports/Photography/Events/fashion-designer-graduation-2025/fashion-grad-2025-10-freedom-dance-certificate.jpg";
+
 // Event Campaign: The Matriculants — Ceremony & Celebration 2025
 import matriculation01 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-01-radiant-welcome.jpg";
 import matriculation02 from "@/imports/Photography/Events/matriculation-2025/matriculation-2025-02-academic-grace.jpg";
@@ -1278,6 +1301,185 @@ const GCTU_2025_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery: UCC Congregation 2026 — Mary Nyarko ─────────────────── */
+const UCC_GRADUATION_2026_GALLERY: LightboxItem[] = [
+  {
+    img: uccGrad08,
+    title: "UCC 2026 — Medal of Excellence",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Mary Nyarko proudly displays her University of Cape Coast honors medal and bespoke graduation sash commemorating her degree in B.A Arts Classics and Philosophy.",
+  },
+  {
+    img: uccGrad01,
+    title: "UCC 2026 — Radiant Graduate",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "A poised commencement portrait in full academic blue and gold regalia, mortarboard styled with elegance and confidence.",
+  },
+  {
+    img: uccGrad02,
+    title: "UCC 2026 — Sash Reflection",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Reflective portrait highlighting the ceremonial sash details, academic hood accents, and quiet anticipation before the ceremony.",
+  },
+  {
+    img: uccGrad07,
+    title: "UCC 2026 — Regalia & Degree Scroll",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Full-length graduation portrait displaying the official University of Cape Coast degree certificate scroll holder in university colors.",
+  },
+  {
+    img: uccGrad05,
+    title: "UCC 2026 — Joyful Triumph",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "A spontaneous, radiant smile reflecting the pride, dedication, and joy of reaching this academic milestone.",
+  },
+  {
+    img: uccGrad06,
+    title: "UCC 2026 — Scroll with Mother",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Heartwarming commemorative portrait with mother holding the UCC scroll together, honoring family devotion and shared success.",
+  },
+  {
+    img: uccGrad03,
+    title: "UCC 2026 — Celebration Cake Cutting",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Family cake-cutting moment celebrating Mary's graduation milestone surrounded by love, cheers, and congratulatory festivities.",
+  },
+  {
+    img: uccGrad04,
+    title: "UCC 2026 — Champagne Celebration",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "High-speed celebratory champagne pop capturing exuberant spray, laughter, and victorious commencement celebration.",
+  },
+  {
+    img: uccGrad09,
+    title: "UCC 2026 — Evening Elegance with Mother",
+    category: "Event",
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "Golden-hour graduation evening portrait alongside mother in celebratory attire, sealing an unforgettable congregation day.",
+  },
+];
+
+/* ─── Gallery: The Fashion Designer — Freedom & Graduation 2025 ──────── */
+const FASHION_GRADUATION_2025_GALLERY: LightboxItem[] = [
+  {
+    img: fashionGrad07,
+    title: "Couture Graduate — Bespoke White Elegance",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "The newly graduated fashion designer seated in regal poise, showcasing her custom white off-shoulder lace and sequin gown with a lustrous pearl tiara.",
+  },
+  {
+    img: fashionGrad01,
+    title: "The Fabric Swatch Ritual — Apprentice Origins",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "A poignant commencement tradition: the apprentice adorned with pinned textile scraps and lace swatches representing years of craftsmanship and fabric mastery.",
+  },
+  {
+    img: fashionGrad02,
+    title: "Whichone Fashion Hub — Emblem of Achievement",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "Standing proudly before celebratory balloon arches, reflecting on the milestone transition from apprentice seamstress to certified fashion designer.",
+  },
+  {
+    img: fashionGrad03,
+    title: "Commencement Gathering — Circle of Support",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "The master trainer and community gather on the green carpet with microphone in hand, presenting the graduating designer to family and patrons.",
+  },
+  {
+    img: fashionGrad04,
+    title: "Runway Showcase — Bespoke Tartan Pleats",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "Student models presenting bespoke plaid skirt designs and directional headwraps tailored as part of the graduation collection showcase.",
+  },
+  {
+    img: fashionGrad05,
+    title: "Runway in Motion — Joyful Stride",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "High-energy runway presentation highlighting fluidity, tailoring craftsmanship, and buoyant celebration of young creative talent.",
+  },
+  {
+    img: fashionGrad06,
+    title: "Menswear Feature — Botanical Sunburst Batik",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "Runway showcase of tailored menswear featuring an expressive palm-leaf and sunburst wax batik button-down creation.",
+  },
+  {
+    img: fashionGrad08,
+    title: "Words of Blessing — Elder's Charge",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "Mentors and family offer heartfelt prayers, cultural blessings, and words of empowerment over the graduating fashion artist.",
+  },
+  {
+    img: fashionGrad09,
+    title: "The Powdering Ceremony — Sacred Tradition",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "The iconic Ghanaian graduation powdering ritual — anointing the designer's shoulders with fragrant talcum powder to symbolize victory, purity, and freedom.",
+  },
+  {
+    img: fashionGrad10,
+    title: "Freedom & Triumph — The Certified Designer",
+    category: "Event",
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "Unbridled ecstasy as the designer holds her graduation certificate aloft, dancing with family amidst powdered confetti and joyous ovations.",
+  },
+];
+
 /* ─── Gallery: The Matriculants — Ceremony & Celebration 2025 ──────────── */
 const MATRICULATION_2025_GALLERY: LightboxItem[] = [
   {
@@ -1945,6 +2147,36 @@ const PHOTOS: PhotoItem[] = [
     gallery: "matriculation-2025",
     galleryItems: MATRICULATION_2025_GALLERY,
     galleryCount: 15,
+  },
+  {
+    id: 30,
+    title: "UCC Congregation 2026 — Mary Nyarko",
+    cat: "Event",
+    category: "Event",
+    img: uccGrad08,
+    tall: true,
+    client: "UCC Graduation 2026",
+    year: "2026",
+    description:
+      "A 9-image graduation milestone editorial celebrating Mary Nyarko (B.A. Arts Classics & Philosophy) at the University of Cape Coast — featuring academic regalia, honors medal display, family cake-cutting, and joyful champagne moments.",
+    gallery: "ucc-graduation-2026",
+    galleryItems: UCC_GRADUATION_2026_GALLERY,
+    galleryCount: 9,
+  },
+  {
+    id: 31,
+    title: "The Fashion Designer — Freedom & Graduation",
+    cat: "Event",
+    category: "Event",
+    img: fashionGrad07,
+    tall: true,
+    client: "Whichone Fashion Hub",
+    year: "2025",
+    description:
+      "A 10-image cultural documentary and commencement editorial capturing the traditional 'Freedom' graduation of a bespoke fashion designer — from apprentice textile rituals and runway collections to ceremonial powder blessings and certificate triumph.",
+    gallery: "fashion-graduation-2025",
+    galleryItems: FASHION_GRADUATION_2025_GALLERY,
+    galleryCount: 10,
   },
 
   /* ── Grouped Campaigns: Documentary ─────────────────── */

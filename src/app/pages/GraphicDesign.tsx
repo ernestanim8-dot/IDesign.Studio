@@ -82,6 +82,18 @@ import odorkorYouthCampPoster from "@/imports/Advertising/Odorkor District AYM Y
 import odorkorMountainJai from "@/imports/Advertising/Odorkor District AYM Youth Camp/Mountain Jai Excursion.jpg";
 import odorkorDressCode from "@/imports/Advertising/Odorkor District AYM Youth Camp/Dress Code.jpg";
 import odorkorPackingList from "@/imports/Advertising/Odorkor District AYM Youth Camp/Packing List.jpg";
+import gnaasWelcome from "@/imports/Advertising/GNAAS TTU/Welcome to GNAAS TTU.jpg";
+import gnaasFreshersDay from "@/imports/Advertising/GNAAS TTU/Freshers Day and Harvest.jpg";
+import gnaasHarvestAppeal from "@/imports/Advertising/GNAAS TTU/Harvest Appeal Banner.jpg";
+import gnaasZecMeeting from "@/imports/Advertising/GNAAS TTU/1st ZEC Meeting.jpg";
+import gnaasFragranceOfPraise from "@/imports/Advertising/GNAAS TTU/The Fragrance of Praise.jpg";
+import gnaasFriendToHave from "@/imports/Advertising/GNAAS TTU/The Friend to Have.jpg";
+import djagoFullBlack from "@/imports/Branding/Djago Design & Build/Djago Full Logo Black.png";
+import djagoLogotypeBlack from "@/imports/Branding/Djago Design & Build/Djago Logotype Black.png";
+import djagoEmblemBlack from "@/imports/Branding/Djago Design & Build/Djago Emblem Black.png";
+import djagoFullGold from "@/imports/Branding/Djago Design & Build/Djago Full Logo Gold.png";
+import djagoLogotypeGold from "@/imports/Branding/Djago Design & Build/Djago Logotype Gold.png";
+import djagoEmblemGold from "@/imports/Branding/Djago Design & Build/Djago Emblem Gold.png";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -113,6 +125,8 @@ interface DesignProject extends LightboxItem {
   | "new-life-sda"
   | "oasis-campout"
   | "odorkor-youth-camp"
+  | "gnaas-ttu"
+  | "djago-design-build"
   | "citation-series";
 }
 
@@ -730,7 +744,135 @@ const CITATION_SERIES_GALLERY: LightboxItem[] = [
   description: `Recognition citation design created in honour of ${recipient}.`,
 }));
 
+const GNAAS_TTU_GALLERY: LightboxItem[] = [
+  {
+    img: gnaasWelcome,
+    title: "Welcome to GNAAS TTU",
+    category: "Advertising & Flyers",
+    client: "GNAAS TTU",
+    year: "2025",
+    description: "Official welcome banner for Ghana National Association of Adventist Students (Takoradi Technical University Chapter) ushering in the 2024/2025 academic year.",
+  },
+  {
+    img: gnaasFreshersDay,
+    title: "Fresher's Day & Harvest",
+    category: "Advertising & Flyers",
+    client: "GNAAS TTU",
+    year: "2025",
+    description: "Event promotional flyer for GNAAS TTU Fresher's Day & Harvest fundraiser held at TTU Rooftop.",
+  },
+  {
+    img: gnaasHarvestAppeal,
+    title: "Harvest Appeal & Fundraising Ticket",
+    category: "Advertising & Flyers",
+    client: "GNAAS TTU",
+    year: "2025",
+    description: "Fundraising campaign banner and card in aid of acquiring a keyboard, microphones, and mixer for campus worship.",
+  },
+  {
+    img: gnaasZecMeeting,
+    title: "1st ZEC Meeting 2025",
+    category: "Advertising & Flyers",
+    client: "GNAAS SWGC Zone",
+    year: "2025",
+    description: "Executive Council promotional flyer for GNAAS South West Ghana Conference Zone held at UMaT Essikado Campus.",
+  },
+  {
+    img: gnaasFragranceOfPraise,
+    title: "The Fragrance of Praise",
+    category: "Advertising & Flyers",
+    client: "GNAAS TTU",
+    year: "2024",
+    description: "Thematic afternoon service graphic exploring 2 Corinthians 2:15 and 'The Church and Dressing' at TTU Rooftop.",
+  },
+  {
+    img: gnaasFriendToHave,
+    title: "The Friend to Have",
+    category: "Advertising & Flyers",
+    client: "GNAAS TTU",
+    year: "2024",
+    description: "Afternoon fellowship and sermon graphic based on Proverbs 12:26 addressing 'The Two Faces of Kindness'.",
+  },
+];
+
+const DJAGO_BRANDING_GALLERY: LightboxItem[] = [
+  {
+    img: djagoFullBlack,
+    title: "Djago Design & Build — Primary Brand Identity",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Primary visual identity for Djago Design & Build featuring architectural monogram mark, corporate logotype, and design/engineering/interiors discipline markers.",
+  },
+  {
+    img: djagoLogotypeBlack,
+    title: "Djago Design & Build — Logotype Lockup",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Logotype lockup version in onyx black and accent gold, crafted for site boards, architectural drawings, and company collateral.",
+  },
+  {
+    img: djagoEmblemBlack,
+    title: "Djago Monogram Emblem — Minimalist Mark",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Standalone architectural monogram emblem fusing the initial 'D' with pitched roofline, mullioned window, and rising skyscrapers.",
+  },
+  {
+    img: djagoFullGold,
+    title: "Djago Design & Build — Gold Edition Full Lockup",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Luxury metallic gold and crisp white identity system engineered specifically for dark surfaces, corporate presentations, and luxury dossiers.",
+  },
+  {
+    img: djagoLogotypeGold,
+    title: "Djago Design & Build — Gold Edition Logotype",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Refined gold lockup delivering high-contrast prestige on dark backgrounds and luxury presentation collateral.",
+  },
+  {
+    img: djagoEmblemGold,
+    title: "Djago Monogram Emblem — Gold Edition",
+    category: "Branding & Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    description: "Iconic metallic gold monogram symbol for app icons, hard hats, stamps, site wear, and architectural watermarks.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 31,
+    title: "Djago Design & Build Identity",
+    client: "Djago Design & Build",
+    year: "2026",
+    img: djagoFullBlack,
+    wide: false,
+    discipline: "Branding & Identity",
+    gallery: "djago-design-build",
+    category: "Branding & Identity",
+    description:
+      "A complete corporate identity suite for Djago Design & Build, featuring architectural monogram marks, logotype lockups, discipline markers, and luxury gold editions for print and digital applications. Click to view the full identity system.",
+  },
+  {
+    id: 30,
+    title: "GNAAS TTU Campus Ministry Campaign",
+    client: "GNAAS TTU",
+    year: "2025",
+    img: gnaasWelcome,
+    wide: false,
+    discipline: "Advertising & Flyers",
+    gallery: "gnaas-ttu",
+    category: "Advertising & Flyers",
+    description:
+      "A comprehensive design suite for the Ghana National Association of Adventist Students (Takoradi Technical University), featuring the 2024/2025 academic welcome poster, Fresher's Day & Harvest fundraiser, ZEC leadership conference, and fellowship campaign graphics. Click to view the full collection.",
+  },
   {
     id: 29,
     title: "Odorkor District AYM Youth Camp 2025",
@@ -1588,6 +1730,18 @@ export function GraphicDesign() {
 
                     if (p.gallery === "odorkor-youth-camp") {
                       setLightboxItems(ODORKOR_YOUTH_CAMP_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "gnaas-ttu") {
+                      setLightboxItems(GNAAS_TTU_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "djago-design-build") {
+                      setLightboxItems(DJAGO_BRANDING_GALLERY);
                       setLightboxIndex(0);
                       return;
                     }
