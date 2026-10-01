@@ -94,6 +94,12 @@ import djagoEmblemBlack from "@/imports/Branding/Djago Design & Build/Djago Embl
 import djagoFullGold from "@/imports/Branding/Djago Design & Build/Djago Full Logo Gold.jpg";
 import djagoLogotypeGold from "@/imports/Branding/Djago Design & Build/Djago Logotype Gold.jpg";
 import djagoEmblemGold from "@/imports/Branding/Djago Design & Build/Djago Emblem Gold.jpg";
+import bossLogo1 from "@/imports/Branding/Boss Clothing/Boss Logo 1.png";
+import bossLogo2 from "@/imports/Branding/Boss Clothing/Boss Logo 2.png";
+import bossCloth1 from "@/imports/Branding/Boss Clothing/Boss Cloth 1.jpg";
+import bossCloth2 from "@/imports/Branding/Boss Clothing/Boss Cloth 2.jpg";
+import bossShirtMockup1 from "@/imports/Branding/Boss Clothing/Shirt Mockup 1.jpg";
+import bossShirtMockup2 from "@/imports/Branding/Boss Clothing/Shirt Mockup 2.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -127,6 +133,7 @@ interface DesignProject extends LightboxItem {
   | "odorkor-youth-camp"
   | "gnaas-ttu"
   | "djago-design-build"
+  | "boss-clothing"
   | "citation-series";
 }
 
@@ -846,7 +853,71 @@ const DJAGO_BRANDING_GALLERY: LightboxItem[] = [
   },
 ];
 
+const BOSS_CLOTHING_GALLERY: LightboxItem[] = [
+  {
+    img: bossLogo1,
+    title: "Boss Clothing — Primary Logo",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "Primary logotype mark for Boss Clothing, designed with bold typographic confidence to communicate premium streetwear identity.",
+  },
+  {
+    img: bossLogo2,
+    title: "Boss Clothing — Secondary Logo Variant",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "Secondary logo variation offering layout flexibility across different apparel placements and brand touchpoints.",
+  },
+  {
+    img: bossCloth1,
+    title: "Boss Clothing — Collection Look 1",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "First garment from the Boss Clothing collection, styled to showcase the brand's premium streetwear aesthetic.",
+  },
+  {
+    img: bossCloth2,
+    title: "Boss Clothing — Collection Look 2",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "Second garment from the Boss Clothing collection, reinforcing the bold and refined visual language of the brand.",
+  },
+  {
+    img: bossShirtMockup1,
+    title: "Boss Clothing — Shirt Mockup I",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "Branded shirt mockup demonstrating how the Boss logo applies to button-up apparel for client presentation.",
+  },
+  {
+    img: bossShirtMockup2,
+    title: "Boss Clothing — Shirt Mockup II",
+    category: "Branding & Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    description: "Second shirt mockup variant exploring alternate colourways and logo placement for the Boss Clothing identity system.",
+  },
+];
+
 const PROJECTS: DesignProject[] = [
+  {
+    id: 32,
+    title: "Boss Clothing Brand Identity",
+    client: "Boss Clothing",
+    year: "2024",
+    img: bossLogo1,
+    wide: false,
+    discipline: "Branding & Identity",
+    gallery: "boss-clothing",
+    category: "Branding & Identity",
+    description:
+      "A full brand identity system for Boss Clothing — a premium streetwear label. Covers logo design, typographic lockups, and apparel mockups across two distinct colourways. Click to view the complete identity.",
+  },
   {
     id: 31,
     title: "Djago Design & Build Identity",
@@ -1742,6 +1813,12 @@ export function GraphicDesign() {
 
                     if (p.gallery === "djago-design-build") {
                       setLightboxItems(DJAGO_BRANDING_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "boss-clothing") {
+                      setLightboxItems(BOSS_CLOTHING_GALLERY);
                       setLightboxIndex(0);
                       return;
                     }
