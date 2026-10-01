@@ -104,6 +104,9 @@ import bachelorParty1 from "@/imports/Advertising/Bachelor Party/Bachelor Party 
 import bachelorParty2 from "@/imports/Advertising/Bachelor Party/Bachelor Party 2.jpg";
 import bachelorParty3 from "@/imports/Advertising/Bachelor Party/Bachelor Party 3.jpg";
 import bachelorParty4 from "@/imports/Advertising/Bachelor Party/Bachelor Party 4.jpg";
+import adomBaRollup1 from "@/imports/Advertising/Adom Ba Cold Store/Adom Ba Cold Store Rollup 1.jpg";
+import adomBaRollup2 from "@/imports/Advertising/Adom Ba Cold Store/Adom Ba Cold Store Rollup 2.png";
+import adomBaHorizontalBanner from "@/imports/Advertising/Adom Ba Cold Store/Adom Ba Cold Store Horizontal Banner.jpg";
 
 interface DesignProject extends LightboxItem {
   id: number;
@@ -139,6 +142,7 @@ interface DesignProject extends LightboxItem {
   | "djago-design-build"
   | "boss-clothing"
   | "bachelor-party"
+  | "adom-ba-cold-store"
   | "citation-series";
 }
 
@@ -915,7 +919,7 @@ const BACHELOR_PARTY_GALLERY: LightboxItem[] = [
     title: "Bachelor Party — Flyer Design I",
     category: "Advertising & Flyers",
     client: "Bachelor Party Event",
-    year: "2024",
+    year: "2023",
     description: "First in a series of bachelor party event flyers, combining bold typography with a premium celebratory aesthetic.",
   },
   {
@@ -923,7 +927,7 @@ const BACHELOR_PARTY_GALLERY: LightboxItem[] = [
     title: "Bachelor Party — Flyer Design II",
     category: "Advertising & Flyers",
     client: "Bachelor Party Event",
-    year: "2024",
+    year: "2023",
     description: "Second flyer variant for the bachelor party campaign, maintaining visual consistency with dynamic layout energy.",
   },
   {
@@ -931,7 +935,7 @@ const BACHELOR_PARTY_GALLERY: LightboxItem[] = [
     title: "Bachelor Party — Flyer Design III",
     category: "Advertising & Flyers",
     client: "Bachelor Party Event",
-    year: "2024",
+    year: "2023",
     description: "Third design in the bachelor party flyer series, reinforcing the event's brand tone and guest appeal.",
   },
   {
@@ -939,17 +943,57 @@ const BACHELOR_PARTY_GALLERY: LightboxItem[] = [
     title: "Bachelor Party — Flyer Design IV",
     category: "Advertising & Flyers",
     client: "Bachelor Party Event",
-    year: "2024",
+    year: "2023",
     description: "Final flyer design in the bachelor party campaign, completing a cohesive four-piece promotional suite.",
+  },
+];
+
+const ADOM_BA_COLD_STORE_GALLERY: LightboxItem[] = [
+  {
+    img: adomBaHorizontalBanner,
+    title: "Adom Ba Cold Store — Horizontal Storefront Banner",
+    category: "Banners & Signage",
+    client: "Adom Ba Cold Store",
+    year: "2024",
+    description: "Storefront signage and horizontal banner for Adom Ba Cold Store, highlighting wholesale and retail meat, poultry, and fish offerings.",
+  },
+  {
+    img: adomBaRollup1,
+    title: "Adom Ba Cold Store — Roll-Up Display Banner I",
+    category: "Banners & Signage",
+    client: "Adom Ba Cold Store",
+    year: "2024",
+    description: "Promotional roll-up display banner showcasing available cold store products with clear pricing units and contact information.",
+  },
+  {
+    img: adomBaRollup2,
+    title: "Adom Ba Cold Store — Roll-Up Display Banner II",
+    category: "Banners & Signage",
+    client: "Adom Ba Cold Store",
+    year: "2024",
+    description: "Alternate vertical roll-up banner design emphasizing wholesale & retail services with composite product imagery.",
   },
 ];
 
 const PROJECTS: DesignProject[] = [
   {
+    id: 34,
+    title: "Adom Ba Cold Store Signage Suite",
+    client: "Adom Ba Cold Store",
+    year: "2024",
+    img: adomBaHorizontalBanner,
+    wide: true,
+    discipline: "Banners & Signage",
+    gallery: "adom-ba-cold-store",
+    category: "Banners & Signage",
+    description:
+      "A complete commercial signage suite for Adom Ba Cold Store, featuring wide-format storefront fascia banners and vertical roll-up promotional displays. Click to view the full collection.",
+  },
+  {
     id: 33,
     title: "Bachelor Party Campaign",
     client: "Bachelor Party Event",
-    year: "2024",
+    year: "2023",
     img: bachelorParty1,
     wide: false,
     discipline: "Advertising & Flyers",
@@ -1878,6 +1922,12 @@ export function GraphicDesign() {
 
                     if (p.gallery === "bachelor-party") {
                       setLightboxItems(BACHELOR_PARTY_GALLERY);
+                      setLightboxIndex(0);
+                      return;
+                    }
+
+                    if (p.gallery === "adom-ba-cold-store") {
+                      setLightboxItems(ADOM_BA_COLD_STORE_GALLERY);
                       setLightboxIndex(0);
                       return;
                     }
