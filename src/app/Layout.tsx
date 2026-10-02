@@ -252,9 +252,10 @@ export function Layout() {
             onClick={() => setIsInquiriesOpen(true)}
             className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#201d17] hover:bg-[#c8a54a]/20 border border-[#383327] hover:border-[#c8a54a] transition-all"
             style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.08em", color: GOLD, cursor: "pointer" }}
+            title="Studio Management Portal (Restricted)"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c8a54a] animate-pulse" />
-            <span>Studio Inquiries</span>
+            <span>🔒</span>
+            <span>Studio Portal</span>
           </button>
           {/* Social icons with proper gap */}
           <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>

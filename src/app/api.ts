@@ -121,11 +121,34 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   }
 }
 
+export async function verifyStudioPin(pin: string): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const res = await fetch("/api/auth/verify-pin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pin: pin.trim() }),
+    });
+    const json = await readJsonResponse<{ ok?: boolean; error?: string }>(res, {});
+    if (res.ok && json.ok) {
+      return { ok: true };
+    }
+    return { ok: false, error: json.error || "Incorrect Studio PIN. Access restricted." };
+  } catch (err) {
+    return { ok: false, error: "Network error connecting to verification service." };
+  }
+}
+
 export async function getInquiries(adminToken?: string): Promise<InquiryItem[]> {
   const headers: HeadersInit = {};
-  if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+  if (adminToken) {
+    headers.Authorization = `Bearer ${adminToken.trim()}`;
+    headers["x-admin-token"] = adminToken.trim();
+  }
 
   const res = await fetch("/api/inquiries", { headers });
+  if (res.status === 401) {
+    throw new Error("Invalid Studio PIN. Access restricted.");
+  }
   if (!res.ok) throw new Error("Failed to fetch inquiries");
   const json = await readJsonResponse<{ inquiries?: InquiryItem[] }>(res, {});
   return json.inquiries || [];

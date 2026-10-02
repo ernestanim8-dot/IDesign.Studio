@@ -55,14 +55,14 @@ function sendJson(res, statusCode, payload) {
 }
 
 function isAuthorizedAdminRequest(req) {
-  const adminToken = process.env.ADMIN_TOKEN;
-  if (!adminToken) return true;
+  const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070324").trim();
 
   const authHeader = req.headers.authorization || "";
   const bearerToken = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
-  const headerToken = req.headers["x-admin-token"] || "";
+  const headerToken = (req.headers["x-admin-token"] || "").trim();
 
-  return bearerToken === adminToken || headerToken === adminToken;
+  const providedToken = bearerToken || headerToken;
+  return Boolean(providedToken && providedToken === expectedToken);
 }
 
 async function readJsonFile(filePath, fallback = []) {
@@ -506,7 +506,7 @@ async function handleContact(req, res) {
           body: JSON.stringify({
             from: fromAddress,
             to: [notifyAddress],
-            reply_to: savedInquiry.email,
+            reply_to: inquiry.email,
             subject: `✦ New Inquiry [${escapedInquiry.id}]: ${escapedInquiry.fullName} — ${escapedInquiry.interest}`,
             html: studioNotificationHtml,
           }),
@@ -519,7 +519,7 @@ async function handleContact(req, res) {
           },
           body: JSON.stringify({
             from: fromAddress,
-            to: [savedInquiry.email],
+            to: [inquiry.email],
             reply_to: notifyAddress,
             subject: `We received your inquiry — iDESIGN Studio`,
             html: clientConfirmationHtml,
@@ -655,6 +655,24 @@ export async function handleRequest(req, res) {
       timestamp: new Date().toISOString(),
       uptimeSeconds: Math.floor(process.uptime()),
     });
+    return;
+  }
+
+  // PIN Authentication Verification
+  if (matchApi("/api/auth/verify-pin") && req.method === "POST") {
+    try {
+      const body = await readRequestBody(req);
+      const providedPin = cleanString(body.pin || body.token);
+      const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070324").trim();
+
+      if (providedPin && providedPin === expectedToken) {
+        sendJson(res, 200, { ok: true, message: "Studio PIN verified." });
+      } else {
+        sendJson(res, 401, { ok: false, error: "Incorrect Studio PIN. Access restricted." });
+      }
+    } catch (err) {
+      sendJson(res, 400, { ok: false, error: "Invalid request." });
+    }
     return;
   }
 
