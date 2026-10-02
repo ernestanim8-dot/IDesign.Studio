@@ -57,7 +57,6 @@ function sendJson(res, statusCode, payload) {
 function isAuthorizedAdminRequest(req) {
   const allowedPins = new Set([
     "0240070342",
-    "0240070324",
     (process.env.ADMIN_PIN || "").trim(),
     (process.env.ADMIN_TOKEN || "").trim(),
   ].filter(Boolean));
@@ -670,7 +669,6 @@ export async function handleRequest(req, res) {
       const providedPin = cleanString(body.pin || body.token);
       const allowedPins = new Set([
         "0240070342",
-        "0240070324",
         (process.env.ADMIN_PIN || "").trim(),
         (process.env.ADMIN_TOKEN || "").trim(),
       ].filter(Boolean));
