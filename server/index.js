@@ -55,7 +55,7 @@ function sendJson(res, statusCode, payload) {
 }
 
 function isAuthorizedAdminRequest(req) {
-  const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070324").trim();
+  const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070342").trim();
 
   const authHeader = req.headers.authorization || "";
   const bearerToken = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
@@ -663,7 +663,7 @@ export async function handleRequest(req, res) {
     try {
       const body = await readRequestBody(req);
       const providedPin = cleanString(body.pin || body.token);
-      const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070324").trim();
+      const expectedToken = (process.env.ADMIN_PIN || process.env.ADMIN_TOKEN || "0240070342").trim();
 
       if (providedPin && providedPin === expectedToken) {
         sendJson(res, 200, { ok: true, message: "Studio PIN verified." });
