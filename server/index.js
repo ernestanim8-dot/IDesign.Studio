@@ -646,8 +646,15 @@ export async function handleRequest(req, res) {
     return;
   }
 
-  const requestUrl = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+  // On Vercel serverless, req.url is the full original path (e.g. /api/inquiries).
+  // Use req.originalUrl as fallback (Express-like runtimes set this).
+  const rawUrl = req.originalUrl || req.url || "/";
+  // Ensure the URL is absolute so `new URL()` can parse it
+  const base = `http://${req.headers.host || "localhost"}`;
+  const requestUrl = new URL(rawUrl.startsWith("http") ? rawUrl : rawUrl, base);
   const pathname = requestUrl.pathname;
+
+  // matchApi matches both /api/foo and /foo (for Vercel stripped paths)
   const matchApi = (route) => pathname === route || pathname === route.replace(/^\/api/, "");
 
   // Health

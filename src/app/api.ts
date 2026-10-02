@@ -146,11 +146,15 @@ export async function getInquiries(adminToken?: string): Promise<InquiryItem[]> 
   }
 
   const res = await fetch("/api/inquiries", { headers });
+  const json = await readJsonResponse<{ ok?: boolean; inquiries?: InquiryItem[]; errors?: string[]; error?: string }>(res, {});
+
   if (res.status === 401) {
     throw new Error("Invalid Studio PIN. Access restricted.");
   }
-  if (!res.ok) throw new Error("Failed to fetch inquiries");
-  const json = await readJsonResponse<{ inquiries?: InquiryItem[] }>(res, {});
+  if (!res.ok) {
+    const serverMsg = json.errors?.[0] || json.error || `Server error ${res.status}`;
+    throw new Error(serverMsg);
+  }
   return json.inquiries || [];
 }
 
