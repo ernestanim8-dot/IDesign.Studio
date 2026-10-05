@@ -180,8 +180,8 @@ export function Home() {
         setLiveStats([
           { value: `${data.yearsExperience}+`, label: "Years in Business" },
           { value: `${data.projectsCompleted}+`, label: "Projects Completed" },
-          { value: data.clientSatisfaction, label: "Client Satisfaction" },
-          { value: `${data.awardsWon}`, label: "Design Awards" },
+          { value: `${data.happyClients}+`, label: "Happy Clients" },
+          { value: `${data.servicesOffered}`, label: "Services Under One Roof" },
         ]);
       }
     });

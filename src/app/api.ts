@@ -35,10 +35,10 @@ export interface Testimonial {
 
 export interface StudioStats {
   projectsCompleted: number;
+  happyClients: number;
   clientSatisfaction: string;
-  internationalClients: number;
   yearsExperience: number;
-  awardsWon: number;
+  servicesOffered: number;
   activeInquiriesThisWeek: number;
 }
 
@@ -56,12 +56,12 @@ export interface InquiryItem {
 }
 
 const FALLBACK_STATS: StudioStats = {
-  projectsCompleted: 184,
-  clientSatisfaction: "99.4%",
-  internationalClients: 38,
-  yearsExperience: 9,
-  awardsWon: 14,
-  activeInquiriesThisWeek: 12,
+  projectsCompleted: 340,
+  happyClients: 80,
+  clientSatisfaction: "100%",
+  yearsExperience: 4,
+  servicesOffered: 3,
+  activeInquiriesThisWeek: 0,
 };
 
 async function readJsonResponse<T>(res: Response, fallback: T): Promise<T> {
