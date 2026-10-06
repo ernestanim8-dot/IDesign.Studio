@@ -268,13 +268,13 @@ import redVelvet04 from "@/imports/Photography/Portrait/Red Velvet Studio/red-ve
 import redVelvet05 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-05-boot-sole-drama.jpg";
 import redVelvet06 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-06-reclined-chair.jpg";
 
-// Portrait Campaign: Ernest Anim — Studio Portrait Session
-import earnestAnim01 from "@/imports/Ernest Anim/IMG_1292-1.jpg";
-import earnestAnim02 from "@/imports/Ernest Anim/IMG_1295-1.jpg";
-import earnestAnim03 from "@/imports/Ernest Anim/IMG_1298-1.jpg";
-import earnestAnim04 from "@/imports/Ernest Anim/IMG_1300.jpg";
-import earnestAnim05 from "@/imports/Ernest Anim/IMG_1302.jpg";
-import earnestAnim06 from "@/imports/Ernest Anim/IMG_1306.jpg";
+// Portrait Campaign: Ernest Anim — Founder & Creative Director Portrait Session
+import earnestAnim01 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1292-1.jpg";
+import earnestAnim02 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1295-1.jpg";
+import earnestAnim03 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1298-1.jpg";
+import earnestAnim04 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1300.jpg";
+import earnestAnim05 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1302.jpg";
+import earnestAnim06 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1306.jpg";
 
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary"];
 
