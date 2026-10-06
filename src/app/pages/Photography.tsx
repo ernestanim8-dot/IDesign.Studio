@@ -2052,55 +2052,55 @@ const RED_VELVET_STUDIO_GALLERY: LightboxItem[] = [
   },
 ];
 
-/* ─── Gallery: Ernest Anim — Studio Portrait Session ───────────────── */
+/* ─── Gallery: Ernest Anim — iDESIGN Studio Founder ───────────────── */
 const ERNEST_ANIM_GALLERY: LightboxItem[] = [
   {
     img: earnestAnim01,
-    title: "Ernest Anim — Studio Portrait I",
+    title: "The Director — Ernest Anim I",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Clean studio portrait session capturing confident, natural character with controlled studio lighting.",
+    description: "A portrait of the man behind the lens — Ernest Anim, founder of iDESIGN Studio. Controlled studio lighting draws out quiet confidence and creative authority.",
   },
   {
     img: earnestAnim02,
-    title: "Ernest Anim — Studio Portrait II",
+    title: "The Director — Ernest Anim II",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Second studio frame exploring a relaxed yet composed pose with warm directional light.",
+    description: "Second frame from the founder session — relaxed yet commanding, a rare look at the creative force behind the studio.",
   },
   {
     img: earnestAnim03,
-    title: "Ernest Anim — Studio Portrait III",
+    title: "The Director — Ernest Anim III",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Portrait study with softbox fill light balancing natural skin tones and sharp detail.",
+    description: "Softbox-lit portrait study of the studio's creative director — natural skin tones, sharp detail, and an understated strength.",
   },
   {
     img: earnestAnim04,
-    title: "Ernest Anim — Studio Portrait IV",
+    title: "The Director — Ernest Anim IV",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Full studio session frame — confident stance, clean backdrop, and studio-polished finishing.",
+    description: "Full-frame studio portrait of iDESIGN's founder — confident posture, clean backdrop, studio-polished from every angle.",
   },
   {
     img: earnestAnim05,
-    title: "Ernest Anim — Studio Portrait V",
+    title: "The Director — Ernest Anim V",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Mid-length studio portrait bringing out character, posture, and expressive energy.",
+    description: "Mid-length portrait capturing the personality and presence that drives iDESIGN Studio's creative vision.",
   },
   {
     img: earnestAnim06,
-    title: "Ernest Anim — Studio Portrait VI",
+    title: "The Director — Ernest Anim VI",
     category: "Portrait",
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
-    description: "Final portrait frame from the session — composed, sharp, and full of personality.",
+    description: "Final frame of the founder portrait session — composed, sharp, and unmistakably in his element.",
   },
 ];
 
@@ -2320,15 +2320,15 @@ const PHOTOS: PhotoItem[] = [
 
   {
     id: 30,
-    title: "Ernest Anim — Studio Portrait Session",
+    title: "The Director — Ernest Anim, Founder of iDESIGN Studio",
     cat: "Portrait",
     category: "Portrait",
     img: earnestAnim01,
     tall: true,
-    client: "Ernest Anim",
+    client: "iDESIGN Studio — Founder & Creative Director",
     year: "2026",
     description:
-      "A 6-image studio portrait session capturing confident posture, warm directional lighting, and natural character across a clean professional backdrop.",
+      "A 6-image portrait session of Ernest Anim — the founder and creative director behind iDESIGN Studio. Warm studio lighting, clean backdrops, and composed presence that tells the story of the man who built it all.",
     gallery: "ernestanim",
     galleryItems: ERNEST_ANIM_GALLERY,
     galleryCount: 6,
