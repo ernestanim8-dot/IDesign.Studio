@@ -268,6 +268,14 @@ import redVelvet04 from "@/imports/Photography/Portrait/Red Velvet Studio/red-ve
 import redVelvet05 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-05-boot-sole-drama.jpg";
 import redVelvet06 from "@/imports/Photography/Portrait/Red Velvet Studio/red-velvet-06-reclined-chair.jpg";
 
+// Portrait Campaign: Ernest Anim — Studio Portrait Session
+import earnestAnim01 from "@/imports/Ernest Anim/IMG_1292-1.jpg";
+import earnestAnim02 from "@/imports/Ernest Anim/IMG_1295-1.jpg";
+import earnestAnim03 from "@/imports/Ernest Anim/IMG_1298-1.jpg";
+import earnestAnim04 from "@/imports/Ernest Anim/IMG_1300.jpg";
+import earnestAnim05 from "@/imports/Ernest Anim/IMG_1302.jpg";
+import earnestAnim06 from "@/imports/Ernest Anim/IMG_1306.jpg";
+
 const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
@@ -2044,6 +2052,58 @@ const RED_VELVET_STUDIO_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery: Ernest Anim — Studio Portrait Session ───────────────── */
+const ERNEST_ANIM_GALLERY: LightboxItem[] = [
+  {
+    img: earnestAnim01,
+    title: "Ernest Anim — Studio Portrait I",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Clean studio portrait session capturing confident, natural character with controlled studio lighting.",
+  },
+  {
+    img: earnestAnim02,
+    title: "Ernest Anim — Studio Portrait II",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Second studio frame exploring a relaxed yet composed pose with warm directional light.",
+  },
+  {
+    img: earnestAnim03,
+    title: "Ernest Anim — Studio Portrait III",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Portrait study with softbox fill light balancing natural skin tones and sharp detail.",
+  },
+  {
+    img: earnestAnim04,
+    title: "Ernest Anim — Studio Portrait IV",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Full studio session frame — confident stance, clean backdrop, and studio-polished finishing.",
+  },
+  {
+    img: earnestAnim05,
+    title: "Ernest Anim — Studio Portrait V",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Mid-length studio portrait bringing out character, posture, and expressive energy.",
+  },
+  {
+    img: earnestAnim06,
+    title: "Ernest Anim — Studio Portrait VI",
+    category: "Portrait",
+    client: "Ernest Anim",
+    year: "2026",
+    description: "Final portrait frame from the session — composed, sharp, and full of personality.",
+  },
+];
+
 interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
@@ -2256,6 +2316,22 @@ const PHOTOS: PhotoItem[] = [
     gallery: "urbanchic",
     galleryItems: URBAN_CHIC_SISTERHOOD_GALLERY,
     galleryCount: 10,
+  },
+
+  {
+    id: 30,
+    title: "Ernest Anim — Studio Portrait Session",
+    cat: "Portrait",
+    category: "Portrait",
+    img: earnestAnim01,
+    tall: true,
+    client: "Ernest Anim",
+    year: "2026",
+    description:
+      "A 6-image studio portrait session capturing confident posture, warm directional lighting, and natural character across a clean professional backdrop.",
+    gallery: "ernestanim",
+    galleryItems: ERNEST_ANIM_GALLERY,
+    galleryCount: 6,
   },
 
   /* ── Grouped Campaigns: Event ─────────────────────── */
