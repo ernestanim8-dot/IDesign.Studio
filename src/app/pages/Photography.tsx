@@ -119,6 +119,18 @@ import gradImg08 from "@/imports/Photography/Events/graduation/IMG_5606.jpg";
 import gradImg09 from "@/imports/Photography/Events/graduation/IMG_5630.jpg";
 import gradImg10 from "@/imports/Photography/Events/graduation/IMG_5643.jpg";
 
+// Event Campaign: Abetifi Presbyterian College of Education — Class of 2024
+import abetifi01 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5236.jpg";
+import abetifi02 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5240.jpg";
+import abetifi03 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5283.jpg";
+import abetifi04 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5300.jpg";
+import abetifi05 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5340.jpg";
+import abetifi06 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5494.jpg";
+import abetifi07 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5500.jpg";
+import abetifi08 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5539.jpg";
+import abetifi09 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5544.jpg";
+import abetifi10 from "@/imports/Photography/Events/Abetifi College Graduation 2024/IMG_5557.jpg";
+
 // Event Campaign: The Graduate — GCTU Class of 2025
 import gctu01 from "@/imports/Photography/Events/graduation-2025/gctu-2025-01-family-pride.jpg";
 import gctu02 from "@/imports/Photography/Events/graduation-2025/gctu-2025-02-cap-and-scroll.jpg";
@@ -1387,6 +1399,90 @@ const GRADUATION_GALLERY: LightboxItem[] = [
   },
 ];
 
+/* ─── Gallery: Abetifi Presbyterian College of Education — Class of 2024 ─── */
+const ABETIFI_GRADUATION_2024_GALLERY: LightboxItem[] = [
+  {
+    img: abetifi01,
+    title: "Abetifi 2024 — Joyful Graduate",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Ernestina Anim celebrating her Bachelor of Education degree in vibrant floral couture and Aseda Nkoaa kente sash, flashing a celebratory peace sign.",
+  },
+  {
+    img: abetifi02,
+    title: "Abetifi 2024 — Tossing the Mortarboard",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Christopher Kankam and Ernest Anim lifting their graduation caps in jubilant celebration, adorned with their prestigious honors medals.",
+  },
+  {
+    img: abetifi03,
+    title: "Abetifi 2024 — Aseda Nkoaa",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Radiant commemorative portrait of Ernestina Anim holding her official Abetifi Presbyterian College of Education certificate folder in full academic regalia.",
+  },
+  {
+    img: abetifi04,
+    title: "Abetifi 2024 — Family Honor & Pride",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "A proud milestone moment with family by her side, honoring years of sacrifice, discipline, and academic triumph.",
+  },
+  {
+    img: abetifi05,
+    title: "Abetifi 2024 — Commencement Gathering",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Family celebration outdoors on the college grounds, capturing warm smiles and shared joy under the sun.",
+  },
+  {
+    img: abetifi06,
+    title: "Abetifi 2024 — Evening Honors Portrait",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Dramatic evening portrait of Ernestina Anim wearing her honors medal, bathed in soft directional light with lush greenery bokeh.",
+  },
+  {
+    img: abetifi07,
+    title: "Abetifi 2024 — Evening Radiance",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Close-up celebratory portrait capturing infectious happiness and festive elegance at the post-commencement dinner.",
+  },
+  {
+    img: abetifi08,
+    title: "Abetifi 2024 — Honors Gala Celebration",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Dinner gala gathering commemorating graduation day excellence with friends, fellow scholars, and colleagues.",
+  },
+  {
+    img: abetifi09,
+    title: "Abetifi 2024 — Scholars at the Table",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Ernest Anim and friends gathered together at the evening celebration dinner, reflecting on the milestone journey.",
+  },
+  {
+    img: abetifi10,
+    title: "Abetifi 2024 — First Class Distinction",
+    category: "Event",
+    client: "Abetifi College of Education — Commencement 2024",
+    year: "2024",
+    description: "Ernest Anim, colleague, and Ernestina Anim united with their First Class and Second Class Upper honors ribbons in an iconic closing portrait.",
+  },
+];
+
 /* ─── Gallery: GCTU Class of 2025 — Commencement Ceremony ──────────── */
 const GCTU_2025_GALLERY: LightboxItem[] = [
   {
@@ -2319,7 +2415,7 @@ const PHOTOS: PhotoItem[] = [
   },
 
   {
-    id: 30,
+    id: 33,
     title: "The Director — Ernest Anim, Founder of iDESIGN Studio",
     cat: "Portrait",
     category: "Portrait",
@@ -2363,6 +2459,21 @@ const PHOTOS: PhotoItem[] = [
       "A 10-image celebratory event editorial documenting commencement honors, academic regalia, triumphant smiles, and milestone accomplishments.",
     gallery: "graduation",
     galleryItems: GRADUATION_GALLERY,
+    galleryCount: 10,
+  },
+  {
+    id: 34,
+    title: "Abetifi College of Education — Class of 2024 Commencement & Honors",
+    cat: "Event",
+    category: "Event",
+    img: abetifi03,
+    tall: true,
+    client: "Abetifi College of Education",
+    year: "2024",
+    description:
+      "A 10-image commencement and gala editorial celebrating the Class of 2024 — academic regalia, Aseda Nkoaa kente stoles, cap tossing triumphs, family pride, and First Class honors dinner portraits.",
+    gallery: "abetifi-2024",
+    galleryItems: ABETIFI_GRADUATION_2024_GALLERY,
     galleryCount: 10,
   },
   {
