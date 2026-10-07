@@ -84,10 +84,15 @@ setInterval(() => {
   }
 }, 10 * 60 * 1000).unref?.();
 
+// Determine allowed origin: prefer explicit CORS_ORIGIN env var;
+// otherwise allow same-origin only in production, or * in local dev.
+const corsOrigin = process.env.CORS_ORIGIN ||
+  (process.env.NODE_ENV === "production" ? "https://idesign.studio" : "*");
+
 function sendJson(res, statusCode, payload) {
   res.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
-    "Access-Control-Allow-Origin": process.env.CORS_ORIGIN || "*",
+    "Access-Control-Allow-Origin": corsOrigin,
     "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,Authorization,x-admin-token",
     "X-Content-Type-Options": "nosniff",
@@ -101,12 +106,10 @@ function isAuthorizedAdminRequest(req) {
   const configuredPin = (process.env.ADMIN_PIN || "").trim();
   const configuredToken = (process.env.ADMIN_TOKEN || "").trim();
 
-  // If environment secrets are configured, ONLY accept them. Fallback to default PIN in local dev only.
-  const allowedPins = new Set([
-    configuredPin,
-    configuredToken,
-    (!configuredPin && !configuredToken ? "0240070342" : ""),
-  ].filter(Boolean));
+  // Only accept credentials that are explicitly set via environment variables.
+  // No hardcoded fallback — if neither env var is set, ALL admin requests are rejected.
+  const allowedPins = new Set([configuredPin, configuredToken].filter(Boolean));
+  if (allowedPins.size === 0) return false;
 
   const authHeader = req.headers.authorization || "";
   const bearerToken = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
@@ -831,13 +834,12 @@ export async function handleRequest(req, res) {
       const configuredPin = (process.env.ADMIN_PIN || "").trim();
       const configuredToken = (process.env.ADMIN_TOKEN || "").trim();
 
-      const allowedPins = new Set([
-        configuredPin,
-        configuredToken,
-        (!configuredPin && !configuredToken ? "0240070342" : ""),
-      ].filter(Boolean));
+      // Only accept env-configured credentials — no hardcoded fallback.
+      const allowedPins = new Set([configuredPin, configuredToken].filter(Boolean));
 
-      if (providedPin && allowedPins.has(providedPin)) {
+      if (allowedPins.size === 0) {
+        sendJson(res, 503, { ok: false, error: "Studio PIN is not configured. Set ADMIN_PIN in environment variables." });
+      } else if (providedPin && allowedPins.has(providedPin)) {
         sendJson(res, 200, { ok: true, message: "Studio PIN verified." });
       } else {
         sendJson(res, 401, { ok: false, error: "Incorrect Studio PIN. Access restricted." });

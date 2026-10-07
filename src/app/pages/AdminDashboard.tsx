@@ -5,18 +5,29 @@ import {
   deleteInquiry,
   getStats,
   updateStats,
+  getTestimonials,
   verifyStudioPin,
   type InquiryItem,
   type StudioStats,
+  type Testimonial,
 } from "../api";
 
 const statuses = ["New", "Contacted", "Qualified", "Booked", "Closed"];
+
+const BLANK_REVIEW = {
+  name: "",
+  role: "",
+  company: "",
+  quote: "",
+  rating: 5,
+  project: "",
+};
 
 export function AdminDashboard() {
   const [pin, setPin] = useState("");
   const [savedPin, setSavedPin] = useState(() => window.localStorage.getItem("idesign-admin-pin") || "");
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const [activeTab, setActiveTab] = useState<"inquiries" | "stats">("inquiries");
+  const [activeTab, setActiveTab] = useState<"inquiries" | "stats" | "testimonials">("inquiries");
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
@@ -37,6 +48,12 @@ export function AdminDashboard() {
   });
   const [statsLoading, setStatsLoading] = useState(false);
   const [statsSuccess, setStatsSuccess] = useState("");
+
+  // Testimonials State
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(false);
+  const [newReview, setNewReview] = useState(BLANK_REVIEW);
+  const [reviewSuccess, setReviewSuccess] = useState("");
 
   const attemptUnlock = async (candidatePin: string, isManual: boolean = true) => {
     const trimmed = candidatePin.trim();
@@ -93,11 +110,29 @@ export function AdminDashboard() {
     }
   };
 
+  const loadTestimonials = async () => {
+    setTestimonialsLoading(true);
+    try {
+      const list = await getTestimonials();
+      setTestimonials(list);
+    } catch (err) {
+      console.warn("Failed to load testimonials:", err);
+    } finally {
+      setTestimonialsLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (savedPin) {
       attemptUnlock(savedPin, false);
     }
   }, []);
+
+  useEffect(() => {
+    if (isUnlocked && activeTab === "testimonials" && testimonials.length === 0) {
+      loadTestimonials();
+    }
+  }, [isUnlocked, activeTab]);
 
   const handleLock = () => {
     window.localStorage.removeItem("idesign-admin-pin");
@@ -149,6 +184,34 @@ export function AdminDashboard() {
       setError(err instanceof Error ? err.message : "Error saving stats.");
     } finally {
       setStatsLoading(false);
+    }
+  };
+
+  const handleAddReview = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newReview.name.trim() || !newReview.quote.trim()) {
+      setError("Client name and review quote are required.");
+      return;
+    }
+    setError("");
+    setReviewSuccess("");
+    try {
+      const res = await fetch("/api/testimonials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newReview),
+      });
+      const json = await res.json();
+      if (res.ok && json.ok) {
+        setTestimonials((prev) => [json.testimonial, ...prev]);
+        setNewReview(BLANK_REVIEW);
+        setReviewSuccess("Review published successfully!");
+        setTimeout(() => setReviewSuccess(""), 3500);
+      } else {
+        setError(json.errors?.[0] || "Failed to publish review.");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Network error.");
     }
   };
 
@@ -267,6 +330,16 @@ export function AdminDashboard() {
             }`}
           >
             Live Studio Metrics
+          </button>
+          <button
+            onClick={() => setActiveTab("testimonials")}
+            className={`pb-3 text-xs uppercase tracking-widest font-mono font-semibold transition-all border-b-2 cursor-pointer ${
+              activeTab === "testimonials"
+                ? "border-[#c8a54a] text-[#c8a54a]"
+                : "border-transparent text-neutral-400 hover:text-white"
+            }`}
+          >
+            Client Reviews ({testimonials.length})
           </button>
         </div>
 
@@ -431,7 +504,7 @@ export function AdminDashboard() {
               )}
             </section>
           </>
-        ) : (
+        ) : activeTab === "stats" ? (
           /* Live Studio Metrics Tab */
           <div className="bg-[#14120e] border border-[#2e2920] rounded-2xl p-6 sm:p-8">
             <div className="mb-6">
@@ -476,7 +549,7 @@ export function AdminDashboard() {
                     }
                     className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
                   />
-                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 80+ corporate & portrait clients</p>
+                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 80+ corporate &amp; portrait clients</p>
                 </div>
 
                 <div>
@@ -539,7 +612,117 @@ export function AdminDashboard() {
               </div>
             </form>
           </div>
-        )}
+        ) : activeTab === "testimonials" ? (
+          /* Client Reviews Management Tab */
+          <div className="space-y-8">
+            {/* Add New Review Form */}
+            <div className="bg-[#14120e] border border-[#2e2920] rounded-2xl p-6 sm:p-8">
+              <h2 className="text-xl font-serif text-white mb-1">Publish Client Review</h2>
+              <p className="text-xs text-neutral-400 mb-6">Add a new testimonial that will appear on the website immediately.</p>
+
+              {reviewSuccess && (
+                <div className="mb-6 p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs">
+                  ✓ {reviewSuccess}
+                </div>
+              )}
+
+              <form onSubmit={handleAddReview} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-1.5">Client Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={newReview.name}
+                      onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
+                      placeholder="e.g. Elizabeth Mensah"
+                      className="w-full text-sm px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white placeholder:text-neutral-600 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-1.5">Role / Title</label>
+                    <input
+                      type="text"
+                      value={newReview.role}
+                      onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
+                      placeholder="e.g. Fashion Designer"
+                      className="w-full text-sm px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white placeholder:text-neutral-600 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-1.5">Company / Context</label>
+                    <input
+                      type="text"
+                      value={newReview.company}
+                      onChange={(e) => setNewReview({ ...newReview, company: e.target.value })}
+                      placeholder="e.g. Portrait Session 2025"
+                      className="w-full text-sm px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white placeholder:text-neutral-600 outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-1.5">Rating (1–5)</label>
+                    <select
+                      value={newReview.rating}
+                      onChange={(e) => setNewReview({ ...newReview, rating: Number(e.target.value) })}
+                      className="w-full text-sm px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                    >
+                      {[5, 4, 3, 2, 1].map((r) => (
+                        <option key={r} value={r}>{"★".repeat(r)} ({r}/5)</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-1.5">Review Quote *</label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={newReview.quote}
+                    onChange={(e) => setNewReview({ ...newReview, quote: e.target.value })}
+                    placeholder="Type the client's words exactly as they said or wrote them..."
+                    className="w-full text-sm px-4 py-3 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white placeholder:text-neutral-600 outline-none resize-none leading-relaxed"
+                  />
+                </div>
+                <div className="pt-2 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 rounded-xl bg-[#c8a54a] hover:bg-[#d6b55e] text-black font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer"
+                  >
+                    Publish Review
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Existing Reviews */}
+            <div>
+              <h3 className="text-sm font-mono uppercase tracking-widest text-neutral-400 mb-4">
+                {testimonialsLoading ? "Loading reviews..." : `${testimonials.length} Published Review${testimonials.length !== 1 ? "s" : ""}`}
+              </h3>
+              <div className="space-y-3">
+                {testimonials.map((t) => (
+                  <div
+                    key={t.id}
+                    className="bg-[#14120e] border border-[#2e2920] rounded-xl p-5 flex gap-4 items-start"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[#c8a54a] text-xs">{"★".repeat(Math.round(t.rating))}</span>
+                        <span className="text-xs font-mono text-neutral-500">{t.date}</span>
+                      </div>
+                      <p className="text-sm text-white font-semibold">{t.name}</p>
+                      <p className="text-xs text-neutral-400">{t.role}{t.company ? ` · ${t.company}` : ""}</p>
+                      <p className="text-sm text-neutral-300 mt-2 leading-relaxed line-clamp-3">&ldquo;{t.quote}&rdquo;</p>
+                    </div>
+                  </div>
+                ))}
+                {!testimonialsLoading && testimonials.length === 0 && (
+                  <p className="text-neutral-500 text-sm py-6 text-center">No reviews published yet.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
