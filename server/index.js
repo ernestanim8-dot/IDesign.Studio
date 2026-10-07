@@ -44,21 +44,68 @@ const contentTypes = {
   ".woff2": "font/woff2",
 };
 
+// In-Memory Rate Limiting
+const rateLimitMap = new Map();
+
+function getClientIp(req) {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.trim()) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.socket?.remoteAddress || "127.0.0.1";
+}
+
+function checkRateLimit(ip, endpointKey, maxRequests, windowMs) {
+  const key = `${endpointKey}:${ip}`;
+  const now = Date.now();
+  const record = rateLimitMap.get(key);
+
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(key, { count: 1, resetTime: now + windowMs });
+    return { allowed: true };
+  }
+
+  if (record.count >= maxRequests) {
+    const retryAfter = Math.ceil((record.resetTime - now) / 1000);
+    return { allowed: false, retryAfter };
+  }
+
+  record.count += 1;
+  return { allowed: true };
+}
+
+// Clean up stale rate-limit records every 10 minutes to avoid memory accumulation
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, record] of rateLimitMap.entries()) {
+    if (now > record.resetTime) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, 10 * 60 * 1000).unref?.();
+
 function sendJson(res, statusCode, payload) {
   res.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": process.env.CORS_ORIGIN || "*",
     "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type,Authorization",
+    "Access-Control-Allow-Headers": "Content-Type,Authorization,x-admin-token",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
   });
   res.end(JSON.stringify(payload));
 }
 
 function isAuthorizedAdminRequest(req) {
+  const configuredPin = (process.env.ADMIN_PIN || "").trim();
+  const configuredToken = (process.env.ADMIN_TOKEN || "").trim();
+
+  // If environment secrets are configured, ONLY accept them. Fallback to default PIN in local dev only.
   const allowedPins = new Set([
-    "0240070342",
-    (process.env.ADMIN_PIN || "").trim(),
-    (process.env.ADMIN_TOKEN || "").trim(),
+    configuredPin,
+    configuredToken,
+    (!configuredPin && !configuredToken ? "0240070342" : ""),
   ].filter(Boolean));
 
   const authHeader = req.headers.authorization || "";
@@ -289,6 +336,16 @@ async function deleteInquiry(id) {
 // Handler: Inquiries / Contact
 async function handleContact(req, res) {
   try {
+    const clientIp = getClientIp(req);
+    const limit = checkRateLimit(clientIp, "contact", 5, 10 * 60 * 1000);
+    if (!limit.allowed) {
+      sendJson(res, 429, {
+        ok: false,
+        errors: [`Too many inquiries submitted from your IP. Please try again in ${Math.ceil(limit.retryAfter / 60)} minutes.`],
+      });
+      return;
+    }
+
     const body = await readRequestBody(req);
     const fullName = cleanString(body.fullName);
     const email = cleanString(body.email).toLowerCase();
@@ -694,10 +751,10 @@ async function handleProjectCreate(req, res) {
 
 // Static Fallback Server
 async function serveStatic(req, res) {
-  const requestUrl = new URL(req.url || "/", `http://${req.headers.host}`);
+  const requestUrl = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   const pathname = decodeURIComponent(requestUrl.pathname);
-  const requestedPath = path.normalize(path.join(distDir, pathname));
-  const isInsideDist = requestedPath.startsWith(distDir);
+  const requestedPath = path.resolve(distDir, "." + pathname);
+  const isInsideDist = requestedPath.startsWith(distDir + path.sep) || requestedPath === distDir;
   const fallbackPath = path.join(distDir, "index.html");
 
   let filePath = isInsideDist ? requestedPath : fallbackPath;
@@ -714,7 +771,12 @@ async function serveStatic(req, res) {
   try {
     const file = await readFile(filePath);
     const ext = path.extname(filePath);
-    res.writeHead(200, { "Content-Type": contentTypes[ext] || "application/octet-stream" });
+    res.writeHead(200, {
+      "Content-Type": contentTypes[ext] || "application/octet-stream",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    });
     res.end(file);
   } catch {
     sendJson(res, 404, { ok: false, errors: ["Frontend build not found. Run npm run build first."] });
@@ -751,15 +813,28 @@ export async function handleRequest(req, res) {
     return;
   }
 
-  // PIN Authentication Verification
+  // PIN Authentication Verification with brute-force rate limiting
   if (matchApi("/api/auth/verify-pin") && req.method === "POST") {
+    const clientIp = getClientIp(req);
+    const limit = checkRateLimit(clientIp, "verify-pin", 5, 15 * 60 * 1000);
+    if (!limit.allowed) {
+      sendJson(res, 429, {
+        ok: false,
+        error: `Too many PIN attempts. Please wait ${limit.retryAfter} seconds before trying again.`,
+      });
+      return;
+    }
+
     try {
       const body = await readRequestBody(req);
       const providedPin = cleanString(body.pin || body.token);
+      const configuredPin = (process.env.ADMIN_PIN || "").trim();
+      const configuredToken = (process.env.ADMIN_TOKEN || "").trim();
+
       const allowedPins = new Set([
-        "0240070342",
-        (process.env.ADMIN_PIN || "").trim(),
-        (process.env.ADMIN_TOKEN || "").trim(),
+        configuredPin,
+        configuredToken,
+        (!configuredPin && !configuredToken ? "0240070342" : ""),
       ].filter(Boolean));
 
       if (providedPin && allowedPins.has(providedPin)) {
