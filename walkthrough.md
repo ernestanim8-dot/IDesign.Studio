@@ -61,6 +61,7 @@ graph TD
    - `GET & POST /api/testimonials`: Verified reviews and review submissions.
 
 ### B. Interactive Digital Portfolio Builder (`/builder`)
+
 - **Visual Creator Persona**: Edit Name, Title, Bio, Location, Email, and Social Handles.
 - **Theme Architecture**: Choose between 4 curated luxury themes:
   - *Obsidian & Gold* (`#0d0c09` / `#c8a54a`)
@@ -76,16 +77,19 @@ graph TD
   - **Reset Sample** button resets to a pre-filled luxury demo.
 
 ### C. Studio Inquiries Live Drawer (`src/app/components/InquiriesDrawer.tsx`)
+
 - Discreet **"Studio Inquiries"** trigger in the header and footer.
 - Real-time slide-out drawer reading directly from `/api/inquiries`.
 - Inbound inquiries display client name, email, WhatsApp quick link, interest tier, timeline, and message content.
 
 ### D. Luxury Frontend UI/UX Design System
+
 - **Design Tokens (`src/tokens.ts`)**: Editorial Obsidian `#0d0c09`, Warm Sand `#faf8f4`, Artisanal Gold `#c8a54a`, and glassmorphic elevated panels.
 - **Interactive Home Page**: Connected live to `/api/stats` and featuring a dedicated **Digital Portfolio Builder** studio showcase section with call-to-actions.
 - **Toast Notifications (`src/app/components/Toast.tsx`)**: Non-intrusive floating feedback when items are saved, copied, or submitted.
 
 ### E. Upgraded Studio Control Center & Notification Engine
+
 - **Admin Dashboard (`/admin`)**:
   - Tabbed interface separating **Client Inquiries** from **Live Studio Performance Metrics**.
   - Inquiries search bar filtering across name, email, phone, interest, and message content.
@@ -109,7 +113,9 @@ graph TD
 ## 3. Verification & Validation Results
 
 ### Backend API Testing
+
 All endpoints were tested and verified against the running server at `http://127.0.0.1:8787`:
+
 - `GET /api/health` -> `HTTP 200` (`{"ok":true,"service":"idesign-api","version":"2.0.0"}`)
 - `GET /api/stats` -> `HTTP 200` (`{"projectsCompleted":340,"clientSatisfaction":"100%"}`)
 - `POST /api/stats` -> `HTTP 200` (Successfully updated live studio metrics)
@@ -120,6 +126,7 @@ All endpoints were tested and verified against the running server at `http://127
 - `DELETE /api/inquiries/:id` -> `HTTP 200` (Inquiry deleted successfully)
 
 ### Frontend Production Build
+
 - Executed `npm run build`:
   - Transformed 869 modules.
   - Bundled PWA Service Worker (`dist/sw.js`).
