@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { getInquiries, updateInquiryStatus, verifyStudioPin, type InquiryItem } from "../api";
+import {
+  getInquiries,
+  updateInquiryStatus,
+  deleteInquiry,
+  getStats,
+  updateStats,
+  verifyStudioPin,
+  type InquiryItem,
+  type StudioStats,
+} from "../api";
 
 const statuses = ["New", "Contacted", "Qualified", "Booked", "Closed"];
 
@@ -7,11 +16,27 @@ export function AdminDashboard() {
   const [pin, setPin] = useState("");
   const [savedPin, setSavedPin] = useState(() => window.localStorage.getItem("idesign-admin-pin") || "");
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const [activeTab, setActiveTab] = useState<"inquiries" | "stats">("inquiries");
+
+  // Inquiries State
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
   const [statusFilter, setStatusFilter] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [pinError, setPinError] = useState("");
+
+  // Stats State
+  const [stats, setStats] = useState<StudioStats>({
+    projectsCompleted: 340,
+    happyClients: 80,
+    clientSatisfaction: "100%",
+    yearsExperience: 4,
+    servicesOffered: 4,
+    activeInquiriesThisWeek: 0,
+  });
+  const [statsLoading, setStatsLoading] = useState(false);
+  const [statsSuccess, setStatsSuccess] = useState("");
 
   const attemptUnlock = async (candidatePin: string, isManual: boolean = true) => {
     const trimmed = candidatePin.trim();
@@ -28,6 +53,7 @@ export function AdminDashboard() {
         setSavedPin(trimmed);
         setIsUnlocked(true);
         loadInquiries(trimmed);
+        loadStudioStats();
       } else {
         setIsUnlocked(false);
         if (isManual) {
@@ -58,6 +84,15 @@ export function AdminDashboard() {
     }
   };
 
+  const loadStudioStats = async () => {
+    try {
+      const data = await getStats();
+      setStats(data);
+    } catch (err) {
+      console.warn("Failed to load initial studio stats:", err);
+    }
+  };
+
   useEffect(() => {
     if (savedPin) {
       attemptUnlock(savedPin, false);
@@ -84,10 +119,53 @@ export function AdminDashboard() {
     );
   };
 
-  const visible = useMemo(
-    () => inquiries.filter((inquiry) => statusFilter === "All" || inquiry.status === statusFilter),
-    [inquiries, statusFilter]
-  );
+  const handleDeleteInquiry = async (id: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to permanently delete the inquiry from ${name}?`)) {
+      return;
+    }
+    const res = await deleteInquiry(id, savedPin);
+    if (res.ok) {
+      setInquiries((current) => current.filter((item) => item.id !== id));
+    } else {
+      setError(res.errors?.[0] || "Failed to delete inquiry.");
+    }
+  };
+
+  const handleSaveStats = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatsLoading(true);
+    setStatsSuccess("");
+    setError("");
+    try {
+      const res = await updateStats(stats, savedPin);
+      if (res.ok && res.stats) {
+        setStats(res.stats);
+        setStatsSuccess("Studio metrics updated and live on website!");
+        setTimeout(() => setStatsSuccess(""), 4000);
+      } else {
+        setError(res.error || "Failed to update stats.");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error saving stats.");
+    } finally {
+      setStatsLoading(false);
+    }
+  };
+
+  const visible = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return inquiries.filter((inquiry) => {
+      const matchesStatus = statusFilter === "All" || inquiry.status === statusFilter;
+      const matchesSearch =
+        !q ||
+        inquiry.fullName.toLowerCase().includes(q) ||
+        inquiry.email.toLowerCase().includes(q) ||
+        (inquiry.phone && inquiry.phone.toLowerCase().includes(q)) ||
+        inquiry.interest.toLowerCase().includes(q) ||
+        inquiry.message.toLowerCase().includes(q);
+      return matchesStatus && matchesSearch;
+    });
+  }, [inquiries, statusFilter, searchQuery]);
 
   if (!isUnlocked) {
     return (
@@ -130,7 +208,7 @@ export function AdminDashboard() {
             <button
               type="submit"
               disabled={loading || !pin.trim()}
-              className="w-full py-3 rounded-xl bg-[#c8a54a] hover:bg-[#d6b55e] disabled:opacity-50 text-black font-semibold text-xs uppercase tracking-widest transition-all"
+              className="w-full py-3 rounded-xl bg-[#c8a54a] hover:bg-[#d6b55e] disabled:opacity-50 text-black font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer"
             >
               {loading ? "Authenticating..." : "Unlock Studio Dashboard"}
             </button>
@@ -146,102 +224,322 @@ export function AdminDashboard() {
         <header className="admin-header">
           <div>
             <p>Studio Operations</p>
-            <h1>Client inquiries</h1>
+            <h1>iDESIGN Control Center</h1>
           </div>
           <div className="admin-auth flex items-center gap-3">
-            <button onClick={() => loadInquiries(savedPin)} disabled={loading}>
-              {loading ? "Loading..." : "↻ Refresh"}
+            <button
+              onClick={() => {
+                loadInquiries(savedPin);
+                loadStudioStats();
+              }}
+              disabled={loading}
+              className="cursor-pointer"
+            >
+              {loading ? "Refreshing..." : "↻ Refresh"}
             </button>
             <button
               onClick={handleLock}
-              className="bg-red-950/40 border-red-800/60 text-red-300 hover:bg-red-900/50"
+              className="bg-red-950/40 border-red-800/60 text-red-300 hover:bg-red-900/50 cursor-pointer"
             >
               🔒 Lock
             </button>
           </div>
         </header>
 
-        <div className="admin-metrics">
-          {statuses.slice(0, 4).map((status) => (
-            <div key={status}>
-              <span>{status}</span>
-              <strong>{inquiries.filter((item) => item.status === status).length}</strong>
-            </div>
-          ))}
-        </div>
-
-        <div className="admin-toolbar">
-          <span>{inquiries.length} total leads</span>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            aria-label="Filter status"
+        {/* Tab Switcher */}
+        <div className="flex border-b border-[#2e2920] mb-6 gap-3">
+          <button
+            onClick={() => setActiveTab("inquiries")}
+            className={`pb-3 text-xs uppercase tracking-widest font-mono font-semibold transition-all border-b-2 cursor-pointer ${
+              activeTab === "inquiries"
+                ? "border-[#c8a54a] text-[#c8a54a]"
+                : "border-transparent text-neutral-400 hover:text-white"
+            }`}
           >
-            <option>All</option>
-            {statuses.map((status) => (
-              <option key={status}>{status}</option>
-            ))}
-          </select>
+            Client Inquiries ({inquiries.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("stats")}
+            className={`pb-3 text-xs uppercase tracking-widest font-mono font-semibold transition-all border-b-2 cursor-pointer ${
+              activeTab === "stats"
+                ? "border-[#c8a54a] text-[#c8a54a]"
+                : "border-transparent text-neutral-400 hover:text-white"
+            }`}
+          >
+            Live Studio Metrics
+          </button>
         </div>
 
-        {error && <p className="admin-error">{error}</p>}
+        {error && <p className="admin-error mb-4">{error}</p>}
 
-        <section className="inquiry-list">
-          {visible.map((inquiry) => {
-            const cleanPhone = inquiry.phone ? inquiry.phone.replace(/\D/g, "") : "";
-            const whatsappText = encodeURIComponent(
-              `Hi ${inquiry.fullName}, thank you for contacting iDESIGN Studio about ${inquiry.interest}. I would love to hear a little more about your project.`
-            );
-
-            return (
-              <article key={inquiry.id} className="inquiry-card">
-                <div>
-                  <p className="inquiry-date">
-                    {new Date(inquiry.createdAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                  <h2>{inquiry.fullName}</h2>
-                  <p className="inquiry-meta">
-                    {inquiry.interest} · {inquiry.timeline} · {inquiry.budget || "Budget flexible"}
-                  </p>
-                  <p className="inquiry-message">{inquiry.message}</p>
-                  <div className="inquiry-links">
-                    <a href={`mailto:${inquiry.email}`}>Email Client</a>
-                    {cleanPhone && (
-                      <a
-                        href={`https://wa.me/${cleanPhone}?text=${whatsappText}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-emerald-400"
-                      >
-                        WhatsApp
-                      </a>
-                    )}
+        {activeTab === "inquiries" ? (
+          <>
+            {/* Status Metrics Cards */}
+            <div className="admin-metrics">
+              {statuses.map((status) => {
+                const count = inquiries.filter((item) => item.status === status).length;
+                return (
+                  <div
+                    key={status}
+                    onClick={() => setStatusFilter(status === statusFilter ? "All" : status)}
+                    className={`cursor-pointer transition-all ${
+                      statusFilter === status ? "ring-1 ring-[#c8a54a] bg-[#1a1814]" : ""
+                    }`}
+                  >
+                    <span>{status}</span>
+                    <strong>{count}</strong>
                   </div>
-                </div>
+                );
+              })}
+            </div>
 
+            {/* Inquiries Toolbar */}
+            <div className="admin-toolbar flex flex-wrap items-center justify-between gap-4 mt-6">
+              <div className="flex items-center gap-3 flex-1 min-w-[260px]">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search client, email, service..."
+                  className="w-full text-xs px-3 py-2 rounded-lg bg-[#14120e] border border-[#2e2920] focus:border-[#c8a54a] text-white placeholder:text-neutral-500 outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="text-xs text-neutral-400 hover:text-white px-2 cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-neutral-400">
+                  {visible.length} of {inquiries.length} leads
+                </span>
                 <select
-                  value={inquiry.status}
-                  onChange={(e) => setStatus(inquiry, e.target.value)}
-                  aria-label={`Set status for ${inquiry.fullName}`}
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  aria-label="Filter status"
                 >
+                  <option value="All">All Statuses</option>
                   {statuses.map((status) => (
-                    <option key={status}>{status}</option>
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
                   ))}
                 </select>
-              </article>
-            );
-          })}
+              </div>
+            </div>
 
-          {!loading && visible.length === 0 && (
-            <p className="admin-empty">No inquiries match this view yet.</p>
-          )}
-        </section>
+            {/* Inquiries List */}
+            <section className="inquiry-list mt-6 space-y-4">
+              {visible.map((inquiry) => {
+                const cleanPhone = inquiry.phone ? inquiry.phone.replace(/\D/g, "") : "";
+                const whatsappText = encodeURIComponent(
+                  `Hi ${inquiry.fullName}, thank you for contacting iDESIGN Studio about ${inquiry.interest}. I would love to hear a little more about your project.`
+                );
+
+                const statusColor =
+                  inquiry.status === "New"
+                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                    : inquiry.status === "Contacted"
+                    ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                    : inquiry.status === "Qualified"
+                    ? "bg-sky-500/10 text-sky-400 border-sky-500/30"
+                    : inquiry.status === "Booked"
+                    ? "bg-purple-500/10 text-purple-400 border-purple-500/30"
+                    : "bg-neutral-800 text-neutral-400 border-neutral-700";
+
+                return (
+                  <article key={inquiry.id} className="inquiry-card">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`text-[10px] px-2 py-0.5 rounded border font-mono uppercase tracking-wider ${statusColor}`}>
+                          {inquiry.status}
+                        </span>
+                        <p className="inquiry-date text-xs text-neutral-500 font-mono">
+                          {new Date(inquiry.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                      </div>
+
+                      <h2 className="text-lg font-serif text-white">{inquiry.fullName}</h2>
+                      <p className="inquiry-meta text-xs text-neutral-400 mt-1">
+                        <span className="text-[#c8a54a] font-medium">{inquiry.interest}</span> · Timeline: {inquiry.timeline} · Budget: {inquiry.budget || "Flexible"}
+                      </p>
+                      <p className="inquiry-message text-sm text-neutral-300 mt-3 p-3 rounded-lg bg-[#110f0c] border border-[#23201a] leading-relaxed">
+                        {inquiry.message}
+                      </p>
+
+                      <div className="inquiry-links flex items-center gap-4 mt-3 text-xs">
+                        <a
+                          href={`mailto:${inquiry.email}`}
+                          className="text-[#c8a54a] hover:underline"
+                        >
+                          ✉ Email Client ({inquiry.email})
+                        </a>
+                        {cleanPhone && (
+                          <a
+                            href={`https://wa.me/${cleanPhone}?text=${whatsappText}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-emerald-400 hover:underline flex items-center gap-1"
+                          >
+                            💬 WhatsApp ({inquiry.phone})
+                          </a>
+                        )}
+                        <button
+                          onClick={() => handleDeleteInquiry(inquiry.id, inquiry.fullName)}
+                          className="text-red-400 hover:text-red-300 ml-auto text-[11px] underline cursor-pointer"
+                        >
+                          Delete Lead
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-end gap-2">
+                      <label className="text-[10px] font-mono uppercase text-neutral-400">
+                        Status
+                      </label>
+                      <select
+                        value={inquiry.status}
+                        onChange={(e) => setStatus(inquiry, e.target.value)}
+                        aria-label={`Set status for ${inquiry.fullName}`}
+                        className="text-xs bg-[#12100d] border border-[#3e382d] rounded-lg px-2 py-1.5 text-white"
+                      >
+                        {statuses.map((status) => (
+                          <option key={status} value={status}>
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </article>
+                );
+              })}
+
+              {!loading && visible.length === 0 && (
+                <p className="admin-empty py-12 text-center text-neutral-500">
+                  No inquiries match this filter view.
+                </p>
+              )}
+            </section>
+          </>
+        ) : (
+          /* Live Studio Metrics Tab */
+          <div className="bg-[#14120e] border border-[#2e2920] rounded-2xl p-6 sm:p-8">
+            <div className="mb-6">
+              <h2 className="text-xl font-serif text-white">Live Studio Performance Metrics</h2>
+              <p className="text-xs text-neutral-400 mt-1">
+                Update the official counters displayed across the Home page hero, stats ticker, and client trust badges.
+              </p>
+            </div>
+
+            {statsSuccess && (
+              <div className="mb-6 p-3 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs">
+                ✓ {statsSuccess}
+              </div>
+            )}
+
+            <form onSubmit={handleSaveStats} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-2">
+                    Projects Completed
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.projectsCompleted}
+                    onChange={(e) =>
+                      setStats({ ...stats, projectsCompleted: Number(e.target.value) })
+                    }
+                    className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                  />
+                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 340+ completed commissions</p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-2">
+                    Happy Clients
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.happyClients}
+                    onChange={(e) =>
+                      setStats({ ...stats, happyClients: Number(e.target.value) })
+                    }
+                    className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                  />
+                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 80+ corporate & portrait clients</p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-2">
+                    Client Satisfaction Rate
+                  </label>
+                  <input
+                    type="text"
+                    value={stats.clientSatisfaction}
+                    onChange={(e) =>
+                      setStats({ ...stats, clientSatisfaction: e.target.value })
+                    }
+                    className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                  />
+                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 100% or 99.4%</p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-2">
+                    Years of Studio Excellence
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.yearsExperience}
+                    onChange={(e) =>
+                      setStats({ ...stats, yearsExperience: Number(e.target.value) })
+                    }
+                    className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                  />
+                  <p className="text-[11px] text-neutral-500 mt-1">e.g. 4+ or 5+ years active</p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#c8a54a] mb-2">
+                    Primary Service Disciplines
+                  </label>
+                  <input
+                    type="number"
+                    value={stats.servicesOffered}
+                    onChange={(e) =>
+                      setStats({ ...stats, servicesOffered: Number(e.target.value) })
+                    }
+                    className="w-full text-base font-semibold px-4 py-2.5 rounded-xl bg-[#0c0a08] border border-[#2e2920] focus:border-[#c8a54a] text-white outline-none"
+                  />
+                  <p className="text-[11px] text-neutral-500 mt-1">Photography, Design, Concepts, Print</p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#23201a] flex items-center justify-between">
+                <span className="text-xs text-neutral-400">
+                  Changes take effect immediately on production site.
+                </span>
+                <button
+                  type="submit"
+                  disabled={statsLoading}
+                  className="px-6 py-2.5 rounded-xl bg-[#c8a54a] hover:bg-[#d6b55e] disabled:opacity-50 text-black font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer"
+                >
+                  {statsLoading ? "Saving..." : "Save Studio Metrics"}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

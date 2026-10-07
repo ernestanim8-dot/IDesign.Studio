@@ -43,13 +43,16 @@ graph TD
 ## 2. What Was Built & Accomplished
 
 ### A. Full REST Backend (`server/index.js` & `server/data/`)
+
 1. **Portfolio Builder Engine**:
    - `POST /api/builder`: Accepts custom portfolio configuration (persona, bio, theme, layout, projects, contacts) and persists it with unique ID (`pf-...`).
    - `GET /api/builder`: Lists all user-created portfolios.
    - `GET /api/builder/:id`: Retrieves a specific user portfolio.
+
 2. **Studio Operations & Inquiries**:
    - `POST /api/contact`: Validates and saves inbound project quote inquiries with timestamps and status tags.
    - `GET /api/inquiries`: Live query of all inbound inquiries for the studio manager drawer.
+
 3. **Dynamic Studio APIs**:
    - `GET /api/health`: Health monitoring and uptime metrics.
    - `GET /api/stats`: Real-time studio performance counters (satisfaction rate, awards, projects completed).
@@ -82,6 +85,25 @@ graph TD
 - **Interactive Home Page**: Connected live to `/api/stats` and featuring a dedicated **Digital Portfolio Builder** studio showcase section with call-to-actions.
 - **Toast Notifications (`src/app/components/Toast.tsx`)**: Non-intrusive floating feedback when items are saved, copied, or submitted.
 
+### E. Upgraded Studio Control Center & Notification Engine
+- **Admin Dashboard (`/admin`)**:
+  - Tabbed interface separating **Client Inquiries** from **Live Studio Performance Metrics**.
+  - Inquiries search bar filtering across name, email, phone, interest, and message content.
+  - Status badges (`New`, `Contacted`, `Qualified`, `Booked`, `Closed`) with instant status transitions.
+  - Permanent lead deletion with confirmation safety modal.
+  - Live **Studio Metrics Editor** allowing the studio director to edit `projectsCompleted`, `happyClients`, `clientSatisfaction`, `yearsExperience`, and `servicesOffered` and save them live to the site.
+- **Multi-Channel Inquiry Notifications (`server/index.js`)**:
+  - Resend email alerts with luxury HTML templates for both client confirmation and studio alerts.
+  - Discord webhook dispatching with rich gold embedded cards.
+  - Telegram bot push notifications direct to the studio phone.
+  - Generic JSON webhook support for third-party automation (Zapier, Make, n8n).
+- **Fashion & Lookbook Photography (`src/app/pages/Photography.tsx`)**:
+  - Added dedicated **Fashion** category filter tab.
+  - Multi-category tag matching across Haute Couture, Runway, and Editorial showcases.
+  - Added Fashion & Lookbook service breakdown to the overview grid.
+- **Production SEO & Sitemap (`public/sitemap.xml`)**:
+  - Added `/builder` route to XML sitemap.
+
 ---
 
 ## 3. Verification & Validation Results
@@ -89,14 +111,16 @@ graph TD
 ### Backend API Testing
 All endpoints were tested and verified against the running server at `http://127.0.0.1:8787`:
 - `GET /api/health` -> `HTTP 200` (`{"ok":true,"service":"idesign-api","version":"2.0.0"}`)
-- `GET /api/stats` -> `HTTP 200` (`{"projectsCompleted":184,"clientSatisfaction":"99.4%"}`)
+- `GET /api/stats` -> `HTTP 200` (`{"projectsCompleted":340,"clientSatisfaction":"100%"}`)
+- `POST /api/stats` -> `HTTP 200` (Successfully updated live studio metrics)
 - `POST /api/builder` -> `HTTP 201` (`"Digital portfolio created successfully"`)
 - `GET /api/builder/:id` -> `HTTP 200` (Retrieved saved portfolio)
-- `POST /api/contact` -> `HTTP 201` (`"Inquiry received successfully"`)
-- `GET /api/inquiries` -> `HTTP 200` (Returned inquiries list with newly submitted item)
+- `POST /api/contact` -> `HTTP 201` (Inquiry received & parallel notifications dispatched)
+- `GET /api/inquiries` -> `HTTP 200` (Returned inquiries list with status filtering)
+- `DELETE /api/inquiries/:id` -> `HTTP 200` (Inquiry deleted successfully)
 
 ### Frontend Production Build
-- Executed `npm.cmd run build`:
-  - Transformed 496 modules.
-  - Bundled `PortfolioBuilder`, `Home`, `GraphicDesign`, `Photography`, `CreativeConcepts`, and `Contact`.
-  - **Build status: SUCCESS (0 errors, 0 warnings, completed in 2.14s)**.
+- Executed `npm run build`:
+  - Transformed 869 modules.
+  - Bundled PWA Service Worker (`dist/sw.js`).
+  - **Build status: SUCCESS (0 errors, 0 warnings, completed in 6.94s)**.

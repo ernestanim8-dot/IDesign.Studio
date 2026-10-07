@@ -288,7 +288,7 @@ import earnestAnim04 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1300.j
 import earnestAnim05 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1302.jpg";
 import earnestAnim06 from "@/imports/Photography/Portrait/Ernest Anim/IMG_1306.jpg";
 
-const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Event", "Documentary"];
+const CATEGORIES = ["All", "Product", "Food", "Commercial", "Portrait", "Fashion", "Event", "Documentary"];
 
 /* ─── Gallery 1: Blue for Men ─────────────────────────────────────── */
 const BLUE_FOR_MEN_GALLERY: LightboxItem[] = [
@@ -2204,6 +2204,7 @@ interface PhotoItem extends LightboxItem {
   id: number;
   tall: boolean;
   cat: string;
+  tags?: string[];
   /** If set, clicking opens the named gallery in the lightbox */
   gallery?: string;
   galleryItems?: LightboxItem[];
@@ -2388,6 +2389,7 @@ const PHOTOS: PhotoItem[] = [
     title: "Studio Glam — From Hard Hats to High Fashion",
     cat: "Portrait",
     category: "Portrait",
+    tags: ["Fashion", "Portrait", "Editorial"],
     img: glamImg01,
     tall: true,
     client: "Haute Couture Editorial",
@@ -2403,6 +2405,7 @@ const PHOTOS: PhotoItem[] = [
     title: "Urban Chic & Sisterhood — Studio Editorial",
     cat: "Portrait",
     category: "Portrait",
+    tags: ["Fashion", "Portrait", "Editorial"],
     img: urbanChicImg04,
     tall: true,
     client: "Urban Chic Editorial",
@@ -2539,8 +2542,9 @@ const PHOTOS: PhotoItem[] = [
   {
     id: 31,
     title: "The Fashion Designer — Freedom & Graduation",
-    cat: "Event",
-    category: "Event",
+    cat: "Fashion",
+    category: "Fashion",
+    tags: ["Fashion", "Event", "Documentary"],
     img: fashionGrad07,
     tall: true,
     client: "Whichone Fashion Hub",
@@ -2625,7 +2629,9 @@ function getCategoryCount(cat: string) {
   if (cat === "All") {
     return PHOTOS.reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
   }
-  return PHOTOS.filter((p) => p.cat === cat).reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
+  return PHOTOS.filter(
+    (p) => p.cat === cat || p.category === cat || (p.tags && p.tags.includes(cat))
+  ).reduce((acc, p) => acc + (p.galleryCount ?? 1), 0);
 }
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -2670,7 +2676,11 @@ export function Photography() {
 
   const filteredPhotos = useMemo(() => {
     return PHOTOS.filter((p) => {
-      const matchesCategory = activeCategory === "All" || p.cat === activeCategory;
+      const matchesCategory =
+        activeCategory === "All" ||
+        p.cat === activeCategory ||
+        p.category === activeCategory ||
+        (p.tags && p.tags.includes(activeCategory));
       const q = searchQuery.trim().toLowerCase();
       const matchesNestedGallery = p.galleryItems?.some(
         (item) =>
@@ -3130,6 +3140,7 @@ export function Photography() {
                 { title: "Food & Culinary", desc: "Sensory gastronomy, dessert styling, and restaurant editorial visuals that stimulate appetite and brand distinction." },
                 { title: "Commercial", desc: "Brand lifestyle and advertising photography engineered to build customer trust and elevate campaigns." },
                 { title: "Portrait", desc: "Individual, team, and executive portraiture in studio or on location." },
+                { title: "Fashion & Lookbook", desc: "Runway shows, bespoke couture, model lookbooks, and high-fashion editorial styling documentation for designers and luxury brands." },
                 { title: "Event", desc: "Ceremonial, milestone, and commencement documentation capturing distinguished guests and defining moments." },
                 { title: "Documentary", desc: "Cultural and editorial coverage that captures real moments and ancestral heritage authentically." },
               ].map(({ title, desc }, i) => (

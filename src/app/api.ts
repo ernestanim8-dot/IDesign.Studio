@@ -219,3 +219,48 @@ export async function submitInquiry(payload: {
     return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
   }
 }
+
+export async function deleteInquiry(
+  id: string,
+  adminToken?: string
+): Promise<{ ok: boolean; message?: string; errors?: string[] }> {
+  try {
+    const headers: HeadersInit = {};
+    if (adminToken) {
+      headers.Authorization = `Bearer ${adminToken.trim()}`;
+      headers["x-admin-token"] = adminToken.trim();
+    }
+    const res = await fetch(`/api/inquiries/${encodeURIComponent(id)}`, {
+      method: "DELETE",
+      headers,
+    });
+    return await readJsonResponse(res, { ok: false, errors: ["Failed to delete inquiry."] });
+  } catch (err) {
+    return { ok: false, errors: [err instanceof Error ? err.message : "Network error"] };
+  }
+}
+
+export async function updateStats(
+  stats: Partial<StudioStats>,
+  adminToken?: string
+): Promise<{ ok: boolean; stats?: StudioStats; error?: string }> {
+  try {
+    const headers: HeadersInit = { "Content-Type": "application/json" };
+    if (adminToken) {
+      headers.Authorization = `Bearer ${adminToken.trim()}`;
+      headers["x-admin-token"] = adminToken.trim();
+    }
+    const res = await fetch("/api/stats", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(stats),
+    });
+    const json = await readJsonResponse<{ ok?: boolean; stats?: StudioStats; error?: string }>(res, {});
+    if (res.ok && json.ok) {
+      return { ok: true, stats: json.stats };
+    }
+    return { ok: false, error: json.error || "Failed to update stats" };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Network error" };
+  }
+}

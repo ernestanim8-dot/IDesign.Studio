@@ -261,6 +261,31 @@ async function updateInquiryStatus(id, status) {
   return inquiries[index];
 }
 
+async function deleteInquiry(id) {
+  if (hasSupabase) {
+    try {
+      await supabaseRequest(`inquiries?id=eq.${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      return true;
+    } catch (supabaseErr) {
+      console.warn("Supabase delete failed, falling back to local file:", supabaseErr?.message || supabaseErr);
+    }
+  }
+
+  const inquiries = await listInquiries();
+  const filtered = inquiries.filter((inquiry) => inquiry.id !== id);
+  await mkdir(dataDir, { recursive: true });
+  await writeFile(
+    inquiriesFile,
+    filtered.length > 0
+      ? `${filtered.slice().reverse().map((inquiry) => JSON.stringify(inquiry)).join("\n")}\n`
+      : "",
+    "utf8"
+  );
+  return true;
+}
+
 // Handler: Inquiries / Contact
 async function handleContact(req, res) {
   try {
@@ -540,6 +565,63 @@ async function handleContact(req, res) {
       });
     } // end if (RESEND_API_KEY)
 
+    // Parallel Webhook Dispatches (Discord / Generic Webhook / Telegram)
+    const webhookUrls = [
+      process.env.INQUIRY_WEBHOOK_URL,
+      process.env.DISCORD_WEBHOOK_URL,
+    ].filter(Boolean);
+
+    for (const webhookUrl of webhookUrls) {
+      const isDiscord = webhookUrl.includes("discord.com/api/webhooks");
+      const webhookPayload = isDiscord
+        ? {
+            username: "iDESIGN Studio Alerts",
+            embeds: [
+              {
+                title: `✦ New Client Inquiry: ${inquiry.fullName}`,
+                description: inquiry.message,
+                color: 0xc8a54a,
+                fields: [
+                  { name: "Service", value: inquiry.interest, inline: true },
+                  { name: "Timeline", value: inquiry.timeline, inline: true },
+                  { name: "Budget", value: inquiry.budget || "Flexible", inline: true },
+                  { name: "Email", value: inquiry.email, inline: true },
+                  { name: "Phone", value: inquiry.phone || "Not provided", inline: true },
+                ],
+                footer: { text: `Inquiry ID: ${inquiry.id} • iDESIGN Studio` },
+                timestamp: inquiry.createdAt,
+              },
+            ],
+          }
+        : {
+            event: "inquiry.created",
+            inquiry,
+          };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(webhookPayload),
+      }).catch((webhookErr) => {
+        console.warn("Webhook dispatch error:", webhookErr?.message || webhookErr);
+      });
+    }
+
+    if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
+      const tgText = `🔔 *New iDESIGN Inquiry*\n\n*Client:* ${inquiry.fullName}\n*Service:* ${inquiry.interest}\n*Email:* ${inquiry.email}\n*Phone:* ${inquiry.phone || "N/A"}\n*Timeline:* ${inquiry.timeline}\n*Budget:* ${inquiry.budget || "Flexible"}\n\n*Message:*\n${inquiry.message}`;
+      fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: process.env.TELEGRAM_CHAT_ID,
+          text: tgText,
+          parse_mode: "Markdown",
+        }),
+      }).catch((tgErr) => {
+        console.warn("Telegram dispatch error:", tgErr?.message || tgErr);
+      });
+    }
+
     sendJson(res, 201, {
       ok: true,
       message: "Inquiry received successfully. We will get back to you shortly.",
@@ -694,11 +776,47 @@ export async function handleRequest(req, res) {
   // Stats
   if (matchApi("/api/stats") && req.method === "GET") {
     const stats = await readJsonFile(statsFile, {
-      projectsCompleted: 180,
-      clientSatisfaction: "99%",
-      awardsWon: 12,
+      projectsCompleted: 340,
+      happyClients: 80,
+      clientSatisfaction: "100%",
+      yearsExperience: 4,
+      servicesOffered: 4,
+      activeInquiriesThisWeek: 0,
     });
     sendJson(res, 200, { ok: true, stats });
+    return;
+  }
+
+  // Update Stats (Admin only)
+  if (matchApi("/api/stats") && (req.method === "POST" || req.method === "PUT")) {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, error: "Unauthorized. Admin token required." });
+      return;
+    }
+    try {
+      const body = await readRequestBody(req);
+      const current = await readJsonFile(statsFile, {
+        projectsCompleted: 340,
+        happyClients: 80,
+        clientSatisfaction: "100%",
+        yearsExperience: 4,
+        servicesOffered: 4,
+        activeInquiriesThisWeek: 0,
+      });
+      const updated = {
+        ...current,
+        projectsCompleted: Number(body.projectsCompleted ?? current.projectsCompleted),
+        happyClients: Number(body.happyClients ?? current.happyClients),
+        clientSatisfaction: String(body.clientSatisfaction ?? current.clientSatisfaction),
+        yearsExperience: Number(body.yearsExperience ?? current.yearsExperience),
+        servicesOffered: Number(body.servicesOffered ?? current.servicesOffered),
+        activeInquiriesThisWeek: Number(body.activeInquiriesThisWeek ?? current.activeInquiriesThisWeek),
+      };
+      await writeJsonFile(statsFile, updated);
+      sendJson(res, 200, { ok: true, stats: updated });
+    } catch (err) {
+      sendJson(res, 500, { ok: false, error: err.message || "Failed to update stats" });
+    }
     return;
   }
 
@@ -795,6 +913,21 @@ export async function handleRequest(req, res) {
       sendJson(res, 200, { ok: true, inquiry });
     } catch (err) {
       sendJson(res, 400, { ok: false, errors: [err.message || "Failed to update inquiry."] });
+    }
+    return;
+  }
+
+  if ((pathname.startsWith("/api/inquiries/") || pathname.startsWith("/inquiries/")) && req.method === "DELETE") {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, errors: ["Admin token is required."] });
+      return;
+    }
+    try {
+      const id = pathname.replace(/^\/api\/inquiries\//, "").replace(/^\/inquiries\//, "");
+      await deleteInquiry(id);
+      sendJson(res, 200, { ok: true, message: "Inquiry deleted successfully." });
+    } catch (err) {
+      sendJson(res, 400, { ok: false, errors: [err.message || "Failed to delete inquiry."] });
     }
     return;
   }
