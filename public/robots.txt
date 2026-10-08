@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Disallow admin & API endpoints from crawlers
+Disallow: /api/
+Disallow: /admin
+
+# Crawl-delay for polite bots
+Crawl-delay: 10
+
 Sitemap: https://idesign.studio/sitemap.xml

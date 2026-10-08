@@ -33,9 +33,35 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
+// ── Inline field error pill ───────────────────────────────────────────────
+function FieldError({ msg }: { msg?: string }) {
+  if (!msg) return null;
+  return (
+    <AnimatePresence>
+      <motion.p
+        key={msg}
+        initial={{ opacity: 0, y: -4 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0 }}
+        style={{
+          fontFamily: "'DM Mono', monospace",
+          fontSize: "0.6rem",
+          letterSpacing: "0.05em",
+          color: "#c0392b",
+          marginTop: "0.3rem",
+        }}
+      >
+        ⚠ {msg}
+      </motion.p>
+    </AnimatePresence>
+  );
+}
+
 export function Contact() {
   useEffect(() => {
     document.title = "Contact & Bookings — iDESIGN Studio";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Book a photography session, request a graphic design quote, or start a print project with iDESIGN Studio in Accra, Ghana. Reach us via our inquiry form or WhatsApp.");
   }, []);
 
   const [submitted, setSubmitted] = useState(false);
@@ -43,6 +69,9 @@ export function Contact() {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  // Field-level validation errors
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
   // Form State
   const [fullName, setFullName] = useState("");
@@ -90,13 +119,30 @@ export function Contact() {
     return preferredDate ? `Preferred project date: ${preferredDate}\n\n${details}` : details;
   };
 
+  // ── Validation helper ──
+  const validate = (fields: { name?: boolean; email?: boolean; phone?: boolean } = {}) => {
+    const errs: { name?: string; email?: string; phone?: string } = {};
+    if (fields.name !== false && !fullName.trim()) errs.name = "Full name is required.";
+    if (fields.email !== false) {
+      if (!email.trim()) {
+        errs.email = "Email address is required.";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+        errs.email = "Please enter a valid email address.";
+      }
+    }
+    if (fields.phone !== false && phone.trim() && !/^[+\d\s()-]{6,20}$/.test(phone.trim())) {
+      errs.phone = "Enter a valid phone number (e.g. +233 50 231 0663).";
+    }
+    return errs;
+  };
+
   const handleSendViaWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
-      alert("Please enter your name.");
+      setFieldErrors({ name: "Please enter your name before opening WhatsApp." });
       return;
     }
-
+    setFieldErrors({});
     const text = encodeURIComponent(constructWhatsAppMessage());
     const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
@@ -107,11 +153,12 @@ export function Contact() {
 
   const handleStandardSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !email.trim()) {
-      setSubmitError("Please fill in your name and a valid email address.");
+    const errs = validate({ name: true, email: true, phone: true });
+    if (Object.keys(errs).length > 0) {
+      setFieldErrors(errs);
       return;
     }
-
+    setFieldErrors({});
     setIsSubmitting(true);
     setSubmitError("");
 
@@ -769,20 +816,21 @@ export function Contact() {
                           fontSize: "0.62rem",
                           letterSpacing: "0.12em",
                           textTransform: "uppercase",
-                          color: MUTED,
+                          color: fieldErrors.name ? "#c0392b" : MUTED,
                         }}
                       >
                         Full Name *
                       </label>
                       <input
                         type="text"
+                        id="contact-name"
                         placeholder="e.g. Ama Mensah"
                         value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
+                        onChange={(e) => { setFullName(e.target.value); if (fieldErrors.name && e.target.value.trim()) setFieldErrors((p) => ({ ...p, name: undefined })); }}
                         required
                         style={{
                           background: SURFACE,
-                          border: `1px solid ${BORDER}`,
+                          border: `1px solid ${fieldErrors.name ? "#c0392b" : BORDER}`,
                           color: DARK,
                           fontFamily: "'Work Sans',sans-serif",
                           fontSize: "0.9rem",
@@ -792,9 +840,10 @@ export function Contact() {
                           borderRadius: "3px",
                           transition: "border-color 0.2s",
                         }}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                        onFocus={(e) => (e.currentTarget.style.borderColor = fieldErrors.name ? "#c0392b" : GOLD)}
+                        onBlur={(e) => (e.currentTarget.style.borderColor = fieldErrors.name ? "#c0392b" : BORDER)}
                       />
+                      <FieldError msg={fieldErrors.name} />
                     </div>
 
                     {/* Email & Phone side-by-side */}
@@ -806,20 +855,21 @@ export function Contact() {
                             fontSize: "0.62rem",
                             letterSpacing: "0.12em",
                             textTransform: "uppercase",
-                            color: MUTED,
+                            color: fieldErrors.email ? "#c0392b" : MUTED,
                           }}
                         >
                           Email Address *
                         </label>
                         <input
+                          id="contact-email"
                           type="email"
                           placeholder="you@domain.com"
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => { setEmail(e.target.value); if (fieldErrors.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.target.value)) setFieldErrors((p) => ({ ...p, email: undefined })); }}
                           required
                           style={{
                             background: SURFACE,
-                            border: `1px solid ${BORDER}`,
+                            border: `1px solid ${fieldErrors.email ? "#c0392b" : BORDER}`,
                             color: DARK,
                             fontFamily: "'Work Sans',sans-serif",
                             fontSize: "0.9rem",
@@ -829,9 +879,10 @@ export function Contact() {
                             borderRadius: "3px",
                             transition: "border-color 0.2s",
                           }}
-                          onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
-                          onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                          onFocus={(e) => (e.currentTarget.style.borderColor = fieldErrors.email ? "#c0392b" : GOLD)}
+                          onBlur={(e) => (e.currentTarget.style.borderColor = fieldErrors.email ? "#c0392b" : BORDER)}
                         />
+                        <FieldError msg={fieldErrors.email} />
                       </div>
 
                       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
@@ -841,19 +892,20 @@ export function Contact() {
                             fontSize: "0.62rem",
                             letterSpacing: "0.12em",
                             textTransform: "uppercase",
-                            color: MUTED,
+                            color: fieldErrors.phone ? "#c0392b" : MUTED,
                           }}
                         >
                           Phone / WhatsApp (optional)
                         </label>
                         <input
+                          id="contact-phone"
                           type="tel"
                           placeholder="+233 ..."
                           value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
+                          onChange={(e) => { setPhone(e.target.value); if (fieldErrors.phone) setFieldErrors((p) => ({ ...p, phone: undefined })); }}
                           style={{
                             background: SURFACE,
-                            border: `1px solid ${BORDER}`,
+                            border: `1px solid ${fieldErrors.phone ? "#c0392b" : BORDER}`,
                             color: DARK,
                             fontFamily: "'Work Sans',sans-serif",
                             fontSize: "0.9rem",
@@ -863,9 +915,10 @@ export function Contact() {
                             borderRadius: "3px",
                             transition: "border-color 0.2s",
                           }}
-                          onFocus={(e) => (e.currentTarget.style.borderColor = GOLD)}
-                          onBlur={(e) => (e.currentTarget.style.borderColor = BORDER)}
+                          onFocus={(e) => (e.currentTarget.style.borderColor = fieldErrors.phone ? "#c0392b" : GOLD)}
+                          onBlur={(e) => (e.currentTarget.style.borderColor = fieldErrors.phone ? "#c0392b" : BORDER)}
                         />
+                        <FieldError msg={fieldErrors.phone} />
                       </div>
                     </div>
 

@@ -87,8 +87,9 @@ export default defineConfig(({ mode }) => {
           // deployment; caching an older copy can make it request a bundle
           // that Vercel has already removed. Vercel handles SPA navigation,
           // while every JavaScript chunk from the current build is cached.
-          globPatterns: ['**/*.{css,ico,svg,woff2}', 'assets/**/*.js'],
-          navigateFallback: null,
+          globPatterns: ['**/*.{css,ico,svg,woff2}', 'assets/**/*.js', 'offline.html'],
+          navigateFallback: '/offline.html',
+          navigateFallbackDenylist: [/^\/api\//],
           clientsClaim: true,
           skipWaiting: true,
           runtimeCaching: [
@@ -466,6 +467,8 @@ function idesignApiMiddleware(): Plugin {
         const pathname = url.split('?')[0]
         if (pathname === '/api' || pathname.startsWith('/api/')) {
           try {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore — server/index.js is a plain CJS dev-server; no TS types needed
             const { handleRequest } = await import('./server/index.js')
             await handleRequest(req, res)
             return

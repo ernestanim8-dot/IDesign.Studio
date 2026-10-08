@@ -1,9 +1,11 @@
 import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 import logoMark from "@/imports/i design logo gh.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { Preloader } from "./components/Preloader";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Lazy-load non-critical components — they're only visible after user action
 const WhatsAppFloatingButton = lazy(() =>
@@ -109,7 +111,6 @@ const NAV_LINKS = [
   { label: "Graphic Design", to: "/graphic-design" },
   { label: "Photography", to: "/photography" },
   { label: "Creative Concepts", to: "/creative-concepts" },
-  { label: "Portfolio Builder", to: "/builder" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -412,16 +413,36 @@ export function Layout() {
       {/* page content */}
       <main style={{ flex: 1 }}>
         <AnimatePresence mode="wait">
-          <motion.div key={location.pathname}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            style={{ position: "relative" }}
           >
-            <Outlet />
+            {/* Curtain wipe overlay — sweeps in then retracts on enter */}
+            <motion.div
+              key={`curtain-${location.pathname}`}
+              initial={{ clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)", transition: { duration: 0.22, ease: [0.76, 0, 0.24, 1] } }}
+              exit={{ clipPath: "inset(0 0 0 100%)", transition: { duration: 0.22, ease: [0.76, 0, 0.24, 1] } }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: DARKER,
+                zIndex: 40,
+                pointerEvents: "none",
+                minHeight: "100vh",
+              }}
+            />
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
           </motion.div>
         </AnimatePresence>
       </main>
+      <Analytics />
 
       {/* footer */}
       <footer style={{ background: DARKER, padding: "3rem 2rem 2rem" }}>

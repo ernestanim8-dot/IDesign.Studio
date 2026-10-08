@@ -107,21 +107,14 @@ graph TD
   - Dedicated **Fashion** category filter tab and campaign cards with multi-photo nested lightbox.
   - Multi-category tag matching across Haute Couture, Runway, and Editorial showcases.
   - Fashion & Lookbook service breakdown in the overview grid.
-- **Digital Portfolio Builder (`/builder` & `src/app/pages/Builder.tsx`)**:
-  - Full-featured luxury creative builder allowing designers, photographers, models, and creators to configure their digital portfolio.
-  - Atmosphere customization with 4 bespoke presets (*Atelier Noir*, *Solar Gold*, *Editorial Ivory*, *Cyber Minimal*) and 3 typography pairings (*Luxury Serif*, *Modern Sans*, *Technical Mono*).
-  - Project showcase manager to add, edit, and organize works with descriptions, tags, and imagery.
-  - Real-time responsive live preview with Desktop and Mobile toggle.
-  - **Export & Sharing Suite**: One-click PDF / Print layout, standalone download of ready-to-host `.html` bundle, unique shareable URL generation (`/builder?id=...`), and 1-click WhatsApp commissioning brief to `+233502310663`.
-  - Added "Portfolio Builder" to primary header navigation and mobile menu.
 - **Supabase Cloud Database Expansion (`supabase.sql` & `server/index.js`)**:
-  - Added PostgreSQL tables with Row Level Security (RLS) for `inquiries`, `testimonials`, `studio_stats`, and `portfolios`.
+  - Added PostgreSQL tables with Row Level Security (RLS) for `inquiries`, `testimonials`, and `studio_stats`.
   - Data access layer in `server/index.js` automatically syncs reads and writes to Supabase REST endpoints when configured, with seamless fallback to local JSON files.
 - **Production SEO & Structured Data (`index.html` & `public/sitemap.xml`)**:
   - Added `WebSite` JSON-LD schema with Google Sitelinks Searchbox action.
-  - Added `Digital Portfolio Builder` to the studio's official `OfferCatalog`.
-  - Added targeted search keywords covering commercial photography, branding systems, and digital portfolio creation in Accra and worldwide.
-  - XML sitemap includes `/builder` with priority `0.85`.
+  - Official `OfferCatalog` covering Commercial Photography, Brand Identity Systems, and Creative Concepts.
+  - Targeted search keywords covering commercial photography, branding systems, and lookbook production in Accra and worldwide.
+  - Clean XML sitemap covering all primary studio showcases and inquiry routes.
 
 ---
 
@@ -137,8 +130,6 @@ All endpoints were tested and verified against the running server at `http://127
 - `GET /api/testimonials` -> `HTTP 200` (Returns published client reviews)
 - `POST /api/testimonials` -> `HTTP 201` (Publishes review with admin authentication)
 - `DELETE /api/testimonials/:id` -> `HTTP 200` (Deletes review with admin token)
-- `POST /api/builder` -> `HTTP 201` (Saves custom digital portfolio and returns shareable ID)
-- `GET /api/builder/:id` -> `HTTP 200` (Retrieves saved digital portfolio)
 - `POST /api/contact` -> `HTTP 201` (Inquiry received & parallel notifications dispatched)
 - `GET /api/inquiries` -> `HTTP 200` (Returned inquiries list with status filtering)
 - `DELETE /api/inquiries/:id` -> `HTTP 200` (Inquiry deleted successfully)

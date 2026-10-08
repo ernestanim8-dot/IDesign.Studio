@@ -1412,6 +1412,8 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export function GraphicDesign() {
   useEffect(() => {
     document.title = "Graphic Design & Brand Systems — iDESIGN Studio";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "iDESIGN Studio delivers bespoke graphic design and brand identity systems in Accra, Ghana — logos, stationery, packaging, and full visual identities for startups and established brands.");
   }, []);
 
   const [activeCategory, setActiveCategory] = useState("All");

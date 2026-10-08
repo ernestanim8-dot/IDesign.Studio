@@ -21,7 +21,6 @@ const testimonialsFile = process.env.VERCEL
   : path.join(seedDataDir, "testimonials.json");
 const seedTestimonialsFile = path.join(seedDataDir, "testimonials.json");
 const statsFile = path.join(seedDataDir, "stats.json");
-const portfoliosFile = path.join(dataDir, "portfolios.json");
 
 const port = Number(process.env.API_PORT || process.env.PORT || 8787);
 const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
@@ -480,47 +479,6 @@ async function saveStatsData(stats) {
   }
   await writeJsonFile(statsFile, stats);
   return stats;
-}
-
-// Data Layer: Portfolio Builder
-async function savePortfolio(portfolio) {
-  if (hasSupabase) {
-    try {
-      const rows = await supabaseRequest("portfolios", {
-        method: "POST",
-        headers: { Prefer: "resolution=merge-duplicates,return=representation" },
-        body: JSON.stringify({
-          id: portfolio.id,
-          creator_name: portfolio.creatorName || portfolio.name || "Creative Individual",
-          title: portfolio.title || "Digital Portfolio",
-          data: portfolio,
-          updated_at: new Date().toISOString(),
-        }),
-      });
-      if (Array.isArray(rows) && rows.length > 0) return portfolio;
-    } catch (err) {
-      console.warn("Supabase save portfolio failed, falling back to local file:", err?.message || err);
-    }
-  }
-  const all = await readJsonFile(portfoliosFile, {});
-  all[portfolio.id] = portfolio;
-  await writeJsonFile(portfoliosFile, all);
-  return portfolio;
-}
-
-async function getPortfolio(id) {
-  if (hasSupabase) {
-    try {
-      const rows = await supabaseRequest(`portfolios?id=eq.${encodeURIComponent(id)}&select=*`);
-      if (Array.isArray(rows) && rows.length > 0 && rows[0].data) {
-        return rows[0].data;
-      }
-    } catch (err) {
-      console.warn("Supabase get portfolio failed, falling back to local file:", err?.message || err);
-    }
-  }
-  const all = await readJsonFile(portfoliosFile, {});
-  return all[id] || null;
 }
 
 // Handler: Inquiries / Contact
@@ -1148,39 +1106,6 @@ export async function handleRequest(req, res) {
   if (matchApi("/api/projects") && req.method === "POST") {
     await handleProjectCreate(req, res);
     return;
-  }
-
-  // Digital Portfolio Builder
-  if (matchApi("/api/builder") && req.method === "POST") {
-    try {
-      const body = await readRequestBody(req);
-      const id = cleanString(body.id) || "pf-" + Date.now().toString(36) + Math.random().toString(36).substring(2, 6);
-      const portfolio = {
-        ...body,
-        id,
-        createdAt: body.createdAt || new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      await savePortfolio(portfolio);
-      sendJson(res, 201, { ok: true, portfolio, id });
-      return;
-    } catch (err) {
-      sendJson(res, 500, { ok: false, errors: [err.message] });
-      return;
-    }
-  }
-
-  if ((pathname.startsWith("/api/builder/") || (pathname.startsWith("/builder/") && !pathname.includes("."))) && req.method === "GET") {
-    const id = pathname.replace(/^\/api\/builder\//, "").replace(/^\/builder\//, "");
-    if (id && id !== "builder") {
-      const found = await getPortfolio(id);
-      if (found) {
-        sendJson(res, 200, { ok: true, portfolio: found });
-        return;
-      }
-      sendJson(res, 404, { ok: false, error: "Portfolio not found." });
-      return;
-    }
   }
 
   // Inquiries / Contact

@@ -680,7 +680,9 @@ function FadeUp({
 
 export function CreativeConcepts() {
   useEffect(() => {
-    document.title = "Creative Concepts & Studio Packages — iDESIGN Studio"
+    document.title = "Creative Concepts & Studio Packages — iDESIGN Studio";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Explore iDESIGN Studio's creative concept packages — curated studio sessions, themed shoots, and complete brand rollout packages for individuals, events, and businesses in Ghana.");
   }, [])
 
   const [hovered, setHovered] = useState<number | null>(null)

@@ -2665,6 +2665,8 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export function Photography() {
   useEffect(() => {
     document.title = "Photography Portfolio — iDESIGN Studio";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Explore iDESIGN Studio's photography portfolio — commercial, portrait, fashion, graduation, and documentary photography based in Accra, Ghana.");
   }, []);
 
   const [activeCategory, setActiveCategory] = useState("All");

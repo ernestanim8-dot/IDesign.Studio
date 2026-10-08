@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -13,9 +13,35 @@ import deborahSimpsonImg from "@/imports/What Our Clients Say/IMG_0906.jpg";
 import ashamiImg from "@/imports/What Our Clients Say/IMG_6838.jpg";
 import lawrenciaTakyiImg from "@/imports/What Our Clients Say/IMG_6777.jpg";
 import { GOLD, GOLD_LIGHT, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
-import { getStats } from "../api";
+import { getStats, getTestimonials } from "../api";
 import { ServicesSlider } from "../components/ServicesSlider";
 import { TestimonialsSlider } from "../components/TestimonialsSlider";
+import type { TestimonialItem } from "../components/TestimonialsSlider";
+
+// ── Count-up animation hook ──────────────────────────────────────────────────
+function useCountUp(target: number, duration = 1800, shouldStart = false) {
+  const [count, setCount] = useState(0);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!shouldStart || target === 0) return;
+    const startTime = performance.now();
+    const startVal = 0;
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Math.round(startVal + (target - startVal) * easeOut(progress)));
+      if (progress < 1) rafRef.current = requestAnimationFrame(step);
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, duration, shouldStart]);
+
+  return count;
+}
 
 const LATEST_WORK = [
   {
@@ -153,15 +179,89 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
+// ── Animated stat card with count-up ────────────────────────────────────────
+function StatCard({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setInView(true); obs.disconnect(); }
+    }, { threshold: 0.4 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  // Extract numeric part and suffix (e.g. "340+" → 340, "+")
+  const match = value.match(/^(\d+)(.*)?$/);
+  const numericTarget = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? (match[2] ?? "") : value;
+  const animated = useCountUp(numericTarget, 1600, inView);
+  const displayValue = match ? `${animated}${suffix}` : value;
+
+  return (
+    <motion.div
+      ref={ref}
+      whileHover={{ scale: 1.05, y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      style={{
+        textAlign: "center",
+        background: "rgba(255,255,255,0.04)",
+        backdropFilter: "blur(12px)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "8px",
+        padding: "2rem 1rem",
+        cursor: "default",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle gold shimmer on hover */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(circle at 50% 0%, rgba(200,165,74,0.10) 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }}
+      />
+      <p style={{
+        fontFamily: "'DM Serif Display',serif",
+        fontSize: "clamp(2.5rem,5vw,3.75rem)",
+        color: GOLD,
+        lineHeight: 1,
+        marginBottom: "0.6rem",
+        letterSpacing: "-0.02em",
+      }}>
+        {displayValue}
+      </p>
+      <p style={{
+        fontFamily: "'DM Mono',monospace",
+        fontSize: "0.62rem",
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        color: "#6a6460",
+      }}>
+        {label}
+      </p>
+    </motion.div>
+  );
+}
+
 export function Home() {
   useEffect(() => {
-    document.title = "iDESIGN Studio — Accra, Ghana | Photography & Creative Direction";
+    document.title = "iDESIGN Studio — Photography, Graphic Design & Creative Concepts | Accra, Ghana";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "iDESIGN Studio is a full-service creative studio in Accra, Ghana. Expert commercial photography, bespoke brand identity, graphic design, and print — all under one roof. Book a session today.");
   }, []);
 
   const [heroReady, setHeroReady] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeSection, setActiveSection] = useState("about-preview");
   const [liveStats, setLiveStats] = useState(STATS);
+  const [liveTestimonials, setLiveTestimonials] = useState<TestimonialItem[]>(TESTIMONIALS);
   const heroRef = useRef(null);
   // Disable scroll-driven parallax on mobile — saves scroll-tick reflows
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -185,6 +285,24 @@ export function Home() {
         ]);
       }
     });
+  }, []);
+
+  // Fetch live testimonials and merge with hardcoded ones
+  useEffect(() => {
+    getTestimonials().then((remote) => {
+      if (!remote || remote.length === 0) return;
+      // Map API format to slider format
+      const mapped: TestimonialItem[] = remote.map((t) => ({
+        quote: t.quote,
+        author: t.name,
+        role: t.role || "Client",
+        rating: t.rating ?? 5,
+        initials: t.name.split(" ").map((w: string) => w[0]).join("").toUpperCase().slice(0, 2),
+        image: t.avatar || undefined,
+      }));
+      // Prepend live reviews before hardcoded ones
+      setLiveTestimonials([...mapped, ...TESTIMONIALS]);
+    }).catch(() => { /* silent — use hardcoded */ });
   }, []);
 
   useEffect(() => {
@@ -673,41 +791,8 @@ export function Home() {
           </FadeUp>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {liveStats.map(({ value, label }, i) => (
-              <FadeUp key={label} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.04 }}
-                  style={{
-                    textAlign: "center",
-                    background: "rgba(255,255,255,0.04)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    borderRadius: "8px",
-                    padding: "2rem 1rem",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "'DM Serif Display',serif",
-                      fontSize: "clamp(2.5rem,5vw,3.75rem)",
-                      color: GOLD,
-                      lineHeight: 1,
-                      marginBottom: "0.6rem",
-                    }}
-                  >
-                    {value}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'DM Mono',monospace",
-                      fontSize: "0.62rem",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      color: "#6a6460",
-                    }}
-                  >
-                    {label}
-                  </p>
-                </motion.div>
+              <FadeUp key={label} delay={i * 0.12}>
+                <StatCard value={value} label={label} />
               </FadeUp>
             ))}
           </div>
@@ -744,7 +829,7 @@ export function Home() {
         </FadeUp>
 
         <FadeUp delay={0.1}>
-          <TestimonialsSlider testimonials={TESTIMONIALS} />
+          <TestimonialsSlider testimonials={liveTestimonials} />
         </FadeUp>
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <a
