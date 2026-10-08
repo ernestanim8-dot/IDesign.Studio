@@ -648,6 +648,11 @@ export function Contact() {
                     href: "https://www.facebook.com/share/19ba8Zujqc/?mibextid=wwXIfr",
                     icon: "📘",
                   },
+                  {
+                    name: "LinkedIn",
+                    href: "https://www.linkedin.com/in/ernest-anim-06b891325",
+                    icon: "💼",
+                  },
                 ].map((s) => (
                   <a
                     key={s.name}
