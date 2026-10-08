@@ -21,6 +21,7 @@ const testimonialsFile = process.env.VERCEL
   : path.join(seedDataDir, "testimonials.json");
 const seedTestimonialsFile = path.join(seedDataDir, "testimonials.json");
 const statsFile = path.join(seedDataDir, "stats.json");
+const portfoliosFile = path.join(dataDir, "portfolios.json");
 
 const port = Number(process.env.API_PORT || process.env.PORT || 8787);
 const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
@@ -334,6 +335,192 @@ async function deleteInquiry(id) {
     "utf8"
   );
   return true;
+}
+
+// Data Layer: Testimonials
+function toSupabaseTestimonial(t) {
+  return {
+    id: t.id,
+    name: t.name,
+    role: t.role,
+    company: t.company,
+    avatar: t.avatar,
+    quote: t.quote,
+    rating: t.rating,
+    project: t.project,
+    date: t.date,
+  };
+}
+
+function fromSupabaseTestimonial(row) {
+  return {
+    id: row.id,
+    name: row.name,
+    role: row.role || "Client",
+    company: row.company || "Verified Partner",
+    avatar: row.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+    quote: row.quote,
+    rating: Number(row.rating) || 5,
+    project: row.project || "Creative Studio Engagement",
+    date: row.date || "Recently",
+  };
+}
+
+async function listTestimonials() {
+  if (hasSupabase) {
+    try {
+      const rows = await supabaseRequest("testimonials?select=*&order=created_at.desc");
+      if (Array.isArray(rows) && rows.length > 0) {
+        return rows.map(fromSupabaseTestimonial);
+      }
+    } catch (err) {
+      console.warn("Supabase list testimonials error, falling back to local file:", err?.message || err);
+    }
+  }
+  return readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
+}
+
+async function saveTestimonial(testimonial) {
+  if (hasSupabase) {
+    try {
+      const createdRows = await supabaseRequest("testimonials", {
+        method: "POST",
+        headers: { Prefer: "return=representation" },
+        body: JSON.stringify(toSupabaseTestimonial(testimonial)),
+      });
+      const created = Array.isArray(createdRows) ? createdRows[0] : null;
+      if (created) return fromSupabaseTestimonial(created);
+    } catch (err) {
+      console.warn("Supabase save testimonial error, falling back to local file:", err?.message || err);
+    }
+  }
+  const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
+  testimonials.unshift(testimonial);
+  await writeJsonFile(testimonialsFile, testimonials);
+  return testimonial;
+}
+
+async function deleteTestimonialItem(id) {
+  if (hasSupabase) {
+    try {
+      await supabaseRequest(`testimonials?id=eq.${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+    } catch (err) {
+      console.warn("Supabase delete testimonial error, falling back to local file:", err?.message || err);
+    }
+  }
+  const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
+  const filtered = testimonials.filter((t) => t.id !== id);
+  await writeJsonFile(testimonialsFile, filtered);
+  return true;
+}
+
+// Data Layer: Studio Stats
+function fromSupabaseStats(row) {
+  return {
+    projectsCompleted: Number(row.projects_completed ?? 340),
+    happyClients: Number(row.happy_clients ?? 80),
+    clientSatisfaction: String(row.client_satisfaction ?? "100%"),
+    yearsExperience: Number(row.years_experience ?? 4),
+    servicesOffered: Number(row.services_offered ?? 4),
+    activeInquiriesThisWeek: Number(row.active_inquiries_this_week ?? 0),
+  };
+}
+
+function toSupabaseStats(s) {
+  return {
+    id: "primary",
+    projects_completed: Number(s.projectsCompleted ?? 340),
+    happy_clients: Number(s.happyClients ?? 80),
+    client_satisfaction: String(s.clientSatisfaction ?? "100%"),
+    years_experience: Number(s.yearsExperience ?? 4),
+    services_offered: Number(s.servicesOffered ?? 4),
+    active_inquiries_this_week: Number(s.activeInquiriesThisWeek ?? 0),
+    updated_at: new Date().toISOString(),
+  };
+}
+
+async function getStatsData() {
+  const defaultStats = {
+    projectsCompleted: 340,
+    happyClients: 80,
+    clientSatisfaction: "100%",
+    yearsExperience: 4,
+    servicesOffered: 4,
+    activeInquiriesThisWeek: 0,
+  };
+  if (hasSupabase) {
+    try {
+      const rows = await supabaseRequest("studio_stats?id=eq.primary&select=*");
+      if (Array.isArray(rows) && rows.length > 0) {
+        return fromSupabaseStats(rows[0]);
+      }
+    } catch (err) {
+      console.warn("Supabase get stats error, falling back to local file:", err?.message || err);
+    }
+  }
+  return readJsonFile(statsFile, defaultStats);
+}
+
+async function saveStatsData(stats) {
+  if (hasSupabase) {
+    try {
+      const rows = await supabaseRequest("studio_stats?on_conflict=id", {
+        method: "POST",
+        headers: { Prefer: "resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify(toSupabaseStats(stats)),
+      });
+      if (Array.isArray(rows) && rows.length > 0) {
+        return fromSupabaseStats(rows[0]);
+      }
+    } catch (err) {
+      console.warn("Supabase save stats error, falling back to local file:", err?.message || err);
+    }
+  }
+  await writeJsonFile(statsFile, stats);
+  return stats;
+}
+
+// Data Layer: Portfolio Builder
+async function savePortfolio(portfolio) {
+  if (hasSupabase) {
+    try {
+      const rows = await supabaseRequest("portfolios", {
+        method: "POST",
+        headers: { Prefer: "resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify({
+          id: portfolio.id,
+          creator_name: portfolio.creatorName || portfolio.name || "Creative Individual",
+          title: portfolio.title || "Digital Portfolio",
+          data: portfolio,
+          updated_at: new Date().toISOString(),
+        }),
+      });
+      if (Array.isArray(rows) && rows.length > 0) return portfolio;
+    } catch (err) {
+      console.warn("Supabase save portfolio failed, falling back to local file:", err?.message || err);
+    }
+  }
+  const all = await readJsonFile(portfoliosFile, {});
+  all[portfolio.id] = portfolio;
+  await writeJsonFile(portfoliosFile, all);
+  return portfolio;
+}
+
+async function getPortfolio(id) {
+  if (hasSupabase) {
+    try {
+      const rows = await supabaseRequest(`portfolios?id=eq.${encodeURIComponent(id)}&select=*`);
+      if (Array.isArray(rows) && rows.length > 0 && rows[0].data) {
+        return rows[0].data;
+      }
+    } catch (err) {
+      console.warn("Supabase get portfolio failed, falling back to local file:", err?.message || err);
+    }
+  }
+  const all = await readJsonFile(portfoliosFile, {});
+  return all[id] || null;
 }
 
 // Handler: Inquiries / Contact
@@ -852,14 +1039,7 @@ export async function handleRequest(req, res) {
 
   // Stats
   if (matchApi("/api/stats") && req.method === "GET") {
-    const stats = await readJsonFile(statsFile, {
-      projectsCompleted: 340,
-      happyClients: 80,
-      clientSatisfaction: "100%",
-      yearsExperience: 4,
-      servicesOffered: 4,
-      activeInquiriesThisWeek: 0,
-    });
+    const stats = await getStatsData();
     sendJson(res, 200, { ok: true, stats });
     return;
   }
@@ -872,14 +1052,7 @@ export async function handleRequest(req, res) {
     }
     try {
       const body = await readRequestBody(req);
-      const current = await readJsonFile(statsFile, {
-        projectsCompleted: 340,
-        happyClients: 80,
-        clientSatisfaction: "100%",
-        yearsExperience: 4,
-        servicesOffered: 4,
-        activeInquiriesThisWeek: 0,
-      });
+      const current = await getStatsData();
       const updated = {
         ...current,
         projectsCompleted: Number(body.projectsCompleted ?? current.projectsCompleted),
@@ -889,7 +1062,7 @@ export async function handleRequest(req, res) {
         servicesOffered: Number(body.servicesOffered ?? current.servicesOffered),
         activeInquiriesThisWeek: Number(body.activeInquiriesThisWeek ?? current.activeInquiriesThisWeek),
       };
-      await writeJsonFile(statsFile, updated);
+      await saveStatsData(updated);
       sendJson(res, 200, { ok: true, stats: updated });
     } catch (err) {
       sendJson(res, 500, { ok: false, error: err.message || "Failed to update stats" });
@@ -906,7 +1079,7 @@ export async function handleRequest(req, res) {
 
   // Testimonials
   if (matchApi("/api/testimonials") && req.method === "GET") {
-    const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
+    const testimonials = await listTestimonials();
     sendJson(res, 200, { ok: true, testimonials });
     return;
   }
@@ -918,7 +1091,6 @@ export async function handleRequest(req, res) {
     }
     try {
       const body = await readRequestBody(req);
-      const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
       const newReview = {
         id: "test-" + Date.now(),
         name: cleanString(body.name),
@@ -930,9 +1102,8 @@ export async function handleRequest(req, res) {
         project: cleanString(body.project, "Creative Studio Engagement"),
         date: cleanString(body.date, "Recently"),
       };
-      testimonials.unshift(newReview);
-      await writeJsonFile(testimonialsFile, testimonials);
-      sendJson(res, 201, { ok: true, testimonial: newReview });
+      const saved = await saveTestimonial(newReview);
+      sendJson(res, 201, { ok: true, testimonial: saved });
       return;
     } catch (err) {
       sendJson(res, 500, { ok: false, errors: [err.message] });
@@ -947,9 +1118,7 @@ export async function handleRequest(req, res) {
     }
     try {
       const id = pathname.replace(/^\/api\/testimonials\//, "").replace(/^\/testimonials\//, "");
-      const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
-      const filtered = testimonials.filter((t) => t.id !== id);
-      await writeJsonFile(testimonialsFile, filtered);
+      await deleteTestimonialItem(id);
       sendJson(res, 200, { ok: true, message: "Review deleted successfully." });
       return;
     } catch (err) {
@@ -979,6 +1148,39 @@ export async function handleRequest(req, res) {
   if (matchApi("/api/projects") && req.method === "POST") {
     await handleProjectCreate(req, res);
     return;
+  }
+
+  // Digital Portfolio Builder
+  if (matchApi("/api/builder") && req.method === "POST") {
+    try {
+      const body = await readRequestBody(req);
+      const id = cleanString(body.id) || "pf-" + Date.now().toString(36) + Math.random().toString(36).substring(2, 6);
+      const portfolio = {
+        ...body,
+        id,
+        createdAt: body.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      await savePortfolio(portfolio);
+      sendJson(res, 201, { ok: true, portfolio, id });
+      return;
+    } catch (err) {
+      sendJson(res, 500, { ok: false, errors: [err.message] });
+      return;
+    }
+  }
+
+  if ((pathname.startsWith("/api/builder/") || (pathname.startsWith("/builder/") && !pathname.includes("."))) && req.method === "GET") {
+    const id = pathname.replace(/^\/api\/builder\//, "").replace(/^\/builder\//, "");
+    if (id && id !== "builder") {
+      const found = await getPortfolio(id);
+      if (found) {
+        sendJson(res, 200, { ok: true, portfolio: found });
+        return;
+      }
+      sendJson(res, 404, { ok: false, error: "Portfolio not found." });
+      return;
+    }
   }
 
   // Inquiries / Contact
