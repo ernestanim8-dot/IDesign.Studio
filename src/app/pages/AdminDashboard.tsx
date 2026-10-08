@@ -6,6 +6,8 @@ import {
   getStats,
   updateStats,
   getTestimonials,
+  createTestimonial,
+  deleteTestimonial,
   verifyStudioPin,
   type InquiryItem,
   type StudioStats,
@@ -196,19 +198,33 @@ export function AdminDashboard() {
     setError("");
     setReviewSuccess("");
     try {
-      const res = await fetch("/api/testimonials", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newReview),
-      });
-      const json = await res.json();
-      if (res.ok && json.ok) {
-        setTestimonials((prev) => [json.testimonial, ...prev]);
+      const res = await createTestimonial(newReview, savedPin);
+      if (res.ok && res.testimonial) {
+        setTestimonials((prev) => [res.testimonial!, ...prev]);
         setNewReview(BLANK_REVIEW);
         setReviewSuccess("Review published successfully!");
         setTimeout(() => setReviewSuccess(""), 3500);
       } else {
-        setError(json.errors?.[0] || "Failed to publish review.");
+        setError(res.errors?.[0] || res.error || "Failed to publish review.");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Network error.");
+    }
+  };
+
+  const handleDeleteReview = async (id: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to remove the review by "${name}"?`)) {
+      return;
+    }
+    setError("");
+    try {
+      const res = await deleteTestimonial(id, savedPin);
+      if (res.ok) {
+        setTestimonials((prev) => prev.filter((item) => item.id !== id));
+        setReviewSuccess("Review deleted successfully.");
+        setTimeout(() => setReviewSuccess(""), 3500);
+      } else {
+        setError(res.error || "Failed to delete review.");
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Network error.");
@@ -714,6 +730,14 @@ export function AdminDashboard() {
                       <p className="text-xs text-neutral-400">{t.role}{t.company ? ` · ${t.company}` : ""}</p>
                       <p className="text-sm text-neutral-300 mt-2 leading-relaxed line-clamp-3">&ldquo;{t.quote}&rdquo;</p>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteReview(t.id, t.name)}
+                      title="Delete review"
+                      className="px-3 py-1.5 rounded-lg border border-red-900/60 text-red-400 hover:bg-red-950/40 text-xs font-mono transition-colors shrink-0 cursor-pointer"
+                    >
+                      Delete
+                    </button>
                   </div>
                 ))}
                 {!testimonialsLoading && testimonials.length === 0 && (

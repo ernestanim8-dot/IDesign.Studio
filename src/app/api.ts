@@ -121,6 +121,55 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   }
 }
 
+export async function createTestimonial(
+  review: {
+    name: string;
+    role?: string;
+    company?: string;
+    avatar?: string;
+    quote: string;
+    rating?: number;
+    project?: string;
+  },
+  adminToken?: string
+): Promise<{ ok: boolean; testimonial?: Testimonial; error?: string; errors?: string[] }> {
+  try {
+    const headers: HeadersInit = { "Content-Type": "application/json" };
+    if (adminToken) {
+      headers.Authorization = `Bearer ${adminToken.trim()}`;
+      headers["x-admin-token"] = adminToken.trim();
+    }
+    const res = await fetch("/api/testimonials", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(review),
+    });
+    return await readJsonResponse(res, { ok: false, error: "Empty server response." });
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Network error" };
+  }
+}
+
+export async function deleteTestimonial(
+  id: string,
+  adminToken?: string
+): Promise<{ ok: boolean; message?: string; error?: string }> {
+  try {
+    const headers: HeadersInit = {};
+    if (adminToken) {
+      headers.Authorization = `Bearer ${adminToken.trim()}`;
+      headers["x-admin-token"] = adminToken.trim();
+    }
+    const res = await fetch(`/api/testimonials/${encodeURIComponent(id)}`, {
+      method: "DELETE",
+      headers,
+    });
+    return await readJsonResponse(res, { ok: false, error: "Failed to delete review." });
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Network error" };
+  }
+}
+
 export async function verifyStudioPin(pin: string): Promise<{ ok: boolean; error?: string }> {
   try {
     const res = await fetch("/api/auth/verify-pin", {

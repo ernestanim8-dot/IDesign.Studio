@@ -91,20 +91,22 @@ graph TD
 ### E. Upgraded Studio Control Center & Notification Engine
 
 - **Admin Dashboard (`/admin`)**:
-  - Tabbed interface separating **Client Inquiries** from **Live Studio Performance Metrics**.
+  - Tabbed interface separating **Client Inquiries**, **Live Studio Performance Metrics**, and **Client Reviews Management**.
   - Inquiries search bar filtering across name, email, phone, interest, and message content.
   - Status badges (`New`, `Contacted`, `Qualified`, `Booked`, `Closed`) with instant status transitions.
   - Permanent lead deletion with confirmation safety modal.
   - Live **Studio Metrics Editor** allowing the studio director to edit `projectsCompleted`, `happyClients`, `clientSatisfaction`, `yearsExperience`, and `servicesOffered` and save them live to the site.
+  - **Client Reviews & Testimonial Publisher**: Form to publish verified client reviews directly with name, role, company, star rating, and quote, plus deletion controls for existing entries.
 - **Multi-Channel Inquiry Notifications (`server/index.js`)**:
   - Resend email alerts with luxury HTML templates for both client confirmation and studio alerts.
   - Discord webhook dispatching with rich gold embedded cards.
   - Telegram bot push notifications direct to the studio phone.
   - Generic JSON webhook support for third-party automation (Zapier, Make, n8n).
+  - PIN authorization enforced across protected endpoints (`POST /api/stats`, `GET /api/inquiries`, `PATCH /api/inquiries/:id`, `DELETE /api/inquiries/:id`, `POST /api/testimonials`, `DELETE /api/testimonials/:id`).
 - **Fashion & Lookbook Photography (`src/app/pages/Photography.tsx`)**:
-  - Added dedicated **Fashion** category filter tab.
+  - Dedicated **Fashion** category filter tab and campaign cards with multi-photo nested lightbox.
   - Multi-category tag matching across Haute Couture, Runway, and Editorial showcases.
-  - Added Fashion & Lookbook service breakdown to the overview grid.
+  - Fashion & Lookbook service breakdown in the overview grid.
 - **Production SEO & Sitemap (`public/sitemap.xml`)**:
   - Added `/builder` route to XML sitemap.
 
@@ -118,16 +120,18 @@ All endpoints were tested and verified against the running server at `http://127
 
 - `GET /api/health` -> `HTTP 200` (`{"ok":true,"service":"idesign-api","version":"2.0.0"}`)
 - `GET /api/stats` -> `HTTP 200` (`{"projectsCompleted":340,"clientSatisfaction":"100%"}`)
-- `POST /api/stats` -> `HTTP 200` (Successfully updated live studio metrics)
-- `POST /api/builder` -> `HTTP 201` (`"Digital portfolio created successfully"`)
-- `GET /api/builder/:id` -> `HTTP 200` (Retrieved saved portfolio)
+- `POST /api/stats` -> `HTTP 200` (Successfully updated live studio metrics with admin token)
+- `GET /api/testimonials` -> `HTTP 200` (Returns published client reviews)
+- `POST /api/testimonials` -> `HTTP 201` (Publishes review with admin authentication)
+- `DELETE /api/testimonials/:id` -> `HTTP 200` (Deletes review with admin token)
 - `POST /api/contact` -> `HTTP 201` (Inquiry received & parallel notifications dispatched)
 - `GET /api/inquiries` -> `HTTP 200` (Returned inquiries list with status filtering)
 - `DELETE /api/inquiries/:id` -> `HTTP 200` (Inquiry deleted successfully)
 
-### Frontend Production Build
+### Type Checking & Production Build
 
+- Executed `npx tsc --noEmit`:
+  - **Status: SUCCESS (0 errors)** with `server/index.d.ts` module declarations.
 - Executed `npm run build`:
-  - Transformed 869 modules.
-  - Bundled PWA Service Worker (`dist/sw.js`).
-  - **Build status: SUCCESS (0 errors, 0 warnings, completed in 6.94s)**.
+  - Bundled PWA Service Worker (`dist/sw.js`) and precached assets.
+  - **Build status: SUCCESS (0 errors, built in 3.11s)**.

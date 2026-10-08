@@ -912,11 +912,15 @@ export async function handleRequest(req, res) {
   }
 
   if (matchApi("/api/testimonials") && req.method === "POST") {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, error: "Unauthorized. Admin token required." });
+      return;
+    }
     try {
       const body = await readRequestBody(req);
       const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
       const newReview = {
-        id: "test-" + (testimonials.length + 1),
+        id: "test-" + Date.now(),
         name: cleanString(body.name),
         role: cleanString(body.role, "Client"),
         company: cleanString(body.company, "Verified Partner"),
@@ -924,11 +928,29 @@ export async function handleRequest(req, res) {
         quote: cleanString(body.quote),
         rating: Math.min(5, Math.max(1, Number(body.rating) || 5)),
         project: cleanString(body.project, "Creative Studio Engagement"),
-        date: "Recently",
+        date: cleanString(body.date, "Recently"),
       };
       testimonials.unshift(newReview);
       await writeJsonFile(testimonialsFile, testimonials);
       sendJson(res, 201, { ok: true, testimonial: newReview });
+      return;
+    } catch (err) {
+      sendJson(res, 500, { ok: false, errors: [err.message] });
+      return;
+    }
+  }
+
+  if ((pathname.startsWith("/api/testimonials/") || pathname.startsWith("/testimonials/")) && req.method === "DELETE") {
+    if (!isAuthorizedAdminRequest(req)) {
+      sendJson(res, 401, { ok: false, error: "Unauthorized. Admin token required." });
+      return;
+    }
+    try {
+      const id = pathname.replace(/^\/api\/testimonials\//, "").replace(/^\/testimonials\//, "");
+      const testimonials = await readSeededJsonFile(testimonialsFile, seedTestimonialsFile, []);
+      const filtered = testimonials.filter((t) => t.id !== id);
+      await writeJsonFile(testimonialsFile, filtered);
+      sendJson(res, 200, { ok: true, message: "Review deleted successfully." });
       return;
     } catch (err) {
       sendJson(res, 500, { ok: false, errors: [err.message] });
@@ -1028,3 +1050,7 @@ if (isDirectRun && !process.env.VERCEL) {
     console.log(`Backend running at http://localhost:${port}`);
   });
 }
+
+export { server };
+export default handleRequest;
+
