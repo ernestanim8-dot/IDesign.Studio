@@ -87,9 +87,8 @@ export default defineConfig(({ mode }) => {
           // deployment; caching an older copy can make it request a bundle
           // that Vercel has already removed. Vercel handles SPA navigation,
           // while every JavaScript chunk from the current build is cached.
-          globPatterns: ['**/*.{css,ico,svg,woff2}', 'assets/**/*.js', 'offline.html'],
-          navigateFallback: '/offline.html',
-          navigateFallbackDenylist: [/^\/api\//],
+          globPatterns: ['**/*.{css,ico,svg,woff2}', 'assets/**/*.js'],
+          navigateFallback: null,
           clientsClaim: true,
           skipWaiting: true,
           runtimeCaching: [

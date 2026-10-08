@@ -415,27 +415,11 @@ export function Layout() {
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            style={{ position: "relative" }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.24, ease: "easeOut" }}
           >
-            {/* Curtain wipe overlay — sweeps in then retracts on enter */}
-            <motion.div
-              key={`curtain-${location.pathname}`}
-              initial={{ clipPath: "inset(0 100% 0 0)" }}
-              animate={{ clipPath: "inset(0 0% 0 0)", transition: { duration: 0.22, ease: [0.76, 0, 0.24, 1] } }}
-              exit={{ clipPath: "inset(0 0 0 100%)", transition: { duration: 0.22, ease: [0.76, 0, 0.24, 1] } }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: DARKER,
-                zIndex: 40,
-                pointerEvents: "none",
-                minHeight: "100vh",
-              }}
-            />
             <ErrorBoundary>
               <Outlet />
             </ErrorBoundary>
