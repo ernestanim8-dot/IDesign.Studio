@@ -11,8 +11,8 @@ const path  = require('path');
 
 const ROOT       = path.resolve(__dirname, '../src/imports');
 const MAX_DIM    = 1600;
-const QUALITY    = 90;
-const SKIP_BELOW = 200 * 1024; // 200 KB
+const QUALITY    = 80;
+const SKIP_BELOW = 80 * 1024; // 80 KB
 
 let totalBefore = 0;
 let totalAfter  = 0;
