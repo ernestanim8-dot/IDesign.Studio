@@ -492,7 +492,7 @@ export function Home() {
                   "Hello iDESIGN! I found you through your website and would like to chat."
                 )}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -835,7 +835,7 @@ export function Home() {
           <a
             href={`https://wa.me/233502310663?text=${encodeURIComponent("Hello iDESIGN! I would like to share a short testimonial about my experience working with you.")}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1177,7 +1177,7 @@ export function Home() {
                 "Hello iDESIGN! I'm ready to discuss a new project."
               )}`}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               style={{
                 fontFamily: "'Work Sans', sans-serif",
                 fontWeight: 600,

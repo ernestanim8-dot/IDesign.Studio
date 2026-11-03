@@ -72,7 +72,7 @@ function SocialIconLink({ icon: Icon, href, label, color = "#aaa49a", hoverColor
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       aria-label={label}
       title={label}
       style={{ color, transition: "color 0.2s, transform 0.2s", display: "inline-flex", alignItems: "center" }}
@@ -252,7 +252,7 @@ export function Layout() {
           <a href="mailto:idesign6048@gmail.com" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
             idesign6048@gmail.com
           </a>
-          <a href="https://wa.me/233502310663" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
+          <a href="https://wa.me/233502310663" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.05em", color: "#aaa49a", textDecoration: "none" }}>
             +233 50 231 0663 (WhatsApp)
           </a>
         </div>
