@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+﻿import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
@@ -2135,7 +2135,7 @@ export function GraphicDesign() {
               letterSpacing: "0.06em",
               textTransform: "uppercase",
               padding: "0.9rem 2.25rem",
-              background: WHITE,
+              background: "var(--theme-card-bg, #ffffff)",
               color: GOLD,
               textDecoration: "none",
               borderRadius: "3px",

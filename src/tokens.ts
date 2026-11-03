@@ -1,18 +1,21 @@
 export const GOLD = "#c8a54a";
 export const GOLD_LIGHT = "#e4c06e";
 export const GOLD_GLOW = "rgba(200, 165, 74, 0.25)";
-export const DARK = "#1a1814";
+
+// Dynamic theme tokens (seamlessly adapt to Warm Editorial & Obsidian Noir)
+export const DARK = "var(--theme-text, #1a1814)";
 export const DARKER = "#0d0c09";
-export const DARK_ELEVATED = "#141310";
-export const MUTED = "#7a7368";
+export const DARK_ELEVATED = "var(--theme-card-bg, #141310)";
+export const MUTED = "var(--theme-text-muted, #7a7368)";
 export const MUTED_LIGHT = "#a69f92";
-export const BG = "#faf8f4";
+export const BG = "var(--theme-bg, #faf8f4)";
 export const BG_DARK = "#0d0c09";
-export const SURFACE = "#f2ede5";
+export const SURFACE = "var(--theme-surface, #f2ede5)";
 export const SURFACE_DARK = "#181612";
-export const BORDER = "#e0d8cc";
+export const BORDER = "var(--theme-border, #e0d8cc)";
 export const BORDER_DARK = "#28251e";
 export const WHITE = "#ffffff";
+export const CARD_BG = "var(--theme-card-bg, #ffffff)";
 
 export const THEME_PRESETS = {
   "obsidian-gold": {

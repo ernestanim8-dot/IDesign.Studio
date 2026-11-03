@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+﻿import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
@@ -310,7 +310,7 @@ export function Contact() {
                   display: "flex",
                   alignItems: "center",
                   gap: "1rem",
-                  background: WHITE,
+                  background: "var(--theme-card-bg, #ffffff)",
                   padding: "1rem 1.25rem",
                   borderRadius: "6px",
                   border: `1px solid ${BORDER}`,
@@ -705,7 +705,7 @@ export function Contact() {
                     flexDirection: "column",
                     gap: "1.25rem",
                     padding: "2.5rem",
-                    background: WHITE,
+                    background: "var(--theme-card-bg, #ffffff)",
                     border: `1px solid ${BORDER}`,
                     borderRadius: "6px",
                     boxShadow: "0 8px 32px rgba(26,24,20,0.06)",
@@ -784,7 +784,7 @@ export function Contact() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   style={{
-                    background: WHITE,
+                    background: "var(--theme-card-bg, #ffffff)",
                     padding: "2.5rem",
                     borderRadius: "6px",
                     border: `1px solid ${BORDER}`,

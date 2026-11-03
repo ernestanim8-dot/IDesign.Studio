@@ -6,6 +6,7 @@ import logoMark from "@/imports/i design logo gh.png";
 import { GOLD, DARK, DARKER, MUTED, BG, BORDER, WHITE } from "@/tokens";
 import { Preloader } from "./components/Preloader";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 // Lazy-load non-critical components — they're only visible after user action
 const WhatsAppFloatingButton = lazy(() =>
@@ -256,7 +257,8 @@ export function Layout() {
             +233 50 231 0663 (WhatsApp)
           </a>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="compact" />
           <button
             onClick={() => setIsInquiriesOpen(true)}
             className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#201d17] hover:bg-[#c8a54a]/20 border border-[#383327] hover:border-[#c8a54a] transition-all"
@@ -276,7 +278,7 @@ export function Layout() {
       </div>
 
       {/* main nav */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(250,248,244,0.96)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", borderBottom: `1px solid ${BORDER}`, padding: "0 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
+      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "var(--theme-nav-bg, rgba(250,248,244,0.96))", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", borderBottom: `1px solid ${BORDER}`, padding: "0 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
         <NavLink to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <img src={logoMark} alt="iDESIGN" style={{ height: "44px", width: "auto", objectFit: "contain" }} />
         </NavLink>
@@ -304,6 +306,7 @@ export function Layout() {
               <span>{label}</span>
             </NavLink>
           ))}
+          <ThemeToggle variant="pill" />
           <NavLink
             to="/contact"
             className="book-project-link"
@@ -353,7 +356,7 @@ export function Layout() {
                 top: "100%",
                 left: 0,
                 right: 0,
-                background: BG,
+                background: "var(--theme-mobile-drawer, #faf8f4)",
                 borderBottom: `1px solid ${BORDER}`,
                 padding: "1.5rem 2rem",
                 display: "flex",
@@ -362,6 +365,7 @@ export function Layout() {
                 zIndex: 100,
               }}
             >
+              <ThemeToggle variant="mobile" className="mb-2" />
               {NAV_LINKS.map(({ label, to }) => (
                 <NavLink
                   key={to}

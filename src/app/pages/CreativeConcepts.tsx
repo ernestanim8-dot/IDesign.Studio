@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from "react"
+﻿import { useRef, useState, useEffect, useMemo } from "react"
 
 import { Link } from "react-router"
 
@@ -1247,7 +1247,7 @@ export function CreativeConcepts() {
             {/* Step 1: Base Tier */}
             <div
               style={{
-                background: WHITE,
+                background: "var(--theme-card-bg, #ffffff)",
 
                 padding: "2rem",
 
@@ -1393,7 +1393,7 @@ export function CreativeConcepts() {
             {/* Step 2: Add-Ons */}
             <div
               style={{
-                background: WHITE,
+                background: "var(--theme-card-bg, #ffffff)",
 
                 padding: "2rem",
 
@@ -2652,7 +2652,7 @@ export function CreativeConcepts() {
 
                       justifyContent: "space-between",
 
-                      background: WHITE,
+                      background: "var(--theme-card-bg, #ffffff)",
                     }}
                   >
                     <div>

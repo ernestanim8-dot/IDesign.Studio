@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+﻿import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -1331,7 +1331,7 @@ export function Home() {
                   style={{
                     border: `1px solid ${isOpen ? GOLD : BORDER}`,
                     borderRadius: "6px",
-                    background: WHITE,
+                    background: "var(--theme-card-bg, #ffffff)",
                     overflow: "hidden",
                     transition: "border-color 0.2s",
                   }}

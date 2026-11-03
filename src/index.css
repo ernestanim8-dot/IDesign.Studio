@@ -15,12 +15,39 @@ html {
   scroll-margin-top: 86px;
 }
 
+:root {
+  --theme-bg: #faf8f4;
+  --theme-surface: #f2ede5;
+  --theme-card-bg: #ffffff;
+  --theme-card-rgb: 255, 255, 255;
+  --theme-text: #1a1814;
+  --theme-text-muted: #7a7368;
+  --theme-border: #e0d8cc;
+  --theme-nav-bg: rgba(250, 248, 244, 0.96);
+  --theme-mobile-drawer: #faf8f4;
+  --theme-scrollbar-track: rgba(13, 12, 9, 0.05);
+}
+
+.dark, [data-theme="dark"] {
+  --theme-bg: #0d0c09;
+  --theme-surface: #141310;
+  --theme-card-bg: #161410;
+  --theme-card-rgb: 22, 20, 16;
+  --theme-text: #f5f3ef;
+  --theme-text-muted: #9e978c;
+  --theme-border: #28251e;
+  --theme-nav-bg: rgba(13, 12, 9, 0.96);
+  --theme-mobile-drawer: #141310;
+  --theme-scrollbar-track: rgba(255, 255, 255, 0.05);
+}
+
 body {
-  background: #faf8f4;
-  color: #1a1814;
+  background: var(--theme-bg, #faf8f4);
+  color: var(--theme-text, #1a1814);
   font-family: 'Work Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.2s ease;
 }
 
 ::selection {
@@ -33,7 +60,7 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(13, 12, 9, 0.05);
+  background: var(--theme-scrollbar-track, rgba(13, 12, 9, 0.05));
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(200, 165, 74, 0.3);
@@ -45,9 +72,9 @@ body {
 
 /* Glassmorphism & Luxury Cards (GPU-optimized blur radius) */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(var(--theme-card-rgb, 255, 255, 255), 0.85);
   -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 165, 74, 0.18);
 }
 
