@@ -28,3 +28,6 @@ server/data/*
 !server/data/stats.json
 !server/data/testimonials.json
 dev-dist/
+
+.vercel
+.env*
