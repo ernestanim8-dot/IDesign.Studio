@@ -307,7 +307,7 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ["about-preview", "photography", "graphic-design", "advertising", "featured-work", "cta"];
+    const sectionIds = ["about-preview", "photography", "graphic-design", "advertising", "featured-work", "studio-rates", "cta"];
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -574,6 +574,7 @@ export function Home() {
             ["Graphic Design", "#graphic-design"],
             ["Advertising", "#advertising"],
             ["Featured Work", "#featured-work"],
+            ["Rates", "#studio-rates"],
             ["Book", "#cta"],
           ].map(([label, href]) => {
             const sectionId = href.slice(1);
@@ -990,6 +991,303 @@ export function Home() {
                   borderRadius: 2,
                 }}
               />
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── Studio Rates & Packages Spotlight ── */}
+      <section
+        id="studio-rates"
+        style={{
+          background: DARKER,
+          padding: "6rem 2rem",
+          borderTop: `1px solid ${BORDER}`,
+          borderBottom: `1px solid ${BORDER}`,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "600px",
+            height: "600px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(200,165,74,0.06) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div style={{ maxWidth: "1240px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <FadeUp>
+            <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+              <p
+                style={{
+                  fontFamily: "'DM Mono',monospace",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                — Transparent Investment
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'DM Serif Display',serif",
+                  fontSize: "clamp(2rem,4vw,3.2rem)",
+                  letterSpacing: "-0.02em",
+                  color: WHITE,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Studio Session Packages
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Work Sans',sans-serif",
+                  fontSize: "0.95rem",
+                  fontWeight: 300,
+                  lineHeight: "1.7",
+                  color: "rgba(255,255,255,0.65)",
+                  maxWidth: "580px",
+                  margin: "0 auto",
+                }}
+              >
+                Clear flat-rate photography packages crafted for portraits, couples, life milestones, and creative direction.
+              </p>
+            </div>
+          </FadeUp>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                title: "Studio Portrait Session",
+                badge: "Most Popular",
+                icon: "📸",
+                price: "GH₵300 – GH₵650",
+                desc: "Refined indoor session with professional studio lighting, creative backdrops, and precision editorial retouching.",
+                features: [
+                  "10 Master Retouched Images",
+                  "Up to 3 Outfit Changes",
+                  "Professional Posing Direction",
+                  "Private High-Resolution Gallery",
+                  "Fast 3–5 Day Turnaround",
+                ],
+                waMsg: "Hello iDESIGN! I would like to book a Studio Portrait Session. Please let me know your available dates.",
+              },
+              {
+                title: "Location & Couples Shoot",
+                badge: "Outdoor & Lifestyle",
+                icon: "🌇",
+                price: "GH₵300 – GH₵700",
+                desc: "Dynamic outdoor session on location in Accra or surrounding destinations. Ideal for couples, lifestyle, and creatives.",
+                features: [
+                  "7–10 Master Retouched Images",
+                  "2–3 Outfits Across Scenic Backdrops",
+                  "Natural Golden-Hour Lighting",
+                  "Full High-Res Download Access",
+                  "Creative Storyboarding Included",
+                ],
+                waMsg: "Hello iDESIGN! I'm interested in booking an Outdoor Location or Couples Shoot. What are your next available dates?",
+              },
+              {
+                title: "Pre-Wedding & Milestones",
+                badge: "Signature Experience",
+                icon: "💍",
+                price: "From GH₵900",
+                desc: "Luxury multi-location visual narrative celebrating engagements, commencement graduations, and matrimonial milestones.",
+                features: [
+                  "10–15+ Master Retouched Photos",
+                  "Multiple Locations & Up to 3 Outfits",
+                  "Couple & Regalia Framing",
+                  "Full-Resolution Print-Ready Files",
+                  "Dedicated Creative Consultation",
+                ],
+                waMsg: "Hello iDESIGN! I would like to inquire about booking a Pre-Wedding or Milestone Shoot package.",
+              },
+            ].map((pkg, idx) => (
+              <FadeUp key={pkg.title} delay={idx * 0.1}>
+                <div
+                  style={{
+                    background: "rgba(255,255,255,0.03)",
+                    backdropFilter: "blur(12px)",
+                    border: `1px solid ${pkg.badge === "Most Popular" ? GOLD : "rgba(255,255,255,0.08)"}`,
+                    borderRadius: "8px",
+                    padding: "2.25rem 1.75rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    position: "relative",
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span style={{ fontSize: "1.5rem" }}>{pkg.icon}</span>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.58rem",
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        padding: "0.3rem 0.65rem",
+                        borderRadius: "50px",
+                        background: pkg.badge === "Most Popular" ? "rgba(200,165,74,0.18)" : "rgba(255,255,255,0.06)",
+                        color: pkg.badge === "Most Popular" ? GOLD : "rgba(255,255,255,0.6)",
+                        border: `1px solid ${pkg.badge === "Most Popular" ? GOLD : "rgba(255,255,255,0.12)"}`,
+                      }}
+                    >
+                      {pkg.badge}
+                    </span>
+                  </div>
+
+                  <h3
+                    style={{
+                      fontFamily: "'DM Serif Display',serif",
+                      fontSize: "1.45rem",
+                      color: WHITE,
+                      marginBottom: "0.4rem",
+                    }}
+                  >
+                    {pkg.title}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontFamily: "'Work Sans',sans-serif",
+                      fontSize: "0.82rem",
+                      fontWeight: 300,
+                      lineHeight: "1.6",
+                      color: "rgba(255,255,255,0.6)",
+                      marginBottom: "1.25rem",
+                    }}
+                  >
+                    {pkg.desc}
+                  </p>
+
+                  <div style={{ marginBottom: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "1rem" }}>
+                    <p
+                      style={{
+                        fontFamily: "'DM Mono',monospace",
+                        fontSize: "0.58rem",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.4)",
+                        marginBottom: "0.25rem",
+                      }}
+                    >
+                      Starting Rate
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'DM Serif Display',serif",
+                        fontSize: "1.85rem",
+                        color: GOLD,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {pkg.price}
+                    </p>
+                  </div>
+
+                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem 0", display: "flex", flexDirection: "column", gap: "0.6rem", flex: 1 }}>
+                    {pkg.features.map((feat) => (
+                      <li
+                        key={feat}
+                        style={{
+                          fontFamily: "'Work Sans',sans-serif",
+                          fontSize: "0.82rem",
+                          color: "rgba(255,255,255,0.8)",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <span style={{ color: GOLD, fontSize: "0.75rem" }}>✓</span>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={`https://wa.me/233502310663?text=${encodeURIComponent(pkg.waMsg)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "0.4rem",
+                      fontFamily: "'Work Sans',sans-serif",
+                      fontWeight: 600,
+                      fontSize: "0.82rem",
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      padding: "0.85rem 1rem",
+                      borderRadius: "3px",
+                      background: pkg.badge === "Most Popular" ? GOLD : "transparent",
+                      color: pkg.badge === "Most Popular" ? WHITE : GOLD,
+                      border: `1px solid ${GOLD}`,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    Book on WhatsApp 💬
+                  </a>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+
+          <FadeUp delay={0.25}>
+            <div
+              style={{
+                textAlign: "center",
+                background: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: "8px",
+                padding: "1.75rem 2rem",
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "1.25rem",
+              }}
+            >
+              <div style={{ textAlign: "left" }}>
+                <p style={{ fontFamily: "'DM Serif Display',serif", fontSize: "1.2rem", color: WHITE, marginBottom: "0.2rem" }}>
+                  Need Commercial, Wedding, or Brand Identity Packages?
+                </p>
+                <p style={{ fontFamily: "'Work Sans',sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.55)" }}>
+                  Explore complete Silver &amp; Gold tier breakdowns, add-ons, and instant custom pricing calculations.
+                </p>
+              </div>
+              <Link
+                to="/creative-concepts#studio-rates"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontFamily: "'Work Sans',sans-serif",
+                  fontWeight: 600,
+                  fontSize: "0.82rem",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  padding: "0.85rem 1.6rem",
+                  background: "transparent",
+                  color: GOLD,
+                  border: `1px solid ${GOLD}`,
+                  borderRadius: "3px",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                View Full Rate Card →
+              </Link>
             </div>
           </FadeUp>
         </div>
