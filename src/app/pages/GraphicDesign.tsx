@@ -40,6 +40,8 @@ import glamourSticker from "@/imports/Advertising/3mma’s Glamour/3mma’s Glam
 import godHaveMercy from "@/imports/Advertising/God have mercy food joint/God have mercy food joint 2.jpg";
 import iceCream from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg";
 import effesCosmetics from "@/imports/Advertising/It's Effes cosmetic/IT’S EFFES COSMETICS 3a.jpg";
+import effesCosmeticsPoster2026 from "@/imports/Advertising/It's Effes cosmetic/IT'S EFFES COSMETICS Campaign Poster 2026.jpg";
+import effesCosmeticsBanner2026 from "@/imports/Advertising/It's Effes cosmetic/IT'S EFFES COSMETICS Rollup Banner 2026.jpg";
 import janeNails from "@/imports/Advertising/Nails by Jane/Jane copy.jpg";
 import janetNails from "@/imports/Advertising/Nails by Jane/Janet copy copy.jpg";
 import openSoon from "@/imports/Advertising/Open Soon/open soon 1.jpg";
@@ -479,8 +481,24 @@ const ICE_CREAM_GALLERY: LightboxItem[] = [
 
 const EFFES_COSMETICS_GALLERY: LightboxItem[] = [
   {
+    img: effesCosmeticsPoster2026,
+    title: "It's Effes Cosmetics 2026 Campaign Poster",
+    category: "Advertising Design",
+    client: "It's Effes Cosmetic",
+    year: "2026",
+    description: "High-impact 2026 beauty and cosmetics promotional advertising campaign visual.",
+  },
+  {
+    img: effesCosmeticsBanner2026,
+    title: "It's Effes Cosmetics Rollup Banner",
+    category: "Advertising Design",
+    client: "It's Effes Cosmetic",
+    year: "2026",
+    description: "Sleek vertical rollup brand display and promotional banner for salon and retail.",
+  },
+  {
     img: effesCosmetics,
-    title: "It's Effes Cosmetics Campaign",
+    title: "It's Effes Cosmetics Brand Visual",
     category: "Advertising Design",
     client: "It's Effes Cosmetic",
     year: "2025",
@@ -1292,14 +1310,14 @@ const PROJECTS: DesignProject[] = [
     id: 16,
     title: "It's Effes Cosmetics",
     client: "It's Effes Cosmetic",
-    year: "2025",
-    img: effesCosmetics,
+    year: "2026",
+    img: effesCosmeticsPoster2026,
     wide: false,
     discipline: "Advertising & Flyers",
     gallery: "effes",
     category: "Advertising & Flyers",
     description:
-      "Elegantly crafted beauty cosmetics promotion and branding visual. Click to view the gallery.",
+      "Elegantly crafted 2026 beauty cosmetics campaign and rollup promotional visuals. Click to view the gallery.",
   },
   {
     id: 17,
