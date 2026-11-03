@@ -40,8 +40,8 @@ import glamourSticker from "@/imports/Advertising/3mma’s Glamour/3mma’s Glam
 import godHaveMercy from "@/imports/Advertising/God have mercy food joint/God have mercy food joint 2.jpg";
 import iceCream from "@/imports/Advertising/Ice Cream/Ice Cream copy.jpg";
 import effesCosmetics from "@/imports/Advertising/It's Effes cosmetic/IT’S EFFES COSMETICS 3a.jpg";
-import effesCosmeticsPoster2026 from "@/imports/Advertising/It's Effes cosmetic/IT'S EFFES COSMETICS Campaign Poster 2026.jpg";
-import effesCosmeticsBanner2026 from "@/imports/Advertising/It's Effes cosmetic/IT'S EFFES COSMETICS Rollup Banner 2026.jpg";
+import effesCosmeticsPoster2026 from "@/imports/Advertising/It's Effes cosmetic 2026/IT'S EFFES COSMETICS Campaign Poster 2026.jpg";
+import effesCosmeticsBanner2026 from "@/imports/Advertising/It's Effes cosmetic 2026/IT'S EFFES COSMETICS Rollup Banner 2026.jpg";
 import janeNails from "@/imports/Advertising/Nails by Jane/Jane copy.jpg";
 import janetNails from "@/imports/Advertising/Nails by Jane/Janet copy copy.jpg";
 import openSoon from "@/imports/Advertising/Open Soon/open soon 1.jpg";
