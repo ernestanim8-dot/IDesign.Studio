@@ -298,10 +298,11 @@ export function Home() {
         role: t.role || "Client",
         rating: t.rating ?? 5,
         initials: t.name.split(" ").map((w: string) => w[0]).join("").toUpperCase().slice(0, 2),
-        image: t.avatar || undefined,
+        image: t.avatar || (TESTIMONIALS.find((item) => item.author.toLowerCase() === t.name.toLowerCase())?.image) || undefined,
       }));
       // Prepend live reviews before hardcoded ones
-      setLiveTestimonials([...mapped, ...TESTIMONIALS]);
+      const remoteAuthors = new Set(mapped.map((m) => m.author.toLowerCase()));
+      setLiveTestimonials([...mapped, ...TESTIMONIALS.filter((item) => !remoteAuthors.has(item.author.toLowerCase()))]);
     }).catch(() => { /* silent — use hardcoded */ });
   }, []);
 

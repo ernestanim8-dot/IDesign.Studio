@@ -1,35 +1,57 @@
 [
   {
     "id": "test-1",
-    "name": "Ama Serwaa",
-    "role": "Founder & Creative Director",
-    "company": "Kente Contemporary",
-    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces&auto=format",
-    "quote": "iDESIGN transformed our entire brand universe. The packaging and photography felt like a Parisian editorial while staying true to our African luxury heritage. Remarkable attention to detail.",
+    "name": "Elizabeth Simpson",
+    "role": "Student",
+    "company": "",
+    "avatar": "",
+    "quote": "I loved how creative they were with the concepts, props, poses, and different backgrounds. Every setup had its own personality, and the final images looked professional, vibrant, and full of life. I’m genuinely impressed with the results!",
     "rating": 5,
-    "project": "Brand Identity & Product Editorial",
-    "date": "February 2025"
+    "project": "Creative Portrait Session",
+    "date": "2025"
   },
   {
     "id": "test-2",
-    "name": "David Mensah",
-    "role": "Managing Partner",
-    "company": "Haven Ridge Architecture",
-    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&auto=format",
-    "quote": "Their architectural photography captured the play of tropical morning light across our concrete facades better than any agency we've ever hired. Our client inquiries doubled in two months.",
+    "name": "Deborah Simpson",
+    "role": "Fashion Designer",
+    "company": "",
+    "avatar": "",
+    "quote": "I absolutely loved my experience with IDesign! The photos came out even better than I imagined. I’m really happy with the final results and would definitely recommend their photography services.",
     "rating": 5,
-    "project": "Architectural Visual Direction",
-    "date": "January 2025"
+    "project": "Fashion & Lookbook Photography",
+    "date": "2025"
   },
   {
     "id": "test-3",
-    "name": "Elena Rostova",
-    "role": "Head of Marketing",
-    "company": "Velox Sound & Acoustics",
-    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces&auto=format",
-    "quote": "Fast, visionary, and impeccable taste. The digital portfolio system they structured for our product line launch blew our stakeholders away.",
+    "name": "Ashami",
+    "role": "Student",
+    "company": "",
+    "avatar": "",
+    "quote": "This photoshoot was such a wonderful experience! I felt confident and comfortable throughout the session, and the final images exceeded my expectations. Every detail was beautifully captured, from the lighting to the vibrant colors. I’m truly grateful for these stunning portraits and would definitely recommend iDesign Photography!",
+    "rating": 4,
+    "project": "Editorial Studio Portrait",
+    "date": "2025"
+  },
+  {
+    "id": "test-4",
+    "name": "Lawrencia Takyi",
+    "role": "Sales Personnel",
+    "company": "",
+    "avatar": "",
+    "quote": "I really love my shoot with iDesign. It was an amazing moment with him. The pictures came out standing. The images looked real and nice also the posses were on point and the colors made it beautiful. He made me enjoy my shoot and also made me know that taking shoot involve nature and involvement. I will also love to take my next shot with him.",
     "rating": 5,
-    "project": "Launch Campaign & Digital Showcase",
-    "date": "December 2024"
+    "project": "Personal Portrait Session",
+    "date": "2025"
+  },
+  {
+    "id": "test-5",
+    "name": "Nicole",
+    "role": "Trader",
+    "company": "",
+    "avatar": "",
+    "quote": "Thank you so much! You really helped me a lot with my presentation today. I honestly don’t think I would’ve felt this confident without your help. I really appreciate you taking the time to help me put everything together. It means a lot to me!",
+    "rating": 5,
+    "project": "Brand Consultation & Presentation Design",
+    "date": "2025"
   }
 ]
