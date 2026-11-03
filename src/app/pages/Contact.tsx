@@ -995,13 +995,14 @@ export function Contact() {
                             style={{
                               fontFamily: "'Work Sans',sans-serif",
                               fontSize: "0.78rem",
-                              padding: "0.4rem 0.8rem",
-                              border: `1px solid ${timeline === t ? DARK : BORDER}`,
-                              background: timeline === t ? DARK : SURFACE,
-                              color: timeline === t ? WHITE : MUTED,
+                              padding: "0.45rem 0.85rem",
+                              border: `1px solid ${timeline === t ? GOLD : BORDER}`,
+                              background: timeline === t ? GOLD : SURFACE,
+                              color: timeline === t ? "#0d0c09" : MUTED,
+                              fontWeight: timeline === t ? 600 : 400,
                               cursor: "pointer",
-                              borderRadius: "3px",
-                              transition: "all 0.18s",
+                              borderRadius: "4px",
+                              transition: "all 0.18s ease",
                             }}
                           >
                             {t}

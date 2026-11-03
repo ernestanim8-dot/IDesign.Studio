@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+﻿@import 'tailwindcss';
 
 /* Tell Tailwind v4 to use the .dark class strategy (not prefers-color-scheme media query) */
 @variant dark (&:where(.dark, .dark *));
@@ -42,6 +42,11 @@ html {
   --theme-nav-bg: rgba(13, 12, 9, 0.96);
   --theme-mobile-drawer: #141310;
   --theme-scrollbar-track: rgba(255, 255, 255, 0.05);
+}
+
+select option {
+  background: var(--theme-card-bg);
+  color: var(--theme-text);
 }
 
 input::placeholder, textarea::placeholder {
