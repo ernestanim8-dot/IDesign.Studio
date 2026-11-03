@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Tell Tailwind v4 to use the .dark class strategy (not prefers-color-scheme media query) */
+@variant dark (&:where(.dark, .dark *));
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,11 +37,16 @@ html {
   --theme-card-bg: #161410;
   --theme-card-rgb: 22, 20, 16;
   --theme-text: #f5f3ef;
-  --theme-text-muted: #9e978c;
+  --theme-text-muted: #b5ad9f;
   --theme-border: #28251e;
   --theme-nav-bg: rgba(13, 12, 9, 0.96);
   --theme-mobile-drawer: #141310;
   --theme-scrollbar-track: rgba(255, 255, 255, 0.05);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--theme-text-muted);
+  opacity: 0.75;
 }
 
 body {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { GOLD, DARK, MUTED, BORDER, WHITE } from "@/tokens";
+﻿import React, { useState, useEffect, useRef, useCallback } from "react";
+import { GOLD, DARK, MUTED, BORDER, CARD_BG } from "@/tokens";
 
 export interface TestimonialItem {
   quote: string;
@@ -174,7 +174,7 @@ export function TestimonialsSlider({ testimonials }: TestimonialsSliderProps) {
               style={{
                 flex: `0 0 ${cardWidth}px`,
                 width: `${cardWidth}px`,
-                background: WHITE,
+                background: CARD_BG,
                 border: `1px solid ${BORDER}`,
                 borderRadius: "10px",
                 padding: containerWidth < 640 ? "1.75rem" : "2.25rem",

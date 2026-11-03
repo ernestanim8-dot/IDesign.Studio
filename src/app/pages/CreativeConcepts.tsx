@@ -1028,7 +1028,7 @@ export function CreativeConcepts() {
                     whileHover={{ y: -6 }}
                     transition={{ duration: 0.3 }}
                     style={{
-                      background: highlight ? GOLD : "#fff",
+                      background: highlight ? GOLD : "var(--theme-card-bg, #ffffff)",
 
                       border: `1px solid ${highlight ? GOLD : BORDER}`,
 
@@ -1463,7 +1463,7 @@ export function CreativeConcepts() {
 
                         border: `1px solid ${isChecked ? GOLD : BORDER}`,
 
-                        background: isChecked ? "rgba(200,165,74,0.05)" : WHITE,
+                        background: isChecked ? "rgba(200,165,74,0.08)" : "var(--theme-card-bg, #ffffff)",
 
                         cursor: "pointer",
 

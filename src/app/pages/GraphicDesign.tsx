@@ -1571,7 +1571,7 @@ export function GraphicDesign() {
             style={{
               display: "flex",
               alignItems: "center",
-              background: "rgba(255, 255, 255, 0.65)",
+              background: "var(--theme-card-bg, rgba(255, 255, 255, 0.65))",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
               border: `1px solid ${searchQuery ? GOLD : BORDER}`,

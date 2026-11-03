@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+﻿import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { GOLD, DARK, DARKER, MUTED, BG, SURFACE, BORDER, WHITE } from "@/tokens";
@@ -2809,7 +2809,7 @@ export function Photography() {
             style={{
               display: "flex",
               alignItems: "center",
-              background: "rgba(255, 255, 255, 0.65)",
+              background: "var(--theme-card-bg, rgba(255, 255, 255, 0.65))",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
               border: `1px solid ${searchQuery ? GOLD : BORDER}`,
