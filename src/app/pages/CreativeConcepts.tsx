@@ -47,13 +47,15 @@ const PACKAGES = [
     turnaround: "10-14 business days",
 
     features: [
-      "Logo design (2 core concepts + 2 revision rounds)",
+      "Bespoke Primary & Secondary Logo Marks (2 curated concepts + 2 revision rounds)",
 
-      "Business card design & print-ready files",
+      "Signature Business Card Architecture & Print-Ready Production Files",
 
-      "Curated color palette & typography guide",
+      "Harmonized Color Palette System & Editorial Typography Pairing",
 
-      "Vector & raster digital deliverables",
+      "Complete Master File Export (.AI, .EPS, .SVG, .PDF, .PNG, .WebP)",
+
+      "Mini Brand Usage Guide for Digital & Social Media Consistency",
     ],
 
     highlight: false,
@@ -99,17 +101,17 @@ const PACKAGES = [
     turnaround: "5-6 weeks",
 
     features: [
-      "Everything in Studio Complete",
+      "Comprehensive Brand Ecosystem (Everything in Studio Complete)",
 
-      "Bespoke 5-page responsive portfolio/website",
+      "Full Campaign Creative Direction, Moodboards & Styling Direction",
 
-      "Full campaign art direction & styling",
+      "Custom 5-Page Responsive Web Experience & Domain Architecture",
 
-      "Packaging & merchandise design",
+      "Bespoke Product Packaging, Labeling & Merchandise Mockups",
 
-      "Ongoing monthly retainer option",
+      "Executive 30-Day Brand Launch Strategy & Priority Retainer Access",
 
-      "Dedicated senior creative director",
+      "Dedicated Lead Creative Director & 1-on-1 Consultation Access",
     ],
 
     highlight: false,
@@ -130,51 +132,51 @@ const ADD_ONS: AddOn[] = [
   {
     id: "photo_session",
 
-    name: "Extra Half-Day Photography Session",
+    name: "Half-Day Editorial Photo Shoot",
 
     price: 5250,
 
-    desc: "3 hours on location or studio, 25 retouched high-res images.",
+    desc: "3 hours in-studio or on location with professional lighting, styling direction, and 25 retouched master images.",
   },
 
   {
     id: "stationery_print",
 
-    name: "Premium Stationery Print Run (500 units)",
+    name: "Luxury Foil-Stamped Stationery Run",
 
     price: 3265,
 
-    desc: "350gsm matte paper with gold foil stamped accents.",
+    desc: "500 custom units on 400gsm velvet-touch stock with metallic gold foil stamping.",
   },
 
   {
     id: "social_templates",
 
-    name: "Animated Social Media Templates",
+    name: "Motion & Social Content Suite",
 
     price: 4080,
 
-    desc: "Figma & Canva kit with motion graphics for Instagram/LinkedIn.",
+    desc: "Animated Instagram & LinkedIn story/feed assets, plus editable Figma & Canva master templates.",
   },
 
   {
     id: "website_build",
 
-    name: "Custom Responsive Portfolio / Web App",
+    name: "High-Performance Web Presence",
 
     price: 13990,
 
-    desc: "Modern, high-performance website with custom domain wiring.",
+    desc: "Modern, lightning-fast digital portfolio or business website with SEO optimization and custom domain wiring.",
   },
 
   {
     id: "express_delivery",
 
-    name: "Express Priority Turnaround",
+    name: "VIP Express Delivery (Front-of-Queue)",
 
     price: 4665,
 
-    desc: "Dedicate front-of-queue scheduling to compress timeline by 40%.",
+    desc: "Dedicated priority scheduling accelerating your project timeline by 40%.",
   },
 ]
 

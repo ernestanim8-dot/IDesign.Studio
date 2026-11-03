@@ -111,7 +111,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "I really love my shoot with iDesign. It was an amazing moment with him. The pictures came out standing. The images looked real and nice also the posses were on point and the colors made it beautiful. He made me enjoy my shoot and also made me know that taking shoot involve nature and involvement. I will also love to take my next shot with him.",
+      "I really loved my shoot with iDesign — it was an incredible experience! The pictures came out outstanding, vibrant, and natural. The poses were on point, and the color grading was breathtaking. He made me feel completely relaxed and brought out the best in every frame. I can't wait for our next session!",
     author: "Lawrencia Takyi",
     role: "Sales Personnel",
     rating: 5,
